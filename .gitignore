@@ -1,0 +1,10 @@
+.idea/*
+*.iml
+*/target
+front/src/README.md
+front/src/dist
+front/src/temp
+front/src/out-tsc
+
+front/src/node_modules
+
