@@ -5,6 +5,8 @@ front/src/README.md
 front/src/dist
 front/src/temp
 front/src/out-tsc
+front/src/out
+front/out
 
 front/src/node_modules
 
