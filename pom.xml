@@ -14,7 +14,6 @@
         <module>model</module>
         <module>services</module>
         <module>api</module>
-        <module>front</module>
         <module>war</module>
     </modules>
 
@@ -33,6 +32,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <javaee.version>8.0</javaee.version>
         <hibernate.version>5.4</hibernate.version>
+        <keycloak.version>7.0.0</keycloak.version>
     </properties>
 
 </project>
