@@ -1,26 +1,36 @@
-import { NgModule } from '@angular/core';
-import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
-import {AppComponent} from "./app.component";
-import { BrowserModule } from '@angular/platform-browser';
-import { ContentComponent } from './content/content.component';
-import {KeyCloakService} from "./utils/key-cloak-service";
+import {NgModule} from '@angular/core';
+import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
+import {AppComponent} from './app.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {ContentComponent} from './content/content.component';
+import {HttpClientModule} from '@angular/common/http';
+import {CookieService} from 'ngx-cookie-service';
+import { MenuComponent } from './content/menu/menu.component';
+import {MaterialModule} from './MaterialModule';
+import { ClientsViewComponent } from './content/clients/clients-view.component';
 
 const keycloakService = new KeycloakService();
 
 @NgModule({
-  imports: [KeycloakAngularModule,BrowserModule],
+  imports: [
+    KeycloakAngularModule,
+    BrowserModule,
+    HttpClientModule,
+    MaterialModule
+  ],
   providers: [
     {
       provide: KeycloakService,
       useValue: keycloakService
-    }
+    }, CookieService
   ],
   entryComponents: [AppComponent],
-  declarations: [AppComponent, ContentComponent]
+  declarations: [AppComponent, ContentComponent, MenuComponent, ClientsViewComponent]
 })
 
 export class AppModule {
-   ngDoBootstrap(app) {
+
+  ngDoBootstrap(app) {
     keycloakService
       .init({
         config: {
@@ -38,7 +48,5 @@ export class AppModule {
         app.bootstrap(AppComponent);
       })
       .catch(error => console.error('[ngDoBootstrap] init Keycloak failed', error));
-
-
   }
 }
