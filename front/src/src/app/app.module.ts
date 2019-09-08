@@ -7,7 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import { MenuComponent } from './content/menu/menu.component';
 import {MaterialModule} from './MaterialModule';
-import { ClientsViewComponent } from './content/clients/clients-view.component';
+import {AppRoutingModule, routingComponents} from './app-routing.module';
 
 const keycloakService = new KeycloakService();
 
@@ -16,7 +16,8 @@ const keycloakService = new KeycloakService();
     KeycloakAngularModule,
     BrowserModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    AppRoutingModule
   ],
   providers: [
     {
@@ -25,7 +26,7 @@ const keycloakService = new KeycloakService();
     }, CookieService
   ],
   entryComponents: [AppComponent],
-  declarations: [AppComponent, ContentComponent, MenuComponent, ClientsViewComponent]
+  declarations: [AppComponent, ContentComponent, MenuComponent, routingComponents]
 })
 
 export class AppModule {
