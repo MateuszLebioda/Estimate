@@ -1,4 +1,4 @@
-package com.estimate.dao.services;
+package com.estimate.dao.services.dao;
 
 public interface AbstractDaoFunction<T> {
 

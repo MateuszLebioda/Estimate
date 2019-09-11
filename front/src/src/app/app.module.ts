@@ -8,8 +8,13 @@ import {CookieService} from 'ngx-cookie-service';
 import { MenuComponent } from './content/menu/menu.component';
 import {MaterialModule} from './MaterialModule';
 import {AppRoutingModule, routingComponents} from './app-routing.module';
+import { AddClientComponent } from './content/clients/add-client/add-client.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 const keycloakService = new KeycloakService();
+
+
 
 @NgModule({
   imports: [
@@ -17,7 +22,10 @@ const keycloakService = new KeycloakService();
     BrowserModule,
     HttpClientModule,
     MaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     {
@@ -25,8 +33,8 @@ const keycloakService = new KeycloakService();
       useValue: keycloakService
     }, CookieService
   ],
-  entryComponents: [AppComponent],
-  declarations: [AppComponent, ContentComponent, MenuComponent, routingComponents]
+  entryComponents: [AppComponent, AddClientComponent],
+  declarations: [AppComponent, ContentComponent, MenuComponent, routingComponents, AddClientComponent]
 })
 
 export class AppModule {

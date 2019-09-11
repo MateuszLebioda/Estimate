@@ -1,4 +1,4 @@
-package com.estimate.dao.services;
+package com.estimate.dao.services.dao;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
