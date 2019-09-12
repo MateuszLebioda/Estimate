@@ -1,8 +1,10 @@
 package com.estimate.model.entities;
 
+import com.estimate.model.entities.dto.ClientDTO;
 import lombok.Data;
 import javax.persistence.*;
 
+import static java.lang.Enum.valueOf;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Data
@@ -40,4 +42,7 @@ public class Client {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
+    public ClientDTO toDTO(){
+        return new ClientDTO(id,firstName,lastName,email,city,street,houseNumber,code,user.getId());
+    }
 }

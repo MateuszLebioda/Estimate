@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -21,10 +22,10 @@ public class User {
     @Column(name = "keycloak_Id")
     private String keyCloakId;
 
-    @OneToMany(mappedBy="user")
-    private Set<Estimate> estimates;
+   /* @OneToMany(mappedBy="user")
+    private Set<Estimate> estimates;*/
 
-    @OneToMany(mappedBy="user")
-    private Set<Client> clients;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="user")
+    private List<Client> clients;
 
 }

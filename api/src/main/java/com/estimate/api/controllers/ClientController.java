@@ -12,6 +12,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Path("/client")
 public class ClientController {
@@ -26,7 +27,7 @@ public class ClientController {
     @Path("/getAll")
     public Response getClients(){
         if(user.isPresent()){
-            return Response.ok(clientDao.getClientsByUser(user.get())).build();
+            return Response.ok(user.get().getClients().stream().map(Client::toDTO).collect(Collectors.toList())).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }

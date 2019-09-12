@@ -2,9 +2,9 @@ package com.estimate.dao.services.dao;
 import com.estimate.model.entities.Client;
 import com.estimate.model.entities.User;
 
-import java.util.Set;
+import java.util.List;
 
 public interface ClientDao extends AbstractDaoFunction <Client>{
 
-    Set<Client> getClientsByUser(User user);
+    List<Client> getClientsByUser(User user);
 }

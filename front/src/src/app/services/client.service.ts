@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {KeyCloakService} from '../utils/key-cloak-service';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -13,8 +13,8 @@ export class ClientService {
   constructor(private keyCloakService: KeyCloakService, private http: HttpClient) {
   }
 
-  public getAllClient(): Observable<HttpResponse<object>> {
-    return this.http.get(backEndUrl + '/client/getAll', {observe: 'response'});
+  public getAllClient(): Observable<HttpResponse<Client[]>> {
+    return this.http.get<Client[]>(backEndUrl + '/client/getAll', {observe: 'response'});
   }
 
   public addClient(client: Client): Observable<HttpResponse<object>> {

@@ -1,0 +1,16 @@
+<mat-card>
+      <div class="example-container"  *ngIf="client">
+        <mat-form-field>
+          <input matInput value="{{client.firstName}} {{client.lastName}}" disabled>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput value="{{client.email}}"  disabled>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput  value="{{client.code}} {{client.city}}" disabled>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput  value="{{client.street}} {{client.houseNumber}}"  disabled>
+        </mat-form-field>
+      </div>
+</mat-card>

@@ -11,6 +11,7 @@ import {AppRoutingModule, routingComponents} from './app-routing.module';
 import { AddClientComponent } from './content/clients/add-client/add-client.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RawClientComponent } from './content/clients/raw-client/raw-client.component';
 
 const keycloakService = new KeycloakService();
 
@@ -34,7 +35,7 @@ const keycloakService = new KeycloakService();
     }, CookieService
   ],
   entryComponents: [AppComponent, AddClientComponent],
-  declarations: [AppComponent, ContentComponent, MenuComponent, routingComponents, AddClientComponent]
+  declarations: [AppComponent, ContentComponent, MenuComponent, routingComponents, AddClientComponent, RawClientComponent]
 })
 
 export class AppModule {

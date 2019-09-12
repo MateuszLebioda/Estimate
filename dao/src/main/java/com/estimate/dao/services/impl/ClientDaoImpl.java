@@ -10,22 +10,20 @@ import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Stateless(name = "clientDao")
 public class ClientDaoImpl extends AbstractDao<Client> implements ClientDao {
     @Override
-    public Set<Client> getClientsByUser(User user) {
+    public List<Client> getClientsByUser(User user) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Client> criteriaQuery = criteriaBuilder.createQuery(Client.class);
         Root<Client> root = criteriaQuery.from(Client.class);
         criteriaQuery.where(criteriaBuilder.equal(root.get("user"),user));
         try {
-            return new HashSet<>(entityManager.createQuery(criteriaQuery).getResultList());
+            return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
         }catch (NoResultException e){
-            return Collections.emptySet();
+            return Collections.emptyList();
         }
     }
 }
