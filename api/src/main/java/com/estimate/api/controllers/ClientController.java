@@ -1,10 +1,9 @@
 package com.estimate.api.controllers;
 
-import com.estimate.dao.services.dao.ClientDao;
 import com.estimate.model.entities.Client;
 import com.estimate.model.entities.User;
+import com.estimate.model.entities.dto.ClientDTO;
 import com.estimate.services.ClientService;
-
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -58,5 +57,23 @@ public class ClientController {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
         return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+
+    @PUT
+    @Path("/update")
+    public Response updateClient(ClientDTO clientDTO) {
+        if(user.isPresent()){
+            Client client = clientService.getClientById(clientDTO.getId());
+            if (clientService.isMyClient(user.get(), client)) {
+                client.mergeWithDto(clientDTO);
+                clientService.merge(client);
+                return Response.ok().build();
+            }else {
+                return Response.accepted("Client doest not exist").build();
+            }
+        }else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
     }
 }

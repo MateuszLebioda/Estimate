@@ -15,6 +15,9 @@ public class ClientDTO {
     private String code;
     private Long user;
 
+    public ClientDTO() {
+    }
+
     public ClientDTO(Long id, String firstName, String lastName, String email, String city, String street, String houseNumber, String code, Long user) {
         this.id = id;
         this.firstName = firstName;

@@ -24,4 +24,8 @@ export class ClientService {
   public delete(client: Client): Observable<HttpResponse<object>> {
     return this.http.delete(backEndUrl + '/client/delete/' + client.id, {observe: 'response'});
   }
+
+  public put(client: Client): Observable<HttpResponse<object>> {
+    return this.http.put(backEndUrl + '/client/update', client, {observe: 'response'});
+  }
 }

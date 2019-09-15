@@ -7,7 +7,6 @@ import com.estimate.model.entities.dto.ClientDTO;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -62,6 +61,11 @@ public class ClientServiceImpl implements ClientService{
     public boolean isMyClient(User user, Long clientId) {
         Optional<Client> optionalClient = clientDao.getClientById(clientId);
         return optionalClient.filter(client -> isMyClient(user, client)).isPresent();
+    }
+
+    @Override
+    public void merge(Client client) {
+        clientDao.merge(client);
     }
 
 }

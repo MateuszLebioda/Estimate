@@ -37,7 +37,7 @@
       </mat-form-field>
     </div>
     <div>
-      <button mat-button>Anuluj</button>
+      <button mat-button (click)="bottomSheetRef.dismiss()">Anuluj</button>
       <button mat-button (click)="saveClient()">Zapisz</button>
     </div>
   </form>

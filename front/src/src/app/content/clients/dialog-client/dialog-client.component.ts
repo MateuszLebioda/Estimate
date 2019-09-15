@@ -15,8 +15,11 @@ export class DialogClientComponent {
               @Inject(MAT_DIALOG_DATA) public client: Client) {
   }
 
+  private editClient() {
+    this.dialogRef.close('edit');
+  }
+
   private deleteClient(): void {
-    console.log(this.client);
     this.clientService.delete(this.client).subscribe(response => {
       this.dialogRef.close('deleted');
     }, (error) => {

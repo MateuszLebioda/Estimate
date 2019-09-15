@@ -6,15 +6,20 @@ import {ClientService} from '../../../services/client.service';
 
 @Component({
   selector: 'app-add-client',
-  templateUrl: './add-client.component.html',
-  styleUrls: ['./add-client.component.scss']
+  templateUrl: './client-sheet.component.html',
+  styleUrls: ['./client-sheet.component.scss']
 })
-export class AddClientComponent {
+export class ClientSheetComponent {
 
-  constructor(private bottomSheetRef: MatBottomSheetRef<AddClientComponent>,
-              private clientService: ClientService,
-              @Inject(MAT_BOTTOM_SHEET_DATA) public data: Client[]) {
-    this.client = new Client();
+  constructor(private bottomSheetRef: MatBottomSheetRef<ClientSheetComponent>,
+              @Inject(MAT_BOTTOM_SHEET_DATA) public data: Client) {
+    if (data !== null) {
+      this.edit = true;
+      this.client = data;
+    } else {
+      this.edit = false;
+      this.client = new Client();
+    }
     this.clientForm = new FormGroup({
       firstName: new FormControl(this.client.firstName, [Validators.required, Validators.minLength(3)]),
       lastName: new FormControl(this.client.lastName, [Validators.required, Validators.minLength(3)]),
@@ -26,9 +31,9 @@ export class AddClientComponent {
     });
   }
 
+  private edit: boolean;
   client: Client;
   private clientForm: FormGroup;
-  public needRefresh = false;
 
   saveClient() {
     this.client.firstName = this.clientForm.get('firstName').value;
@@ -38,11 +43,6 @@ export class AddClientComponent {
     this.client.street = this.clientForm.get('street').value;
     this.client.houseNumber = this.clientForm.get('houseNumber').value;
     this.client.code = this.clientForm.get('code').value;
-    this.clientService.addClient(this.client).subscribe(response  => {
-      this.client.id = response.body;
-    }, error => {
-      console.error('Cannot add user');
-    });
     this.bottomSheetRef.dismiss(this.client);
   }
 }

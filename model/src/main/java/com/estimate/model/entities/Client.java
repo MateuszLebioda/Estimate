@@ -45,4 +45,14 @@ public class Client implements SimpleDao {
     public ClientDTO toDTO(){
         return new ClientDTO(id,firstName,lastName,email,city,street,houseNumber,code,user.getId());
     }
+
+    public void mergeWithDto(ClientDTO clientDTO){
+        this.setFirstName(clientDTO.getFirstName());
+        this.setLastName(clientDTO.getLastName());
+        this.setCity(clientDTO.getCity());
+        this.setStreet(clientDTO.getStreet());
+        this.setEmail(clientDTO.getEmail());
+        this.setCode(clientDTO.getCode());
+        this.setHouseNumber(clientDTO.getHouseNumber());
+    }
 }

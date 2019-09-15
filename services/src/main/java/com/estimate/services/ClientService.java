@@ -19,4 +19,5 @@ public interface ClientService {
     boolean deleteClient(Client client);
     boolean isMyClient(User user, Client client);
     boolean isMyClient(User user, Long clientId);
+    void merge(Client client);
 }
