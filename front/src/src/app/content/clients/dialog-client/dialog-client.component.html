@@ -1,0 +1,8 @@
+<div class="example-container">
+  <mat-form-field>
+    <input matInput value="{{client.firstName}} {{client.lastName}}" readonly class="clientName">
+  </mat-form-field>
+  <button mat-raised-button color="accent">Pokaż kosztorysy</button>
+  <button mat-raised-button color="primary" (click)="editClient()">Edytuj</button>
+  <button mat-raised-button color="warn" (click)="deleteClient()">Usuń</button>
+</div>

@@ -1,8 +1,7 @@
 package com.estimate.api.producers;
 
-import com.estimate.dao.services.UserDao;
+import com.estimate.dao.services.dao.UserDao;
 import com.estimate.model.entities.User;
-import org.dom4j.util.UserDataAttribute;
 import org.keycloak.representations.AccessToken;
 
 import javax.ejb.EJB;

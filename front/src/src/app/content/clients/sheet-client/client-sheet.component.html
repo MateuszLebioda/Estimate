@@ -1,0 +1,44 @@
+<mat-card>
+  <form [formGroup]="clientForm">
+    <div class="example-container">
+      <mat-form-field>
+        <input formControlName="firstName" matInput placeholder="Imie">
+        <mat-error *ngIf="clientForm.get('firstName').hasError('required')">Pole jest wymagane</mat-error>
+        <mat-error *ngIf="clientForm.get('firstName').hasError('minlength')">Pole musi zawierać przynajmniej 3 znaki</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="lastName" matInput placeholder="Nazwisko">
+        <mat-error *ngIf="clientForm.get('lastName').hasError('required')">Pole jest wymagane</mat-error>
+        <mat-error *ngIf="clientForm.get('lastName').hasError('minlength')">Pole musi zawierać przynajmniej 3 znaki</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="email" matInput placeholder="Email">
+        <mat-error *ngIf="clientForm.get('city').hasError('required')">Pole jest wymagane</mat-error>
+        <mat-error *ngIf="clientForm.get('email').hasError('email')">Niepoprawy format adresu email</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="city" matInput placeholder="Miasto">
+        <mat-error *ngIf="clientForm.get('city').hasError('required')">Pole jest wymagane</mat-error>
+        <mat-error *ngIf="clientForm.get('city').hasError('minlength')">Pole musi zawierać przynajmniej 2 znaki</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="street" matInput placeholder="Ulica">
+        <mat-error *ngIf="clientForm.get('street').hasError('required')">Pole jest wymagane</mat-error>
+        <mat-error *ngIf="clientForm.get('street').hasError('minlength')">Pole musi zawierać przynajmniej 2 znaki</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="houseNumber" matInput placeholder="Numer domu/mieszkania">
+        <mat-error *ngIf="clientForm.get('houseNumber').hasError('required')">Pole jest wymagane</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="code" matInput placeholder="Kod pocztowy">
+        <mat-error *ngIf="clientForm.get('code').hasError('required')">Pole jest wymagane</mat-error>
+        <mat-error *ngIf="clientForm.get('code').hasError('pattern')">Niepoprawny format kodu pocztowego</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-button (click)="bottomSheetRef.dismiss()">Anuluj</button>
+      <button mat-button (click)="saveClient()" [disabled]="!clientForm.valid">Zapisz</button>
+    </div>
+  </form>
+</mat-card>

@@ -1,4 +1,4 @@
-package com.estimate.dao.services;
+package com.estimate.dao.services.dao;
 
 import com.estimate.model.entities.User;
 

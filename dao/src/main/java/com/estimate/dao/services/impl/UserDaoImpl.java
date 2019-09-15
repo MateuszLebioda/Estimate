@@ -1,7 +1,7 @@
 package com.estimate.dao.services.impl;
 
-import com.estimate.dao.services.AbstractDao;
-import com.estimate.dao.services.UserDao;
+import com.estimate.dao.services.dao.AbstractDao;
+import com.estimate.dao.services.dao.UserDao;
 import com.estimate.model.entities.User;
 
 import javax.ejb.Stateless;

@@ -8,8 +8,8 @@
         <jta-data-source>java:/PostgreEstimate</jta-data-source>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect" />
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
-            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="false" />
             <property name="hibernate.default_schema" value="estimate"/>
         </properties>
     </persistence-unit>
