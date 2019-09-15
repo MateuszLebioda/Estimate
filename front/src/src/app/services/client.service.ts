@@ -17,7 +17,11 @@ export class ClientService {
     return this.http.get<Client[]>(backEndUrl + '/client/getAll', {observe: 'response'});
   }
 
-  public addClient(client: Client): Observable<HttpResponse<object>> {
-    return this.http.post(backEndUrl + '/client/add', client, {observe: 'response'});
+  public addClient(client: Client): Observable<HttpResponse<number>> {
+    return this.http.post<number>(backEndUrl + '/client/add', client, {observe: 'response'});
+  }
+
+  public delete(client: Client): Observable<HttpResponse<object>> {
+    return this.http.delete(backEndUrl + '/client/delete/' + client.id, {observe: 'response'});
   }
 }

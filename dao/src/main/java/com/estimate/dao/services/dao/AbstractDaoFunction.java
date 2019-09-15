@@ -2,7 +2,7 @@ package com.estimate.dao.services.dao;
 
 public interface AbstractDaoFunction<T> {
 
-    public void save(T object);
+    public T save(T object);
 
     public void delete(T object);
 

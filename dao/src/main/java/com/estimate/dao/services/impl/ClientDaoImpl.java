@@ -26,4 +26,17 @@ public class ClientDaoImpl extends AbstractDao<Client> implements ClientDao {
             return Collections.emptyList();
         }
     }
+
+    @Override
+    public Optional<Client> getClientById(Long id) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Client> criteriaQuery = criteriaBuilder.createQuery(Client.class);
+        Root<Client> root = criteriaQuery.from(Client.class);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("id"),id));
+        try {
+            return Optional.of(entityManager.createQuery(criteriaQuery).getSingleResult());
+        }catch (NoResultException e){
+            return Optional.empty();
+        }
+    }
 }

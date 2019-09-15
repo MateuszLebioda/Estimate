@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import {Component, Inject} from '@angular/core';
+import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Client} from '../../../model/client';
 import {ClientService} from '../../../services/client.service';
@@ -11,7 +11,9 @@ import {ClientService} from '../../../services/client.service';
 })
 export class AddClientComponent {
 
-  constructor(private bottomSheetRef: MatBottomSheetRef<AddClientComponent>, private clientService: ClientService) {
+  constructor(private bottomSheetRef: MatBottomSheetRef<AddClientComponent>,
+              private clientService: ClientService,
+              @Inject(MAT_BOTTOM_SHEET_DATA) public data: Client[]) {
     this.client = new Client();
     this.clientForm = new FormGroup({
       firstName: new FormControl(this.client.firstName, [Validators.required, Validators.minLength(3)]),
@@ -26,6 +28,7 @@ export class AddClientComponent {
 
   client: Client;
   private clientForm: FormGroup;
+  public needRefresh = false;
 
   saveClient() {
     this.client.firstName = this.clientForm.get('firstName').value;
@@ -35,13 +38,11 @@ export class AddClientComponent {
     this.client.street = this.clientForm.get('street').value;
     this.client.houseNumber = this.clientForm.get('houseNumber').value;
     this.client.code = this.clientForm.get('code').value;
-    console.log(this.client);
-    this.clientService.addClient(this.client).subscribe(response => {
-
+    this.clientService.addClient(this.client).subscribe(response  => {
+      this.client.id = response.body;
     }, error => {
       console.error('Cannot add user');
     });
-
-    this.bottomSheetRef.dismiss();
+    this.bottomSheetRef.dismiss(this.client);
   }
 }

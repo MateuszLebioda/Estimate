@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Data
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements SimpleDao {
 
     @Id
     @GeneratedValue(strategy=SEQUENCE, generator="user_seq")

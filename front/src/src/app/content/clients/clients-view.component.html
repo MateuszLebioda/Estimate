@@ -1,5 +1,5 @@
 <div *ngFor="let client of clients; let i = index" class="example-container">
-  <app-raw-client [client]="client" class="example-card" (click)="OnMatCardClickEvent(client)"></app-raw-client>
+  <app-raw-client [client]="client" class="example-card" (click)="onMatCardClickEvent(client)"></app-raw-client>
 </div>
 
 <button mat-raised-button (click)="addNewClient()">Dodaj kilenta</button>

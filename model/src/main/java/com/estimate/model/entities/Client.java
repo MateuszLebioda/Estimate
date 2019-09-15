@@ -4,13 +4,13 @@ import com.estimate.model.entities.dto.ClientDTO;
 import lombok.Data;
 import javax.persistence.*;
 
-import static java.lang.Enum.valueOf;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Data
 @Entity
 @Table(name = "client")
-public class Client {
+public class Client implements SimpleDao {
 
     @Id
     @GeneratedValue(strategy=SEQUENCE, generator="client_seq")

@@ -1,6 +1,7 @@
 .mat-card{
   width: 300px;
   background: rgba(255, 230, 179, 0.5);
+  cursor: pointer;
 }
 
 .example-container {
@@ -13,6 +14,10 @@
 
 .mat-form-field{
   margin-bottom: 2px;
+}
+
+.client-data{
+  cursor: pointer;
 }
 
 

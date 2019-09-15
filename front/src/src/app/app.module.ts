@@ -5,16 +5,16 @@ import {BrowserModule} from '@angular/platform-browser';
 import {ContentComponent} from './content/content.component';
 import {HttpClientModule} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
-import { MenuComponent } from './content/menu/menu.component';
+import {MenuComponent} from './content/menu/menu.component';
 import {MaterialModule} from './MaterialModule';
 import {AppRoutingModule, routingComponents} from './app-routing.module';
-import { AddClientComponent } from './content/clients/add-client/add-client.component';
+import {AddClientComponent} from './content/clients/add-client/add-client.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { RawClientComponent } from './content/clients/raw-client/raw-client.component';
+import {RawClientComponent} from './content/clients/raw-client/raw-client.component';
+import {DialogClientComponent} from './content/clients/dialog-client/dialog-client.component';
 
 const keycloakService = new KeycloakService();
-
 
 
 @NgModule({
@@ -34,8 +34,16 @@ const keycloakService = new KeycloakService();
       useValue: keycloakService
     }, CookieService
   ],
-  entryComponents: [AppComponent, AddClientComponent],
-  declarations: [AppComponent, ContentComponent, MenuComponent, routingComponents, AddClientComponent, RawClientComponent]
+  entryComponents: [AppComponent,
+    AddClientComponent,
+    DialogClientComponent],
+  declarations: [AppComponent,
+    ContentComponent,
+    MenuComponent,
+    routingComponents,
+    AddClientComponent,
+    RawClientComponent,
+    DialogClientComponent]
 })
 
 export class AppModule {

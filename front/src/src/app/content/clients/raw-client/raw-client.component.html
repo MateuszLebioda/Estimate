@@ -1,16 +1,16 @@
 <mat-card>
       <div class="example-container"  *ngIf="client">
         <mat-form-field>
-          <input matInput value="{{client.firstName}} {{client.lastName}}" disabled>
+          <input matInput value="{{client.firstName}} {{client.lastName}}" readonly class="client-data">
         </mat-form-field>
         <mat-form-field>
-          <input matInput value="{{client.email}}"  disabled>
+          <input matInput value="{{client.email}}"  readonly class="client-data">
         </mat-form-field>
         <mat-form-field>
-          <input matInput  value="{{client.code}} {{client.city}}" disabled>
+          <input matInput  value="{{client.code}} {{client.city}}" readonly class="client-data">
         </mat-form-field>
         <mat-form-field>
-          <input matInput  value="{{client.street}} {{client.houseNumber}}"  disabled>
+          <input matInput  value="{{client.street}} {{client.houseNumber}}"  readonly class="client-data">
         </mat-form-field>
       </div>
 </mat-card>
