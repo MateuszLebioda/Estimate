@@ -57,9 +57,11 @@ export class ClientsViewComponent implements OnInit {
         this.addSheet.open(ClientSheetComponent, {
           data: client
         }).afterDismissed().subscribe(response => {
-          this.openSnackBar(client, 'Zaktualizowano');
-          this.clientService.put(client).subscribe(r => {
-          });
+          if (response !== undefined) {
+            this.openSnackBar(client, 'Zaktualizowano');
+            this.clientService.put(client).subscribe(r => {
+            });
+          }
         });
       }
 
