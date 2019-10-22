@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {KeyCloakService} from '../../utils/key-cloak-service';
-import {RandomServiceService} from '../../services/random-service.service';
-import {interval, Observable} from 'rxjs';
 
 
 @Component({
@@ -10,18 +8,11 @@ import {interval, Observable} from 'rxjs';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  private num;
 
-  constructor(private keyCloak: KeyCloakService, private randomService: RandomServiceService) {
+  constructor(private keyCloak: KeyCloakService) {
   }
 
   ngOnInit() {
-    const secondsCounter = interval(5000);
-    secondsCounter.subscribe(x => {
-      this.randomService.getRandomNumber().subscribe(z => {
-        this.num = z.body;
-      });
-    });
   }
 
   logout() {
