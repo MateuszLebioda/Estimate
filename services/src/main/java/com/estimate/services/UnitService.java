@@ -1,0 +1,22 @@
+package com.estimate.services;
+
+import com.estimate.model.entities.Unit;
+import com.estimate.model.entities.User;
+import com.estimate.model.entities.dto.UnitDTO;
+
+import javax.ejb.Local;
+import java.util.List;
+import java.util.Optional;
+
+@Local
+public interface UnitService {
+    Long addUnit(Unit unit);
+    List<Unit> getAllUnits(User user);
+    List<UnitDTO> getAllDTOUnits(User user);
+    Optional<Unit> getOptionalUnitById(Long id);
+    Unit getUnitById(Long id);
+    boolean deleteUnit(Unit unit);
+    boolean isMyUnit(User user, Unit unit);
+    boolean isMyUnit(User user, Long unitId);
+    void merge(Unit unit);
+}

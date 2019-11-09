@@ -29,7 +29,14 @@ public abstract class AbstractMaterial implements SimpleEntity<Client> {
     @Column(name = "create_time")
     private LocalDateTime createTime;
 
+    @Column(name = "isActual")
+    private Boolean actual;
+
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name="unit_id", nullable=false)
+    private Unit unit;
 }

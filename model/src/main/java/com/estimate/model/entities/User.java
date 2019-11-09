@@ -31,4 +31,7 @@ public class User implements SimpleEntity {
     @OneToMany(mappedBy="user")
     private List<Works> works;
 
+    @OneToMany(mappedBy="user")
+    private List<Unit> unit;
+
 }
