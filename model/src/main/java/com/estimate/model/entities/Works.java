@@ -6,7 +6,8 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity()
-@DiscriminatorValue(value = Role.MATERIAL_TITLE)
-public class Material extends AbstractMaterial {
+@DiscriminatorValue(value = Role.WORKS_TITLE)
+public class Works extends AbstractMaterial {
 
 }
+

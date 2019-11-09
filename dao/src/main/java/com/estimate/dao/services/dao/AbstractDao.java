@@ -1,12 +1,12 @@
 package com.estimate.dao.services.dao;
 
 
-import com.estimate.model.entities.SimpleDao;
+import com.estimate.model.entities.utils.SimpleEntity;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-public abstract class AbstractDao <T extends SimpleDao> implements AbstractDaoFunction<T>{
+public abstract class AbstractDao <T extends SimpleEntity> implements AbstractDaoFunction<T>{
 
     @Inject
     protected EntityManager entityManager;
