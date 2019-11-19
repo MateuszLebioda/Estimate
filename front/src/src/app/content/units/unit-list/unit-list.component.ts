@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Unit} from '../../../model/unit';
 
 @Component({
@@ -12,8 +12,12 @@ export class UnitListComponent implements OnInit {
 
   @Input() units: Array<Unit>;
   @Input() title: string;
+  @Output() unitToDelete = new EventEmitter<Unit>();
 
   ngOnInit() {
   }
 
+  deleteUnit(unit: Unit) {
+    this.unitToDelete.emit(unit);
+  }
 }

@@ -1,2 +1,6 @@
-<app-unit-toolbar-view></app-unit-toolbar-view>
-<app-unit-content></app-unit-content>
+<app-unit-toolbar-view (unitToAdd)="addUnit($event)"></app-unit-toolbar-view>
+<app-unit-content (materialUnitDelete)="deleteMaterialUnit($event)"
+                  (workUnitDelete)="deleteWorksUnit($event)"
+                  [materialUnits]="materialUnits"
+                  [workUnits]="workUnits">
+</app-unit-content>

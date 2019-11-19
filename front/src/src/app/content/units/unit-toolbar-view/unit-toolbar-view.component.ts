@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {UnitSheetComponentComponent} from '../unit-sheet-component/unit-sheet-component.component';
+import {Unit} from '../../../model/unit';
 
 @Component({
   selector: 'app-unit-toolbar-view',
@@ -7,12 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UnitToolbarViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private addSheet: MatBottomSheet) {
+  }
+
+  @Output()
+  unitToAdd = new EventEmitter<Unit>();
 
   ngOnInit() {
   }
 
   addNewUnit() {
-    console.log('działa');
+    this.addSheet.open(UnitSheetComponentComponent).afterDismissed().subscribe((unit: Unit) => {
+      if (unit !== undefined) {
+        this.unitToAdd.emit(unit);
+      }
+      }
+    );
   }
+
 }

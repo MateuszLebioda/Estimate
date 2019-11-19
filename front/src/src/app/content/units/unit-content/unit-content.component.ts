@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Unit} from '../../../model/unit';
-import {UnitService} from '../../../services/unit.service';
 
 @Component({
   selector: 'app-unit-content',
@@ -9,20 +8,29 @@ import {UnitService} from '../../../services/unit.service';
 })
 export class UnitContentComponent implements OnInit {
 
-  materialUnits = new Array<Unit>();
-  workUnits = new Array<Unit>();
+  @Input()
+  materialUnits: Array<Unit>;
 
-  constructor(private unitService: UnitService) { }
+  @Input()
+  workUnits: Array<Unit>;
 
-  ngOnInit() {
-    this.unitService.getAlWorkUnits().subscribe(u => {
-      this.workUnits = u.body;
-    });
+  @Output()
+  materialUnitDelete = new EventEmitter<Unit>();
 
-    this.unitService.getAllMaterialUnits().subscribe(u => {
-      this.materialUnits = u.body;
-    });
+  @Output()
+  workUnitDelete = new EventEmitter<Unit>();
 
+  constructor() {
   }
 
+  ngOnInit() {
+  }
+
+  deleteWorksUnit(unit: Unit) {
+    this.workUnitDelete.emit(unit);
+  }
+
+  deleteMaterialUnit(unit: Unit) {
+    this.materialUnitDelete.emit(unit);
+  }
 }

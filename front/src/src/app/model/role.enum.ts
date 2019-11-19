@@ -1,3 +1,3 @@
 export enum Role {
-  WORKS, MATERIAL
+  WORKS = 'Prace', MATERIAL = 'Materiały'
 }

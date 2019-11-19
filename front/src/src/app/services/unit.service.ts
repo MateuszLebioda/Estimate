@@ -20,4 +20,12 @@ export class UnitService {
   public getAlWorkUnits(): Observable<HttpResponse<Unit[]>> {
     return this.http.get<Unit[]>(backEndUrl + '/unit/getAllWorkUnits', {observe: 'response'});
   }
+
+  public deleteUnit(unit: Unit): Observable<HttpResponse<object>> {
+    return this.http.delete(backEndUrl + '/unit/delete/' + unit.id, {observe: 'response'});
+  }
+
+  public addUnit(unit: Unit): Observable<HttpResponse<number>> {
+    return this.http.post<number>(backEndUrl + '/unit/add/', unit, {observe: 'response'});
+  }
 }

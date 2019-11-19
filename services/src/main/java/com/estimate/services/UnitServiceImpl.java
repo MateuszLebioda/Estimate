@@ -68,8 +68,8 @@ public class UnitServiceImpl implements UnitService {
 
     @Override
     public boolean deleteUnit(Unit unit) {
-        Optional<Unit> optionalClient = unitDao.getUnitById(unit.getId());
-        if(optionalClient.isPresent()){
+        Optional<Unit> optionalUnit = unitDao.getUnitById(unit.getId());
+        if(optionalUnit.isPresent()){
             unitDao.delete(unit);
             return true;
         }return false;

@@ -1,9 +1,9 @@
 <div>
   <div style="width: 50%; float:left;">
-    <app-unit-list [units]="workUnits" [title]="'Prace'"  class="units-list-style"></app-unit-list>
+    <app-unit-list [units]="workUnits" [title]="'Prace'" (unitToDelete)="deleteWorksUnit($event)" class="units-list-style"></app-unit-list>
   </div>
   <div style="width: 50%; overflow: hidden">
-    <app-unit-list [units]="materialUnits" [title]="'Materiały'" class="units-list-style"></app-unit-list>
+    <app-unit-list [units]="materialUnits" [title]="'Materiały'" (unitToDelete)="deleteMaterialUnit($event)" class="units-list-style"></app-unit-list>
   </div>
 </div>
 

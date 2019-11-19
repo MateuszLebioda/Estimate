@@ -18,6 +18,7 @@ import { UnitToolbarViewComponent } from './content/units/unit-toolbar-view/unit
 import { UnitSheetComponentComponent } from './content/units/unit-sheet-component/unit-sheet-component.component';
 import { UnitContentComponent } from './content/units/unit-content/unit-content.component';
 import { UnitListComponent } from './content/units/unit-list/unit-list.component';
+import { UnitAddSheetComponent } from './content/units/unit-add-sheet/unit-add-sheet.component';
 
 const keycloakService = new KeycloakService();
 
@@ -41,7 +42,8 @@ const keycloakService = new KeycloakService();
   ],
   entryComponents: [AppComponent,
     ClientSheetComponent,
-    DialogClientComponent],
+    DialogClientComponent,
+    UnitSheetComponentComponent],
   declarations: [AppComponent,
     ContentComponent,
     MenuComponent,
@@ -53,7 +55,8 @@ const keycloakService = new KeycloakService();
     UnitToolbarViewComponent,
     UnitSheetComponentComponent,
     UnitContentComponent,
-    UnitListComponent]
+    UnitListComponent,
+    UnitAddSheetComponent]
 })
 
 export class AppModule {

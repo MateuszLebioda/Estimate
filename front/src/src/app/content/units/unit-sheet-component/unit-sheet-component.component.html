@@ -1,1 +1,30 @@
-<p>unit-sheet-component works!</p>
+<mat-card>
+  <form [formGroup]="unitForm">
+    <div class="form-sheet-container">
+      <mat-form-field>
+        <input formControlName="bottom" matInput placeholder="Indeks dolny">
+        <mat-error *ngIf="unitForm.get('bottom').hasError('required')">Pole jest wymagane</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input formControlName="top" matInput placeholder="Indeks górny">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select formControlName="role" placeholder="Typ" >
+          <mat-option value="MATERIAL">
+            {{roles.MATERIAL}}
+          </mat-option>
+          <mat-option value="WORKS">
+            {{roles.WORKS}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="unitForm.get('role').hasError('required')">Pole jest wymagane</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-button (click)="bottomSheetRef.dismiss()">Anuluj</button>
+      <button mat-button (click)="saveClient()" [disabled]="!unitForm.valid">Zapisz</button>
+    </div>
+  </form>
+</mat-card>
