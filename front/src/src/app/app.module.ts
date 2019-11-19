@@ -13,6 +13,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RawClientComponent} from './content/clients/raw-client/raw-client.component';
 import {DialogClientComponent} from './content/clients/dialog-client/dialog-client.component';
+import { UnitViewsComponent } from './content/units/units-view.component';
+import { UnitToolbarViewComponent } from './content/units/unit-toolbar-view/unit-toolbar-view.component';
+import { UnitSheetComponentComponent } from './content/units/unit-sheet-component/unit-sheet-component.component';
+import { UnitContentComponent } from './content/units/unit-content/unit-content.component';
+import { UnitListComponent } from './content/units/unit-list/unit-list.component';
+import { UnitAddSheetComponent } from './content/units/unit-add-sheet/unit-add-sheet.component';
 
 const keycloakService = new KeycloakService();
 
@@ -36,14 +42,21 @@ const keycloakService = new KeycloakService();
   ],
   entryComponents: [AppComponent,
     ClientSheetComponent,
-    DialogClientComponent],
+    DialogClientComponent,
+    UnitSheetComponentComponent],
   declarations: [AppComponent,
     ContentComponent,
     MenuComponent,
     routingComponents,
     ClientSheetComponent,
     RawClientComponent,
-    DialogClientComponent]
+    DialogClientComponent,
+    UnitViewsComponent,
+    UnitToolbarViewComponent,
+    UnitSheetComponentComponent,
+    UnitContentComponent,
+    UnitListComponent,
+    UnitAddSheetComponent]
 })
 
 export class AppModule {

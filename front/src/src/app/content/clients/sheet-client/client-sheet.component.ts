@@ -2,7 +2,6 @@ import {Component, Inject} from '@angular/core';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Client} from '../../../model/client';
-import {ClientService} from '../../../services/client.service';
 
 @Component({
   selector: 'app-add-client',

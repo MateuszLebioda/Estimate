@@ -14,11 +14,12 @@ public class ClientDTO {
     private String houseNumber;
     private String code;
     private Long user;
+    private Boolean actual;
 
     public ClientDTO() {
     }
 
-    public ClientDTO(Long id, String firstName, String lastName, String email, String city, String street, String houseNumber, String code, Long user) {
+    public ClientDTO(Long id, String firstName, String lastName, String email, String city, String street, String houseNumber, String code, Long user, Boolean actual) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,5 +29,6 @@ public class ClientDTO {
         this.houseNumber = houseNumber;
         this.code = code;
         this.user = user;
+        this.actual = actual;
     }
 }

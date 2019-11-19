@@ -1,6 +1,5 @@
 package com.estimate.services;
 
-import com.estimate.dao.services.dao.ClientDao;
 import com.estimate.model.entities.Client;
 import com.estimate.model.entities.User;
 import com.estimate.model.entities.dto.ClientDTO;

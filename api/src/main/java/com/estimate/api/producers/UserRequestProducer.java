@@ -1,7 +1,7 @@
 package com.estimate.api.producers;
 
-import com.estimate.dao.services.dao.UserDao;
 import com.estimate.model.entities.User;
+import com.estimate.services.UserService;
 import org.keycloak.representations.AccessToken;
 
 import javax.ejb.EJB;
@@ -17,20 +17,17 @@ public class UserRequestProducer {
     AccessToken accessToken;
 
     @EJB
-    private UserDao userDao;
+    UserService userService;
 
     @Produces
     public Optional<User> getUser() {
         if (accessToken!=null) {
             String token = accessToken.getSubject();
-            Optional<User> optionalUser = userDao.getUserByKeyCloakId(token);
+            Optional<User> optionalUser = userService.getOptionalUserByToken(token);
             if (optionalUser.isPresent()) {
                 return optionalUser;
             } else {
-                User user = new User();
-                user.setKeyCloakId(token);
-                userDao.save(user);
-                return Optional.of(user);
+                return Optional.of(userService.createUser(token));
             }
         }
         return Optional.empty();

@@ -1,6 +1,7 @@
 package com.estimate.model.entities;
 
 import com.estimate.model.entities.dto.ClientDTO;
+import com.estimate.model.entities.utils.SimpleEntity;
 import lombok.Data;
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Data
 @Entity
 @Table(name = "client")
-public class Client implements SimpleDao {
+public class Client implements SimpleEntity<Client> {
 
     @Id
     @GeneratedValue(strategy=SEQUENCE, generator="client_seq")
@@ -38,12 +39,15 @@ public class Client implements SimpleDao {
     @Column(name = "code")
     private String code;
 
+    @Column(name = "isActual")
+    private Boolean actual;
+
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
     public ClientDTO toDTO(){
-        return new ClientDTO(id,firstName,lastName,email,city,street,houseNumber,code,user.getId());
+        return new ClientDTO(id,firstName,lastName,email,city,street,houseNumber,code,user.getId(), actual);
     }
 
     public void mergeWithDto(ClientDTO clientDTO){
