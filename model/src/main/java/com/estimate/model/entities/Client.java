@@ -39,12 +39,15 @@ public class Client implements SimpleEntity<Client> {
     @Column(name = "code")
     private String code;
 
+    @Column(name = "isActual")
+    private Boolean actual;
+
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
     public ClientDTO toDTO(){
-        return new ClientDTO(id,firstName,lastName,email,city,street,houseNumber,code,user.getId());
+        return new ClientDTO(id,firstName,lastName,email,city,street,houseNumber,code,user.getId(), actual);
     }
 
     public void mergeWithDto(ClientDTO clientDTO){

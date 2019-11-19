@@ -31,7 +31,7 @@ public class User implements SimpleEntity {
     @OneToMany(mappedBy="user")
     private List<Works> works;
 
-    @OneToMany(mappedBy="user")
+    @OneToMany(mappedBy="user", cascade = {CascadeType.PERSIST})
     private List<Unit> unit;
 
 }

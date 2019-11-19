@@ -1,0 +1,13 @@
+<mat-card class="example-container">
+  <mat-list class="units-list-main-style">
+    <h3 style="text-align: center">{{title}}</h3>
+    <mat-list-item *ngFor="let unit of units">
+      <h4 mat-line>{{unit.bottom}} <sup>{{unit.top}}</sup></h4>
+
+      <button aria-label="Example icon-button with a heart icon">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</mat-card>

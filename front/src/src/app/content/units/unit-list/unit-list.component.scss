@@ -1,0 +1,12 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  .mat-input-element:disabled{
+    color: black;
+  }
+}
+
+.mat-card{
+  background: rgba(255, 230, 179, 0.5);
+  margin: 25px;
+}

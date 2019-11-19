@@ -2,10 +2,11 @@ package com.estimate.dao.services.impl;
 
 import com.estimate.dao.services.dao.AbstractDao;
 import com.estimate.dao.services.dao.UnitDao;
-import com.estimate.model.entities.Client;
 import com.estimate.model.entities.Unit;
 import com.estimate.model.entities.User;
+import com.estimate.model.entities.utils.Role;
 
+import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -15,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+@Stateless(name = "unitDao")
 public class UnitDaoImpl extends AbstractDao<Unit> implements UnitDao {
 
     @Override
@@ -40,6 +42,22 @@ public class UnitDaoImpl extends AbstractDao<Unit> implements UnitDao {
             return Optional.of(entityManager.createQuery(criteriaQuery).getSingleResult());
         }catch (NoResultException e){
             return Optional.empty();
+        }
+    }
+
+    @Override
+    public List<Unit> getUnitsByUserAndRole(User user, Role role) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Unit> criteriaQuery = criteriaBuilder.createQuery(Unit.class);
+        Root<Unit> root = criteriaQuery.from(Unit.class);
+        criteriaQuery.where(
+                criteriaBuilder.and(
+                        criteriaBuilder.equal(root.get("user"),user),
+                        criteriaBuilder.equal(root.get("role"),role)));
+        try {
+            return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
+        }catch (NoResultException e){
+            return Collections.emptyList();
         }
     }
 }

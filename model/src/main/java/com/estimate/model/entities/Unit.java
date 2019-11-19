@@ -39,6 +39,17 @@ public class Unit implements SimpleEntity<Unit> {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
+    public Unit() {
+
+    }
+
+    public Unit(String bottom, String top, Role role, Boolean actual) {
+        this.bottom = bottom;
+        this.top = top;
+        this.role = role;
+        this.actual = actual;
+    }
+
     public UnitDTO toDTO(){
         return new UnitDTO(id,bottom,top,role,actual,user.getId());
     }
