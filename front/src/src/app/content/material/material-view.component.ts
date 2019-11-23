@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Material} from '../../model/material';
+import {MaterialService} from '../../services/material.service';
 
 @Component({
   selector: 'app-material-view',
@@ -8,12 +9,17 @@ import {Material} from '../../model/material';
 })
 export class MaterialViewComponent implements OnInit {
 
-  constructor() { }
+  materials: Array<Material>;
+
+  constructor(private materialService: MaterialService) {
+  }
 
   ngOnInit() {
   }
 
   addMaterial(material: Material) {
-
+    this.materialService.addMaterial(material).subscribe(materialId => {
+      material.id = materialId.body;
+    });
   }
 }

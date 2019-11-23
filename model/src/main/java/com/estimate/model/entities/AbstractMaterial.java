@@ -23,7 +23,7 @@ public abstract class AbstractMaterial implements SimpleEntity<Client> {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "price")
+    @Column(name = "price", columnDefinition="Decimal(15,2)")
     private Double price;
 
     @Column(name = "create_time")
