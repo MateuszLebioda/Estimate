@@ -10,9 +10,7 @@ import {Role} from '../../../model/role.enum';
   styleUrls: ['./unit-sheet-component.component.scss']
 })
 export class UnitSheetComponentComponent implements OnInit {
-
-  roles  = Role;
-
+  private roles  = Role;
   private unitForm: FormGroup;
   unit: Unit;
 

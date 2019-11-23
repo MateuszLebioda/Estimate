@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Material} from '../../model/material';
 
 @Component({
   selector: 'app-material-view',
@@ -12,4 +13,7 @@ export class MaterialViewComponent implements OnInit {
   ngOnInit() {
   }
 
+  addMaterial(material: Material) {
+
+  }
 }
