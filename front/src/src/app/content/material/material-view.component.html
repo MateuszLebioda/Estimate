@@ -1,2 +1,4 @@
 <app-material-toolbar (materialToAdd)="addMaterial($event)"></app-material-toolbar>
-<p>material-view works!</p>
+<div *ngFor="let material of materials; let i = index" class="card-container">
+  <app-raw-material [material]="material" class="example-card" (click)="onMatCardClickEvent(material)"></app-raw-material>
+</div>

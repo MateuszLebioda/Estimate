@@ -13,6 +13,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Path("/materials")
 public class MaterialsController {
@@ -39,7 +40,7 @@ public class MaterialsController {
     @Path("/getAllMaterials")
     public Response getMaterials(){
         if(user.isPresent()){
-            return Response.ok(materialService.getAllMaterials(user.get())).build();
+            return Response.ok(materialService.getAllMaterials(user.get()).stream().map(Material::toDTO).collect(Collectors.toList())).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }

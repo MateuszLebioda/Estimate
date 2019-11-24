@@ -13,13 +13,16 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RawClientComponent} from './content/clients/raw-client/raw-client.component';
 import {DialogClientComponent} from './content/clients/dialog-client/dialog-client.component';
-import { UnitViewsComponent } from './content/units/units-view.component';
-import { UnitToolbarViewComponent } from './content/units/unit-toolbar-view/unit-toolbar-view.component';
-import { UnitSheetComponentComponent } from './content/units/unit-sheet-component/unit-sheet-component.component';
-import { UnitContentComponent } from './content/units/unit-content/unit-content.component';
-import { UnitListComponent } from './content/units/unit-list/unit-list.component';
-import { MaterialToolbarComponent } from './content/material/material-toolbar/material-toolbar.component';
-import { AddMaterialSheetComponent } from './content/material/add-material-sheet/add-material-sheet.component';
+import {UnitViewsComponent} from './content/units/units-view.component';
+import {UnitToolbarViewComponent} from './content/units/unit-toolbar-view/unit-toolbar-view.component';
+import {UnitSheetComponentComponent} from './content/units/unit-sheet-component/unit-sheet-component.component';
+import {UnitContentComponent} from './content/units/unit-content/unit-content.component';
+import {UnitListComponent} from './content/units/unit-list/unit-list.component';
+import {MaterialToolbarComponent} from './content/material/material-toolbar/material-toolbar.component';
+import {AddMaterialSheetComponent} from './content/material/add-material-sheet/add-material-sheet.component';
+import {RawMaterialComponent} from './content/material/raw-material/raw-material.component';
+import {SimpleComponentDialogComponent} from './utils/simple-component-dialog/simple-component-dialog.component';
+import { ConfirmDialogComponent } from './utils/confirm-dialog/confirm-dialog.component';
 
 const keycloakService = new KeycloakService();
 
@@ -45,7 +48,9 @@ const keycloakService = new KeycloakService();
     ClientSheetComponent,
     DialogClientComponent,
     UnitSheetComponentComponent,
-    AddMaterialSheetComponent],
+    AddMaterialSheetComponent,
+    ConfirmDialogComponent,
+    SimpleComponentDialogComponent],
   declarations: [AppComponent,
     ContentComponent,
     MenuComponent,
@@ -59,7 +64,10 @@ const keycloakService = new KeycloakService();
     UnitContentComponent,
     UnitListComponent,
     MaterialToolbarComponent,
-    AddMaterialSheetComponent]
+    AddMaterialSheetComponent,
+    RawMaterialComponent,
+    SimpleComponentDialogComponent,
+    ConfirmDialogComponent]
 })
 
 export class AppModule {

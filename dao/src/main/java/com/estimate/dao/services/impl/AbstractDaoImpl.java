@@ -40,7 +40,7 @@ public class AbstractDaoImpl extends AbstractDao<AbstractMaterial> implements Ab
         criteriaQuery.where(
                 criteriaBuilder.and(
                         criteriaBuilder.equal(root.get("user"), user),
-                        criteriaBuilder.equal(root.get("isActive"), true)
+                        criteriaBuilder.equal(root.get("actual"), true)
                         ));
         try {
             return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());

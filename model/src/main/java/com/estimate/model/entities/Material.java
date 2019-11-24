@@ -11,6 +11,6 @@ import javax.persistence.Entity;
 public class Material extends AbstractMaterial {
 
     public MaterialDTO toDTO(){
-        return new MaterialDTO(getId(),getName(),getPrice(),getUnit().getId(),getUser());
+        return new MaterialDTO(getId(),getName(),getPrice(),getUnit(),getUser());
     }
 }

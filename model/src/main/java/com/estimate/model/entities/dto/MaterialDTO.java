@@ -1,5 +1,6 @@
 package com.estimate.model.entities.dto;
 
+import com.estimate.model.entities.Unit;
 import com.estimate.model.entities.User;
 import lombok.Data;
 
@@ -10,15 +11,17 @@ public class MaterialDTO {
     private Double price;
     private Long unitId;
     private User user;
+    private UnitDTO unit;
 
     public MaterialDTO() {
     }
 
-    public MaterialDTO(Long id, String name, Double price, Long unitId, User user) {
+    public MaterialDTO(Long id, String name, Double price, Unit unit, User user) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.unitId = unitId;
+        this.unitId = unit.getId();
+        this.unit = unit.toDTO();
         this.user = getUser();
     }
 }

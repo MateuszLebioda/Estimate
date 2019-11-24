@@ -4,12 +4,23 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
+.data-mat-card{
+  background: rgba(255, 230, 179, 0.5);
+  margin: 25px 25px 0px;
+  cursor: pointer!important;
+}
+
 .form-sheet-container {
   display: flex;
   flex-direction: column;
   .mat-form-field{
     padding-top: 8px;
   }
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .tool-bar-color{
@@ -34,4 +45,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: black;
     filter: brightness(90%);
   }
+}
+
+
+.mat-form-field-appearance-legacy .mat-form-field-infix{
+  border: 0px;
 }
