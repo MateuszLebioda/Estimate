@@ -15,7 +15,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select formControlName="unit" placeholder="Jednostka" >
+        <mat-select formControlName="unit" placeholder="Jednostka" [compareWith]="compareObjects">
           <mat-option *ngFor="let unit of units" [value]="unit">
             <h4 mat-line>{{unit.bottom}} <sup>{{unit.top}}</sup></h4>
           </mat-option>

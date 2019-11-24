@@ -9,6 +9,7 @@ import com.estimate.model.entities.dto.MaterialDTO;
 
 import javax.ejb.Local;
 import java.util.List;
+import java.util.Optional;
 
 @Local
 public interface MaterialService {
@@ -16,4 +17,11 @@ public interface MaterialService {
     Long addMaterialFromDTO(MaterialDTO materialDto);
     List<Material> getAllMaterials(User user);
     List<Works> getAllWorks(User user);
+    Optional<Material> getMaterialById(Long id);
+    boolean isMyMaterial(User user, Long materialId);
+    boolean deleteMaterial(Material material);
+    boolean isMyMaterial(User user, Material material);
+    Long updateMaterial(Material material, MaterialDTO materialDTO);
+    Material getMaterialFromDTO(MaterialDTO materialDTO);
+    void mergeMaterialWithMaterialDTO(Material material, MaterialDTO materialDTO);
 }

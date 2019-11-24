@@ -12,6 +12,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless(name = "abstractMaterialDao")
 public class AbstractDaoImpl extends AbstractDao<AbstractMaterial> implements AbstractMaterialDao {
@@ -46,6 +47,19 @@ public class AbstractDaoImpl extends AbstractDao<AbstractMaterial> implements Ab
             return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
         } catch (NoResultException e) {
             return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public Optional<Material> getMaterialById(Long id) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Material> criteriaQuery = criteriaBuilder.createQuery(Material.class);
+        Root<Material> root = criteriaQuery.from(Material.class);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("id"),id));
+        try {
+            return Optional.of(entityManager.createQuery(criteriaQuery).getSingleResult());
+        }catch (NoResultException e){
+            return Optional.empty();
         }
     }
 

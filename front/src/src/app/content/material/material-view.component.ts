@@ -5,6 +5,9 @@ import {DialogClientComponent} from '../clients/dialog-client/dialog-client.comp
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SimpleComponentDialogComponent} from '../../utils/simple-component-dialog/simple-component-dialog.component';
+import {AddMaterialSheetComponent} from './add-material-sheet/add-material-sheet.component';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {ClientSheetComponent} from '../clients/sheet-client/client-sheet.component';
 
 @Component({
   selector: 'app-material-view',
@@ -15,7 +18,7 @@ export class MaterialViewComponent implements OnInit {
 
   materials: Array<Material>;
 
-  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private materialService: MaterialService) {
+  constructor(private addSheet: MatBottomSheet, public dialog: MatDialog, private snackBar: MatSnackBar, private materialService: MaterialService) {
   }
 
   private openSnackBar(material: Material, action: string) {
@@ -25,9 +28,7 @@ export class MaterialViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.materialService.getAllMaterials().subscribe( materials => {
-      console.log(materials.body);
-
+    this.materialService.getAllMaterials().subscribe(materials => {
       this.materials = materials.body;
     });
   }
@@ -44,10 +45,24 @@ export class MaterialViewComponent implements OnInit {
       data: material.name
     }).afterClosed().subscribe(reload => {
       if (reload !== undefined && reload === 'deleted') {
-        this.openSnackBar(material, 'Usunięto');
+        this.materialService.delete(material).subscribe(o => {
+          this.openSnackBar(material, 'Usunięto');
+          this.materials = this.materials.filter(m => m.id !== material.id);
+        });
       }
       if (reload !== undefined && reload === 'edit') {
-        this.openSnackBar(material, 'Zaktualizowano');
+        this.addSheet.open(AddMaterialSheetComponent, {
+          data: material
+        }).afterDismissed().subscribe((m: Material) => {
+            if (m !== undefined) {
+              console.log(m);
+              this.materialService.put(m).subscribe(http => {
+                console.log(http.body);
+                this.openSnackBar(material, 'Zaktualizowano');
+              });
+            }
+          }
+        );
       }
     });
   }

@@ -4,6 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Table(name = "estimate")
@@ -18,5 +21,12 @@ public class Estimate {
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
+
+    @ManyToMany()
+    @JoinTable(name = "estimate_material",
+            joinColumns = @JoinColumn(name = "estimate_id"),
+            inverseJoinColumns = @JoinColumn(name = "material_id")
+    )
+    private Set<Material> materials = new HashSet<>();
 
 }

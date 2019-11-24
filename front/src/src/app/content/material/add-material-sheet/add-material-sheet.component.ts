@@ -34,9 +34,19 @@ export class AddMaterialSheetComponent implements OnInit {
       price: new FormControl(this.material.price, [Validators.required, Validators.pattern('[0-9]*(\\.[0-9][0-9]){0,1}')]),
       unit: new FormControl(this.material.unit, [Validators.required]),
     });
+
+    console.log(this.materialForm.get('unit').value);
+  }
+
+  getUnit(): Unit {
+    return this.material.unit;
   }
 
   ngOnInit() {
+  }
+
+  compareObjects(o1: any, o2: any): boolean {
+    return o1.id === o2.id;
   }
 
   saveMaterial() {
