@@ -64,7 +64,6 @@ export class ClientsViewComponent implements OnInit {
           }
         });
       }
-
     });
   }
 

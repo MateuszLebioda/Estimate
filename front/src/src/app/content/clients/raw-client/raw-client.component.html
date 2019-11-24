@@ -1,10 +1,10 @@
 <mat-card>
-      <div class="example-container" *ngIf="client">
+<div *ngIf="client" class="card-style">
         <mat-form-field>
           <input matInput value="{{client.firstName}} {{client.lastName}}" readonly class="client-data">
         </mat-form-field>
         <mat-form-field>
-          <input matInput value="{{client.email}}"  readonly class="client-data">
+          <input matInput value="{{client.email}}"  readonly >
         </mat-form-field>
         <mat-form-field>
           <input matInput  value="{{client.code}} {{client.city}}" readonly class="client-data">

@@ -1,11 +1,14 @@
 package com.estimate.model.entities;
 
+import com.estimate.model.entities.dto.MaterialDTO;
 import com.estimate.model.entities.utils.SimpleEntity;
 import lombok.Data;
 
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -23,7 +26,7 @@ public abstract class AbstractMaterial implements SimpleEntity<Client> {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "price")
+    @Column(name = "price", columnDefinition="Decimal(15,2)")
     private Double price;
 
     @Column(name = "create_time")
@@ -39,4 +42,7 @@ public abstract class AbstractMaterial implements SimpleEntity<Client> {
     @ManyToOne
     @JoinColumn(name="unit_id", nullable=false)
     private Unit unit;
+
+    @ManyToMany(mappedBy = "materials")
+    private Set<Estimate> estimates = new HashSet<>();
 }

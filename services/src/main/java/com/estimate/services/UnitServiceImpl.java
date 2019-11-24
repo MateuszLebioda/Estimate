@@ -70,7 +70,12 @@ public class UnitServiceImpl implements UnitService {
     public boolean deleteUnit(Unit unit) {
         Optional<Unit> optionalUnit = unitDao.getUnitById(unit.getId());
         if(optionalUnit.isPresent()){
-            unitDao.delete(unit);
+            if(unit.getMaterials().isEmpty()) {
+                unitDao.delete(unit);
+            }else {
+                unit.setActual(false);
+                unitDao.merge(unit);
+            }
             return true;
         }return false;
     }

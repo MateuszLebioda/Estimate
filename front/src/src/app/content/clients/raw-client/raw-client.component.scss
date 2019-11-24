@@ -4,7 +4,7 @@
   cursor: pointer;
 }
 
-.example-container {
+.card-container {
   display: flex;
   flex-direction: column;
   .mat-input-element:disabled{
@@ -16,8 +16,10 @@
   margin-bottom: 2px;
 }
 
-.client-data{
-  cursor: pointer;
+.card-style{
+  .mat-form-field{
+    width: 100%;
+  }
 }
 
 

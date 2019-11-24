@@ -6,7 +6,10 @@ import com.estimate.model.entities.utils.SimpleEntity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -35,6 +38,16 @@ public class Unit implements SimpleEntity<Unit> {
     @Column(name = "isActual")
     private Boolean actual;
 
+    @Column(name = "created")
+    private LocalDateTime created;
+
+    @ManyToOne(cascade={CascadeType.ALL})
+    @JoinColumn(name="parent")
+    private Unit parent;
+
+    @OneToMany(mappedBy="parent")
+    private Set<Unit> children = new HashSet<>();
+
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
@@ -48,6 +61,7 @@ public class Unit implements SimpleEntity<Unit> {
         this.top = top;
         this.role = role;
         this.actual = actual;
+        this.created = LocalDateTime.now();
     }
 
     public UnitDTO toDTO(){

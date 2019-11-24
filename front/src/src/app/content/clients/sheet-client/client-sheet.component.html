@@ -1,6 +1,6 @@
 <mat-card>
   <form [formGroup]="clientForm">
-    <div class="example-container">
+    <div class="form-sheet-container">
       <mat-form-field>
         <input formControlName="firstName" matInput placeholder="Imie">
         <mat-error *ngIf="clientForm.get('firstName').hasError('required')">Pole jest wymagane</mat-error>

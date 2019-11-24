@@ -1,6 +1,5 @@
 package com.estimate.api.controllers;
 
-import com.estimate.model.entities.Client;
 import com.estimate.model.entities.Unit;
 import com.estimate.model.entities.User;
 import com.estimate.model.entities.dto.UnitDTO;
@@ -11,6 +10,7 @@ import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,8 +61,8 @@ public class UnitController {
     public Response addUnit(Unit unit){
         if(user.isPresent()){
             unit.setUser(user.get());
-            Long newClientId = unitService.addUnit(unit);
-            return Response.ok(newClientId).build();
+            unit.setCreated(LocalDateTime.now());
+            return Response.ok(unitService.addUnit(unit)).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }

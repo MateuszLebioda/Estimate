@@ -53,7 +53,8 @@ public class UnitDaoImpl extends AbstractDao<Unit> implements UnitDao {
         criteriaQuery.where(
                 criteriaBuilder.and(
                         criteriaBuilder.equal(root.get("user"),user),
-                        criteriaBuilder.equal(root.get("role"),role)));
+                        criteriaBuilder.equal(root.get("role"),role),
+                        criteriaBuilder.equal(root.get("actual"),true)));
         try {
             return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
         }catch (NoResultException e){
