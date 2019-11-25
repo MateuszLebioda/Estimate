@@ -5,16 +5,22 @@ import {EstimateViewComponent} from './content/estimate/estimate-view.component'
 import {MaterialViewComponent} from './content/material/material-view.component';
 import {UnitViewsComponent} from './content/units/units-view.component';
 import {WorkViewComponent} from './content/work/work-view.component';
+import {JobTemplatesViewComponent} from './content/job-templates/job-templates-view.component';
 
 const routes: Routes = [
   {path: 'clients', component: ClientsViewComponent},
   {path: 'estimates', component: EstimateViewComponent},
   {path: 'materials', component: MaterialViewComponent},
   {path: 'units', component: UnitViewsComponent},
-  {path: 'jobs', component: WorkViewComponent}
+  {path: 'work', component: WorkViewComponent},
+  {path: 'job-templates', component: JobTemplatesViewComponent}
 ];
 
-export const routingComponents = [ClientsViewComponent, EstimateViewComponent, MaterialViewComponent, WorkViewComponent];
+export const routingComponents = [ClientsViewComponent,
+  EstimateViewComponent,
+  MaterialViewComponent,
+  WorkViewComponent,
+  JobTemplatesViewComponent];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

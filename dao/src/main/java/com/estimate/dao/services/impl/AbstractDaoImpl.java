@@ -52,22 +52,19 @@ public class AbstractDaoImpl extends AbstractDao<AbstractMaterial> implements Ab
 
     @Override
     public Optional<Material> getMaterialById(Long id) {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Material> criteriaQuery = criteriaBuilder.createQuery(Material.class);
-        Root<Material> root = criteriaQuery.from(Material.class);
-        criteriaQuery.where(criteriaBuilder.equal(root.get("id"),id));
-        try {
-            return Optional.of(entityManager.createQuery(criteriaQuery).getSingleResult());
-        }catch (NoResultException e){
-            return Optional.empty();
-        }
+        return Optional.of((Material) getAbstractMaterialById(id).get());
     }
 
     @Override
     public Optional<Work> getWorkById(Long id) {
+        return Optional.of((Work) getAbstractMaterialById(id).get());
+    }
+
+    @Override
+    public Optional<AbstractMaterial> getAbstractMaterialById(Long id) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Work> criteriaQuery = criteriaBuilder.createQuery(Work.class);
-        Root<Work> root = criteriaQuery.from(Work.class);
+        CriteriaQuery<AbstractMaterial> criteriaQuery = criteriaBuilder.createQuery(AbstractMaterial.class);
+        Root<AbstractMaterial> root = criteriaQuery.from(AbstractMaterial.class);
         criteriaQuery.where(criteriaBuilder.equal(root.get("id"),id));
         try {
             return Optional.of(entityManager.createQuery(criteriaQuery).getSingleResult());

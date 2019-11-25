@@ -23,7 +23,6 @@ export class WorkViewComponent implements OnInit {
 
   ngOnInit() {
     this.workService.getAllWorks().subscribe(works => {
-      console.log(works.body);
       this.works = works.body;
     });
   }

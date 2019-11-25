@@ -2,6 +2,7 @@ package com.estimate.services;
 
 import com.estimate.dao.services.dao.AbstractMaterialDao;
 import com.estimate.model.entities.*;
+import com.estimate.model.entities.dto.AbstractMaterialDTO;
 import com.estimate.model.entities.dto.MaterialDTO;
 import com.estimate.model.entities.dto.WorkDTO;
 
@@ -22,14 +23,42 @@ public class MaterialServiceImpl implements MaterialService {
     private UnitService unitService;
 
     @Override
-    public Long addMaterial(AbstractMaterial material) {
-        material.setCreateTime(LocalDateTime.now());
+    public Long addAbstractMaterial(AbstractMaterial material) {
         return abstractMaterialDao.save(material).getId();
     }
 
     @Override
-    public Long addMaterialFromDTO(MaterialDTO materialDto) {
-        return addMaterial(getMaterialFromDTO(materialDto));
+    public boolean deleteAbstractMaterial(AbstractMaterial abstractMaterial) {
+        Optional<AbstractMaterial> optionalAbstractMaterial = abstractMaterialDao.getAbstractMaterialById(abstractMaterial.getId());
+        if(optionalAbstractMaterial.isPresent()){
+            abstractMaterialDao.delete(optionalAbstractMaterial.get());
+            return true;
+        }return false;
+    }
+
+    @Override
+    public Long updateAbstractMaterial(AbstractMaterial abstractMaterial, AbstractMaterialDTO abstractMaterialDTO) {
+        if(abstractMaterial.getEstimates().isEmpty()){
+            mergeMaterialWithMaterialDTO(abstractMaterial,abstractMaterialDTO);
+            abstractMaterialDao.merge(abstractMaterial);
+            return abstractMaterial.getId();
+        }else {
+            Long newMaterialId = addAbstractMaterialFromDTO(abstractMaterialDTO);
+            abstractMaterial.setActual(Boolean.FALSE);
+            abstractMaterialDao.merge(abstractMaterial);
+            return newMaterialId;
+        }
+    }
+
+    @Override
+    public Long addAbstractMaterialFromDTO(AbstractMaterialDTO abstractMaterialDTO) {
+        if(abstractMaterialDTO instanceof WorkDTO){
+            Work work = getWorkFromDTO((WorkDTO) abstractMaterialDTO);
+            return abstractMaterialDao.save(work).getId();
+        }else {
+            Material material = getMaterialFromDTO((MaterialDTO) abstractMaterialDTO);
+            return abstractMaterialDao.save(material).getId();
+        }
     }
 
     public List<Material> getAllMaterials(User user){
@@ -53,28 +82,21 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    public Long updateMaterial(Material material, MaterialDTO materialDTO) {
-        if(material.getEstimates().isEmpty()){
-            mergeMaterialWithMaterialDTO(material,materialDTO);
-            abstractMaterialDao.merge(material);
-            return material.getId();
-        }else {
-            Long newMaterialId = addMaterialFromDTO(materialDTO);
-            material.setActual(Boolean.FALSE);
-            abstractMaterialDao.merge(material);
-            return newMaterialId;
-        }
-    }
-
-    @Override
     public Material getMaterialFromDTO(MaterialDTO materialDTO) {
         Material material = new Material();
-        mergeMaterialWithMaterialDTO(material,materialDTO);
+        mergeMaterialWithMaterialDTO(material, materialDTO);
         return material;
     }
 
     @Override
-    public void mergeMaterialWithMaterialDTO(Material material, MaterialDTO materialDTO) {
+    public Work getWorkFromDTO(WorkDTO workDTO) {
+        Work work = new Work();
+        mergeMaterialWithMaterialDTO(work, workDTO);
+        return work;
+    }
+
+    @Override
+    public void mergeMaterialWithMaterialDTO(AbstractMaterial material, AbstractMaterialDTO materialDTO) {
         material.setName(materialDTO.getName());
         material.setPrice(materialDTO.getPrice());
         material.setUser(materialDTO.getUser());
@@ -84,50 +106,8 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    public Long addWorkFromDTO(WorkDTO workDTO) {
-        return addMaterial(getWorkFromDTO(workDTO));
-    }
-
-    @Override
-    public Work getWorkFromDTO(WorkDTO workDTO) {
-        Work work = new Work();
-        mergeWorkWithWorkDTO(work, workDTO);
-        return work;
-    }
-
-    @Override
     public Optional<Work> getWorkById(Long id) {
         return abstractMaterialDao.getWorkById(id);
     }
 
-
-
-    @Override
-    public boolean deleteWork(Work work) {
-        Optional<Work> optionalMaterial = abstractMaterialDao.getWorkById(work.getId());
-        if(optionalMaterial.isPresent()){
-            abstractMaterialDao.delete(optionalMaterial.get());
-            return true;
-        }return false;
-    }
-
-
-    @Override
-    public void mergeWorkWithWorkDTO(Work work, WorkDTO workDTO) {
-        work.setName(workDTO.getName());
-        work.setPrice(workDTO.getPrice());
-        work.setUser(workDTO.getUser());
-        work.setActual(Boolean.TRUE);
-        work.setCreateTime(LocalDateTime.now());
-        work.setUnit(unitService.getUnitById(workDTO.getUnit().getId()));
-    }
-
-    @Override
-    public boolean deleteMaterial(Material material) {
-        Optional<Material> optionalMaterial = abstractMaterialDao.getMaterialById(material.getId());
-        if(optionalMaterial.isPresent()){
-            abstractMaterialDao.delete(optionalMaterial.get());
-            return true;
-        }return false;
-    }
 }

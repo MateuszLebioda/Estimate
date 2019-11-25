@@ -17,6 +17,7 @@ export class UnitSheetComponentComponent implements OnInit {
   constructor(private bottomSheetRef: MatBottomSheetRef<UnitSheetComponentComponent>,
               @Inject(MAT_BOTTOM_SHEET_DATA) public data: Unit) {
 
+    bottomSheetRef.disableClose = true;
     if (data !== null) {
       this.unit = data;
     } else {

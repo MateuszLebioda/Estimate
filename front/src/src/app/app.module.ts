@@ -27,6 +27,7 @@ import { WorkViewComponent } from './content/work/work-view.component';
 import { WorkToolbarComponent } from './content/work/work-toolbar/work-toolbar.component';
 import { AddWorkSheetComponent } from './content/work/add-work-sheet/add-work-sheet.component';
 import {RawWorkComponent} from './content/work/raw-work/raw-work.component';
+import { JobTemplatesViewComponent } from './content/job-templates/job-templates-view.component';
 
 const keycloakService = new KeycloakService();
 
@@ -76,7 +77,8 @@ const keycloakService = new KeycloakService();
     WorkViewComponent,
     WorkToolbarComponent,
     AddWorkSheetComponent,
-    RawWorkComponent]
+    RawWorkComponent,
+    JobTemplatesViewComponent]
 })
 
 export class AppModule {

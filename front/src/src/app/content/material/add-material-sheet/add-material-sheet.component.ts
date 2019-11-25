@@ -19,6 +19,7 @@ export class AddMaterialSheetComponent implements OnInit {
   constructor(private unitService: UnitService, private bottomSheetRef: MatBottomSheetRef<AddMaterialSheetComponent>,
               @Inject(MAT_BOTTOM_SHEET_DATA) public data: Material) {
 
+    bottomSheetRef.disableClose = true;
     if (data !== null) {
       this.material = data;
     } else {

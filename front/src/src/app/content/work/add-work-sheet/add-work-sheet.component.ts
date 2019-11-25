@@ -19,6 +19,7 @@ export class AddWorkSheetComponent implements OnInit {
   constructor(private unitService: UnitService, private bottomSheetRef: MatBottomSheetRef<AddWorkSheetComponent>,
               @Inject(MAT_BOTTOM_SHEET_DATA) public data: Work) {
 
+    bottomSheetRef.disableClose = true;
     if (data !== null) {
       this.work = data;
     } else {

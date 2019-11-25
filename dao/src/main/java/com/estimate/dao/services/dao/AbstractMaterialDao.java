@@ -14,4 +14,5 @@ public interface AbstractMaterialDao extends AbstractDaoFunction <AbstractMateri
     List<Material> getAllMaterials(User user);
     Optional<Material> getMaterialById(Long id);
     Optional<Work> getWorkById(Long id);
+    Optional<AbstractMaterial> getAbstractMaterialById(Long id);
 }

@@ -5,23 +5,11 @@ import com.estimate.model.entities.User;
 import lombok.Data;
 
 @Data
-public class WorkDTO {
-    private Long id;
-    private String name;
-    private Double price;
-    private Long unitId;
-    private User user;
-    private UnitDTO unit;
-
+public class WorkDTO extends AbstractMaterialDTO{
     public WorkDTO() {
     }
 
     public WorkDTO(Long id, String name, Double price, Unit unit, User user) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.unitId = unit.getId();
-        this.unit = unit.toDTO();
-        this.user = getUser();
+        super(id,name,price,unit,user);
     }
 }
