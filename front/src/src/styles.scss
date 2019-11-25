@@ -1,19 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 
-.data-mat-card{
+.data-mat-card {
   background: rgba(255, 230, 179, 0.5);
   margin: 25px 25px 0px;
-  cursor: pointer!important;
+  cursor: pointer !important;
 }
 
 .form-sheet-container {
   display: flex;
   flex-direction: column;
-  .mat-form-field{
+
+  .mat-form-field {
     padding-top: 8px;
   }
 }
@@ -23,31 +30,61 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   flex-direction: column;
 }
 
-.tool-bar-color{
+.card-size {
+  margin: 25px;
+  height: 150px;
+  width: auto;
+}
+
+.tool-bar-color {
   background: #283593;
   color: white;
 }
 
-*{
+* {
   font-family: 'Audiowide', sans-serif;
   font-size: 16px;
 }
 
 
-.tool-bar-spans{
+.tool-bar-spans {
   padding-left: 30px;
   padding-right: 30px;
   font-size: 23px;
-  .mat-button{
+
+  .mat-button {
     font-size: 15px;
   }
-  .mat-button:hover{
+
+  .mat-button:hover {
     color: black;
     filter: brightness(90%);
   }
 }
 
+.dialog-button-max-size {
+  min-width: 300px;
+  mat-form-field {
+    width: 100% !important;
+  }
+    .content {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 200px;
+      max-width: 350px;
+      .content2 {
+        display: flex;
+        flex-direction: column;
+        .mat-raised-button {
+          max-width: 250px;
+          margin-bottom: 20px!important;
+          width: 100%;
+      }
+    }
+  }
+}
 
-.mat-form-field-appearance-legacy .mat-form-field-infix{
+.mat-form-field-appearance-legacy .mat-form-field-infix {
   border: 0px;
 }

@@ -3,6 +3,7 @@ package com.estimate.services;
 import com.estimate.dao.services.dao.AbstractMaterialDao;
 import com.estimate.model.entities.*;
 import com.estimate.model.entities.dto.MaterialDTO;
+import com.estimate.model.entities.dto.WorkDTO;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -36,7 +37,7 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    public List<Works> getAllWorks(User user) {
+    public List<Work> getAllWorks(User user) {
         return abstractMaterialDao.getAllWorks(user);
     }
 
@@ -45,14 +46,9 @@ public class MaterialServiceImpl implements MaterialService {
         return abstractMaterialDao.getMaterialById(id);
     }
 
-    @Override
-    public boolean isMyMaterial(User user, Long materialId) {
-        Optional<Material> optionalMaterial = abstractMaterialDao.getMaterialById(materialId);
-        return optionalMaterial.filter(material -> isMyMaterial(user, material)).isPresent();
-    }
 
     @Override
-    public boolean isMyMaterial(User user, Material material) {
+    public boolean isMyMaterial(User user, AbstractMaterial material) {
         return material.getUser().getId().equals(user.getId());
     }
 
@@ -85,6 +81,45 @@ public class MaterialServiceImpl implements MaterialService {
         material.setActual(Boolean.TRUE);
         material.setCreateTime(LocalDateTime.now());
         material.setUnit(unitService.getUnitById(materialDTO.getUnit().getId()));
+    }
+
+    @Override
+    public Long addWorkFromDTO(WorkDTO workDTO) {
+        return addMaterial(getWorkFromDTO(workDTO));
+    }
+
+    @Override
+    public Work getWorkFromDTO(WorkDTO workDTO) {
+        Work work = new Work();
+        mergeWorkWithWorkDTO(work, workDTO);
+        return work;
+    }
+
+    @Override
+    public Optional<Work> getWorkById(Long id) {
+        return abstractMaterialDao.getWorkById(id);
+    }
+
+
+
+    @Override
+    public boolean deleteWork(Work work) {
+        Optional<Work> optionalMaterial = abstractMaterialDao.getWorkById(work.getId());
+        if(optionalMaterial.isPresent()){
+            abstractMaterialDao.delete(optionalMaterial.get());
+            return true;
+        }return false;
+    }
+
+
+    @Override
+    public void mergeWorkWithWorkDTO(Work work, WorkDTO workDTO) {
+        work.setName(workDTO.getName());
+        work.setPrice(workDTO.getPrice());
+        work.setUser(workDTO.getUser());
+        work.setActual(Boolean.TRUE);
+        work.setCreateTime(LocalDateTime.now());
+        work.setUnit(unitService.getUnitById(workDTO.getUnit().getId()));
     }
 
     @Override

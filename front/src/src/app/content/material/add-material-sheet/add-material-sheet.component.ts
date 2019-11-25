@@ -38,9 +38,6 @@ export class AddMaterialSheetComponent implements OnInit {
     console.log(this.materialForm.get('unit').value);
   }
 
-  getUnit(): Unit {
-    return this.material.unit;
-  }
 
   ngOnInit() {
   }

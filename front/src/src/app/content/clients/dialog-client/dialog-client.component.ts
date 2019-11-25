@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Client} from '../../../model/client';
 import {ClientService} from '../../../services/client.service';
@@ -8,11 +8,12 @@ import {ClientService} from '../../../services/client.service';
   templateUrl: './dialog-client.component.html',
   styleUrls: ['./dialog-client.component.scss']
 })
-export class DialogClientComponent {
+export class DialogClientComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DialogClientComponent>,
               private clientService: ClientService,
               @Inject(MAT_DIALOG_DATA) public client: Client) {
+
   }
 
   private editClient() {
@@ -25,7 +26,14 @@ export class DialogClientComponent {
     }, (error) => {
       console.log(error);
     });
+  }
 
+  resizable(el, factor: string) {
+    el.style.width = (factor.length * 15) + 'px';
+  }
+
+  ngOnInit(): void {
+    this.resizable(document.getElementById('container'), this.client.lastName + this.client.firstName + 1);
   }
 
 }

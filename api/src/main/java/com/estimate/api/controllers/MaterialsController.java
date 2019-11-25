@@ -1,10 +1,11 @@
 package com.estimate.api.controllers;
 
-import com.estimate.model.entities.Client;
 import com.estimate.model.entities.Material;
 import com.estimate.model.entities.User;
+import com.estimate.model.entities.Work;
 import com.estimate.model.entities.dto.ClientDTO;
 import com.estimate.model.entities.dto.MaterialDTO;
+import com.estimate.model.entities.dto.WorkDTO;
 import com.estimate.services.MaterialService;
 
 
@@ -35,6 +36,17 @@ public class MaterialsController {
         }
     }
 
+    @POST
+    @Path("/addWorks")
+    public Response addMaterial(WorkDTO workDTO){
+        if(user.isPresent()){
+            workDTO.setUser(user.get());
+            return Response.ok(materialService.addWorkFromDTO(workDTO)).build();
+        }else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+
 
     @GET
     @Path("/getAllMaterials")
@@ -50,15 +62,15 @@ public class MaterialsController {
     @Path("/getAllWorks")
     public Response getWorks(){
         if(user.isPresent()){
-            return Response.ok(materialService.getAllMaterials(user.get())).build();
+            return Response.ok(materialService.getAllWorks(user.get()).stream().map(Work::toDTO).collect(Collectors.toList())).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
     }
 
     @DELETE
-    @Path("/delete/{id}")
-    public Response deleteClient(@PathParam("id") long id){
+    @Path("/deleteMaterial/{id}")
+    public Response deleteMaterial(@PathParam("id") long id){
         if(user.isPresent()){
             Optional<Material> optionalMaterial = materialService.getMaterialById(id);
             if(optionalMaterial.isPresent()) {
@@ -74,9 +86,27 @@ public class MaterialsController {
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
+    @DELETE
+    @Path("/deleteWork/{id}")
+    public Response deleteWork(@PathParam("id") long id){
+        if(user.isPresent()){
+            Optional<Work> optionalWork = materialService.getWorkById(id);
+            if(optionalWork.isPresent()) {
+                if (materialService.isMyMaterial(user.get(),optionalWork.get())) {
+                    materialService.deleteWork(optionalWork.get());
+                    return Response.ok().build();
+                }else {
+                    return Response.accepted("Client doest not exist").build();
+                }
+            }
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
 
     @PUT
-    @Path("/update")
+    @Path("/updateMaterial")
     public Response updateClient(MaterialDTO materialDTO) {
         if(user.isPresent()){
             Material material = materialService.getMaterialById(materialDTO.getId()).get();

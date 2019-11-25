@@ -23,6 +23,10 @@ import {AddMaterialSheetComponent} from './content/material/add-material-sheet/a
 import {RawMaterialComponent} from './content/material/raw-material/raw-material.component';
 import {SimpleComponentDialogComponent} from './utils/simple-component-dialog/simple-component-dialog.component';
 import { ConfirmDialogComponent } from './utils/confirm-dialog/confirm-dialog.component';
+import { WorkViewComponent } from './content/work/work-view.component';
+import { WorkToolbarComponent } from './content/work/work-toolbar/work-toolbar.component';
+import { AddWorkSheetComponent } from './content/work/add-work-sheet/add-work-sheet.component';
+import {RawWorkComponent} from './content/work/raw-work/raw-work.component';
 
 const keycloakService = new KeycloakService();
 
@@ -50,7 +54,8 @@ const keycloakService = new KeycloakService();
     UnitSheetComponentComponent,
     AddMaterialSheetComponent,
     ConfirmDialogComponent,
-    SimpleComponentDialogComponent],
+    SimpleComponentDialogComponent,
+    AddWorkSheetComponent],
   declarations: [AppComponent,
     ContentComponent,
     MenuComponent,
@@ -67,7 +72,11 @@ const keycloakService = new KeycloakService();
     AddMaterialSheetComponent,
     RawMaterialComponent,
     SimpleComponentDialogComponent,
-    ConfirmDialogComponent]
+    ConfirmDialogComponent,
+    WorkViewComponent,
+    WorkToolbarComponent,
+    AddWorkSheetComponent,
+    RawWorkComponent]
 })
 
 export class AppModule {

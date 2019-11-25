@@ -1,0 +1,31 @@
+<mat-card>
+  <form [formGroup]="workForm">
+    <div class="form-sheet-container">
+      <mat-form-field>
+        <input formControlName="name" matInput placeholder="Nazwa">
+        <mat-error *ngIf="workForm.get('name').hasError('required')">Pole jest wymagane</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); materialForm.get('price').setValue(this.value); "
+               formControlName="price" matInput placeholder="Cena za jednostkę">
+        <span matSuffix>zł &nbsp;</span>
+        <mat-error *ngIf="workForm.get('price').hasError('required')">Pole jest wymagane</mat-error>
+        <mat-error *ngIf="workForm.get('price').hasError('pattern')">Niepoprawna wartość</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select formControlName="unit" placeholder="Jednostka" [compareWith]="compareObjects">
+          <mat-option *ngFor="let unit of units" [value]="unit">
+            <h4 mat-line>{{unit.bottom}} <sup>{{unit.top}}</sup></h4>
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="workForm.get('unit').hasError('required')">Pole jest wymagane</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-button (click)="bottomSheetRef.dismiss()">Anuluj</button>
+      <button mat-button (click)="saveWork()" [disabled]="!workForm.valid">Zapisz</button>
+    </div>
+  </form>
+</mat-card>

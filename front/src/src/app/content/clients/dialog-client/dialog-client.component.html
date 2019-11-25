@@ -1,8 +1,12 @@
-<div class="card-container">
+<div class="card-container dialog-button-max-size" id="container">
   <mat-form-field>
     <input matInput value="{{client.firstName}} {{client.lastName}}" readonly class="clientName">
   </mat-form-field>
-  <button mat-raised-button color="accent">Pokaż kosztorysy</button>
-  <button mat-raised-button color="primary" (click)="editClient()">Edytuj</button>
-  <button mat-raised-button color="warn" (click)="deleteClient()">Usuń</button>
+  <div class="content">
+    <div class="content2">
+      <button mat-raised-button color="accent">Pokaż kosztorysy</button>
+      <button mat-raised-button color="primary" (click)="editClient()">Edytuj</button>
+      <button mat-raised-button color="warn" (click)="deleteClient()">Usuń</button>
+    </div>
+  </div>
 </div>

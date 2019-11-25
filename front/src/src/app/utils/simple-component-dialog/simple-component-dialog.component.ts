@@ -14,6 +14,7 @@ export class SimpleComponentDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.resizable(document.getElementById('container'), this.value);
   }
 
   edit() {
@@ -27,4 +28,9 @@ export class SimpleComponentDialogComponent implements OnInit {
       }
     });
   }
+
+  resizable(el, factor: string) {
+      el.style.width = (factor.length * 11.5) + 'px';
+  }
+
 }
