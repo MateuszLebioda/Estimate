@@ -13,7 +13,7 @@ export class DialogClientComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<DialogClientComponent>,
               private clientService: ClientService,
               @Inject(MAT_DIALOG_DATA) public client: Client) {
-
+    dialogRef.disableClose = true;
   }
 
   private editClient() {

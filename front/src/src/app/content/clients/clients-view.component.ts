@@ -18,7 +18,6 @@ export class ClientsViewComponent implements OnInit {
               private clientService: ClientService,
               public dialog: MatDialog,
               private snackBar: MatSnackBar) {
-    this.clients = new Array<Client>();
   }
 
   clients: Array<Client>;

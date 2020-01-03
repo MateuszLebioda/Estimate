@@ -12,6 +12,7 @@ export class ClientSheetComponent {
 
   constructor(private bottomSheetRef: MatBottomSheetRef<ClientSheetComponent>,
               @Inject(MAT_BOTTOM_SHEET_DATA) public data: Client) {
+    bottomSheetRef.disableClose = true;
     if (data !== null) {
       this.edit = true;
       this.client = data;

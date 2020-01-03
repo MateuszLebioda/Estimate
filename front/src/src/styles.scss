@@ -12,8 +12,13 @@ body {
 
 .data-mat-card {
   background: rgba(255, 230, 179, 0.5);
-  margin: 25px 25px 0px;
+  margin: 20px 20px 0px;
   cursor: pointer !important;
+  padding-top: 0px!important;
+  padding-bottom: 0px!important;
+  input{
+    cursor: pointer !important;
+  }
 }
 
 .form-sheet-container {
@@ -28,6 +33,23 @@ body {
 .card-container {
   display: flex;
   flex-direction: column;
+}
+
+.client-card-container {
+  display: block;
+  flex-direction: column;
+  align-content: center;
+}
+
+.client-example-card {
+  max-width: 300px;
+  margin-left: 50px;
+  margin-top: 25px;
+  float: left;
+  input{
+    cursor: pointer!important;
+    text-align: center;
+  }
 }
 
 .card-size {
