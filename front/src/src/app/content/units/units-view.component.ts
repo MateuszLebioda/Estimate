@@ -9,19 +9,14 @@ import {UnitService} from '../../services/unit.service';
 })
 export class UnitViewsComponent implements OnInit {
 
-  materialUnits = new Array<Unit>();
-  workUnits = new Array<Unit>();
+  units = new Array<Unit>();
 
   constructor(private unitService: UnitService) {
   }
 
   ngOnInit() {
-    this.unitService.getAlWorkUnits().subscribe(u => {
-      this.workUnits = u.body;
-    });
-
-    this.unitService.getAllMaterialUnits().subscribe(u => {
-      this.materialUnits = u.body;
+    this.unitService.getAllUnits().subscribe(u => {
+      this.units = u.body;
     });
   }
 
@@ -29,23 +24,14 @@ export class UnitViewsComponent implements OnInit {
     this.unitService.addUnit(unit).subscribe(u => {
       unit.id = u.body;
       // @ts-ignore
-      if (unit.role === 'MATERIAL') {
-        this.materialUnits.push(unit);
-      } else {
-        this.workUnits.push(unit);
-      }
+      this.units.push(unit);
     });
   }
 
-  deleteWorksUnit(unit: Unit) {
+  deleteUnit(unit: Unit) {
     this.unitService.deleteUnit(unit).subscribe(s => {
-      this.workUnits = this.workUnits.filter(w => w !== unit);
+      this.units = this.units.filter(w => w !== unit);
     });
   }
 
-  deleteMaterialUnit(unit: Unit) {
-    this.unitService.deleteUnit(unit).subscribe(s => {
-      this.materialUnits = this.materialUnits.filter(w => w !== unit);
-    });
-  }
 }

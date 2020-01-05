@@ -1,6 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Material} from '../../../model/material';
-import {UnitSheetComponentComponent} from '../../units/unit-sheet-component/unit-sheet-component.component';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {AddMaterialSheetComponent} from '../add-material-sheet/add-material-sheet.component';
 

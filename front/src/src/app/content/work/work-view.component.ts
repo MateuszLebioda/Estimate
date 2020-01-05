@@ -53,7 +53,7 @@ export class WorkViewComponent implements OnInit {
       if (reload !== undefined && reload === 'edit') {
         this.addSheet.open(AddWorkSheetComponent, {
           data: work
-        }).afterDismissed().subscribe((m: Material) => {
+        }).afterDismissed().subscribe((m: Work) => {
             if (m !== undefined) {
               console.log(m);
               this.workService.put(m).subscribe(http => {

@@ -15,11 +15,10 @@ public class UnitDTO {
     public UnitDTO() {
     }
 
-    public UnitDTO(Long id, String bottom, String top, Role role, Boolean actual, Long user) {
+    public UnitDTO(Long id, String bottom, String top, Boolean actual, Long user) {
         this.id = id;
         this.bottom = bottom;
         this.top = top;
-        this.role = role;
         this.actual = actual;
         this.user = user;
     }

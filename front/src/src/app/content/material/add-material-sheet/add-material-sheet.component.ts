@@ -26,7 +26,7 @@ export class AddMaterialSheetComponent implements OnInit {
       this.material = new Material();
     }
 
-    unitService.getAllMaterialUnits().subscribe(units => {
+    unitService.getAllUnits().subscribe(units => {
       this.units = units.body;
     });
 

@@ -23,10 +23,10 @@ export class AddWorkSheetComponent implements OnInit {
     if (data !== null) {
       this.work = data;
     } else {
-      this.work = new Material();
+      this.work = new Work();
     }
 
-    unitService.getAlWorkUnits().subscribe(units => {
+    unitService.getAllUnits().subscribe(units => {
       this.units = units.body;
     });
 

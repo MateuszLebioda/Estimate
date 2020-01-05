@@ -25,20 +25,10 @@ public class UnitController {
     private UnitService unitService;
 
     @GET
-    @Path("/getAllMaterialsUnits")
-    public Response getMaterialsUnits(){
-        if(user.isPresent()){
-            return Response.ok(getUnitList(Role.MATERIAL)).build();
-        }else {
-            return Response.status(Response.Status.UNAUTHORIZED).build();
-        }
-    }
-
-    @GET
-    @Path("/getAllWorkUnits")
+    @Path("/getAllUnits")
     public Response getWorkUnits(){
         if(user.isPresent()){
-            return Response.ok(getUnitList(Role.WORKS)).build();
+            return Response.ok(getUnitList()).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
@@ -68,8 +58,8 @@ public class UnitController {
         }
     }
 
-    private List<UnitDTO> getUnitList(Role role){
-        return unitService.getAllUnitsByRole(user.get(), role)
+    private List<UnitDTO> getUnitList(){
+        return unitService.getAllUnits(user.get())
                 .stream()
                 .map(Unit::toDTO).collect(Collectors.toList());
     }

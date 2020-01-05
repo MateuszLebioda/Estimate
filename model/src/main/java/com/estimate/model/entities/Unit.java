@@ -28,10 +28,6 @@ public class Unit implements SimpleEntity<Unit> {
     @Column(name = "top")
     private String top;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private Role role;
-
     @OneToMany(mappedBy="unit")
     private List<AbstractMaterial> materials;
 
@@ -59,12 +55,11 @@ public class Unit implements SimpleEntity<Unit> {
     public Unit(String bottom, String top, Role role, Boolean actual) {
         this.bottom = bottom;
         this.top = top;
-        this.role = role;
         this.actual = actual;
         this.created = LocalDateTime.now();
     }
 
     public UnitDTO toDTO(){
-        return new UnitDTO(id,bottom,top,role,actual,user.getId());
+        return new UnitDTO(id,bottom,top,actual,user.getId());
     }
 }
