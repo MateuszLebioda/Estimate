@@ -4,9 +4,7 @@ import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {WorkService} from '../../services/work.service';
-import {Material} from '../../model/material';
 import {SimpleComponentDialogComponent} from '../../utils/simple-component-dialog/simple-component-dialog.component';
-import {AddMaterialSheetComponent} from '../material/add-material-sheet/add-material-sheet.component';
 import {AddWorkSheetComponent} from './add-work-sheet/add-work-sheet.component';
 
 @Component({

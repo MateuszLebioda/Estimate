@@ -4,8 +4,6 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {backEndUrl} from '../utils/static';
 import {Material} from '../model/material';
-import {Unit} from '../model/unit';
-import {Client} from '../model/client';
 
 @Injectable({
   providedIn: 'root'

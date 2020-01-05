@@ -1,0 +1,26 @@
+<mat-card style="padding-top: 0">
+  <mat-card-header>
+    <input matInput readonly style="float: left">
+    <button style="float: right" mat-button (click)="close()" class="tool-bar-spans">
+      <mat-icon class="example-icon" aria-hidden="false">close</mat-icon>
+    </button>
+  </mat-card-header>
+    <mat-form-field style="width: 95%; margin-left: 20px; margin-right:20px;">
+      <input matInput placeholder="Filtruj" [(ngModel)]="filter" (ngModelChange)="filterMethod()">
+    </mat-form-field>
+  <div style="overflow-y: scroll; height: 470px">
+    <mat-card class="example-card data-mat-card" *ngFor="let material of filteredMaterials" (click)="emmitMaterial(material)">
+      <div class="card-container" *ngIf="material">
+        <mat-form-field style="width: 100%">
+          <input matInput readonly style="border: 0px">
+          <h4 style="margin: 0px; float: left">{{material.name}}</h4>
+          <span style="float: right">
+        <h4 style="margin: 0px">{{material.price}}zł / {{material.unit.bottom}}
+          <sup>{{material.unit.top}}</sup>
+        </h4>
+      </span>
+        </mat-form-field>
+      </div>
+    </mat-card>
+  </div>
+</mat-card>

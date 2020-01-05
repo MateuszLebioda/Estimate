@@ -110,3 +110,7 @@ body {
 .mat-form-field-appearance-legacy .mat-form-field-infix {
   border: 0px;
 }
+
+.jobTemplateAddSheet{
+  min-width: calc(100vw - 258px) !important;
+}

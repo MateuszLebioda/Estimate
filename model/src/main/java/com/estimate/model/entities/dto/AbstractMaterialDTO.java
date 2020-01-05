@@ -2,9 +2,11 @@ package com.estimate.model.entities.dto;
 
 import com.estimate.model.entities.Unit;
 import com.estimate.model.entities.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AbstractMaterialDTO {
     private Long id;
     private String name;

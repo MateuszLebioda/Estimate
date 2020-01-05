@@ -22,12 +22,17 @@ import {MaterialToolbarComponent} from './content/material/material-toolbar/mate
 import {AddMaterialSheetComponent} from './content/material/add-material-sheet/add-material-sheet.component';
 import {RawMaterialComponent} from './content/material/raw-material/raw-material.component';
 import {SimpleComponentDialogComponent} from './utils/simple-component-dialog/simple-component-dialog.component';
-import { ConfirmDialogComponent } from './utils/confirm-dialog/confirm-dialog.component';
-import { WorkViewComponent } from './content/work/work-view.component';
-import { WorkToolbarComponent } from './content/work/work-toolbar/work-toolbar.component';
-import { AddWorkSheetComponent } from './content/work/add-work-sheet/add-work-sheet.component';
+import {ConfirmDialogComponent} from './utils/confirm-dialog/confirm-dialog.component';
+import {WorkViewComponent} from './content/work/work-view.component';
+import {WorkToolbarComponent} from './content/work/work-toolbar/work-toolbar.component';
+import {AddWorkSheetComponent} from './content/work/add-work-sheet/add-work-sheet.component';
 import {RawWorkComponent} from './content/work/raw-work/raw-work.component';
-import { JobTemplatesViewComponent } from './content/job-templates/job-templates-view.component';
+import {JobTemplatesViewComponent} from './content/job-templates/job-templates-view.component';
+import {JobTemplateToolbarComponent} from './content/job-templates/job-template-toolbar/job-template-toolbar.component';
+import {AddJobTemplateSheetComponent} from './content/job-templates/add-job-template-sheet/add-job-template-sheet.component';
+// tslint:disable-next-line:max-line-length
+import {AddAbstractMaterialDialogComponent} from './content/job-templates/add-abstract-material-dialog/add-abstract-material-dialog.component';
+import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
 const keycloakService = new KeycloakService();
 
@@ -56,7 +61,9 @@ const keycloakService = new KeycloakService();
     AddMaterialSheetComponent,
     ConfirmDialogComponent,
     SimpleComponentDialogComponent,
-    AddWorkSheetComponent],
+    AddWorkSheetComponent,
+    AddJobTemplateSheetComponent,
+    AddAbstractMaterialDialogComponent],
   declarations: [AppComponent,
     ContentComponent,
     MenuComponent,
@@ -78,7 +85,10 @@ const keycloakService = new KeycloakService();
     WorkToolbarComponent,
     AddWorkSheetComponent,
     RawWorkComponent,
-    JobTemplatesViewComponent]
+    JobTemplatesViewComponent,
+    JobTemplateToolbarComponent,
+    AddJobTemplateSheetComponent,
+    AddAbstractMaterialDialogComponent]
 })
 
 export class AppModule {

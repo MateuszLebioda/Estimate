@@ -2,6 +2,7 @@ package com.estimate.model.entities;
 
 import com.estimate.model.entities.dto.MaterialDTO;
 import com.estimate.model.entities.utils.SimpleEntity;
+import com.estimate.model.entities.utils.WorkTemplateAbstractMaterial;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -45,4 +46,7 @@ public abstract class AbstractMaterial implements SimpleEntity<Client> {
 
     @ManyToMany(mappedBy = "materials")
     private Set<Estimate> estimates = new HashSet<>();
+
+    @OneToMany(mappedBy = "abstractMaterial", cascade = CascadeType.ALL)
+    Set<WorkTemplateAbstractMaterial> workTemplateAbstractMaterial;
 }
