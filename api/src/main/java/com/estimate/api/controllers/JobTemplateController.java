@@ -1,8 +1,10 @@
 package com.estimate.api.controllers;
 
 import com.estimate.model.entities.User;
-import com.estimate.model.entities.dto.WorkTemplateDTO;
+import com.estimate.model.entities.dto.JobTemplateDTO;
+import com.estimate.services.JobTemplateService;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -14,11 +16,14 @@ public class JobTemplateController {
     @Inject
     private Optional<User> user;
 
+    @EJB
+    JobTemplateService jobTemplateService;
+
     @POST
     @Path("/add")
-    public Response addMaterial(WorkTemplateDTO workTemplateDTO){
+    public Response addMaterial(JobTemplateDTO jobTemplateDTO){
         if(user.isPresent()){
-            System.out.println(workTemplateDTO);
+            jobTemplateService.addJobTemplateDTO(jobTemplateDTO);
             return Response.accepted().build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();

@@ -44,6 +44,9 @@ public class Unit implements SimpleEntity<Unit> {
     @OneToMany(mappedBy="parent")
     private Set<Unit> children = new HashSet<>();
 
+    @OneToMany(mappedBy = "unit", cascade = CascadeType.ALL)
+    Set<JobTemplate> jobTemplates;
+
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
@@ -52,7 +55,7 @@ public class Unit implements SimpleEntity<Unit> {
 
     }
 
-    public Unit(String bottom, String top, Role role, Boolean actual) {
+    public Unit(String bottom, String top, Boolean actual) {
         this.bottom = bottom;
         this.top = top;
         this.actual = actual;

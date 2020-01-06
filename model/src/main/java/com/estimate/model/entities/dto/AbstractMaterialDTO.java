@@ -2,11 +2,10 @@ package com.estimate.model.entities.dto;
 
 import com.estimate.model.entities.Unit;
 import com.estimate.model.entities.User;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.estimate.model.entities.utils.Role;
 import lombok.Data;
 
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class AbstractMaterialDTO {
     private Long id;
     private String name;
@@ -14,6 +13,7 @@ public class AbstractMaterialDTO {
     private Long unitId;
     private User user;
     private UnitDTO unit;
+    private Role type;
 
     public AbstractMaterialDTO() {
     }

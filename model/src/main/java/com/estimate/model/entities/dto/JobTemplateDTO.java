@@ -5,9 +5,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class WorkTemplateDTO {
+public class JobTemplateDTO {
     Long id;
     String name;
-    List<WorkTemplateAbstractMaterialDTO> materials;
+    List<JobTemplateAbstractMaterialDTO> materials;
     UnitDTO unit;
 }

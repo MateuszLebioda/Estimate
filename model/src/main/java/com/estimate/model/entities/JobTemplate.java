@@ -1,7 +1,7 @@
-package com.estimate.model.entities.utils;
+package com.estimate.model.entities;
 
-import com.estimate.model.entities.User;
-import com.estimate.model.entities.dto.WorkTemplateDTO;
+import com.estimate.model.entities.dto.JobTemplateDTO;
+import com.estimate.model.entities.utils.SimpleEntity;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Data
 @Entity
 @Table(name = "workTemplate")
-public class WorkTemplate {
+public class JobTemplate implements SimpleEntity<JobTemplate> {
 
     @Id
     @GeneratedValue(strategy=SEQUENCE, generator="workTemplate_seq")
@@ -24,14 +24,19 @@ public class WorkTemplate {
     private String name;
 
     @OneToMany(mappedBy = "workTemple", cascade = CascadeType.ALL)
-    Set<WorkTemplateAbstractMaterial> workTemplateAbstractMaterial;
+    Set<JobTemplateAbstractMaterial> jobTemplateAbstractMaterial;
+
+    @ManyToOne
+    @JoinColumn(name="unit_id", nullable=false)
+    private Unit unit;
+
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
 
-    public void mergeWithDto(WorkTemplateDTO clientDTO){
+    public void mergeWithDto(JobTemplateDTO clientDTO){
 
     }
 }
