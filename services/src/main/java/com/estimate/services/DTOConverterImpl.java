@@ -29,9 +29,6 @@ public class DTOConverterImpl implements DTOConverter {
         jobTemplate.setName(jobTemplateDTO.getName());
         jobTemplate.setUnit(unitService.getUnitById(jobTemplateDTO.getUnit().getId()));
         jobTemplate.setUser(user.get());
-        /*jobTemplate.setJobTemplateAbstractMaterial(
-                jobTemplateDTO.getMaterials().stream()
-                        .map(this::makeJobTemplateAbstractMaterial).collect(Collectors.toSet()));*/
         return jobTemplate;
     }
 
@@ -41,8 +38,8 @@ public class DTOConverterImpl implements DTOConverter {
 
         jobTemplateAbstractMaterial.setValue(jobTemplateAbstractMaterialDTO.getValue());
         jobTemplateAbstractMaterial.setAbstractMaterial(
-                jobTemplateAbstractMaterialDTO.getMaterial().getType() == Role.MATERIAL?
-                        materialService.getMaterialById(jobTemplateAbstractMaterialDTO.getMaterial().getId()).get():
+                jobTemplateAbstractMaterialDTO.getMaterial().getType() == Role.MATERIAL ?
+                        materialService.getMaterialById(jobTemplateAbstractMaterialDTO.getMaterial().getId()).get() :
                         materialService.getWorkById(jobTemplateAbstractMaterialDTO.getMaterial().getId()).get());
 
         return jobTemplateAbstractMaterial;
@@ -50,7 +47,7 @@ public class DTOConverterImpl implements DTOConverter {
 
     @Override
     public AbstractMaterial makeAbstractMaterial(AbstractMaterialDTO abstractMaterialDTO) {
-        AbstractMaterial abstractMaterial = abstractMaterialDTO.getType() == Role.MATERIAL? new Material():new Work();
+        AbstractMaterial abstractMaterial = abstractMaterialDTO.getType() == Role.MATERIAL ? new Material() : new Work();
         abstractMaterial.setName(abstractMaterialDTO.getName());
         abstractMaterial.setPrice(abstractMaterialDTO.getPrice());
         abstractMaterial.setUser(abstractMaterialDTO.getUser());

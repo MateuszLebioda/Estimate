@@ -46,5 +46,5 @@ public abstract class AbstractMaterial implements SimpleEntity<Client> {
     private Set<Estimate> estimates = new HashSet<>();
 
     @OneToMany(mappedBy = "abstractMaterial", cascade = CascadeType.ALL)
-    Set<JobTemplateAbstractMaterial> jobTemplateAbstractMaterial;
+    private Set<JobTemplateAbstractMaterial> jobTemplateAbstractMaterial;
 }

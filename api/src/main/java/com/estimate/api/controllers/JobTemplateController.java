@@ -6,6 +6,7 @@ import com.estimate.services.JobTemplateService;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
@@ -21,10 +22,20 @@ public class JobTemplateController {
 
     @POST
     @Path("/add")
-    public Response addMaterial(JobTemplateDTO jobTemplateDTO){
+    public Response addJobTemplate(JobTemplateDTO jobTemplateDTO){
         if(user.isPresent()){
             jobTemplateService.addJobTemplateDTO(jobTemplateDTO);
             return Response.accepted().build();
+        }else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+
+    @GET
+    @Path("/get")
+    public Response getJobTemplates(){
+        if(user.isPresent()){
+            return Response.ok(jobTemplateService.getAllJobTemples(user.get())).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }

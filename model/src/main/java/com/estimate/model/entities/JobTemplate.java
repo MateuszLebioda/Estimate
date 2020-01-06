@@ -6,37 +6,46 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Data
 @Entity
-@Table(name = "workTemplate")
+@Table(name = "job_temple")
 public class JobTemplate implements SimpleEntity<JobTemplate> {
 
     @Id
-    @GeneratedValue(strategy=SEQUENCE, generator="workTemplate_seq")
+    @GeneratedValue(strategy = SEQUENCE, generator = "jobTemplate_seq")
     @Column(name = "id")
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "workTemple", cascade = CascadeType.ALL)
-    Set<JobTemplateAbstractMaterial> jobTemplateAbstractMaterial;
+    @OneToMany(mappedBy = "jobTemplate", cascade = CascadeType.ALL)
+    private List<JobTemplateAbstractMaterial> jobTemplateAbstractMaterial;
 
     @ManyToOne
-    @JoinColumn(name="unit_id", nullable=false)
+    @JoinColumn(name = "unit_id", nullable = false)
     private Unit unit;
 
-
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
 
-    public void mergeWithDto(JobTemplateDTO clientDTO){
+    public JobTemplateDTO toDto() {
+        JobTemplateDTO jobTemplateDTO = new JobTemplateDTO();
 
+        jobTemplateDTO.setId(id);
+        jobTemplateDTO.setName(name);
+        jobTemplateDTO.setUnit(unit.toDTO());
+        jobTemplateDTO.setMaterials(jobTemplateAbstractMaterial.stream()
+                .map(JobTemplateAbstractMaterial::toDTO).collect(Collectors.toList()));
+
+        return jobTemplateDTO;
     }
 }

@@ -34,4 +34,6 @@ public class User implements SimpleEntity {
     @OneToMany(mappedBy="user", cascade = {CascadeType.PERSIST})
     private List<Unit> unit;
 
+    @OneToMany(mappedBy="user", cascade = {CascadeType.PERSIST})
+    private List<JobTemplate> jobTemplates;
 }

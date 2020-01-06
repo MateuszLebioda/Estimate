@@ -12,6 +12,7 @@ import javax.ejb.Stateless;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Stateless(name = "materialService")
 public class MaterialServiceImpl implements MaterialService {

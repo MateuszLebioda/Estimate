@@ -6,4 +6,5 @@ import javax.ejb.Local;
 
 @Local
 public interface JobTemplateAbstractMaterialDao extends AbstractDaoFunction<JobTemplateAbstractMaterial> {
+    public JobTemplateAbstractMaterial xxx();
 }

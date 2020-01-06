@@ -8,26 +8,25 @@ import javax.persistence.*;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
-@Table(name = "workTemplate_abstract_material")
+@Table(name = "job_temple_abstract_material")
 @Entity
 @Data
 public class JobTemplateAbstractMaterial implements SimpleEntity<JobTemplateAbstractMaterial> {
 
     @Id
-    @GeneratedValue(strategy = SEQUENCE, generator = "workTemplate_abstract_material_seq")
+    @GeneratedValue(strategy = SEQUENCE, generator = "jobTemplate_abstract_material_seq")
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "abstract_material_id")
     private AbstractMaterial abstractMaterial;
 
-    @ManyToOne
-    @JoinColumn(name = "workTemple")
-    private JobTemplate workTemple;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "job_temple")
+    private JobTemplate jobTemplate;
 
     @Column(name = "value")
     private Double value;
-
 
     public JobTemplateAbstractMaterialDTO toDTO() {
         JobTemplateAbstractMaterialDTO jobTemplateAbstractMaterialDTO = new JobTemplateAbstractMaterialDTO();
@@ -36,9 +35,5 @@ public class JobTemplateAbstractMaterial implements SimpleEntity<JobTemplateAbst
         jobTemplateAbstractMaterialDTO.setValue(this.value);
 
         return jobTemplateAbstractMaterialDTO;
-    }
-
-    public void mergeWithDto(JobTemplateAbstractMaterialDTO clientDTO) {
-
     }
 }
