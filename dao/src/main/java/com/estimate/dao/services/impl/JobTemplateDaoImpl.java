@@ -13,6 +13,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless(name = "jobTemplateDao")
 public class JobTemplateDaoImpl extends AbstractDao<JobTemplate> implements JobTemplateDao {
@@ -27,6 +28,19 @@ public class JobTemplateDaoImpl extends AbstractDao<JobTemplate> implements JobT
             return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
         }catch (NoResultException e){
             return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public Optional<JobTemplate> getJobTemplateById(long id) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<JobTemplate> criteriaQuery = criteriaBuilder.createQuery(JobTemplate.class);
+        Root<JobTemplate> root = criteriaQuery.from(JobTemplate.class);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("id"),id));
+        try {
+            return Optional.of(entityManager.createQuery(criteriaQuery).getSingleResult());
+        }catch (NoResultException e){
+            return Optional.empty();
         }
     }
 }

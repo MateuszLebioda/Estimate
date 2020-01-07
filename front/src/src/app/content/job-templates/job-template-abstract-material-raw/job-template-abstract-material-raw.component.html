@@ -1,0 +1,53 @@
+<ng-container *ngIf="jobTemplateMaterials.length > 0 && opened">
+  <div style="padding-bottom: 20px">
+    <div style="width: 95%; float: right;">
+      <mat-card-title style="">{{title}}</mat-card-title>
+    </div>
+
+    <ng-container>
+      <div class="title_style">
+        <div style="width: 80%; float: left;">
+          <h4 style="margin: 0px; float: left">Nazwa</h4>
+          <span style="float: right">
+                <h4 style="margin: 0px">Cena / jednostka
+                </h4>
+              </span>
+        </div>
+        <div style="width: 20%; float: right;">
+          <div style="float: right">
+            <h4 style="margin: 0"> Zapotrzebowanie</h4>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+
+
+    <ng-container *ngFor="let element of jobTemplateMaterials">
+      <div style="border-bottom: 1px solid black; width: 90%; float: right; margin-bottom: 12px">
+        <div style="width: 80%; float: left;">
+          <h4 style="margin: 0px; float: left">{{element.material.name}}</h4>
+          <span style="float: right">
+                <h4 style="margin: 0px">{{element.material.price}}
+                  zł / {{element.material.unit.bottom}}
+                  <sup>{{element.material.unit.top}}</sup>
+                </h4>
+              </span>
+        </div>
+        <div style="width: 20%; float: right;">
+          <div style="float: right">
+            <span style="float: right">
+            <h4 style="margin: 0px">{{element.value}}
+              {{element.material.unit.bottom}}
+              <sup>{{element.material.unit.top}}</sup>
+            </h4>
+            </span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+
+
+  </div>
+</ng-container>

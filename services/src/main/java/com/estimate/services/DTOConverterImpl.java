@@ -25,10 +25,17 @@ public class DTOConverterImpl implements DTOConverter {
 
     @Override
     public JobTemplate makeJobTemplateFromDTO(JobTemplateDTO jobTemplateDTO) {
-        JobTemplate jobTemplate = new JobTemplate();
+       return mergeJobTemplateFromDTO(new JobTemplate(), jobTemplateDTO);
+    }
+
+    @Override
+    public JobTemplate mergeJobTemplateFromDTO(JobTemplate jobTemplate, JobTemplateDTO jobTemplateDTO) {
         jobTemplate.setName(jobTemplateDTO.getName());
         jobTemplate.setUnit(unitService.getUnitById(jobTemplateDTO.getUnit().getId()));
         jobTemplate.setUser(user.get());
+        if(jobTemplateDTO.getId()!=null){
+            jobTemplate.setId(jobTemplateDTO.getId());
+        }
         return jobTemplate;
     }
 

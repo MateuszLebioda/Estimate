@@ -48,4 +48,8 @@ public class JobTemplate implements SimpleEntity<JobTemplate> {
 
         return jobTemplateDTO;
     }
+
+    void mergeWithDTO(){
+
+    }
 }

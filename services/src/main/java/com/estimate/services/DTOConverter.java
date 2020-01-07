@@ -12,6 +12,7 @@ import javax.ejb.Local;
 @Local
 public interface DTOConverter {
     JobTemplate makeJobTemplateFromDTO(JobTemplateDTO jobTemplateDTO);
+    JobTemplate mergeJobTemplateFromDTO(JobTemplate jobTemplate, JobTemplateDTO jobTemplateDTO);
     public JobTemplateAbstractMaterial makeJobTemplateAbstractMaterial(JobTemplateAbstractMaterialDTO jobTemplateAbstractMaterialDTO);
     AbstractMaterial makeAbstractMaterial(AbstractMaterialDTO abstractMaterialDTO);
 }

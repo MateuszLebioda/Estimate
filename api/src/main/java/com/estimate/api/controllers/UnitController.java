@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,6 +62,8 @@ public class UnitController {
     private List<UnitDTO> getUnitList(){
         return unitService.getAllUnits(user.get())
                 .stream()
+                .sorted(Comparator.comparing(Unit::getBottom)
+                        .thenComparing(Unit::getTop))
                 .map(Unit::toDTO).collect(Collectors.toList());
     }
 

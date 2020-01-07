@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -51,7 +52,12 @@ public class MaterialsController {
     @Path("/getAllMaterials")
     public Response getMaterials(){
         if(user.isPresent()){
-            return Response.ok(materialService.getAllMaterials(user.get()).stream().map(Material::toDTO).collect(Collectors.toList())).build();
+            return Response.ok(
+                    materialService.getAllMaterials(user.get())
+                            .stream()
+                            .map(Material::toDTO)
+                            .sorted(Comparator.comparing(MaterialDTO::getName))
+                            .collect(Collectors.toList())).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
@@ -61,7 +67,11 @@ public class MaterialsController {
     @Path("/getAllWorks")
     public Response getWorks(){
         if(user.isPresent()){
-            return Response.ok(materialService.getAllWorks(user.get()).stream().map(Work::toDTO).collect(Collectors.toList())).build();
+            return Response.ok(
+                    materialService.getAllWorks(user.get())
+                            .stream().map(Work::toDTO)
+                            .sorted(Comparator.comparing(WorkDTO::getName))
+                            .collect(Collectors.toList())).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
@@ -111,7 +121,7 @@ public class MaterialsController {
             Material material = materialService.getMaterialById(materialDTO.getId()).get();
             if (materialService.isMyMaterial(user.get(), material)) {
                 materialDTO.setUser(user.get());
-                materialService.updateAbstractMaterial(material,materialDTO);
+                materialService.updateAbstractMaterial(materialDTO);
                 return Response.ok().build();
             }else {
                 return Response.accepted("Client doest not exist").build();
@@ -128,7 +138,7 @@ public class MaterialsController {
             Work work = materialService.getWorkById(workDTO.getId()).get();
             if (materialService.isMyMaterial(user.get(), work)) {
                 workDTO.setUser(user.get());
-                materialService.updateAbstractMaterial(work,workDTO);
+                materialService.updateAbstractMaterial(workDTO);
                 return Response.ok().build();
             }else {
                 return Response.accepted("Client doest not exist").build();

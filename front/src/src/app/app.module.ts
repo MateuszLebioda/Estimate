@@ -32,7 +32,8 @@ import {JobTemplateToolbarComponent} from './content/job-templates/job-template-
 import {AddJobTemplateSheetComponent} from './content/job-templates/add-job-template-sheet/add-job-template-sheet.component';
 // tslint:disable-next-line:max-line-length
 import {AddAbstractMaterialDialogComponent} from './content/job-templates/add-abstract-material-dialog/add-abstract-material-dialog.component';
-import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import { JobTemplateRawComponent } from './content/job-templates/job-template-raw/job-template-raw.component';
+import { JobTemplateAbstractMaterialRawComponent } from './content/job-templates/job-template-abstract-material-raw/job-template-abstract-material-raw.component';
 
 const keycloakService = new KeycloakService();
 
@@ -88,7 +89,9 @@ const keycloakService = new KeycloakService();
     JobTemplatesViewComponent,
     JobTemplateToolbarComponent,
     AddJobTemplateSheetComponent,
-    AddAbstractMaterialDialogComponent]
+    AddAbstractMaterialDialogComponent,
+    JobTemplateRawComponent,
+    JobTemplateAbstractMaterialRawComponent]
 })
 
 export class AppModule {

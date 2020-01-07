@@ -8,6 +8,7 @@ import com.estimate.model.entities.dto.WorkDTO;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.transaction.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,6 +23,9 @@ public class MaterialServiceImpl implements MaterialService {
 
     @EJB
     private UnitService unitService;
+
+    @EJB
+    private MaterialService materialService;
 
     @Override
     public Long addAbstractMaterial(AbstractMaterial material) {
@@ -38,7 +42,9 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    public Long updateAbstractMaterial(AbstractMaterial abstractMaterial, AbstractMaterialDTO abstractMaterialDTO) {
+    @Transactional
+    public Long updateAbstractMaterial(AbstractMaterialDTO abstractMaterialDTO) {
+        Material abstractMaterial = materialService.getMaterialById(abstractMaterialDTO.getId()).get();
         if(abstractMaterial.getEstimates().isEmpty()){
             mergeMaterialWithMaterialDTO(abstractMaterial,abstractMaterialDTO);
             abstractMaterialDao.merge(abstractMaterial);

@@ -18,7 +18,7 @@ public interface MaterialService {
     Long addAbstractMaterial(AbstractMaterial material);
     Long addAbstractMaterialFromDTO(AbstractMaterialDTO abstractMaterialDTO);
     boolean deleteAbstractMaterial(AbstractMaterial abstractMaterial);
-    Long updateAbstractMaterial(AbstractMaterial abstractMaterial, AbstractMaterialDTO abstractMaterialDTO);
+    Long updateAbstractMaterial(AbstractMaterialDTO abstractMaterialDTO);
     List<Material> getAllMaterials(User user);
     List<Work> getAllWorks(User user);
     Optional<Material> getMaterialById(Long id);

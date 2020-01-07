@@ -1,2 +1,3 @@
-<app-job-template-toolbar></app-job-template-toolbar>
-<p>job-templates-view works!</p>
+<app-job-template-toolbar (jobTemplateToAdd)="addJobTemplate($event)"></app-job-template-toolbar>
+<div *ngFor="let job of jobTemplates; let i = index" class="card-container">
+  <app-job-template-raw [jobTemplate]="job" class="example-card" (jobTempleEmitter)="handleEmitter($event)"></app-job-template-raw></div>

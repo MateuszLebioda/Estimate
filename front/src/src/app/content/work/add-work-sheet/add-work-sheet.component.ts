@@ -1,5 +1,4 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Material} from '../../../model/material';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Unit} from '../../../model/unit';
 import {UnitService} from '../../../services/unit.service';

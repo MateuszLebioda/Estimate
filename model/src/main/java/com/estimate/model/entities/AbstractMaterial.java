@@ -1,7 +1,9 @@
 package com.estimate.model.entities;
 
+import com.estimate.model.entities.utils.Role;
 import com.estimate.model.entities.utils.SimpleEntity;
 import lombok.Data;
+import org.hibernate.annotations.Immutable;
 
 import javax.persistence.*;
 

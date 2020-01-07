@@ -1,0 +1,27 @@
+<mat-card class="example-card data-mat-card" style="padding-left: 0">
+  <div style="float: left; width: 75px; height: 75px; padding-right: 10px">
+    <button mat-button class="tool-bar-spans" style="float: right; width: 100%; height: 100%" (click)="expand()">
+      <mat-icon *ngIf="!opened" class="example-icon icon_style" aria-hidden="false">keyboard_arrow_down</mat-icon>
+      <mat-icon *ngIf="opened" class="example-icon icon_style" aria-hidden="false">keyboard_arrow_up</mat-icon>
+    </button>
+  </div>
+  <div class="card-container" *ngIf="jobTemplate" (click)="openDialog()">
+    <mat-form-field style="width: 100%">
+      <input matInput readonly style="border: 0px">
+      <h4 style="margin: 0px; float: left">{{jobTemplate.name}}</h4>
+      <span style="float: right">
+        <h4 style="margin: 0px">{{jobTemplate.unit.bottom}}
+          <sup>{{jobTemplate.unit.top}}</sup>
+        </h4>
+      </span>
+    </mat-form-field>
+
+    <app-job-template-abstract-material-raw [opened]="opened" [jobTemplateMaterials]="getMarkedMaterial()"
+                                            [title]="materialTitle">
+    </app-job-template-abstract-material-raw>
+
+    <app-job-template-abstract-material-raw [opened]="opened" [jobTemplateMaterials]="getMarkedWorks()"
+                                            [title]="workTitle">
+    </app-job-template-abstract-material-raw>
+  </div>
+</mat-card>
