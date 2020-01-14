@@ -1,0 +1,111 @@
+<mat-card>
+  <form [formGroup]="jobTemplateForm">
+    <div class="form-sheet-container">
+      <mat-form-field class="mat-filed-style">
+        <input formControlName="name" matInput placeholder="Nazwa">
+        <mat-error *ngIf="jobTemplateForm.get('name').hasError('required')">Pole jest wymagane</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="mat-filed-style">
+        <mat-select formControlName="unit" placeholder="Jednostka" [compareWith]="compareObjects">
+          <mat-option *ngFor="let unit of units" [value]="unit">
+            <h4 mat-line>{{unit.bottom}} <sup>{{unit.top}}</sup></h4>
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="jobTemplateForm.get('unit').hasError('required')">Pole jest wymagane</mat-error>
+      </mat-form-field>
+
+
+      <div class="mat-filed-style" style="padding-bottom: 5px">
+        <button mat-button class="tool-bar-spans" style="float: right" (click)="addMaterial()">
+          <mat-icon class="example-icon" aria-hidden="false" style="padding-bottom: 3px">add</mat-icon>
+          Dodaj materiał
+        </button>
+        <button mat-button class="tool-bar-spans" style="float: right" (click)="addWork()">
+          <mat-icon class="example-icon" aria-hidden="false" style="padding-bottom: 3px">add</mat-icon>
+          Dodaj prace
+        </button>
+      </div>
+
+
+      <ng-container *ngIf="getMarkedMaterial().controls.length > 0">
+        <div>
+          <div style="width: 100%; float: right;">
+            <mat-card-title style="">Materiały</mat-card-title>
+          </div>
+          <ng-container  formArrayName="materials" *ngFor="let element of getMarkedMaterial().controls; let i = index">
+            <div style="width: 95%; float: right; margin-bottom: 12px" >
+              <div style="width: calc(100% - 230px); float: left; border-bottom: 1px solid black; padding-top: 21px">
+                <h4 style="margin: 0px; float: left">{{element.get('material').value.name}}</h4>
+                <span style="float: right">
+                <h4 style="margin: 0px">{{element.get('material').value.price}}
+                  zł / {{element.get('material').value.unit.bottom}}
+                  <sup>{{element.get('material').value.unit.top}}</sup>
+                </h4>
+              </span>
+              </div>
+
+              <div style="float: right; padding-top: 10px">
+                <div style="float: right">
+                  <button style="float: right" mat-button (click)="deleteMaterial(element)" class="tool-bar-spans">
+                    <mat-icon class="example-icon" aria-hidden="false">close</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div style="float: right">
+                <div style="float: right">
+                  <mat-form-field class="mat-filed-style" style="float: left; text-align: center; width: 125px">
+                    <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="Zapotrzebowanie" matInput [formControl]="element.get('value')">
+                    <mat-error *ngIf="element.get('value').hasError('required')">Pole jest wymagane</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="getMarkedWorks().controls.length > 0">
+        <div>
+          <div style="width: 100%; float: right;">
+            <mat-card-title style="">Prace</mat-card-title>
+          </div>
+          <ng-container  formArrayName="materials" *ngFor="let element of getMarkedWorks().controls; let i = index">
+            <div style="width: 95%; float: right; margin-bottom: 12px" >
+              <div style="width: calc(100% - 230px); float: left; border-bottom: 1px solid black; padding-top: 21px">
+                <h4 style="margin: 0px; float: left">{{element.get('material').value.name}}</h4>
+                <span style="float: right">
+                <h4 style="margin: 0px">{{element.get('material').value.price}}
+                  zł / {{element.get('material').value.unit.bottom}}
+                  <sup>{{element.get('material').value.unit.top}}</sup>
+                </h4>
+              </span>
+              </div>
+
+              <div style="float: right; padding-top: 10px">
+                <div style="float: right">
+                  <button style="float: right" mat-button (click)="deleteWork(element)" class="tool-bar-spans">
+                    <mat-icon class="example-icon" aria-hidden="false">close</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div style="float: right">
+                <div style="float: right">
+                  <mat-form-field class="mat-filed-style" style="float: left; text-align: center; width: 125px">
+                    <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" placeholder="Zapotrzebowanie" matInput [formControl]="element.get('value')">
+                    <mat-error *ngIf="element.get('value').hasError('required')">Pole jest wymagane</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+
+    </div>
+    <div class="mat-filed-style" style="padding-bottom: 25px">
+      <button mat-button style="float: right" (click)="saveJobTemplate()" [disabled]="!jobTemplateForm.valid">Zapisz</button>
+      <button mat-button style="float: right" (click)="bottomSheetRef.dismiss()">Anuluj</button>
+    </div>
+  </form>
+</mat-card>

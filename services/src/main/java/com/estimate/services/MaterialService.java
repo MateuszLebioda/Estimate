@@ -3,8 +3,10 @@ package com.estimate.services;
 import com.estimate.model.entities.AbstractMaterial;
 import com.estimate.model.entities.Material;
 import com.estimate.model.entities.User;
-import com.estimate.model.entities.Works;
+import com.estimate.model.entities.Work;
+import com.estimate.model.entities.dto.AbstractMaterialDTO;
 import com.estimate.model.entities.dto.MaterialDTO;
+import com.estimate.model.entities.dto.WorkDTO;
 
 
 import javax.ejb.Local;
@@ -13,15 +15,16 @@ import java.util.Optional;
 
 @Local
 public interface MaterialService {
-    Long addMaterial(AbstractMaterial material);
-    Long addMaterialFromDTO(MaterialDTO materialDto);
+    Long addAbstractMaterial(AbstractMaterial material);
+    Long addAbstractMaterialFromDTO(AbstractMaterialDTO abstractMaterialDTO);
+    boolean deleteAbstractMaterial(AbstractMaterial abstractMaterial);
+    Long updateAbstractMaterial(AbstractMaterialDTO abstractMaterialDTO);
     List<Material> getAllMaterials(User user);
-    List<Works> getAllWorks(User user);
+    List<Work> getAllWorks(User user);
     Optional<Material> getMaterialById(Long id);
-    boolean isMyMaterial(User user, Long materialId);
-    boolean deleteMaterial(Material material);
-    boolean isMyMaterial(User user, Material material);
-    Long updateMaterial(Material material, MaterialDTO materialDTO);
+    Optional<Work> getWorkById(Long id);
+    boolean isMyMaterial(User user, AbstractMaterial material);
     Material getMaterialFromDTO(MaterialDTO materialDTO);
-    void mergeMaterialWithMaterialDTO(Material material, MaterialDTO materialDTO);
+    Work getWorkFromDTO(WorkDTO workDTO);
+    void mergeMaterialWithMaterialDTO(AbstractMaterial material, AbstractMaterialDTO materialDTO);
 }

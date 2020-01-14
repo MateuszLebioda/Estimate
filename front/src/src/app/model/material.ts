@@ -1,10 +1,10 @@
-import {Unit} from './unit';
+import {AbstractMaterial} from './abstract-material';
+import {AbstractMaterialType} from './abstract-material-type.enum';
 
-export class Material {
+export class Material extends AbstractMaterial {
   constructor() {
+    super();
   }
-  id: number;
-  name: string;
-  unit: Unit;
-  price: number;
+
+  type: AbstractMaterialType.MATERIAL;
 }

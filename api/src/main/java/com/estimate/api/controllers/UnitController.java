@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,20 +26,10 @@ public class UnitController {
     private UnitService unitService;
 
     @GET
-    @Path("/getAllMaterialsUnits")
-    public Response getMaterialsUnits(){
-        if(user.isPresent()){
-            return Response.ok(getUnitList(Role.MATERIAL)).build();
-        }else {
-            return Response.status(Response.Status.UNAUTHORIZED).build();
-        }
-    }
-
-    @GET
-    @Path("/getAllWorkUnits")
+    @Path("/getAllUnits")
     public Response getWorkUnits(){
         if(user.isPresent()){
-            return Response.ok(getUnitList(Role.WORKS)).build();
+            return Response.ok(getUnitList()).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
@@ -68,9 +59,11 @@ public class UnitController {
         }
     }
 
-    private List<UnitDTO> getUnitList(Role role){
-        return unitService.getAllUnitsByRole(user.get(), role)
+    private List<UnitDTO> getUnitList(){
+        return unitService.getAllUnits(user.get())
                 .stream()
+                .sorted(Comparator.comparing(Unit::getBottom)
+                        .thenComparing(Unit::getTop))
                 .map(Unit::toDTO).collect(Collectors.toList());
     }
 

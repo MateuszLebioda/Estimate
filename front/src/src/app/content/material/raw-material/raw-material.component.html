@@ -1,6 +1,13 @@
 <mat-card class="example-card data-mat-card">
   <div class="card-container" *ngIf="material">
     <mat-form-field style="width: 100%">
-      <input matInput readonly style="border: 0px"><h4 style="margin: 0px">{{material.name}} w cenie {{material.price}}zł za {{material.unit.bottom}} <sup>{{material.unit.top}}</sup></h4></mat-form-field>
+      <input matInput readonly style="border: 0px">
+      <h4 style="margin: 0px; float: left">{{material.name}}</h4>
+      <span style="float: right">
+        <h4 style="margin: 0px">{{material.price}}zł / {{material.unit.bottom}}
+          <sup>{{material.unit.top}}</sup>
+        </h4>
+      </span>
+    </mat-form-field>
   </div>
 </mat-card>

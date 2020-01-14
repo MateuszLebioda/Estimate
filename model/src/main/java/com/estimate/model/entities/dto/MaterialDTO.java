@@ -1,27 +1,18 @@
 package com.estimate.model.entities.dto;
 
+
 import com.estimate.model.entities.Unit;
 import com.estimate.model.entities.User;
+import com.estimate.model.entities.utils.Role;
 import lombok.Data;
 
 @Data
-public class MaterialDTO {
-    private Long id;
-    private String name;
-    private Double price;
-    private Long unitId;
-    private User user;
-    private UnitDTO unit;
-
+public class MaterialDTO extends AbstractMaterialDTO {
     public MaterialDTO() {
     }
 
     public MaterialDTO(Long id, String name, Double price, Unit unit, User user) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.unitId = unit.getId();
-        this.unit = unit.toDTO();
-        this.user = getUser();
+        super(id,name,price,unit,user);
+        setType(Role.MATERIAL);
     }
 }

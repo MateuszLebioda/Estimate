@@ -29,9 +29,11 @@ public class User implements SimpleEntity {
     private List<Material> materials;
 
     @OneToMany(mappedBy="user")
-    private List<Works> works;
+    private List<Work> works;
 
     @OneToMany(mappedBy="user", cascade = {CascadeType.PERSIST})
     private List<Unit> unit;
 
+    @OneToMany(mappedBy="user", cascade = {CascadeType.PERSIST})
+    private List<JobTemplate> jobTemplates;
 }

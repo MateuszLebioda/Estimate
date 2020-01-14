@@ -9,16 +9,10 @@ import {Unit} from '../../../model/unit';
 export class UnitContentComponent implements OnInit {
 
   @Input()
-  materialUnits: Array<Unit>;
-
-  @Input()
-  workUnits: Array<Unit>;
+  units: Array<Unit>;
 
   @Output()
-  materialUnitDelete = new EventEmitter<Unit>();
-
-  @Output()
-  workUnitDelete = new EventEmitter<Unit>();
+  unitDelete = new EventEmitter<Unit>();
 
   constructor() {
   }
@@ -26,11 +20,8 @@ export class UnitContentComponent implements OnInit {
   ngOnInit() {
   }
 
-  deleteWorksUnit(unit: Unit) {
-    this.workUnitDelete.emit(unit);
+  deleteUnit(unit: Unit) {
+    this.unitDelete.emit(unit);
   }
 
-  deleteMaterialUnit(unit: Unit) {
-    this.materialUnitDelete.emit(unit);
-  }
 }

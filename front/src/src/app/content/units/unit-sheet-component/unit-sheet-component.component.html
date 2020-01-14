@@ -9,18 +9,6 @@
       <mat-form-field>
         <input formControlName="top" matInput placeholder="Indeks górny">
       </mat-form-field>
-
-      <mat-form-field>
-        <mat-select formControlName="role" placeholder="Typ" >
-          <mat-option value="MATERIAL">
-            {{roles.MATERIAL}}
-          </mat-option>
-          <mat-option value="WORKS">
-            {{roles.WORKS}}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="unitForm.get('role').hasError('required')">Pole jest wymagane</mat-error>
-      </mat-form-field>
     </div>
     <div>
       <button mat-button (click)="bottomSheetRef.dismiss()">Anuluj</button>

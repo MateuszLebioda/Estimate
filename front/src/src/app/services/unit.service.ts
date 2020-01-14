@@ -13,12 +13,8 @@ export class UnitService {
   constructor(private keyCloakService: KeyCloakService, private http: HttpClient) {
   }
 
-  public getAllMaterialUnits(): Observable<HttpResponse<Unit[]>> {
-    return this.http.get<Unit[]>(backEndUrl + '/unit/getAllMaterialsUnits', {observe: 'response'});
-  }
-
-  public getAlWorkUnits(): Observable<HttpResponse<Unit[]>> {
-    return this.http.get<Unit[]>(backEndUrl + '/unit/getAllWorkUnits', {observe: 'response'});
+  public getAllUnits(): Observable<HttpResponse<Unit[]>> {
+    return this.http.get<Unit[]>(backEndUrl + '/unit/getAllUnits', {observe: 'response'});
   }
 
   public deleteUnit(unit: Unit): Observable<HttpResponse<object>> {

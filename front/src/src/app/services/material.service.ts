@@ -4,8 +4,6 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {backEndUrl} from '../utils/static';
 import {Material} from '../model/material';
-import {Unit} from '../model/unit';
-import {Client} from '../model/client';
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +26,10 @@ export class MaterialService {
   }
 
   public delete(material: Material): Observable<HttpResponse<object>> {
-    return this.http.delete(backEndUrl + '/materials/delete/' + material.id, {observe: 'response'});
+    return this.http.delete(backEndUrl + '/materials/deleteMaterial/' + material.id, {observe: 'response'});
   }
 
   public put(material: Material): Observable<HttpResponse<number>> {
-    return this.http.put<number>(backEndUrl + '/materials/update', material, {observe: 'response'});
+    return this.http.put<number>(backEndUrl + '/materials/updateMaterial', material, {observe: 'response'});
   }
 }

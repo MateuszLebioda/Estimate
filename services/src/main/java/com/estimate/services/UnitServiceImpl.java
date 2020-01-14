@@ -37,10 +37,10 @@ public class UnitServiceImpl implements UnitService {
     @Override
     public List<Unit> generateDefaultUnits() {
         List<Unit> units = new ArrayList<>();
-        units.add(new Unit("m","", Role.MATERIAL,true));
-        units.add(new Unit("m","2", Role.MATERIAL,true));
-        units.add(new Unit("m","3", Role.MATERIAL,true));
-        units.add(new Unit("rg","", Role.WORKS,true));
+        units.add(new Unit("m","", true));
+        units.add(new Unit("m","2", true));
+        units.add(new Unit("m","3", true));
+        units.add(new Unit("rg","", true));
         return units;
     }
 

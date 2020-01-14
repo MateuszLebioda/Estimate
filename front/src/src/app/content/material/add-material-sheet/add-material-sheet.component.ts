@@ -19,13 +19,14 @@ export class AddMaterialSheetComponent implements OnInit {
   constructor(private unitService: UnitService, private bottomSheetRef: MatBottomSheetRef<AddMaterialSheetComponent>,
               @Inject(MAT_BOTTOM_SHEET_DATA) public data: Material) {
 
+    bottomSheetRef.disableClose = true;
     if (data !== null) {
       this.material = data;
     } else {
       this.material = new Material();
     }
 
-    unitService.getAllMaterialUnits().subscribe(units => {
+    unitService.getAllUnits().subscribe(units => {
       this.units = units.body;
     });
 
@@ -34,18 +35,15 @@ export class AddMaterialSheetComponent implements OnInit {
       price: new FormControl(this.material.price, [Validators.required, Validators.pattern('[0-9]*(\\.[0-9][0-9]){0,1}')]),
       unit: new FormControl(this.material.unit, [Validators.required]),
     });
-
-    console.log(this.materialForm.get('unit').value);
-  }
-
-  getUnit(): Unit {
-    return this.material.unit;
   }
 
   ngOnInit() {
   }
 
   compareObjects(o1: any, o2: any): boolean {
+    if (o1 === null || o2 === null) {
+      return false;
+    }
     return o1.id === o2.id;
   }
 
