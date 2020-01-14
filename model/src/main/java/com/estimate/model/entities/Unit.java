@@ -63,6 +63,6 @@ public class Unit implements SimpleEntity<Unit> {
     }
 
     public UnitDTO toDTO(){
-        return new UnitDTO(id,bottom,top,actual,user.getId());
+        return new UnitDTO(id,bottom,top);
     }
 }

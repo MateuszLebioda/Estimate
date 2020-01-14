@@ -35,40 +35,35 @@ public class MaterialServiceImpl implements MaterialService {
     @Override
     public boolean deleteAbstractMaterial(AbstractMaterial abstractMaterial) {
         Optional<AbstractMaterial> optionalAbstractMaterial = abstractMaterialDao.getAbstractMaterialById(abstractMaterial.getId());
-        if(optionalAbstractMaterial.isPresent()){
+        if (optionalAbstractMaterial.isPresent()) {
             abstractMaterialDao.delete(optionalAbstractMaterial.get());
             return true;
-        }return false;
+        }
+        return false;
     }
 
     @Override
     @Transactional
     public Long updateAbstractMaterial(AbstractMaterialDTO abstractMaterialDTO) {
         Material abstractMaterial = materialService.getMaterialById(abstractMaterialDTO.getId()).get();
-        if(abstractMaterial.getEstimates().isEmpty()){
-            mergeMaterialWithMaterialDTO(abstractMaterial,abstractMaterialDTO);
-            abstractMaterialDao.merge(abstractMaterial);
-            return abstractMaterial.getId();
-        }else {
-            Long newMaterialId = addAbstractMaterialFromDTO(abstractMaterialDTO);
-            abstractMaterial.setActual(Boolean.FALSE);
-            abstractMaterialDao.merge(abstractMaterial);
-            return newMaterialId;
-        }
+        mergeMaterialWithMaterialDTO(abstractMaterial, abstractMaterialDTO);
+        abstractMaterialDao.merge(abstractMaterial);
+        return abstractMaterial.getId();
+
     }
 
     @Override
     public Long addAbstractMaterialFromDTO(AbstractMaterialDTO abstractMaterialDTO) {
-        if(abstractMaterialDTO instanceof WorkDTO){
+        if (abstractMaterialDTO instanceof WorkDTO) {
             Work work = getWorkFromDTO((WorkDTO) abstractMaterialDTO);
             return abstractMaterialDao.save(work).getId();
-        }else {
+        } else {
             Material material = getMaterialFromDTO((MaterialDTO) abstractMaterialDTO);
             return abstractMaterialDao.save(material).getId();
         }
     }
 
-    public List<Material> getAllMaterials(User user){
+    public List<Material> getAllMaterials(User user) {
         return abstractMaterialDao.getAllMaterials(user);
     }
 

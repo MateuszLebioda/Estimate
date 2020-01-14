@@ -21,12 +21,4 @@ public class Estimate {
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
-
-    @ManyToMany()
-    @JoinTable(name = "estimate_material",
-            joinColumns = @JoinColumn(name = "estimate_id"),
-            inverseJoinColumns = @JoinColumn(name = "material_id")
-    )
-    private Set<Material> materials = new HashSet<>();
-
-}
+    }

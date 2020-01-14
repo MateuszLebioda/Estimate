@@ -33,7 +33,11 @@ import {AddJobTemplateSheetComponent} from './content/job-templates/add-job-temp
 // tslint:disable-next-line:max-line-length
 import {AddAbstractMaterialDialogComponent} from './content/job-templates/add-abstract-material-dialog/add-abstract-material-dialog.component';
 import { JobTemplateRawComponent } from './content/job-templates/job-template-raw/job-template-raw.component';
+// tslint:disable-next-line:max-line-length
 import { JobTemplateAbstractMaterialRawComponent } from './content/job-templates/job-template-abstract-material-raw/job-template-abstract-material-raw.component';
+import { EstimateToolBarComponent } from './content/estimate/estimate-tool-bar/estimate-tool-bar.component';
+import { AddNewEstimateSheetComponent } from './content/estimate/add-new-estimate-sheet/add-new-estimate-sheet.component';
+import { AddJobTemplateDialogComponentComponent } from './content/estimate/add-job-template-dialog-component/add-job-template-dialog-component.component';
 
 const keycloakService = new KeycloakService();
 
@@ -64,7 +68,9 @@ const keycloakService = new KeycloakService();
     SimpleComponentDialogComponent,
     AddWorkSheetComponent,
     AddJobTemplateSheetComponent,
-    AddAbstractMaterialDialogComponent],
+    AddAbstractMaterialDialogComponent,
+    AddNewEstimateSheetComponent,
+    AddJobTemplateDialogComponentComponent],
   declarations: [AppComponent,
     ContentComponent,
     MenuComponent,
@@ -91,7 +97,10 @@ const keycloakService = new KeycloakService();
     AddJobTemplateSheetComponent,
     AddAbstractMaterialDialogComponent,
     JobTemplateRawComponent,
-    JobTemplateAbstractMaterialRawComponent]
+    JobTemplateAbstractMaterialRawComponent,
+    EstimateToolBarComponent,
+    AddNewEstimateSheetComponent,
+    AddJobTemplateDialogComponentComponent]
 })
 
 export class AppModule {

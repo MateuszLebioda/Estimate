@@ -36,6 +36,8 @@ public class JobTemplate implements SimpleEntity<JobTemplate> {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Column(name = "is_template")
+    private Boolean isTemplate;
 
     public JobTemplateDTO toDto() {
         JobTemplateDTO jobTemplateDTO = new JobTemplateDTO();

@@ -1,0 +1,32 @@
+<mat-card>
+  <form [formGroup]="estimateFormGroup">
+    <div class="form-sheet-container">
+      <mat-form-field class="mat-filed-style">
+        <input formControlName="name" matInput placeholder="Nazwa">
+        <mat-error *ngIf="estimateFormGroup.get('name').hasError('required')">Pole jest wymagane</mat-error>
+      </mat-form-field>
+
+      <div class="mat-filed-style" style="padding-bottom: 5px">
+        <button mat-button class="tool-bar-spans" style="float: right" (click)="addMaterial()">
+          <mat-icon class="example-icon" aria-hidden="false" style="padding-bottom: 3px">add</mat-icon>
+          Dodaj materiał
+        </button>
+        <button mat-button class="tool-bar-spans" style="float: right" (click)="addWork()">
+          <mat-icon class="example-icon" aria-hidden="false" style="padding-bottom: 3px">add</mat-icon>
+          Dodaj prace
+        </button>
+        <button mat-button class="tool-bar-spans" style="float: right" (click)="addJobTemplate()">
+          <mat-icon class="example-icon" aria-hidden="false" style="padding-bottom: 3px">add</mat-icon>
+          Dodaj szablon robót
+        </button>
+      </div>
+    </div>
+    <div class="mat-filed-style" style="padding-bottom: 25px">
+      <button mat-button style="float: right" (click)="saveJobTemplate()" [disabled]="!estimateFormGroup.valid">Zapisz
+      </button>
+      <button mat-button style="float: right" (click)="bottomSheetRef.dismiss()">Anuluj</button>
+    </div>
+
+    {{estimateFormGroup.value | json}}
+  </form>
+</mat-card>

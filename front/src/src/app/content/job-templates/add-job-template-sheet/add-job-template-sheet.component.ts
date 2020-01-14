@@ -160,7 +160,6 @@ export class AddJobTemplateSheetComponent implements OnInit {
       items.push(this.creatFormMaterialArray(jobTemplate));
       this.materials = this.materials.filter(m => m.id !== material.id);
     }
-
   }
 
   getMarkedWorks(): FormArray {

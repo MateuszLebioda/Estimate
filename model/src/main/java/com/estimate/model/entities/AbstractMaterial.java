@@ -44,9 +44,6 @@ public abstract class AbstractMaterial implements SimpleEntity<Client> {
     @JoinColumn(name="unit_id", nullable=false)
     private Unit unit;
 
-    @ManyToMany(mappedBy = "materials")
-    private Set<Estimate> estimates = new HashSet<>();
-
     @OneToMany(mappedBy = "abstractMaterial", cascade = CascadeType.ALL)
     private Set<JobTemplateAbstractMaterial> jobTemplateAbstractMaterial;
 }

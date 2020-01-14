@@ -17,7 +17,8 @@ export class AddAbstractMaterialDialogComponent implements OnInit {
 
   filter = '';
 
-  constructor(public dialogRef: MatDialogRef<AddAbstractMaterialDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: Array<AbstractMaterial>) {
+  constructor(public dialogRef: MatDialogRef<AddAbstractMaterialDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: Array<AbstractMaterial>) {
     this.materials = data;
     for (const material of this.materials) {
       this.filteredMaterials.push(material);

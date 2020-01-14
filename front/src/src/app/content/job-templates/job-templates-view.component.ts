@@ -46,7 +46,8 @@ export class JobTemplatesViewComponent implements OnInit {
       }
       if (reload !== undefined && reload === 'edit') {
         this.addSheet.open(AddJobTemplateSheetComponent, {
-          data: jobTemplate
+          data: jobTemplate,
+          panelClass: 'jobTemplateAddSheet'
         }).afterDismissed().subscribe((jobTemplateToEdit: JobTemplate) => {
             if (jobTemplateToEdit !== undefined) {
               this.jobTemplateService.put(jobTemplateToEdit).subscribe(http => {
