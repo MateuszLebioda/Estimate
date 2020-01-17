@@ -7,11 +7,11 @@ import com.estimate.model.entities.utils.Role;
 import lombok.Data;
 
 @Data
-public class MaterialDTO extends AbstractMaterialDTO {
-    public MaterialDTO() {
+public class MaterialTemplateDTO extends AbstractMaterialTemplateDTO {
+    public MaterialTemplateDTO() {
     }
 
-    public MaterialDTO(Long id, String name, Double price, Unit unit, User user) {
+    public MaterialTemplateDTO(Long id, String name, Double price, Unit unit, User user) {
         super(id,name,price,unit,user);
         setType(Role.MATERIAL);
     }

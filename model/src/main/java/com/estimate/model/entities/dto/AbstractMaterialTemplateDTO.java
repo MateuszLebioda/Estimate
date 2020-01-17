@@ -6,7 +6,7 @@ import com.estimate.model.entities.utils.Role;
 import lombok.Data;
 
 @Data
-public class AbstractMaterialDTO {
+public class AbstractMaterialTemplateDTO {
     private Long id;
     private String name;
     private Double price;
@@ -15,10 +15,10 @@ public class AbstractMaterialDTO {
     private UnitDTO unit;
     private Role type;
 
-    public AbstractMaterialDTO() {
+    public AbstractMaterialTemplateDTO() {
     }
 
-    public AbstractMaterialDTO(Long id, String name, Double price, Unit unit, User user) {
+    public AbstractMaterialTemplateDTO(Long id, String name, Double price, Unit unit, User user) {
         this.id = id;
         this.name = name;
         this.price = price;

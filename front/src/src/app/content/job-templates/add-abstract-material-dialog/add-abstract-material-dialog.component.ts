@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {AbstractMaterial} from '../../../model/abstract-material';
+import {AbstractMaterial} from '../../../model/template/abstract-material';
 
 
 @Component({

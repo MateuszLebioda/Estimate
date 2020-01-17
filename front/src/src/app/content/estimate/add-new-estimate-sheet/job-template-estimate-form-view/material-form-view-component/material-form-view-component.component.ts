@@ -1,8 +1,8 @@
 import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
 import {Unit} from '../../../../../model/unit';
-import {Material} from '../../../../../model/material';
-import {Work} from '../../../../../model/work';
+import {MaterialTemplate} from '../../../../../model/template/material-template';
+import {WorkTemplate} from '../../../../../model/template/work-template';
 
 @Component({
   selector: 'app-material-form-view-component',
@@ -18,10 +18,10 @@ export class MaterialFormViewComponentComponent implements OnInit {
   deletedWork = new EventEmitter<number>();
 
   @Input()
-  allMaterials = new Array<Material>();
+  allMaterials = new Array<MaterialTemplate>();
 
   @Input()
-  allWorks = new Array<Work>();
+  allWorks = new Array<WorkTemplate>();
 
   @Input()
   opened: boolean;

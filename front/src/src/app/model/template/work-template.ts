@@ -1,7 +1,7 @@
 import {AbstractMaterial} from './abstract-material';
-import {AbstractMaterialType} from './abstract-material-type.enum';
+import {AbstractMaterialType} from '../abstract-material-type.enum';
 
-export class Work extends AbstractMaterial {
+export class WorkTemplate extends AbstractMaterial {
   constructor() {
     super();
   }

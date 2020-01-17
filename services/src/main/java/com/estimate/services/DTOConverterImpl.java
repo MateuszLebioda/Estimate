@@ -1,7 +1,7 @@
 package com.estimate.services;
 
 import com.estimate.model.entities.*;
-import com.estimate.model.entities.dto.AbstractMaterialDTO;
+import com.estimate.model.entities.dto.AbstractMaterialTemplateDTO;
 import com.estimate.model.entities.dto.JobTemplateAbstractMaterialDTO;
 import com.estimate.model.entities.dto.JobTemplateDTO;
 import com.estimate.model.entities.utils.Role;
@@ -44,7 +44,7 @@ public class DTOConverterImpl implements DTOConverter {
         JobTemplateAbstractMaterial jobTemplateAbstractMaterial = new JobTemplateAbstractMaterial();
 
         jobTemplateAbstractMaterial.setValue(jobTemplateAbstractMaterialDTO.getValue());
-        jobTemplateAbstractMaterial.setAbstractMaterial(
+        jobTemplateAbstractMaterial.setAbstractMaterialTemplate(
                 jobTemplateAbstractMaterialDTO.getMaterial().getType() == Role.MATERIAL ?
                         materialService.getMaterialById(jobTemplateAbstractMaterialDTO.getMaterial().getId()).get() :
                         materialService.getWorkById(jobTemplateAbstractMaterialDTO.getMaterial().getId()).get());
@@ -53,15 +53,14 @@ public class DTOConverterImpl implements DTOConverter {
     }
 
     @Override
-    public AbstractMaterial makeAbstractMaterial(AbstractMaterialDTO abstractMaterialDTO) {
-        AbstractMaterial abstractMaterial = abstractMaterialDTO.getType() == Role.MATERIAL ? new Material() : new Work();
-        abstractMaterial.setName(abstractMaterialDTO.getName());
-        abstractMaterial.setPrice(abstractMaterialDTO.getPrice());
-        abstractMaterial.setUser(abstractMaterialDTO.getUser());
-        abstractMaterial.setActual(Boolean.TRUE);
-        abstractMaterial.setCreateTime(LocalDateTime.now());
-        abstractMaterial.setUnit(unitService.getUnitById(abstractMaterialDTO.getUnit().getId()));
-        return abstractMaterial;
+    public AbstractMaterialTemplate makeAbstractMaterial(AbstractMaterialTemplateDTO abstractMaterialTemplateDTO) {
+        AbstractMaterialTemplate abstractMaterialTemplate = abstractMaterialTemplateDTO.getType() == Role.MATERIAL ? new MaterialTemplate() : new WorkTemplate();
+        abstractMaterialTemplate.setName(abstractMaterialTemplateDTO.getName());
+        abstractMaterialTemplate.setPrice(abstractMaterialTemplateDTO.getPrice());
+        abstractMaterialTemplate.setUser(abstractMaterialTemplateDTO.getUser());
+        abstractMaterialTemplate.setCreateTime(LocalDateTime.now());
+        abstractMaterialTemplate.setUnit(unitService.getUnitById(abstractMaterialTemplateDTO.getUnit().getId()));
+        return abstractMaterialTemplate;
     }
 
 }

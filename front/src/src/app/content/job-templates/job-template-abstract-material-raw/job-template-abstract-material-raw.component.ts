@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {JobTemplateMaterial} from '../../../model/job-template-material';
+import {JobTemplateMaterial} from '../../../model/template/job-template-material';
 
 @Component({
   selector: 'app-job-template-abstract-material-raw',

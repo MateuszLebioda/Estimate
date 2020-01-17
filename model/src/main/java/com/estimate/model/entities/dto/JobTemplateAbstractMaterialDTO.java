@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class JobTemplateAbstractMaterialDTO {
-    AbstractMaterialDTO material;
+    AbstractMaterialTemplateDTO material;
     Double value;
 }

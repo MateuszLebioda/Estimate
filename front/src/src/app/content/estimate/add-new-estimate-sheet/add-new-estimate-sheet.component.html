@@ -38,29 +38,52 @@
       </ng-container>
 
       <ng-container *ngIf="getMaterialFormArray().length > 0">
+        <div style="width: 100%; float: right;">
+          <mat-card-title style="font-size: 20px;font-weight: bold;">Materiały</mat-card-title>
+        </div>
+        <mat-card style="background: rgb(220,220,220); margin-bottom: 10px">
         <div style="padding-bottom: 20px">
-          <div style="width: 100%; float: right;">
-            <mat-card-title style="font-size: 20px;font-weight: bold;">Materiały</mat-card-title>
-          </div>
           <ng-container *ngFor="let element of getMaterialFormArray().controls">
             <app-material-form-editable-component style="width: calc(100% - 85px); float: right" [units]="units"
                                                   [materialFormControl]="element"
                                                   (deleteEmitter)="deleteMaterial($event)"></app-material-form-editable-component>
           </ng-container>
         </div>
+        <div style="color: gray">
+          <mat-form-field style="width: calc(100% - 105px)">
+            <input readonly style="font-weight: bold; text-align: right" matInput [value]="calcSumPriceMaterials()"
+                   placeholder="Suma">
+          </mat-form-field>
+          <mat-form-field style="width: 20px; cursor: default; padding-right: 5px">
+            <input value="zł" matInput readonly style="cursor: default; text-align: center">
+          </mat-form-field>
+        </div>
+        </mat-card>
       </ng-container>
 
       <ng-container *ngIf="getWorkFormArray().length > 0">
+
+        <div style="width: 100%; float: right;">
+          <mat-card-title style="font-size: 20px;font-weight: bold;">Prace</mat-card-title>
+        </div>
+        <mat-card style="background: rgb(220,220,220); margin-bottom: 10px">
         <div style="padding-bottom: 20px">
-          <div style="width: 100%; float: right;">
-            <mat-card-title style="font-size: 20px;font-weight: bold;">Prace</mat-card-title>
-          </div>
           <ng-container *ngFor="let element of getWorkFormArray().controls">
             <app-material-form-editable-component style="width: calc(100% - 85px); float: right" [units]="units"
                                                   [materialFormControl]="element"
                                                   (deleteEmitter)="deleteWork($event)"></app-material-form-editable-component>
           </ng-container>
         </div>
+          <div style="color: gray">
+          <mat-form-field style="width: calc(100% - 105px)">
+            <input readonly style="font-weight: bold; text-align: right; color: gray" matInput [value]="calcSumPriceWorks()"
+                   placeholder="Suma">
+          </mat-form-field>
+          <mat-form-field style="width: 20px; cursor: default; padding-right: 5px">
+            <input value="zł" matInput readonly style="cursor: default; text-align: center">
+          </mat-form-field>
+        </div>
+        </mat-card>
       </ng-container>
 
 

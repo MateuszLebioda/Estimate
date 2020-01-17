@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Unit} from '../../../model/unit';
 import {UnitService} from '../../../services/unit.service';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
-import {Work} from '../../../model/work';
+import {WorkTemplate} from '../../../model/template/work-template';
 
 @Component({
   selector: 'app-add-work-sheet',
@@ -11,18 +11,18 @@ import {Work} from '../../../model/work';
   styleUrls: ['./add-work-sheet.component.scss']
 })
 export class AddWorkSheetComponent implements OnInit {
-  work: Work;
+  work: WorkTemplate;
   workForm: FormGroup;
   units: Array<Unit>;
 
   constructor(private unitService: UnitService, private bottomSheetRef: MatBottomSheetRef<AddWorkSheetComponent>,
-              @Inject(MAT_BOTTOM_SHEET_DATA) public data: Work) {
+              @Inject(MAT_BOTTOM_SHEET_DATA) public data: WorkTemplate) {
 
     bottomSheetRef.disableClose = true;
     if (data !== null) {
       this.work = data;
     } else {
-      this.work = new Work();
+      this.work = new WorkTemplate();
     }
 
     unitService.getAllUnits().subscribe(units => {

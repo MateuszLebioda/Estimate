@@ -121,6 +121,13 @@ body {
 }
 
 
+.estimateAddSheet{
+  min-width: calc(100vw - 124px) !important;
+  max-width: calc(100vw - 124px) !important;
+  max-height: calc(100vw - 200px) !important;
+}
+
+
 
 
 .show-more {

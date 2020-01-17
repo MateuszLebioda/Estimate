@@ -1,11 +1,19 @@
-import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import {FormArray, FormGroup} from '@angular/forms';
 import {Unit} from '../../../../model/unit';
-import {Material} from '../../../../model/material';
-import {Work} from '../../../../model/work';
+import {MaterialTemplate} from '../../../../model/template/material-template';
+import {WorkTemplate} from '../../../../model/template/work-template';
 import {AddAbstractMaterialDialogComponent} from '../../../job-templates/add-abstract-material-dialog/add-abstract-material-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {AbstractMaterial} from '../../../../model/abstract-material';
+import {AbstractMaterial} from '../../../../model/template/abstract-material';
+import {FormService} from '../../../../services/form-service.service';
 
 @Component({
   selector: 'app-job-template-estimate-form-view',
@@ -15,12 +23,12 @@ import {AbstractMaterial} from '../../../../model/abstract-material';
 export class JobTemplateEstimateFormViewComponent implements OnInit {
 
   @Input()
-  allMaterials = new Array<Material>();
-  materialsHidden = new Array<Material>();
+  allMaterials = new Array<MaterialTemplate>();
+  materialsHidden = new Array<MaterialTemplate>();
 
   @Input()
-  allWorks = new Array<Work>();
-  worksHidden = new Array<Work>();
+  allWorks = new Array<WorkTemplate>();
+  worksHidden = new Array<WorkTemplate>();
 
   @Input()
   jobTemplateFormControl: FormGroup;
@@ -33,11 +41,22 @@ export class JobTemplateEstimateFormViewComponent implements OnInit {
 
   opened = true;
 
-  constructor(private dialog: MatDialog, private cd: ChangeDetectorRef) {
+
+  constructor(private dialog: MatDialog,
+              private cd: ChangeDetectorRef,
+              private formService: FormService) {
 
   }
 
   ngOnInit() {
+    this.jobTemplateFormControl.get('materials').valueChanges.subscribe(() => {
+      this.calcSumPrice();
+    });
+
+    this.jobTemplateFormControl.get('works').valueChanges.subscribe(() => {
+      this.calcSumPrice();
+    });
+
     if (this.getMaterialFormArray() !== null) {
       for (const material of this.getMaterialFormArray().controls) {
         if (this.allMaterials.find(m => m.id === material.get('id').value)) {
@@ -78,7 +97,7 @@ export class JobTemplateEstimateFormViewComponent implements OnInit {
   }
 
   getWorkFormArray(): FormArray {
-    return (this.jobTemplateFormControl.get('allWorks') as FormArray);
+    return (this.jobTemplateFormControl.get('works') as FormArray);
   }
 
   addMaterial() {
@@ -96,21 +115,13 @@ export class JobTemplateEstimateFormViewComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
   }
 
-  hideMaterial(material: Material) {
+  hideMaterial(material: MaterialTemplate) {
     this.materialsHidden.push(this.allMaterials.find(m => m.id === material.id));
     this.allMaterials = this.allMaterials.filter(m => m.id !== material.id);
   }
 
   createMaterialFormGroup(material: AbstractMaterial, value: number): FormGroup {
-    return new FormGroup({
-      id: new FormControl(material.id),
-      name: new FormControl(material.name, [Validators.required]),
-      price: new FormControl(material.price, [Validators.required, Validators.pattern('\\d+(\\.\\d{1,2})*')]),
-      unit: new FormControl(material.unit, [Validators.required]),
-      value: new FormControl(value, [Validators.required]),
-      sumPrice: new FormControl(0),
-      sumValue: new FormControl(0),
-    });
+    return this.formService.createMaterialEstimateFormGroup(material, value);
   }
 
   addWork() {
@@ -120,5 +131,18 @@ export class JobTemplateEstimateFormViewComponent implements OnInit {
   unhideMaterial(id: number) {
     this.allMaterials.push(this.materialsHidden.find(m => m.id === id));
     this.materialsHidden = this.materialsHidden.filter(m => m.id !== id);
+  }
+
+  calcSumPrice() {
+    let sum = 0;
+
+    for (const material of this.getMaterialFormArray().controls) {
+      sum = sum + Number(material.get('sumPrice').value);
+    }
+    for (const work of this.getWorkFormArray().controls) {
+      sum = sum + Number(work.get('sumPrice').value);
+    }
+
+    this.jobTemplateFormControl.get('sumPrice').setValue(sum.toFixed(2));
   }
 }

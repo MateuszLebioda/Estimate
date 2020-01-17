@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Material} from '../../../model/material';
+import {MaterialTemplate} from '../../../model/template/material-template';
 
 
 @Component({
@@ -12,7 +12,7 @@ export class RawMaterialComponent implements OnInit {
   constructor() {
   }
 
-  @Input() material: Material;
+  @Input() material: MaterialTemplate;
 
   ngOnInit() {
   }

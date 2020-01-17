@@ -21,12 +21,13 @@
       </mat-form-field>
 
       <mat-form-field style="width: calc(15% - 5px); padding-right: 5px">
-        <input formControlName="value"  style="font-weight: bold" matInput placeholder="Wartość">
+        <input formControlName="value" style="font-weight: bold" matInput placeholder="Wartość">
         <mat-error *ngIf="jobTemplateFormControl.get('value').hasError('required')">Pole jest wymagane</mat-error>
       </mat-form-field>
 
       <mat-form-field style="width: calc(15% - 5px)">
-        <mat-select formControlName="unit" style="font-weight: bold" placeholder="Jednostka" [compareWith]="compareObjects">
+        <mat-select formControlName="unit" style="font-weight: bold" placeholder="Jednostka"
+                    [compareWith]="compareObjects">
           <mat-option *ngFor="let unit of units" [value]="unit">
             <h4 mat-line>{{unit.bottom}} <sup>{{unit.top}}</sup></h4>
           </mat-option>
@@ -45,9 +46,18 @@
       </button>
     </div>
     <div>
-      <app-material-form-view-component  (deletedMaterial)="unhideMaterial($event)" [opened]="opened" [jobTemplateFormGroup]="jobTemplateFormControl" [units]="units">
+      <app-material-form-view-component (deletedMaterial)="unhideMaterial($event)" [opened]="opened"
+                                        [jobTemplateFormGroup]="jobTemplateFormControl" [units]="units">
       </app-material-form-view-component>
     </div>
+    <div style="color: gray">
+      <mat-form-field style="width: calc(100% - 105px)">
+        <input formControlName="sumPrice" readonly style="font-weight: bold; text-align: right;color: gray" matInput
+               placeholder="Suma">
+      </mat-form-field>
+      <mat-form-field style="width: 20px; cursor: default; padding-right: 5px">
+        <input value="zł" matInput readonly style="cursor: default; text-align: center">
+      </mat-form-field>
+    </div>
   </form>
-
 </div>

@@ -6,11 +6,11 @@ import com.estimate.model.entities.utils.Role;
 import lombok.Data;
 
 @Data
-public class WorkDTO extends AbstractMaterialDTO{
-    public WorkDTO() {
+public class WorkTemplateDTO extends AbstractMaterialTemplateDTO {
+    public WorkTemplateDTO() {
     }
 
-    public WorkDTO(Long id, String name, Double price, Unit unit, User user) {
+    public WorkTemplateDTO(Long id, String name, Double price, Unit unit, User user) {
         super(id,name,price,unit,user);
         setType(Role.WORK);
     }

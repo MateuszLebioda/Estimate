@@ -41,7 +41,7 @@
   </mat-form-field>
 
   <mat-form-field style="width: calc(10% - 5px); cursor: default; padding-right: 5px; color: gray">
-    <input [formControl]="materialFormControl.get('sumValue')" matInput placeholder="Nakład suma" readonly
+    <input [formControl]="materialFormControl.get('sumValue')" matInput placeholder="Suma nakładów" readonly
            style="width:calc(100% - 36px);cursor: default; text-align: center">
     <div style="float: right; height: 18px">
       <div style="padding-bottom: 5px">{{materialFormControl.get('unit').value.bottom}} <sup>{{materialFormControl.get('unit').value.top}}</sup>
@@ -50,8 +50,8 @@
   </mat-form-field>
 
   <mat-form-field style="width: calc(10% - 5px); cursor: default; color: gray">
-    <input [formControl]="materialFormControl.get('sumPrice')" matInput placeholder="Koszt suma" readonly
-           style="cursor: default; text-align: center">
+    <input [formControl]="materialFormControl.get('sumPrice')" matInput placeholder="Suma kosztów" readonly
+           style="cursor: default; text-align: right">
   </mat-form-field>
 
   <mat-form-field style="width: calc(4% - 5px); cursor: default;color: gray">

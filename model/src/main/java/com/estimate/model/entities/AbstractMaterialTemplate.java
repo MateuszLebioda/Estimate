@@ -13,12 +13,12 @@ import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
-@Table(name = "material")
+@Table(name = "material_template")
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type")
 @Data
-public abstract class AbstractMaterial implements SimpleEntity<Client> {
+public abstract class AbstractMaterialTemplate implements SimpleEntity<Client> {
 
     @Id
     @GeneratedValue(strategy = SEQUENCE,generator = "material_seq")
@@ -33,9 +33,6 @@ public abstract class AbstractMaterial implements SimpleEntity<Client> {
     @Column(name = "create_time")
     private LocalDateTime createTime;
 
-    @Column(name = "isActual")
-    private Boolean actual;
-
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
@@ -44,6 +41,6 @@ public abstract class AbstractMaterial implements SimpleEntity<Client> {
     @JoinColumn(name="unit_id", nullable=false)
     private Unit unit;
 
-    @OneToMany(mappedBy = "abstractMaterial", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "abstractMaterialTemplate", cascade = CascadeType.ALL)
     private Set<JobTemplateAbstractMaterial> jobTemplateAbstractMaterial;
 }

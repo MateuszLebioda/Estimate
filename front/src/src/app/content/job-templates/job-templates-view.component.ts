@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {JobTemplateService} from '../../services/job-template.service';
-import {JobTemplate} from '../../model/job-template';
+import {JobTemplate} from '../../model/template/job-template';
 import {SimpleComponentDialogComponent} from '../../utils/simple-component-dialog/simple-component-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';

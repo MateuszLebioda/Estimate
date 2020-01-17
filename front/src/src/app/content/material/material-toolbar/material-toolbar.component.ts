@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Material} from '../../../model/material';
+import {MaterialTemplate} from '../../../model/template/material-template';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {AddMaterialSheetComponent} from '../add-material-sheet/add-material-sheet.component';
 
@@ -14,13 +14,13 @@ export class MaterialToolbarComponent implements OnInit {
   }
 
   @Output()
-  materialToAdd = new EventEmitter<Material>();
+  materialToAdd = new EventEmitter<MaterialTemplate>();
 
   ngOnInit() {
   }
 
   addNewMaterial() {
-    this.addSheet.open(AddMaterialSheetComponent).afterDismissed().subscribe((material: Material) => {
+    this.addSheet.open(AddMaterialSheetComponent).afterDismissed().subscribe((material: MaterialTemplate) => {
         if (material !== undefined) {
           this.materialToAdd.emit(material);
         }

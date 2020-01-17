@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {JobTemplate} from '../../../model/job-template';
-import {JobTemplateMaterial} from '../../../model/job-template-material';
+import {JobTemplate} from '../../../model/template/job-template';
+import {JobTemplateMaterial} from '../../../model/template/job-template-material';
 import {AbstractMaterialType} from '../../../model/abstract-material-type.enum';
 import {JobTempleClickEmitter} from '../unit/job-temple-click-emitter.enum';
 

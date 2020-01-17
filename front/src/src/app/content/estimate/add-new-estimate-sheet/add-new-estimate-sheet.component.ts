@@ -1,22 +1,23 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {FormArray,  FormGroup} from '@angular/forms';
 import {Estimate} from '../../../model/estimate';
 import {MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {MaterialService} from '../../../services/material.service';
 import {WorkService} from '../../../services/work.service';
 import {JobTemplateService} from '../../../services/job-template.service';
-import {Work} from '../../../model/work';
-import {JobTemplate} from '../../../model/job-template';
-import {Material} from '../../../model/material';
+import {WorkTemplate} from '../../../model/template/work-template';
+import {JobTemplate} from '../../../model/template/job-template';
+import {MaterialTemplate} from '../../../model/template/material-template';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AddJobTemplateDialogComponentComponent} from '../add-job-template-dialog-component/add-job-template-dialog-component.component';
-import {AbstractMaterialType} from '../../../model/abstract-material-type.enum';
-import {JobTemplateEstimate} from '../../../model/job-template-estimate';
 import {Unit} from '../../../model/unit';
 import {UnitService} from '../../../services/unit.service';
 import {AddAbstractMaterialDialogComponent} from '../../job-templates/add-abstract-material-dialog/add-abstract-material-dialog.component';
-import {AbstractMaterial} from '../../../model/abstract-material';
+import {AbstractMaterial} from '../../../model/template/abstract-material';
+import {FormService} from '../../../services/form-service.service';
+import {consoleTestResultHandler} from 'tslint/lib/test';
+import {EstimateService} from '../../../services/estimate.service';
 
 @Component({
   selector: 'app-add-new-estimate-sheet',
@@ -26,13 +27,13 @@ import {AbstractMaterial} from '../../../model/abstract-material';
 export class AddNewEstimateSheetComponent implements OnInit {
 
   estimateFormGroup: FormGroup;
-  estimate: Estimate;
+  estimate = new Estimate();
 
-  works: Array<Work>;
-  worksHidden = new Array<Work>();
+  works: Array<WorkTemplate>;
+  worksHidden = new Array<WorkTemplate>();
 
-  materials: Array<Material>;
-  materialsHidden = new Array<Material>();
+  materials: Array<MaterialTemplate>;
+  materialsHidden = new Array<MaterialTemplate>();
 
   jobTemplates: Array<JobTemplate>;
   jobTemplatesHidden = new Array<JobTemplate>();
@@ -47,50 +48,20 @@ export class AddNewEstimateSheetComponent implements OnInit {
     private jobTemplateService: JobTemplateService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private formService: FormService,
+    private estimateService: EstimateService
   ) {
     bottomSheetRef.disableClose = true;
-    this.estimate = new Estimate();
     this.initData();
-    this.estimateFormGroup = new FormGroup({
-      name: new FormControl(this.estimate.name, [Validators.required]),
-      materials: new FormArray([]),
-      works: new FormArray([]),
-      jobTemplates: new FormArray([]),
-    });
   }
 
-  private createJobTemplateForm(jobTemplate: JobTemplateEstimate): FormGroup {
-    const formControl = new FormGroup({
-      id: new FormControl(jobTemplate.id),
-      name: new FormControl(jobTemplate.name, [Validators.required]),
-      unit: new FormControl(jobTemplate.unit, [Validators.required]),
-      value: new FormControl(0, [Validators.required]),
-      materials: new FormArray([]),
-      works: new FormArray([]),
-    });
-
-    for (const material of jobTemplate.materials.filter(m => m.material.type === AbstractMaterialType.MATERIAL)) {
-      (formControl.get('materials') as FormArray).push(this.createMaterialFormGroup(material.material, material.value));
-    }
-
-    for (const material of jobTemplate.materials.filter(m => m.material.type === AbstractMaterialType.WORK)) {
-      (formControl.get('works') as FormArray).push(this.createMaterialFormGroup(material.material, material.value));
-    }
-    return formControl;
+  private createJobTemplateFormJobTemple(jobTemplate: JobTemplate): FormGroup {
+    return this.formService.createJobTemplateEstimateFormFromJobTemple(jobTemplate);
   }
-
 
   createMaterialFormGroup(material: AbstractMaterial, value: number): FormGroup {
-    return new FormGroup({
-      id: new FormControl(material.id),
-      name: new FormControl(material.name, [Validators.required]),
-      price: new FormControl(material.price, [Validators.required, Validators.pattern('\\d+(\\.\\d{1,2})*')]),
-      unit: new FormControl(material.unit, [Validators.required]),
-      value: new FormControl(value, [Validators.required]),
-      sumPrice: new FormControl(0),
-      sumValue: new FormControl(0),
-    });
+    return this.formService.createMaterialEstimateFormGroup(material, value);
   }
 
   getJobTemplateFormArray(): FormArray {
@@ -113,6 +84,8 @@ export class AddNewEstimateSheetComponent implements OnInit {
     this.unitService.getAllUnits().subscribe(response => {
       this.units = response.body;
     });
+
+    this.estimateFormGroup = this.formService.createEstimateFormGroup(this.estimate);
   }
 
   ngOnInit() {
@@ -133,7 +106,7 @@ export class AddNewEstimateSheetComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
   }
 
-  hideMaterial(material: Material) {
+  hideMaterial(material: MaterialTemplate) {
     this.materialsHidden.push(this.materials.find(m => m.id === material.id));
     this.materials = this.materials.filter(m => m.id !== material.id);
   }
@@ -153,7 +126,7 @@ export class AddNewEstimateSheetComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
   }
 
-  hideWorks(work: Work) {
+  hideWorks(work: WorkTemplate) {
     this.worksHidden.push(this.works.find(w => w.id === work.id));
     this.works = this.works.filter(m => m.id !== work.id);
   }
@@ -166,7 +139,7 @@ export class AddNewEstimateSheetComponent implements OnInit {
       disableClose: true
     });
     dialogRef.componentInstance.emitter.subscribe(jobTemplate => {
-      (this.estimateFormGroup.get('jobTemplates') as FormArray).push(this.createJobTemplateForm(jobTemplate));
+      (this.estimateFormGroup.get('jobTemplates') as FormArray).push(this.createJobTemplateFormJobTemple(jobTemplate));
       this.hideJobTemplates(jobTemplate);
       this.cd.markForCheck();
     });
@@ -174,7 +147,11 @@ export class AddNewEstimateSheetComponent implements OnInit {
   }
 
   saveJobTemplate() {
-
+    const estimate = this.formService.createEstimateFromEstimateFormGroup(this.estimateFormGroup);
+    this.estimateService.addEstimate(estimate).subscribe(r => {
+      console.log(r.body);
+    });
+    console.log();
   }
 
   deleteJobTemplateForm(formGroup: FormGroup) {
@@ -208,7 +185,7 @@ export class AddNewEstimateSheetComponent implements OnInit {
     this.works.push(this.worksHidden.find(w => w.id === formGroup.get('id').value));
   }
 
-  getAllWorks(): Array<Work> {
+  getAllWorks(): Array<WorkTemplate> {
     const allWorks = this.works;
     for (const w of this.worksHidden) {
       allWorks.push(w);
@@ -216,11 +193,28 @@ export class AddNewEstimateSheetComponent implements OnInit {
     return allWorks;
   }
 
-  getAllMaterials(): Array<Material> {
+  getAllMaterials(): Array<MaterialTemplate> {
     const allMaterials = this.materials;
     for (const m of this.materialsHidden) {
       allMaterials.push(m);
     }
     return allMaterials;
+  }
+
+  calcSumPriceMaterials(): number {
+    let sum = 0;
+
+    for (const material of this.getMaterialFormArray().controls) {
+      sum = sum + Number(material.get('sumPrice').value);
+    }
+    return Number(sum.toFixed(2));
+  }
+
+  calcSumPriceWorks(): number {
+    let sum = 0;
+    for (const work of this.getWorkFormArray().controls) {
+      sum = sum + Number(work.get('sumPrice').value);
+    }
+    return Number(sum.toFixed(2));
   }
 }

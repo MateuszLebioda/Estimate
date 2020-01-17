@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Work} from '../../model/work';
+import {WorkTemplate} from '../../model/template/work-template';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -14,7 +14,7 @@ import {AddWorkSheetComponent} from './add-work-sheet/add-work-sheet.component';
 })
 export class WorkViewComponent implements OnInit {
 
-  works: Array<Work>;
+  works: Array<WorkTemplate>;
 
   constructor(private addSheet: MatBottomSheet, public dialog: MatDialog, private snackBar: MatSnackBar, private workService: WorkService) {
   }
@@ -25,20 +25,20 @@ export class WorkViewComponent implements OnInit {
     });
   }
 
-  private openSnackBar(work: Work, action: string) {
+  private openSnackBar(work: WorkTemplate, action: string) {
     this.snackBar.open(work.name, action, {
       duration: 2000
     });
   }
 
-  addWork(work: Work) {
+  addWork(work: WorkTemplate) {
     this.workService.addWork(work).subscribe(workId => {
       work.id = workId.body;
       this.works.push(work);
     });
   }
 
-  onMatCardClickEvent(work: Work) {
+  onMatCardClickEvent(work: WorkTemplate) {
     this.dialog.open((SimpleComponentDialogComponent), {
       data: work.name
     }).afterClosed().subscribe(reload => {
@@ -51,7 +51,7 @@ export class WorkViewComponent implements OnInit {
       if (reload !== undefined && reload === 'edit') {
         this.addSheet.open(AddWorkSheetComponent, {
           data: work
-        }).afterDismissed().subscribe((m: Work) => {
+        }).afterDismissed().subscribe((m: WorkTemplate) => {
             if (m !== undefined) {
               console.log(m);
               this.workService.put(m).subscribe(http => {
