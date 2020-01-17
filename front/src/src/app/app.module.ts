@@ -38,6 +38,9 @@ import { JobTemplateAbstractMaterialRawComponent } from './content/job-templates
 import { EstimateToolBarComponent } from './content/estimate/estimate-tool-bar/estimate-tool-bar.component';
 import { AddNewEstimateSheetComponent } from './content/estimate/add-new-estimate-sheet/add-new-estimate-sheet.component';
 import { AddJobTemplateDialogComponentComponent } from './content/estimate/add-job-template-dialog-component/add-job-template-dialog-component.component';
+import { JobTemplateEstimateFormViewComponent } from './content/estimate/add-new-estimate-sheet/job-template-estimate-form-view/job-template-estimate-form-view.component';
+import { MaterialFormViewComponentComponent } from './content/estimate/add-new-estimate-sheet/job-template-estimate-form-view/material-form-view-component/material-form-view-component.component';
+import { MaterialFormEditableComponentComponent } from './content/estimate/add-new-estimate-sheet/job-template-estimate-form-view/material-form-editable-component/material-form-editable-component.component';
 
 const keycloakService = new KeycloakService();
 
@@ -100,7 +103,10 @@ const keycloakService = new KeycloakService();
     JobTemplateAbstractMaterialRawComponent,
     EstimateToolBarComponent,
     AddNewEstimateSheetComponent,
-    AddJobTemplateDialogComponentComponent]
+    AddJobTemplateDialogComponentComponent,
+    JobTemplateEstimateFormViewComponent,
+    MaterialFormViewComponentComponent,
+    MaterialFormEditableComponentComponent]
 })
 
 export class AppModule {

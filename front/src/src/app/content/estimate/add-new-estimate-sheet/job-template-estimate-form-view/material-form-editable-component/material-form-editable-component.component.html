@@ -1,0 +1,70 @@
+<div>
+  <mat-form-field style="width: calc(48% - 75px); padding-right: 5px">
+    <input [formControl]="materialFormControl.get('name')" matInput placeholder="Nazwa">
+    <mat-error  *ngIf="materialFormControl.get('name').hasError('required')">Pole jest
+      wymagane
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field style="width: calc(8% - 5px)">
+    <input [formControl]="materialFormControl.get('price')"
+           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" matInput
+           placeholder="Koszt">
+    <mat-error  *ngIf="materialFormControl.get('price').hasError('required')">Pole jest
+      wymagane
+    </mat-error>
+    <mat-error  *ngIf="materialFormControl.get('price').hasError('pattern')">Niepoprwna
+      wartość
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field style="width: calc(4% - 5px); cursor: default; padding-right: 5px">
+    <input value="zł" matInput readonly style="cursor: default; text-align: center">
+  </mat-form-field>
+
+  <mat-form-field style="width: calc(8% - 5px); padding-right: 5px;">
+    <input oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+      [formControl]="materialFormControl.get('value')" matInput placeholder="Nakład">
+    <mat-error  *ngIf="materialFormControl.get('value').hasError('required')">Pole jest
+      wymagane
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field style="width: calc(8% - 5px);  padding-right: 5px">
+    <mat-select [formControl]="materialFormControl.get('unit')" [compareWith]="compareObjects" placeholder="Jednostka">
+      <mat-option *ngFor="let unit of units" [value]="unit">
+        <h4 mat-line>{{unit.bottom}} <sup>{{unit.top}}</sup></h4>
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="materialFormControl.get('unit').hasError('required')">Pole jest
+      wymagane
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field style="width: calc(10% - 5px); cursor: default; padding-right: 5px; color: gray">
+    <input [formControl]="materialFormControl.get('sumValue')" matInput placeholder="Nakład suma" readonly
+           style="width:calc(100% - 36px);cursor: default; text-align: center">
+    <div style="float: right; height: 18px">
+      <div style="padding-bottom: 5px">{{materialFormControl.get('unit').value.bottom}} <sup>{{materialFormControl.get('unit').value.top}}</sup>
+      </div>
+    </div>
+  </mat-form-field>
+
+  <mat-form-field style="width: calc(10% - 5px); cursor: default; color: gray">
+    <input [formControl]="materialFormControl.get('sumPrice')" matInput placeholder="Koszt suma" readonly
+           style="cursor: default; text-align: center">
+  </mat-form-field>
+
+  <mat-form-field style="width: calc(4% - 5px); cursor: default;color: gray">
+    <input value="zł" matInput readonly style="cursor: default; text-align: center">
+  </mat-form-field>
+
+
+
+  <div class="example-card" style="float: right; width: 75px; height:60px">
+    <button mat-button style="float: right; width: 100%; height: 100%" (click)="deleteForm(materialFormControl)">
+      <mat-icon class="example-icon icon_style" aria-hidden="false">close</mat-icon>
+    </button>
+  </div>
+</div>
+
+

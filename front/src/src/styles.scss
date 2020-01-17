@@ -58,6 +58,10 @@ body {
   width: auto;
 }
 
+.mat-error{
+  font-size: 10px;
+}
+
 .tool-bar-color {
   background: #283593;
   color: white;
@@ -114,4 +118,21 @@ body {
 .jobTemplateAddSheet{
   min-width: calc(100vw - 258px) !important;
   max-width: calc(100vw - 258px) !important;
+}
+
+
+
+
+.show-more {
+  -webkit-transition: max-height 1s;
+  -moz-transition: max-height 1s;
+  -ms-transition: max-height 1s;
+  -o-transition: max-height 1s;
+  transition: max-height 1s;
+  background: #e5feff;
+  overflow: hidden;
+
+}
+.show-more.show {
+
 }

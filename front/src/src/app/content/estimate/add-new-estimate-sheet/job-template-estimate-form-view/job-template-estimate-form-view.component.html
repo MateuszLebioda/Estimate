@@ -1,0 +1,53 @@
+<div>
+  <form [formGroup]="jobTemplateFormControl">
+    <div class="example-card" style="float: left; width: 75px; height: 75px; padding-right: 10px">
+      <button mat-button class="tool-bar-spans" style="float: right; width: 100%; height: 100%" (click)="expand()">
+        <mat-icon *ngIf="!opened" class="example-icon icon_style" aria-hidden="false">keyboard_arrow_down</mat-icon>
+        <mat-icon *ngIf="opened" class="example-icon icon_style" aria-hidden="false">keyboard_arrow_up</mat-icon>
+      </button>
+    </div>
+
+    <div class="example-card" style="float: right; width: 75px; height: 75px">
+      <button mat-button class="tool-bar-spans" style="float: right; width: 100%; height: 100%"
+              (click)="deleteJobTemplates()">
+        <mat-icon class="example-icon icon_style" aria-hidden="false">close</mat-icon>
+      </button>
+    </div>
+
+    <div class="example-card" style="float: right; width: calc(100% - 160px); padding-top: 10px">
+      <mat-form-field style="width: calc(70% - 5px); padding-right: 5px">
+        <input formControlName="name" style="font-weight: bold" matInput placeholder="Nazwa">
+        <mat-error *ngIf="jobTemplateFormControl.get('name').hasError('required')">Pole jest wymagane</mat-error>
+      </mat-form-field>
+
+      <mat-form-field style="width: calc(15% - 5px); padding-right: 5px">
+        <input formControlName="value"  style="font-weight: bold" matInput placeholder="Wartość">
+        <mat-error *ngIf="jobTemplateFormControl.get('value').hasError('required')">Pole jest wymagane</mat-error>
+      </mat-form-field>
+
+      <mat-form-field style="width: calc(15% - 5px)">
+        <mat-select formControlName="unit" style="font-weight: bold" placeholder="Jednostka" [compareWith]="compareObjects">
+          <mat-option *ngFor="let unit of units" [value]="unit">
+            <h4 mat-line>{{unit.bottom}} <sup>{{unit.top}}</sup></h4>
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="jobTemplateFormControl.get('unit').hasError('required')">Pole jest wymagane</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-button class="tool-bar-spans" style="float: right" (click)="addMaterial()">
+        <mat-icon class="example-icon" aria-hidden="false" style="padding-bottom: 3px">add</mat-icon>
+        Dodaj materiał
+      </button>
+      <button mat-button class="tool-bar-spans" style="float: right" (click)="addWork()">
+        <mat-icon class="example-icon" aria-hidden="false" style="padding-bottom: 3px">add</mat-icon>
+        Dodaj prace
+      </button>
+    </div>
+    <div>
+      <app-material-form-view-component  (deletedMaterial)="unhideMaterial($event)" [opened]="opened" [jobTemplateFormGroup]="jobTemplateFormControl" [units]="units">
+      </app-material-form-view-component>
+    </div>
+  </form>
+
+</div>

@@ -20,13 +20,55 @@
           Dodaj szablon robót
         </button>
       </div>
+
+      <ng-container *ngIf="getJobTemplateFormArray().controls.length > 0">
+        <div style="width: 100%; float: right;">
+          <mat-card-title style="font-size: 20px;font-weight: bold;">Szablony robót</mat-card-title>
+        </div>
+        <ng-container *ngFor="let element of getJobTemplateFormArray().controls; let i = index">
+          <mat-card style="background: rgb(220,220,220); margin-bottom: 10px">
+            <app-job-template-estimate-form-view
+                                                 [allWorks]="getAllWorks()"
+                                                 [allMaterials]="getAllMaterials()"
+                                                 [jobTemplateFormControl]="element"
+                                                 [units]="units" (emitter)="deleteJobTemplateForm($event)">
+            </app-job-template-estimate-form-view>
+          </mat-card>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="getMaterialFormArray().length > 0">
+        <div style="padding-bottom: 20px">
+          <div style="width: 100%; float: right;">
+            <mat-card-title style="font-size: 20px;font-weight: bold;">Materiały</mat-card-title>
+          </div>
+          <ng-container *ngFor="let element of getMaterialFormArray().controls">
+            <app-material-form-editable-component style="width: calc(100% - 85px); float: right" [units]="units"
+                                                  [materialFormControl]="element"
+                                                  (deleteEmitter)="deleteMaterial($event)"></app-material-form-editable-component>
+          </ng-container>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="getWorkFormArray().length > 0">
+        <div style="padding-bottom: 20px">
+          <div style="width: 100%; float: right;">
+            <mat-card-title style="font-size: 20px;font-weight: bold;">Prace</mat-card-title>
+          </div>
+          <ng-container *ngFor="let element of getWorkFormArray().controls">
+            <app-material-form-editable-component style="width: calc(100% - 85px); float: right" [units]="units"
+                                                  [materialFormControl]="element"
+                                                  (deleteEmitter)="deleteWork($event)"></app-material-form-editable-component>
+          </ng-container>
+        </div>
+      </ng-container>
+
+
     </div>
     <div class="mat-filed-style" style="padding-bottom: 25px">
       <button mat-button style="float: right" (click)="saveJobTemplate()" [disabled]="!estimateFormGroup.valid">Zapisz
       </button>
       <button mat-button style="float: right" (click)="bottomSheetRef.dismiss()">Anuluj</button>
     </div>
-
-    {{estimateFormGroup.value | json}}
   </form>
 </mat-card>

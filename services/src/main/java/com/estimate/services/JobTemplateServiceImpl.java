@@ -35,6 +35,7 @@ public class JobTemplateServiceImpl implements JobTemplateService {
     @Override
     public Long addJobTemplateDTO(JobTemplateDTO jobTemplateDTO) {
         JobTemplate jobTemplate = DTOConverter.makeJobTemplateFromDTO(jobTemplateDTO);
+        jobTemplate.setIsTemplate(Boolean.TRUE);
         Long id = jobTemplateDao.save(jobTemplate).getId();
         List<JobTemplateAbstractMaterial> materials =
                 jobTemplateDTO.getMaterials().stream()
@@ -43,7 +44,6 @@ public class JobTemplateServiceImpl implements JobTemplateService {
             material.setJobTemplate(jobTemplate);
             jobTemplateAbstractMaterialDao.merge(material);
         }
-
         return id;
     }
 

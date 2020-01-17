@@ -40,4 +40,7 @@ export class AddJobTemplateDialogComponentComponent implements OnInit {
     this.filterMethod();
     this.emitter.emit(jobTemplate);
   }
+
+
+
 }
