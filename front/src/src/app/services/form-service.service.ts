@@ -134,6 +134,7 @@ export class FormService {
     estimate.jobTemplates = this.createJobTemplateArrayEstimateFromJobTemplateEstimateFormGroup(form);
     estimate.client = form.get('client').value;
     estimate.sumPrice = form.get('sumPrice').value;
+    console.log(estimate);
     return estimate;
   }
 

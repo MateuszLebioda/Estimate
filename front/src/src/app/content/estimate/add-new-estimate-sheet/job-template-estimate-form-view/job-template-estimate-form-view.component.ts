@@ -10,7 +10,7 @@ import {FormArray, FormGroup} from '@angular/forms';
 import {Unit} from '../../../../model/unit';
 import {MaterialTemplate} from '../../../../model/template/material-template';
 import {WorkTemplate} from '../../../../model/template/work-template';
-import {AddAbstractMaterialDialogComponent} from '../../../job-templates/add-abstract-material-dialog/add-abstract-material-dialog.component';
+import {AddAbstractMaterialDialogComponent} from '../../../../utils/add-abstract-material-dialog/add-abstract-material-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {AbstractMaterial} from '../../../../model/template/abstract-material';
 import {FormService} from '../../../../services/form-service.service';

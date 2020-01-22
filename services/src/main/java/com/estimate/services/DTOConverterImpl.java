@@ -96,7 +96,7 @@ public class DTOConverterImpl implements DTOConverter {
     public Estimate makeEstimate(EstimateDTO estimateDTO) {
         Estimate estimate = new Estimate();
         estimate.setId(estimate.getId());
-        estimate.setName("name");
+        estimate.setName(estimateDTO.getName());
         estimate.setSumPrice(estimateDTO.getSumPrice());
         estimate.setJobTemplates(estimateDTO.getJobTemplates().stream().map(this::makeJobTemplateEstimate).collect(Collectors.toList()));
         estimate.getJobTemplates().forEach(j -> j.setEstimate(estimate));

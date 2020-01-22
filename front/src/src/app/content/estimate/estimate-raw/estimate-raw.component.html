@@ -1,0 +1,13 @@
+<mat-card style="background: rgb(220,220,220); margin-bottom: 10px">
+  <form>
+    <div>
+      <mat-form-field [ngStyle]="nameStyle()" class="mat-filed-style" style="padding-right: 10px">
+        <input [value]="estimate.name" readonly matInput placeholder="Nazwa">
+      </mat-form-field>
+      <mat-form-field *ngIf="estimate.client !== null" class="mat-filed-style" style="width: calc(30% - 10px); float: right">
+        <input [value]="estimate.client.firstName + ' ' + estimate.client.lastName" readonly matInput
+               placeholder="Klient">
+      </mat-form-field>
+    </div>
+  </form>
+</mat-card>

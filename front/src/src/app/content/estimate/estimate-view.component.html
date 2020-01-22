@@ -6,3 +6,9 @@
   [units]="units"
   (estimateEmitter)="saveNewEstimate($event)"
 ></app-estimate-tool-bar>
+
+<ng-container *ngFor="let estimate of estimates">
+
+    <app-estimate-raw [estimate]="estimate" style="margin: 10px">
+    </app-estimate-raw>
+</ng-container>

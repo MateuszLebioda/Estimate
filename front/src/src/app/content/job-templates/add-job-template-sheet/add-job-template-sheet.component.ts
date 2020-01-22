@@ -7,7 +7,7 @@ import {WorkService} from '../../../services/work.service';
 import {WorkTemplate} from '../../../model/template/work-template';
 import {MaterialTemplate} from '../../../model/template/material-template';
 import {MatDialog} from '@angular/material/dialog';
-import {AddAbstractMaterialDialogComponent} from '../add-abstract-material-dialog/add-abstract-material-dialog.component';
+import {AddAbstractMaterialDialogComponent} from '../../../utils/add-abstract-material-dialog/add-abstract-material-dialog.component';
 import {AbstractMaterial} from '../../../model/template/abstract-material';
 import {AbstractMaterialType} from '../../../model/abstract-material-type.enum';
 import {JobTemplateMaterial} from '../../../model/template/job-template-material';

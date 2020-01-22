@@ -46,6 +46,8 @@ public class Estimate  implements SimpleEntity<Estimate> {
                 .materials(materials.stream().filter(material -> material instanceof MaterialEstimate).map(m -> ((MaterialEstimate)m).toDTO()).collect(Collectors.toList()))
                 .works(materials.stream().filter(material -> material instanceof WorkEstimate).map(w -> ((WorkEstimate)w).toDTO()).collect(Collectors.toList()))
                 .name(this.name)
+                .client(this.client==null?null:this.client.toDTO())
+                .sumPrice(this.sumPrice)
                 .build();
     }
 

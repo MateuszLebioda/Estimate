@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {JobTemplate} from '../../../model/template/job-template';
+import {JobTemplate} from '../../model/template/job-template';
 
 @Component({
   selector: 'app-add-job-template-dialog-component',
