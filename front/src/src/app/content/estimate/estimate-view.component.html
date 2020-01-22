@@ -1,1 +1,8 @@
-<app-estimate-tool-bar></app-estimate-tool-bar>
+<app-estimate-tool-bar
+  [jobTemplates]="jobTemplates"
+  [workTemplates]="workTemplates"
+  [materialTemplates]="materialTemplates"
+  [clients]="clients"
+  [units]="units"
+  (estimateEmitter)="saveNewEstimate($event)"
+></app-estimate-tool-bar>

@@ -13,7 +13,11 @@ export class EstimateService {
   constructor(private keyCloakService: KeyCloakService, private http: HttpClient) {
   }
 
-  public addEstimate(estimate: Estimate): Observable<HttpResponse<number>> {
+  public add(estimate: Estimate): Observable<HttpResponse<number>> {
     return this.http.post<number>(backEndUrl + '/estimate/add', estimate, {observe: 'response'});
+  }
+
+  public getAll(): Observable<HttpResponse<Array<Estimate>>> {
+    return this.http.get<Array<Estimate>>(backEndUrl + '/estimate/getAll', {observe: 'response'});
   }
 }

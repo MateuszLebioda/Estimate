@@ -31,7 +31,6 @@ export class AddJobTemplateDialogComponentComponent implements OnInit {
   }
 
   close() {
-
     this.dialogRef.close();
   }
 

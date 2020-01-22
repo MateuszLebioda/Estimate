@@ -16,4 +16,6 @@ public class EstimateDTO {
     private List<WorkEstimateDTO> works;
     private List<MaterialEstimateDTO> materials;
     private List<JobTemplateEstimateDTO> jobTemplates;
+    private ClientDTO client;
+    private Double sumPrice;
 }

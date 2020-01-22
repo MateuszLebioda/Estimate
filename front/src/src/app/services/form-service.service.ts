@@ -7,6 +7,7 @@ import {JobTemplate} from '../model/template/job-template';
 import {AbstractMaterialType} from '../model/abstract-material-type.enum';
 import {MaterialEstimate} from '../model/material-estimate';
 import {WorkEstimate} from '../model/work-estimate';
+import {Client} from '../model/client';
 
 @Injectable({
   providedIn: 'root'
@@ -117,6 +118,7 @@ export class FormService {
   createEstimateFormGroup(estimate: Estimate): FormGroup {
     return this.formBuilder.group({
       name: [estimate.name, Validators.required],
+      client: [new Client()],
       materials: this.formBuilder.array([]),
       works: this.formBuilder.array([]),
       jobTemplates: this.formBuilder.array([]),
@@ -126,10 +128,20 @@ export class FormService {
 
   createEstimateFromEstimateFormGroup(form: FormGroup): Estimate {
     const estimate = new Estimate();
+    estimate.name = form.get('name').value;
     estimate.materials = this.createMaterialEstimateArrayFromEstimateFormGroup(form);
     estimate.works = this.createWorEstimateArrayFromEstimateFormGroup(form);
     estimate.jobTemplates = this.createJobTemplateArrayEstimateFromJobTemplateEstimateFormGroup(form);
+    estimate.client = form.get('client').value;
+    estimate.sumPrice = form.get('sumPrice').value;
     return estimate;
+  }
+
+  compareObjects(o1: any, o2: any): boolean {
+    if (o1 === null || o2 === null) {
+      return false;
+    }
+    return o1.id === o2.id;
   }
 
 }

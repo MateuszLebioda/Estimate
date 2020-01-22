@@ -1,16 +1,18 @@
 package com.estimate.model.entities.dto;
 
+import com.estimate.model.entities.Unit;
 import com.estimate.model.entities.utils.Role;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class WorkEstimateDTO extends AbstractMaterialEstimateDTO{
-    public WorkEstimateDTO(){
+@NoArgsConstructor
+public class WorkEstimateDTO extends AbstractMaterialEstimateDTO {
 
-    }
-
-    public WorkEstimateDTO(Long id, String name, UnitDTO unit, Double price, Role type, Double sumPrice, Double sumValue) {
-        super(id, name, unit, price, type, sumPrice, sumValue);
-        setType(Role.WORK);
+    @Builder
+    public WorkEstimateDTO(Long id, String name, Unit unit, Double price, Double sumPrice, Double sumValue) {
+        super(id, name, unit, price, sumPrice, sumValue);
+        type = Role.WORK;
     }
 }

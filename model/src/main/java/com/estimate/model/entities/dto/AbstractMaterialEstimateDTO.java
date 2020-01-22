@@ -1,28 +1,30 @@
 package com.estimate.model.entities.dto;
 
+import com.estimate.model.entities.Unit;
 import com.estimate.model.entities.utils.Role;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import net.bytebuddy.implementation.bind.annotation.Super;
 
 @Data
+@NoArgsConstructor
 public class AbstractMaterialEstimateDTO {
-    private Long id;
-    private String name;
-    private UnitDTO unit;
-    private Double price;
-    private Role type;
-    private Double sumPrice;
-    private Double sumValue;
+    protected Long id;
+    protected String name;
+    protected UnitDTO unit;
+    protected Double price;
+    protected Role type;
+    protected Double sumPrice;
+    protected Double sumValue;
 
-    AbstractMaterialEstimateDTO(){
-
-    }
-
-    public AbstractMaterialEstimateDTO(Long id, String name, UnitDTO unit, Double price, Role type, Double sumPrice, Double sumValue) {
+    public AbstractMaterialEstimateDTO(Long id, String name, Unit unit, Double price, Double sumPrice, Double sumValue) {
         this.id = id;
         this.name = name;
-        this.unit = unit;
+        this.unit = unit.toDTO();
         this.price = price;
-        this.type = type;
         this.sumPrice = sumPrice;
         this.sumValue = sumValue;
     }
