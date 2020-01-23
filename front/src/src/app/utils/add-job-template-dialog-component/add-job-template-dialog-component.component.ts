@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {JobTemplate} from '../../model/template/job-template';
+import {SnackBarServiceService} from '../../services/snack-bar-service.service';
 
 @Component({
   selector: 'app-add-job-template-dialog-component',
@@ -16,6 +17,7 @@ export class AddJobTemplateDialogComponentComponent implements OnInit {
   filter = '';
 
   constructor(public dialogRef: MatDialogRef<AddJobTemplateDialogComponentComponent>,
+              private snackService: SnackBarServiceService,
               @Inject(MAT_DIALOG_DATA) public data: Array<JobTemplate>) {
     this.jobTemplates = data;
     for (const jobTemplate of this.jobTemplates) {
@@ -37,6 +39,7 @@ export class AddJobTemplateDialogComponentComponent implements OnInit {
   handleEmitter(jobTemplate: JobTemplate) {
     this.jobTemplates = this.jobTemplates.filter(m => m.id !== jobTemplate.id);
     this.filterMethod();
+    this.snackService.openSnackBar(jobTemplate.name, 'Dodano')
     this.emitter.emit(jobTemplate);
   }
 

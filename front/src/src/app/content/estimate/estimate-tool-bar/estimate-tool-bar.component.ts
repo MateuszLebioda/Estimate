@@ -52,7 +52,9 @@ export class EstimateToolBarComponent implements OnInit {
         panelClass: 'estimateAddSheet'
       },
     ).afterDismissed().subscribe(estimate => {
-      this.estimateEmitter.emit(estimate);
+      if(estimate !== undefined) {
+        this.estimateEmitter.emit(estimate);
+      }
     });
   }
 

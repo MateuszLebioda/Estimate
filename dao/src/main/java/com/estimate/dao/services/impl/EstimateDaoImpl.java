@@ -1,6 +1,6 @@
 package com.estimate.dao.services.impl;
 
-import com.estimate.dao.services.EstimateDao;
+import com.estimate.dao.services.dao.EstimateDao;
 import com.estimate.dao.services.dao.AbstractDao;
 import com.estimate.model.entities.Estimate;
 import com.estimate.model.entities.User;
@@ -27,6 +27,19 @@ public class EstimateDaoImpl extends AbstractDao<Estimate> implements EstimateDa
             return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
         }catch (NoResultException e){
             return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public Estimate getEstimatesByUId(Long id) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Estimate> criteriaQuery = criteriaBuilder.createQuery(Estimate.class);
+        Root<Estimate> root = criteriaQuery.from(Estimate.class);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("id"),id));
+        try {
+            return entityManager.createQuery(criteriaQuery).getSingleResult();
+        }catch (NoResultException e){
+            return null;
         }
     }
 }

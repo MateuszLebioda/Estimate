@@ -3,9 +3,12 @@
     <button mat-button class="tool-bar-spans" (click)="addNewClient()">Dodaj kilenta</button>
   </mat-toolbar>
 </div>
-<div class="user-card-container">
-  <div *ngFor="let client of clients; let i = index">
-    <app-raw-client [client]="client" class="client-example-card" (click)="onMatCardClickEvent(client)"></app-raw-client>
+<div class="contentDiv">
+  <div class="user-card-container">
+    <div *ngFor="let client of clients; let i = index">
+      <app-raw-client [client]="client" class="client-example-card"
+                      (click)="onMatCardClickEvent(client)"></app-raw-client>
+    </div>
   </div>
 </div>
 

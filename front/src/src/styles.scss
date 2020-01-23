@@ -127,7 +127,14 @@ body {
   max-height: calc(100vw - 200px) !important;
 }
 
-
+.contentDiv{
+  background: #f1f1e4;
+  height: calc(100% - 139px);
+  overflow-y: scroll;
+  mat-card{
+    background: #f2e0a4;
+  }
+}
 
 
 .show-more {
@@ -141,5 +148,10 @@ body {
 
 }
 .show-more.show {
+
+}
+
+
+.expandIcon{
 
 }

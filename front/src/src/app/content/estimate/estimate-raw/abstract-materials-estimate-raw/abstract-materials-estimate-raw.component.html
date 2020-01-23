@@ -1,0 +1,10 @@
+<ng-container *ngIf="abstractEstimateMaterials.length > 0">
+  <div style="width: 98%; float: right">
+    <mat-card-title style="font-size: 16px;font-weight: bold; padding-bottom: 7px">{{title}}</mat-card-title>
+    <ng-container *ngFor="let material of abstractEstimateMaterials">
+      <app-abstract-material-estimate-raw style="width: 98%; float: right"
+        [materialEstimate]="material">
+      </app-abstract-material-estimate-raw>
+    </ng-container>
+  </div>
+</ng-container>

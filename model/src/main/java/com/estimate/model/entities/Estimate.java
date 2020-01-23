@@ -40,8 +40,13 @@ public class Estimate  implements SimpleEntity<Estimate> {
     @JoinColumn(name = "client_id")
     private Client client;
 
+    public void addAbstractMaterials(List<AbstractMaterialEstimate> materials){
+        this.materials.addAll(materials);
+    }
+
     public EstimateDTO toDTO(){
         return EstimateDTO.builder()
+                .id(id)
                 .jobTemplates(jobTemplates.stream().map(JobTemplateEstimate::toDTO).collect(Collectors.toList()))
                 .materials(materials.stream().filter(material -> material instanceof MaterialEstimate).map(m -> ((MaterialEstimate)m).toDTO()).collect(Collectors.toList()))
                 .works(materials.stream().filter(material -> material instanceof WorkEstimate).map(w -> ((WorkEstimate)w).toDTO()).collect(Collectors.toList()))

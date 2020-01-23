@@ -7,6 +7,8 @@ import java.util.List;
 
 @Local
 public interface EstimateService {
-    Long saveEstimate(EstimateDTO estimateDTO);
+    EstimateDTO saveEstimate(EstimateDTO estimateDTO);
     List<EstimateDTO> getAllEstimates();
+    Boolean deleteEstimate(Long id);
+    EstimateDTO update(EstimateDTO estimateDTO);
 }

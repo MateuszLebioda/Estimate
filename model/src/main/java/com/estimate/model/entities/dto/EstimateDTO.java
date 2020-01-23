@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EstimateDTO {
+    private Long id;
     private String name;
     private List<WorkEstimateDTO> works;
     private List<MaterialEstimateDTO> materials;
