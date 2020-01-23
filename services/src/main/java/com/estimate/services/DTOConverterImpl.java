@@ -74,6 +74,7 @@ public class DTOConverterImpl implements DTOConverter {
         abstractMaterialEstimate.setPrice(abstractMaterialEstimateDTO.getPrice());
         abstractMaterialEstimate.setSumPrice(abstractMaterialEstimateDTO.getSumPrice());
         abstractMaterialEstimate.setSumValue(abstractMaterialEstimateDTO.getSumValue());
+        abstractMaterialEstimate.setValue(abstractMaterialEstimateDTO.getValue());
         abstractMaterialEstimate.setUnit(unitService.getUnitById(abstractMaterialEstimateDTO.getUnit().getId()));
         abstractMaterialEstimate.setUser(user.get());
         return abstractMaterialEstimate;
@@ -95,14 +96,17 @@ public class DTOConverterImpl implements DTOConverter {
 
     public Estimate makeEstimate(EstimateDTO estimateDTO) {
         Estimate estimate = new Estimate();
-        estimate.setId(estimate.getId());
+        estimate.setId(estimateDTO.getId());
         estimate.setName(estimateDTO.getName());
         estimate.setSumPrice(estimateDTO.getSumPrice());
         estimate.setJobTemplates(estimateDTO.getJobTemplates().stream().map(this::makeJobTemplateEstimate).collect(Collectors.toList()));
         estimate.getJobTemplates().forEach(j -> j.setEstimate(estimate));
         estimate.setMaterials(estimateDTO.getMaterials().stream().map(this::makeAbstractMaterialEstimate).collect(Collectors.toList()));
+        estimate.addAbstractMaterials(estimateDTO.getWorks().stream().map(this::makeAbstractMaterialEstimate).collect(Collectors.toList()));
         estimate.getMaterials().forEach(m -> m.setEstimate(estimate));
-        estimate.setClient(estimateDTO.getClient().getId() == null?null:clientService.getClientById(estimateDTO.getClient().getId()));
+        if(estimateDTO.getClient() != null){
+            estimate.setClient(estimateDTO.getClient().getId() == null?null:clientService.getClientById(estimateDTO.getClient().getId()));
+        }
         estimate.setUser(user.get());
         return estimate;
     }

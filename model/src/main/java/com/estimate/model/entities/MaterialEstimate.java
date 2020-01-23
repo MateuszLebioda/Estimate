@@ -18,6 +18,7 @@ public class MaterialEstimate extends AbstractMaterialEstimate {
                 .sumPrice(this.sumPrice)
                 .sumValue(this.sumValue)
                 .unit(unit)
+                .value(value)
                 .build();
     }
 }

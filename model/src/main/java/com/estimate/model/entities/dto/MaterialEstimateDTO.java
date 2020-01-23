@@ -12,8 +12,8 @@ import lombok.experimental.SuperBuilder;
 public class MaterialEstimateDTO extends AbstractMaterialEstimateDTO {
 
     @Builder
-    public MaterialEstimateDTO(Long id, String name, Unit unit, Double price, Double sumPrice, Double sumValue) {
-        super(id, name, unit, price, sumPrice, sumValue);
+    public MaterialEstimateDTO(Long id, String name, Unit unit, Double price, Double sumPrice, Double sumValue, Double value) {
+        super(id, name, unit, price, sumPrice, sumValue,value);
         type = Role.MATERIAL;
     }
 

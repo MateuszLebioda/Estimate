@@ -1,4 +1,6 @@
 <app-unit-toolbar-view (unitToAdd)="addUnit($event)"></app-unit-toolbar-view>
-<app-unit-content (unitDelete)="deleteUnit($event)"
-                  [units]="units">
-</app-unit-content>
+<div class="contentDiv">
+  <app-unit-content (unitDelete)="deleteUnit($event)"
+                    [units]="units">
+  </app-unit-content>
+</div>

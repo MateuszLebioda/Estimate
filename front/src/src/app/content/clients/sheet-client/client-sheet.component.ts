@@ -21,13 +21,13 @@ export class ClientSheetComponent {
       this.client = new Client();
     }
     this.clientForm = new FormGroup({
-      firstName: new FormControl(this.client.firstName, [Validators.required, Validators.minLength(3)]),
-      lastName: new FormControl(this.client.lastName, [Validators.required, Validators.minLength(3)]),
-      email: new FormControl(this.client.email, [Validators.email, Validators.required]),
-      city: new FormControl(this.client.city, [Validators.required, Validators.minLength(2)]),
-      street: new FormControl(this.client.street, [Validators.required, Validators.minLength(3)]),
-      houseNumber: new FormControl(this.client.houseNumber, [Validators.required]),
-      code: new FormControl(this.client.code, [Validators.required, Validators.pattern('[0-9]{2}-[0-9]{3}')]),
+      firstName: new FormControl(this.client.firstName, [Validators.required]),
+      lastName: new FormControl(this.client.lastName, [Validators.required]),
+      email: new FormControl(this.client.email, [Validators.email]),
+      city: new FormControl(this.client.city, ),
+      street: new FormControl(this.client.street, ),
+      houseNumber: new FormControl(this.client.houseNumber),
+      code: new FormControl(this.client.code, [Validators.pattern('[0-9]{2}-[0-9]{3}')]),
     });
   }
 

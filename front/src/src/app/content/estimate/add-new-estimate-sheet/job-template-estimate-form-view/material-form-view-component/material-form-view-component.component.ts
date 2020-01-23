@@ -12,9 +12,6 @@ import {WorkTemplate} from '../../../../../model/template/work-template';
 export class MaterialFormViewComponentComponent implements OnInit {
 
   @Output()
-  deletedMaterial = new EventEmitter<number>();
-
-  @Output()
   deletedWork = new EventEmitter<number>();
 
   @Input()
@@ -30,7 +27,7 @@ export class MaterialFormViewComponentComponent implements OnInit {
   jobTemplateFormGroup: FormGroup;
 
   @Input()
-  units: Array<Unit>
+  units: Array<Unit>;
 
   constructor() {
   }
@@ -62,7 +59,6 @@ export class MaterialFormViewComponentComponent implements OnInit {
   deleteMaterial(formGroup: FormGroup) {
     this.getMaterialFormArray()
       .removeAt(this.getMaterialFormArray().controls.findIndex(jt => jt.get('id').value === formGroup.get('id').value));
-    this.deletedMaterial.emit(formGroup.get('id').value);
   }
 
   getCalcValue() {

@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 public class WorkEstimateDTO extends AbstractMaterialEstimateDTO {
 
     @Builder
-    public WorkEstimateDTO(Long id, String name, Unit unit, Double price, Double sumPrice, Double sumValue) {
-        super(id, name, unit, price, sumPrice, sumValue);
+    public WorkEstimateDTO(Long id, String name, Unit unit, Double price, Double sumPrice, Double sumValue, Double value) {
+        super(id, name, unit, price, sumPrice, sumValue,value);
         type = Role.WORK;
     }
 }

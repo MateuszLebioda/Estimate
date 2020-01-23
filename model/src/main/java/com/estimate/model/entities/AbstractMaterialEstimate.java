@@ -30,6 +30,9 @@ public abstract class AbstractMaterialEstimate implements SimpleEntity<AbstractM
     @Column(name = "sum_value", columnDefinition="Decimal(15,2)")
     protected Double sumValue;
 
+    @Column(name = "value", columnDefinition="Decimal(15,2)")
+    protected Double value;
+
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)
     protected User user;

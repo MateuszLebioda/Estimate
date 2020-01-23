@@ -16,7 +16,6 @@ import {UnitService} from '../../../services/unit.service';
 import {AddAbstractMaterialDialogComponent} from '../../../utils/add-abstract-material-dialog/add-abstract-material-dialog.component';
 import {AbstractMaterial} from '../../../model/template/abstract-material';
 import {FormService} from '../../../services/form-service.service';
-import {EstimateService} from '../../../services/estimate.service';
 import {Client} from '../../../model/client';
 
 @Component({
@@ -34,13 +33,10 @@ export class AddNewEstimateSheetComponent implements OnInit {
   estimate = new Estimate();
 
   works: Array<WorkTemplate>;
-  worksHidden = new Array<WorkTemplate>();
 
   materials: Array<MaterialTemplate>;
-  materialsHidden = new Array<MaterialTemplate>();
 
   jobTemplates: Array<JobTemplate>;
-  jobTemplatesHidden = new Array<JobTemplate>();
 
   units = new Array<Unit>();
 
@@ -54,7 +50,6 @@ export class AddNewEstimateSheetComponent implements OnInit {
     private snackBar: MatSnackBar,
     private cd: ChangeDetectorRef,
     private formService: FormService,
-    private estimateService: EstimateService,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data,
   ) {
     bottomSheetRef.disableClose = true;
@@ -79,6 +74,9 @@ export class AddNewEstimateSheetComponent implements OnInit {
       this.materials = this.data.materialTemplates;
       this.units = this.data.units;
       this.clients = this.data.clients;
+      if (this.data.estimate) {
+        this.estimate = this.data.estimate;
+      }
     }
     this.estimateFormGroup = this.formService.createEstimateFormGroup(this.estimate);
   }
@@ -96,57 +94,86 @@ export class AddNewEstimateSheetComponent implements OnInit {
     });
   }
 
-
-  addMaterial() {
-      const dialogRef = this.dialog.open(AddAbstractMaterialDialogComponent, {
-        data: this.materials,
-        width: '80%',
-        height: '600px',
-        disableClose: true
-      });
-      dialogRef.componentInstance.emmmiter.subscribe(material => {
-        (this.estimateFormGroup.get('materials') as FormArray).push(this.createMaterialFormGroup(material, 1));
-        this.hideMaterial(material);
-        this.cd.markForCheck();
-      });
-      dialogRef.afterClosed().subscribe();
+  getAvailableAbstractMaterials(abstractMaterials, formArray: FormArray): Array<AbstractMaterial> {
+    const availableMaterials = new Array<AbstractMaterial>()
+    for(let material of abstractMaterials){
+      let isChosen = false;
+      for(let materialChosen of formArray.controls){
+        if(material.name === materialChosen.get('name').value){
+          isChosen = true;
+        }
+      }
+      if(!isChosen){
+        availableMaterials.push(material)
+      }
+    }
+    return availableMaterials;
   }
 
-  hideMaterial(material: MaterialTemplate) {
-    this.materialsHidden.push(this.materials.find(m => m.id === material.id));
-    this.materials = this.materials.filter(m => m.id !== material.id);
+  getAvailableJobTemplates(): Array<JobTemplate> {
+    const availableJobTemplates = new Array<JobTemplate>()
+    for(let jobTemplate of this.jobTemplates){
+      let isChosen = false;
+      for(let jobTemplateChosen of this.getJobTemplateFormArray().controls){
+        if(jobTemplate.name === jobTemplateChosen.get('name').value){
+          isChosen = true;
+        }
+      }
+      if(!isChosen){
+        availableJobTemplates.push(jobTemplate)
+      }
+    }
+    return availableJobTemplates;
+  }
+
+
+
+  getAvailableMaterials(): Array<AbstractMaterial> {
+    return this.getAvailableAbstractMaterials(this.materials, this.getMaterialFormArray())
+  }
+
+  getAvailableWorks(): Array<AbstractMaterial> {
+    return this.getAvailableAbstractMaterials(this.works, this.getWorkFormArray())
+  }
+
+
+  addMaterial() {
+    const dialogRef = this.dialog.open(AddAbstractMaterialDialogComponent, {
+      data: this.getAvailableMaterials(),
+      width: '80%',
+      height: '600px',
+      disableClose: true
+    });
+    dialogRef.componentInstance.emmmiter.subscribe(material => {
+      (this.estimateFormGroup.get('materials') as FormArray).push(this.createMaterialFormGroup(material, 1));
+      this.cd.markForCheck();
+    });
+    dialogRef.afterClosed().subscribe();
   }
 
   addWork() {
     const dialogRef = this.dialog.open(AddAbstractMaterialDialogComponent, {
-      data: this.works,
+      data: this.getAvailableWorks(),
       width: '80%',
       height: '600px',
       disableClose: true
     });
     dialogRef.componentInstance.emmmiter.subscribe(material => {
       (this.estimateFormGroup.get('works') as FormArray).push(this.createMaterialFormGroup(material, 1));
-      this.hideWorks(material);
       this.cd.markForCheck();
     });
     dialogRef.afterClosed().subscribe();
   }
 
-  hideWorks(work: WorkTemplate) {
-    this.worksHidden.push(this.works.find(w => w.id === work.id));
-    this.works = this.works.filter(m => m.id !== work.id);
-  }
-
   addJobTemplate() {
     const dialogRef = this.dialog.open(AddJobTemplateDialogComponentComponent, {
-      data: this.jobTemplates,
+      data: this.getAvailableJobTemplates(),
       width: '80%',
       height: '600px',
       disableClose: true
     });
     dialogRef.componentInstance.emitter.subscribe(jobTemplate => {
       (this.estimateFormGroup.get('jobTemplates') as FormArray).push(this.createJobTemplateFormJobTemple(jobTemplate));
-      this.hideJobTemplates(jobTemplate);
       this.cd.markForCheck();
     });
     dialogRef.afterClosed().subscribe();
@@ -160,13 +187,8 @@ export class AddNewEstimateSheetComponent implements OnInit {
   deleteJobTemplateForm(formGroup: FormGroup) {
     this.getJobTemplateFormArray()
       .removeAt(this.getJobTemplateFormArray().controls.findIndex(jt => jt.get('id').value === formGroup.get('id').value));
-    this.jobTemplates.push(this.jobTemplatesHidden.find(m => m.id === formGroup.get('id').value));
   }
 
-  hideJobTemplates(jobTemplate: JobTemplate) {
-    this.jobTemplatesHidden.push(this.jobTemplates.find(m => m.id === jobTemplate.id));
-    this.jobTemplates = this.jobTemplates.filter(m => m.id !== jobTemplate.id);
-  }
 
   getMaterialFormArray() {
     return (this.estimateFormGroup.get('materials') as FormArray);
@@ -179,29 +201,19 @@ export class AddNewEstimateSheetComponent implements OnInit {
   deleteMaterial(formGroup: FormGroup) {
     this.getMaterialFormArray()
       .removeAt(this.getMaterialFormArray().controls.findIndex(m => m.get('id').value === formGroup.get('id').value));
-    this.materials.push(this.materialsHidden.find(m => m.id === formGroup.get('id').value));
   }
 
   deleteWork(formGroup: FormGroup) {
     this.getWorkFormArray()
       .removeAt(this.getWorkFormArray().controls.findIndex(w => w.get('id').value === formGroup.get('id').value));
-    this.works.push(this.worksHidden.find(w => w.id === formGroup.get('id').value));
   }
 
   getAllWorks(): Array<WorkTemplate> {
-    const allWorks = this.works;
-    for (const w of this.worksHidden) {
-      allWorks.push(w);
-    }
-    return allWorks;
+    return this.works;
   }
 
   getAllMaterials(): Array<MaterialTemplate> {
-    const allMaterials = this.materials;
-    for (const m of this.materialsHidden) {
-      allMaterials.push(m);
-    }
-    return allMaterials;
+    return  this.materials;
   }
 
   calcSumPriceMaterials(): number {
@@ -230,4 +242,5 @@ export class AddNewEstimateSheetComponent implements OnInit {
     }
     this.estimateFormGroup.get('sumPrice').setValue(sum.toFixed(2));
   }
+
 }
