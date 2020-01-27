@@ -33,7 +33,7 @@ export class AddAbstractMaterialDialogComponent implements OnInit {
   }
 
   emmitMaterial(material: AbstractMaterial) {
-    //this.materials = this.materials.filter(m => m.id !== material.id);
+    this.materials = this.materials.filter(m => m.id !== material.id);
     this.filterMethod();
     this.emmmiter.emit(material);
   }

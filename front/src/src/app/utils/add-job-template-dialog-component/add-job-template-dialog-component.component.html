@@ -1,16 +1,19 @@
 <mat-card style="padding-top: 0">
-  <mat-card-header>
-    <input matInput readonly style="float: left">
-    <button style="float: right" mat-button (click)="close()" class="tool-bar-spans">
-      <mat-icon class="example-icon" aria-hidden="false">close</mat-icon>
-    </button>
-  </mat-card-header>
-  <mat-form-field style="width: 95%; margin-left: 20px; margin-right:20px;">
-    <input matInput placeholder="Filtruj" [(ngModel)]="filter" (ngModelChange)="filterMethod()">
-  </mat-form-field>
+  <div class="tool-bar-dialog-filter" >
+    <mat-card-header>
+      <input matInput readonly style="float: left">
+      <button style="float: right" mat-button (click)="close()" class="tool-bar-spans">
+        <mat-icon class="example-icon" aria-hidden="false">close</mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-form-field class="white-placeholder" style="width: 95%; margin-left: 20px; margin-right:20px;">
+      <input matInput placeholder="Filtruj" [(ngModel)]="filter" (ngModelChange)="filterMethod()">
+    </mat-form-field>
+  </div>
   <div style="overflow-y: scroll; height: 470px">
     <div *ngFor="let jobTemplate of filteredJobTemplates">
-      <app-job-template-raw [jobTemplate]="jobTemplate" style="margin: 0" (jobTempleEmitter)="handleEmitter($event)"></app-job-template-raw>
+      <app-job-template-raw [jobTemplate]="jobTemplate" style="margin: 0"
+                            (jobTempleEmitter)="handleEmitter($event)"></app-job-template-raw>
     </div>
   </div>
 </mat-card>

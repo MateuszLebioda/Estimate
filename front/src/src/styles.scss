@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "variable";
 
 html, body {
   height: 100%;
@@ -9,9 +10,12 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.custom-dialog-container {
+ padding: 0;
+}
 
 .data-mat-card {
-  background: rgba(255, 230, 179, 0.5);
+  background: $content-div-raw;
   margin: 20px 20px 0px;
   cursor: pointer !important;
   padding-top: 0px!important;
@@ -63,8 +67,14 @@ body {
 }
 
 .tool-bar-color {
-  background: #283593;
+  background: $toolbar-dark;
   color: white;
+}
+
+.tool-bar-dialog-filter{
+  background: $toolbar-soft;
+  color: white;
+  border-radius: 7px 7px 0 0;
 }
 
 * {
@@ -115,6 +125,10 @@ body {
   border: 0px;
 }
 
+.custom-dialog-container {
+  padding: 0;
+}
+
 .jobTemplateAddSheet{
   min-width: calc(100vw - 258px) !important;
   max-width: calc(100vw - 258px) !important;
@@ -128,11 +142,11 @@ body {
 }
 
 .contentDiv{
-  background: #f1f1e4;
+  background: $content-div-background;
   height: calc(100% - 139px);
   overflow-y: scroll;
   mat-card{
-    background: #f2e0a4;
+    background: $content-div-raw;
   }
 }
 
