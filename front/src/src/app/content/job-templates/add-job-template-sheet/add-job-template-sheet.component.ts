@@ -26,6 +26,8 @@ export class AddJobTemplateSheetComponent implements OnInit {
   @Output()
   JobTemplateEmitter = new EventEmitter<JobTemplate>();
 
+
+
   works = new Array<WorkTemplate>();
   materials = new Array<MaterialTemplate>();
   units: Array<Unit>;

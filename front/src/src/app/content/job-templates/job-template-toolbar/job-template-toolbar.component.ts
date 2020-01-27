@@ -13,6 +13,9 @@ export class JobTemplateToolbarComponent implements OnInit {
   @Output()
   jobTemplateToAdd = new EventEmitter<JobTemplate>();
 
+  @Output()
+  filter = new EventEmitter<string>();
+
   constructor(private addSheet: MatBottomSheet) {
   }
 
@@ -28,5 +31,9 @@ export class JobTemplateToolbarComponent implements OnInit {
         }
       }
     );
+  }
+
+  filterMaterials(changed: string) {
+    this.filter.emit(changed);
   }
 }

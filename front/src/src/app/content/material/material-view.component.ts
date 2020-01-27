@@ -1,13 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MaterialTemplate} from '../../model/template/material-template';
 import {MaterialService} from '../../services/material.service';
-import {DialogClientComponent} from '../clients/dialog-client/dialog-client.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SimpleComponentDialogComponent} from '../../utils/simple-component-dialog/simple-component-dialog.component';
 import {AddMaterialSheetComponent} from './add-material-sheet/add-material-sheet.component';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
-import {ClientSheetComponent} from '../clients/sheet-client/client-sheet.component';
 
 @Component({
   selector: 'app-material-view',
@@ -18,7 +16,12 @@ export class MaterialViewComponent implements OnInit {
 
   materials: Array<MaterialTemplate>;
 
-  constructor(private addSheet: MatBottomSheet, public dialog: MatDialog, private snackBar: MatSnackBar, private materialService: MaterialService) {
+  filterMaterial = '';
+
+  constructor(private addSheet: MatBottomSheet,
+              public dialog: MatDialog,
+              private snackBar: MatSnackBar,
+              private materialService: MaterialService) {
   }
 
   private openSnackBar(material: MaterialTemplate, action: string) {
@@ -55,9 +58,7 @@ export class MaterialViewComponent implements OnInit {
           data: material
         }).afterDismissed().subscribe((m: MaterialTemplate) => {
             if (m !== undefined) {
-              console.log(m);
               this.materialService.put(m).subscribe(http => {
-                console.log(http.body);
                 this.openSnackBar(material, 'Zaktualizowano');
               });
             }
@@ -65,5 +66,19 @@ export class MaterialViewComponent implements OnInit {
         );
       }
     });
+  }
+
+  filter(filter: string) {
+    this.filterMaterial = filter;
+  }
+
+  filterMaterials(): Array<MaterialTemplate> {
+    if (this.materials !== undefined) {
+      if (this.filterMaterial === '') {
+        return this.materials.sort((a, b) => a.name.localeCompare(b.name));
+      }
+      return this.materials.filter
+      (m => m.name.toLocaleLowerCase().includes(this.filterMaterial.toLocaleLowerCase())).sort((a, b) => a.name.localeCompare(b.name));
+    }
   }
 }

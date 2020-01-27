@@ -10,11 +10,15 @@ import {AddWorkSheetComponent} from '../add-work-sheet/add-work-sheet.component'
 })
 export class WorkToolbarComponent implements OnInit {
 
-  constructor(private addSheet: MatBottomSheet) {
-  }
 
   @Output()
   workToAdd = new EventEmitter<WorkTemplate>();
+
+  @Output()
+  filter = new EventEmitter<string>();
+
+  constructor(private addSheet: MatBottomSheet) {
+  }
 
   ngOnInit() {
   }
@@ -26,5 +30,9 @@ export class WorkToolbarComponent implements OnInit {
         }
       }
     );
+  }
+
+  filterMaterials(changed: string) {
+    this.filter.emit(changed);
   }
 }

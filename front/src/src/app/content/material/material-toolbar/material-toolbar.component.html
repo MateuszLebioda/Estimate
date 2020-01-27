@@ -1,3 +1,9 @@
 <mat-toolbar class="tool-bar-spans tool-bar-color">
-  <button mat-button class="tool-bar-spans" (click)="addNewMaterial()">Dodaj materiał</button>
+  <div style="width: 100%; padding-top: 15px">
+    <button mat-button class="tool-bar-spans" (click)="addNewMaterial()">Dodaj materiał</button>
+    <mat-icon style="float: right; padding-top: 5px; margin-right: 15px" class="icon-style expandIcon">search</mat-icon>
+    <mat-form-field class="mat-filed-style" style="float: right; padding-right: 5px; width: 25%">
+      <input ngModel="" (ngModelChange)="filterMaterials($event)" matInput placeholder="Szukaj">
+    </mat-form-field>
+  </div>
 </mat-toolbar>

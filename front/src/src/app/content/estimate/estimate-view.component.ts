@@ -32,6 +32,8 @@ export class EstimateViewComponent implements OnInit {
   clients: Array<Client>;
   units = new Array<Unit>();
 
+  filterEstimate = '';
+
   constructor(private estimateService: EstimateService,
               private materialService: MaterialService,
               private workService: WorkService,
@@ -119,6 +121,20 @@ export class EstimateViewComponent implements OnInit {
             );
           }
         });
+    }
+  }
+
+  filter(filter: string) {
+    this.filterEstimate = filter;
+  }
+
+  filterEstimates(): Array<Estimate> {
+    if (this.estimates !== undefined) {
+      if (this.filterEstimate === '') {
+        return this.estimates.sort((a, b) => a.name.localeCompare(b.name));
+      }
+      return this.estimates.filter
+      (m => m.name.toLocaleLowerCase().includes(this.filterEstimate.toLocaleLowerCase())).sort((a, b) => a.name.localeCompare(b.name));
     }
   }
 }

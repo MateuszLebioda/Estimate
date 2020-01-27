@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {AddJobTemplateSheetComponent} from './add-job-template-sheet/add-job-template-sheet.component';
+import {MaterialTemplate} from '../../model/template/material-template';
 
 @Component({
   selector: 'app-job-templates-view',
@@ -15,6 +16,8 @@ import {AddJobTemplateSheetComponent} from './add-job-template-sheet/add-job-tem
 export class JobTemplatesViewComponent implements OnInit {
 
   jobTemplates = new Array<JobTemplate>();
+
+  filterMaterial = '';
 
   constructor(private jobTemplateService: JobTemplateService,
               public dialog: MatDialog,
@@ -72,5 +75,19 @@ export class JobTemplatesViewComponent implements OnInit {
         this.jobTemplates.push(jobTemplate);
       }
     );
+  }
+
+  filter(filter: string) {
+    this.filterMaterial = filter;
+  }
+
+  filterJobTemplates(): Array<JobTemplate> {
+    if (this.jobTemplates !== undefined) {
+      if (this.filterMaterial === '') {
+        return this.jobTemplates.sort((a, b) => a.name.localeCompare(b.name));
+      }
+      return this.jobTemplates.filter
+      (m => m.name.toLocaleLowerCase().includes(this.filterMaterial.toLocaleLowerCase())).sort((a, b) => a.name.localeCompare(b.name));
+    }
   }
 }
