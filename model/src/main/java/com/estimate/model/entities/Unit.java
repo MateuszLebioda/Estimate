@@ -1,7 +1,6 @@
 package com.estimate.model.entities;
 
 import com.estimate.model.entities.dto.UnitDTO;
-import com.estimate.model.entities.utils.Role;
 import com.estimate.model.entities.utils.SimpleEntity;
 import lombok.Data;
 
@@ -29,7 +28,7 @@ public class Unit implements SimpleEntity<Unit> {
     private String top;
 
     @OneToMany(mappedBy="unit")
-    private List<AbstractMaterial> materials;
+    private List<AbstractMaterialTemplate> materials;
 
     @Column(name = "isActual")
     private Boolean actual;
@@ -63,6 +62,6 @@ public class Unit implements SimpleEntity<Unit> {
     }
 
     public UnitDTO toDTO(){
-        return new UnitDTO(id,bottom,top,actual,user.getId());
+        return new UnitDTO(id,bottom,top);
     }
 }

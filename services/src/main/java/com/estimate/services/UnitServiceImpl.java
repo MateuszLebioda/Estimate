@@ -8,6 +8,7 @@ import com.estimate.model.entities.utils.Role;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -67,10 +68,11 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
+    @Transactional
     public boolean deleteUnit(Unit unit) {
         Optional<Unit> optionalUnit = unitDao.getUnitById(unit.getId());
         if(optionalUnit.isPresent()){
-            if(unit.getMaterials().isEmpty()) {
+            if(optionalUnit.get().getMaterials().isEmpty()) {
                 unitDao.delete(unit);
             }else {
                 unit.setActual(false);

@@ -15,16 +15,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Stateless(name = "abstractMaterialDao")
-public class AbstractDaoImpl extends AbstractDao<AbstractMaterial> implements AbstractMaterialDao {
+public class AbstractDaoImpl extends AbstractDao<AbstractMaterialTemplate> implements AbstractMaterialDao {
     @Override
-    public List<Work> getAllWorks(User user) {
+    public List<WorkTemplate> getAllWorks(User user) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Work> criteriaQuery = criteriaBuilder.createQuery(Work.class);
-        Root<Work> root = criteriaQuery.from(Work.class);
+        CriteriaQuery<WorkTemplate> criteriaQuery = criteriaBuilder.createQuery(WorkTemplate.class);
+        Root<WorkTemplate> root = criteriaQuery.from(WorkTemplate.class);
         criteriaQuery.where(
                 criteriaBuilder.and(
-                        criteriaBuilder.equal(root.get("user"), user),
-                        criteriaBuilder.equal(root.get("actual"), true)
+                        criteriaBuilder.equal(root.get("user"), user)
                 ));
         try {
             return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
@@ -34,14 +33,13 @@ public class AbstractDaoImpl extends AbstractDao<AbstractMaterial> implements Ab
     }
 
     @Override
-    public List<Material> getAllMaterials(User user) {
+    public List<MaterialTemplate> getAllMaterials(User user) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Material> criteriaQuery = criteriaBuilder.createQuery(Material.class);
-        Root<Material> root = criteriaQuery.from(Material.class);
+        CriteriaQuery<MaterialTemplate> criteriaQuery = criteriaBuilder.createQuery(MaterialTemplate.class);
+        Root<MaterialTemplate> root = criteriaQuery.from(MaterialTemplate.class);
         criteriaQuery.where(
                 criteriaBuilder.and(
-                        criteriaBuilder.equal(root.get("user"), user),
-                        criteriaBuilder.equal(root.get("actual"), true)
+                        criteriaBuilder.equal(root.get("user"), user)
                         ));
         try {
             return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
@@ -51,20 +49,20 @@ public class AbstractDaoImpl extends AbstractDao<AbstractMaterial> implements Ab
     }
 
     @Override
-    public Optional<Material> getMaterialById(Long id) {
-        return Optional.of((Material) getAbstractMaterialById(id).get());
+    public Optional<MaterialTemplate> getMaterialById(Long id) {
+        return Optional.of((MaterialTemplate) getAbstractMaterialById(id).get());
     }
 
     @Override
-    public Optional<Work> getWorkById(Long id) {
-        return Optional.of((Work) getAbstractMaterialById(id).get());
+    public Optional<WorkTemplate> getWorkById(Long id) {
+        return Optional.of((WorkTemplate) getAbstractMaterialById(id).get());
     }
 
     @Override
-    public Optional<AbstractMaterial> getAbstractMaterialById(Long id) {
+    public Optional<AbstractMaterialTemplate> getAbstractMaterialById(Long id) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<AbstractMaterial> criteriaQuery = criteriaBuilder.createQuery(AbstractMaterial.class);
-        Root<AbstractMaterial> root = criteriaQuery.from(AbstractMaterial.class);
+        CriteriaQuery<AbstractMaterialTemplate> criteriaQuery = criteriaBuilder.createQuery(AbstractMaterialTemplate.class);
+        Root<AbstractMaterialTemplate> root = criteriaQuery.from(AbstractMaterialTemplate.class);
         criteriaQuery.where(criteriaBuilder.equal(root.get("id"),id));
         try {
             return Optional.of(entityManager.createQuery(criteriaQuery).getSingleResult());

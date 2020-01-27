@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Material} from '../../../model/material';
+import {MaterialTemplate} from '../../../model/template/material-template';
 import {UnitService} from '../../../services/unit.service';
 import {Unit} from '../../../model/unit';
 
@@ -12,18 +12,18 @@ import {Unit} from '../../../model/unit';
 })
 export class AddMaterialSheetComponent implements OnInit {
 
-  material: Material;
+  material: MaterialTemplate;
   materialForm: FormGroup;
   units: Array<Unit>;
 
   constructor(private unitService: UnitService, private bottomSheetRef: MatBottomSheetRef<AddMaterialSheetComponent>,
-              @Inject(MAT_BOTTOM_SHEET_DATA) public data: Material) {
+              @Inject(MAT_BOTTOM_SHEET_DATA) public data: MaterialTemplate) {
 
     bottomSheetRef.disableClose = true;
     if (data !== null) {
       this.material = data;
     } else {
-      this.material = new Material();
+      this.material = new MaterialTemplate();
     }
 
     unitService.getAllUnits().subscribe(units => {

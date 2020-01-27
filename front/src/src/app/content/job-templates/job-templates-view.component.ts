@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {JobTemplateService} from '../../services/job-template.service';
-import {JobTemplate} from '../../model/job-template';
+import {JobTemplate} from '../../model/template/job-template';
 import {SimpleComponentDialogComponent} from '../../utils/simple-component-dialog/simple-component-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -46,7 +46,8 @@ export class JobTemplatesViewComponent implements OnInit {
       }
       if (reload !== undefined && reload === 'edit') {
         this.addSheet.open(AddJobTemplateSheetComponent, {
-          data: jobTemplate
+          data: jobTemplate,
+          panelClass: 'jobTemplateAddSheet'
         }).afterDismissed().subscribe((jobTemplateToEdit: JobTemplate) => {
             if (jobTemplateToEdit !== undefined) {
               this.jobTemplateService.put(jobTemplateToEdit).subscribe(http => {

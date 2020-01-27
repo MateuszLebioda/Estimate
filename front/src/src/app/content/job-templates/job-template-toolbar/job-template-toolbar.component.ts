@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {AddJobTemplateSheetComponent} from '../add-job-template-sheet/add-job-template-sheet.component';
-import {JobTemplate} from '../../../model/job-template';
+import {JobTemplate} from '../../../model/template/job-template';
 
 @Component({
   selector: 'app-job-template-toolbar',

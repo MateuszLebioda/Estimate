@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Work} from '../../../model/work';
+import {WorkTemplate} from '../../../model/template/work-template';
 
 @Component({
   selector: 'app-raw-work',
@@ -8,7 +8,7 @@ import {Work} from '../../../model/work';
 })
 export class RawWorkComponent implements OnInit {
 
-  @Input() work: Work;
+  @Input() work: WorkTemplate;
 
   constructor() { }
 

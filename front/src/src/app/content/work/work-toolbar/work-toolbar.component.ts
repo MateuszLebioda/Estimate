@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
-import {Work} from '../../../model/work';
+import {WorkTemplate} from '../../../model/template/work-template';
 import {AddWorkSheetComponent} from '../add-work-sheet/add-work-sheet.component';
 
 @Component({
@@ -14,13 +14,13 @@ export class WorkToolbarComponent implements OnInit {
   }
 
   @Output()
-  workToAdd = new EventEmitter<Work>();
+  workToAdd = new EventEmitter<WorkTemplate>();
 
   ngOnInit() {
   }
 
   addNewWork() {
-    this.addSheet.open(AddWorkSheetComponent).afterDismissed().subscribe((work: Work) => {
+    this.addSheet.open(AddWorkSheetComponent).afterDismissed().subscribe((work: WorkTemplate) => {
         if (work !== undefined) {
           this.workToAdd.emit(work);
         }

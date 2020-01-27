@@ -1,12 +1,12 @@
 package com.estimate.services;
 
-import com.estimate.model.entities.AbstractMaterial;
-import com.estimate.model.entities.Material;
+import com.estimate.model.entities.AbstractMaterialTemplate;
+import com.estimate.model.entities.MaterialTemplate;
 import com.estimate.model.entities.User;
-import com.estimate.model.entities.Work;
-import com.estimate.model.entities.dto.AbstractMaterialDTO;
-import com.estimate.model.entities.dto.MaterialDTO;
-import com.estimate.model.entities.dto.WorkDTO;
+import com.estimate.model.entities.WorkTemplate;
+import com.estimate.model.entities.dto.AbstractMaterialTemplateDTO;
+import com.estimate.model.entities.dto.MaterialTemplateDTO;
+import com.estimate.model.entities.dto.WorkTemplateDTO;
 
 
 import javax.ejb.Local;
@@ -15,16 +15,16 @@ import java.util.Optional;
 
 @Local
 public interface MaterialService {
-    Long addAbstractMaterial(AbstractMaterial material);
-    Long addAbstractMaterialFromDTO(AbstractMaterialDTO abstractMaterialDTO);
-    boolean deleteAbstractMaterial(AbstractMaterial abstractMaterial);
-    Long updateAbstractMaterial(AbstractMaterialDTO abstractMaterialDTO);
-    List<Material> getAllMaterials(User user);
-    List<Work> getAllWorks(User user);
-    Optional<Material> getMaterialById(Long id);
-    Optional<Work> getWorkById(Long id);
-    boolean isMyMaterial(User user, AbstractMaterial material);
-    Material getMaterialFromDTO(MaterialDTO materialDTO);
-    Work getWorkFromDTO(WorkDTO workDTO);
-    void mergeMaterialWithMaterialDTO(AbstractMaterial material, AbstractMaterialDTO materialDTO);
+    Long addAbstractMaterial(AbstractMaterialTemplate material);
+    Long addAbstractMaterialFromDTO(AbstractMaterialTemplateDTO abstractMaterialTemplateDTO);
+    boolean deleteAbstractMaterial(AbstractMaterialTemplate abstractMaterialTemplate);
+    Long updateAbstractMaterial(AbstractMaterialTemplateDTO abstractMaterialTemplateDTO);
+    List<MaterialTemplate> getAllMaterials(User user);
+    List<WorkTemplate> getAllWorks(User user);
+    Optional<MaterialTemplate> getMaterialById(Long id);
+    Optional<WorkTemplate> getWorkById(Long id);
+    boolean isMyMaterial(User user, AbstractMaterialTemplate material);
+    MaterialTemplate getMaterialFromDTO(MaterialTemplateDTO materialDTO);
+    WorkTemplate getWorkFromDTO(WorkTemplateDTO workDTO);
+    void mergeMaterialWithMaterialDTO(AbstractMaterialTemplate material, AbstractMaterialTemplateDTO materialDTO);
 }

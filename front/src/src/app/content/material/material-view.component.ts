@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Material} from '../../model/material';
+import {MaterialTemplate} from '../../model/template/material-template';
 import {MaterialService} from '../../services/material.service';
 import {DialogClientComponent} from '../clients/dialog-client/dialog-client.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -16,12 +16,12 @@ import {ClientSheetComponent} from '../clients/sheet-client/client-sheet.compone
 })
 export class MaterialViewComponent implements OnInit {
 
-  materials: Array<Material>;
+  materials: Array<MaterialTemplate>;
 
   constructor(private addSheet: MatBottomSheet, public dialog: MatDialog, private snackBar: MatSnackBar, private materialService: MaterialService) {
   }
 
-  private openSnackBar(material: Material, action: string) {
+  private openSnackBar(material: MaterialTemplate, action: string) {
     this.snackBar.open(material.name, action, {
       duration: 2000
     });
@@ -33,14 +33,14 @@ export class MaterialViewComponent implements OnInit {
     });
   }
 
-  addMaterial(material: Material) {
+  addMaterial(material: MaterialTemplate) {
     this.materialService.addMaterial(material).subscribe(materialId => {
       material.id = materialId.body;
       this.materials.push(material);
     });
   }
 
-  onMatCardClickEvent(material: Material) {
+  onMatCardClickEvent(material: MaterialTemplate) {
     this.dialog.open((SimpleComponentDialogComponent), {
       data: material.name
     }).afterClosed().subscribe(reload => {
@@ -53,7 +53,7 @@ export class MaterialViewComponent implements OnInit {
       if (reload !== undefined && reload === 'edit') {
         this.addSheet.open(AddMaterialSheetComponent, {
           data: material
-        }).afterDismissed().subscribe((m: Material) => {
+        }).afterDismissed().subscribe((m: MaterialTemplate) => {
             if (m !== undefined) {
               console.log(m);
               this.materialService.put(m).subscribe(http => {

@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {backEndUrl} from '../utils/static';
 import {KeyCloakService} from '../utils/key-cloak-service';
-import {JobTemplate} from '../model/job-template';
+import {JobTemplate} from '../model/template/job-template';
 
 @Injectable({
   providedIn: 'root'

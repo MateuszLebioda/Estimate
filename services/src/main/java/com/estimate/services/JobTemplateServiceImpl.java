@@ -2,7 +2,6 @@ package com.estimate.services;
 
 import com.estimate.dao.services.dao.JobTemplateAbstractMaterialDao;
 import com.estimate.dao.services.dao.JobTemplateDao;
-import com.estimate.model.entities.AbstractMaterial;
 import com.estimate.model.entities.JobTemplate;
 import com.estimate.model.entities.JobTemplateAbstractMaterial;
 import com.estimate.model.entities.User;
@@ -14,7 +13,6 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Stateless(name = "jobTemplateServiceImpl")
@@ -35,6 +33,7 @@ public class JobTemplateServiceImpl implements JobTemplateService {
     @Override
     public Long addJobTemplateDTO(JobTemplateDTO jobTemplateDTO) {
         JobTemplate jobTemplate = DTOConverter.makeJobTemplateFromDTO(jobTemplateDTO);
+        jobTemplate.setIsTemplate(Boolean.TRUE);
         Long id = jobTemplateDao.save(jobTemplate).getId();
         List<JobTemplateAbstractMaterial> materials =
                 jobTemplateDTO.getMaterials().stream()
@@ -43,7 +42,6 @@ public class JobTemplateServiceImpl implements JobTemplateService {
             material.setJobTemplate(jobTemplate);
             jobTemplateAbstractMaterialDao.merge(material);
         }
-
         return id;
     }
 

@@ -53,6 +53,7 @@ public class UnitController {
         if(user.isPresent()){
             unit.setUser(user.get());
             unit.setCreated(LocalDateTime.now());
+            unit.setActual(Boolean.TRUE);
             return Response.ok(unitService.addUnit(unit)).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();

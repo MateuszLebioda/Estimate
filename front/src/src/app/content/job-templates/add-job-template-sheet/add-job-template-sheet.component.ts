@@ -1,16 +1,16 @@
 import {ChangeDetectorRef, Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
-import {JobTemplate} from '../../../model/job-template';
+import {JobTemplate} from '../../../model/template/job-template';
 import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MaterialService} from '../../../services/material.service';
 import {WorkService} from '../../../services/work.service';
-import {Work} from '../../../model/work';
-import {Material} from '../../../model/material';
+import {WorkTemplate} from '../../../model/template/work-template';
+import {MaterialTemplate} from '../../../model/template/material-template';
 import {MatDialog} from '@angular/material/dialog';
-import {AddAbstractMaterialDialogComponent} from '../add-abstract-material-dialog/add-abstract-material-dialog.component';
-import {AbstractMaterial} from '../../../model/abstract-material';
+import {AddAbstractMaterialDialogComponent} from '../../../utils/add-abstract-material-dialog/add-abstract-material-dialog.component';
+import {AbstractMaterial} from '../../../model/template/abstract-material';
 import {AbstractMaterialType} from '../../../model/abstract-material-type.enum';
-import {JobTemplateMaterial} from '../../../model/job-template-material';
+import {JobTemplateMaterial} from '../../../model/template/job-template-material';
 import {Unit} from '../../../model/unit';
 import {UnitService} from '../../../services/unit.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -26,8 +26,8 @@ export class AddJobTemplateSheetComponent implements OnInit {
   @Output()
   JobTemplateEmitter = new EventEmitter<JobTemplate>();
 
-  works = new Array<Work>();
-  materials = new Array<Material>();
+  works = new Array<WorkTemplate>();
+  materials = new Array<MaterialTemplate>();
   units: Array<Unit>;
 
   jobTemplate = new JobTemplate();
@@ -160,7 +160,6 @@ export class AddJobTemplateSheetComponent implements OnInit {
       items.push(this.creatFormMaterialArray(jobTemplate));
       this.materials = this.materials.filter(m => m.id !== material.id);
     }
-
   }
 
   getMarkedWorks(): FormArray {

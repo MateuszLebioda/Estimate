@@ -19,7 +19,7 @@ public class JobTemplateAbstractMaterial implements SimpleEntity<JobTemplateAbst
 
     @ManyToOne
     @JoinColumn(name = "abstract_material_id")
-    private AbstractMaterial abstractMaterial;
+    private AbstractMaterialTemplate abstractMaterialTemplate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "job_temple")
@@ -31,7 +31,7 @@ public class JobTemplateAbstractMaterial implements SimpleEntity<JobTemplateAbst
     public JobTemplateAbstractMaterialDTO toDTO() {
         JobTemplateAbstractMaterialDTO jobTemplateAbstractMaterialDTO = new JobTemplateAbstractMaterialDTO();
 
-        jobTemplateAbstractMaterialDTO.setMaterial(this.abstractMaterial instanceof Work ? ((Work) this.abstractMaterial).toDTO() : ((Material) this.abstractMaterial).toDTO());
+        jobTemplateAbstractMaterialDTO.setMaterial(this.abstractMaterialTemplate instanceof WorkTemplate ? ((WorkTemplate) this.abstractMaterialTemplate).toDTO() : ((MaterialTemplate) this.abstractMaterialTemplate).toDTO());
         jobTemplateAbstractMaterialDTO.setValue(this.value);
 
         return jobTemplateAbstractMaterialDTO;

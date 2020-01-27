@@ -4,6 +4,7 @@ import com.estimate.dao.services.dao.AbstractDao;
 import com.estimate.dao.services.dao.JobTemplateDao;
 import com.estimate.model.entities.JobTemplate;
 import com.estimate.model.entities.User;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
@@ -23,7 +24,9 @@ public class JobTemplateDaoImpl extends AbstractDao<JobTemplate> implements JobT
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<JobTemplate> criteriaQuery = criteriaBuilder.createQuery(JobTemplate.class);
         Root<JobTemplate> root = criteriaQuery.from(JobTemplate.class);
-        criteriaQuery.where(criteriaBuilder.equal(root.get("user"),user));
+        criteriaQuery.where(criteriaBuilder.and(
+                criteriaBuilder.equal(root.get("user"),user)),
+                criteriaBuilder.equal(root.get("isTemplate"), Boolean.TRUE));
         try {
             return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
         }catch (NoResultException e){

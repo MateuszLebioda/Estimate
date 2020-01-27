@@ -6,6 +6,8 @@ import lombok.Data;
 import javax.persistence.*;
 
 
+import java.util.List;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Data
@@ -41,6 +43,9 @@ public class Client implements SimpleEntity<Client> {
 
     @Column(name = "isActual")
     private Boolean actual;
+
+    @OneToMany(mappedBy = "client")
+    private List<Estimate> estimate;
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable=false)

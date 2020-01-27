@@ -34,7 +34,6 @@ export class UnitSheetComponentComponent implements OnInit {
   saveClient() {
     this.unit.bottom = this.unitForm.get('bottom').value;
     this.unit.top = this.unitForm.get('top').value;
-    this.unit.actual = true;
     this.bottomSheetRef.dismiss(this.unit);
   }
 

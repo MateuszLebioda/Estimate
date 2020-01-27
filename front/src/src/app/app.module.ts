@@ -31,9 +31,21 @@ import {JobTemplatesViewComponent} from './content/job-templates/job-templates-v
 import {JobTemplateToolbarComponent} from './content/job-templates/job-template-toolbar/job-template-toolbar.component';
 import {AddJobTemplateSheetComponent} from './content/job-templates/add-job-template-sheet/add-job-template-sheet.component';
 // tslint:disable-next-line:max-line-length
-import {AddAbstractMaterialDialogComponent} from './content/job-templates/add-abstract-material-dialog/add-abstract-material-dialog.component';
+import {AddAbstractMaterialDialogComponent} from './utils/add-abstract-material-dialog/add-abstract-material-dialog.component';
 import { JobTemplateRawComponent } from './content/job-templates/job-template-raw/job-template-raw.component';
+// tslint:disable-next-line:max-line-length
 import { JobTemplateAbstractMaterialRawComponent } from './content/job-templates/job-template-abstract-material-raw/job-template-abstract-material-raw.component';
+import { EstimateToolBarComponent } from './content/estimate/estimate-tool-bar/estimate-tool-bar.component';
+import { AddNewEstimateSheetComponent } from './content/estimate/add-new-estimate-sheet/add-new-estimate-sheet.component';
+import { AddJobTemplateDialogComponentComponent } from './utils/add-job-template-dialog-component/add-job-template-dialog-component.component';
+import { JobTemplateEstimateFormViewComponent } from './content/estimate/add-new-estimate-sheet/job-template-estimate-form-view/job-template-estimate-form-view.component';
+import { MaterialFormViewComponentComponent } from './content/estimate/add-new-estimate-sheet/job-template-estimate-form-view/material-form-view-component/material-form-view-component.component';
+import { MaterialFormEditableComponentComponent } from './content/estimate/add-new-estimate-sheet/job-template-estimate-form-view/material-form-editable-component/material-form-editable-component.component';
+import { EstimateRawComponent } from './content/estimate/estimate-raw/estimate-raw.component';
+import { JobTemplatesEstimateRawComponent } from './content/estimate/estimate-raw/job-templates-estimate-raw/job-templates-estimate-raw.component';
+import { AbstractMaterialsEstimateRawComponent } from './content/estimate/estimate-raw/abstract-materials-estimate-raw/abstract-materials-estimate-raw.component';
+import {AbstractMaterialEstimateRawComponent} from "./content/estimate/estimate-raw/abstract-materials-estimate-raw/abstract-material-estimate-raw/abstract-material-estimate-raw.component";
+import { JobTemplateEstimateRawComponent } from './content/estimate/estimate-raw/job-templates-estimate-raw/job-template-estimate-raw/job-template-estimate-raw.component';
 
 const keycloakService = new KeycloakService();
 
@@ -64,7 +76,9 @@ const keycloakService = new KeycloakService();
     SimpleComponentDialogComponent,
     AddWorkSheetComponent,
     AddJobTemplateSheetComponent,
-    AddAbstractMaterialDialogComponent],
+    AddAbstractMaterialDialogComponent,
+    AddNewEstimateSheetComponent,
+    AddJobTemplateDialogComponentComponent],
   declarations: [AppComponent,
     ContentComponent,
     MenuComponent,
@@ -91,7 +105,18 @@ const keycloakService = new KeycloakService();
     AddJobTemplateSheetComponent,
     AddAbstractMaterialDialogComponent,
     JobTemplateRawComponent,
-    JobTemplateAbstractMaterialRawComponent]
+    JobTemplateAbstractMaterialRawComponent,
+    EstimateToolBarComponent,
+    AddNewEstimateSheetComponent,
+    AddJobTemplateDialogComponentComponent,
+    JobTemplateEstimateFormViewComponent,
+    MaterialFormViewComponentComponent,
+    MaterialFormEditableComponentComponent,
+    EstimateRawComponent,
+    JobTemplatesEstimateRawComponent,
+    AbstractMaterialEstimateRawComponent,
+    AbstractMaterialsEstimateRawComponent,
+    JobTemplateEstimateRawComponent]
 })
 
 export class AppModule {

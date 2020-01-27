@@ -1,0 +1,26 @@
+<div>
+  <form [formGroup]="jobTemplateFormGroup">
+    <ng-container *ngIf="opened && getMaterialFormArray().length > 0">
+      <div style="padding-bottom: 20px">
+        <div style="width: calc(100% - 85px); float: right;">
+          <mat-card-title style="font-size: 16px;font-weight: bold">Materiały</mat-card-title>
+        </div>
+        <ng-container *ngFor="let element of getMaterialFormArray().controls">
+          <app-material-form-editable-component style="width: calc(100% - 85px); float: right"  [calcValue]="getCalcValue()" [units]="units" [materialFormControl]="element" (deleteEmitter)="deleteMaterial($event)"></app-material-form-editable-component>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="opened && getWorkFormArray().length > 0">
+      <div style="padding-bottom: 20px">
+        <div style="width: calc(100% - 85px); float: right;">
+          <mat-card-title style="font-size: 16px;font-weight: bold">Prace</mat-card-title>
+        </div>
+        <ng-container *ngFor="let element of getWorkFormArray().controls">
+          <app-material-form-editable-component style="width: calc(100% - 85px); float: right" [calcValue]="getCalcValue()" [units]="units" [materialFormControl]="element" (deleteEmitter)="deleteWork($event)"></app-material-form-editable-component>
+        </ng-container>
+      </div>
+    </ng-container>
+
+  </form>
+</div>
