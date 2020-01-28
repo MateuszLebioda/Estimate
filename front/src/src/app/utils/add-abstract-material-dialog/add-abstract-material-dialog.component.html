@@ -5,11 +5,18 @@
       <mat-icon class="example-icon" aria-hidden="false">close</mat-icon>
     </button>
   </mat-card-header>
-    <mat-form-field style="width: 95%; margin-left: 20px; margin-right:20px;">
-      <input matInput placeholder="Filtruj" [(ngModel)]="filter" (ngModelChange)="filterMethod()">
-    </mat-form-field>
+  <div>
+      <mat-form-field [ngStyle]="generateStyle()" style="margin-left: 20px; margin-right:20px;">
+        <input matInput placeholder="Filtruj" [(ngModel)]="filter" (ngModelChange)="filterMethod()">
+      </mat-form-field>
+      <button mat-button *ngIf="emptyService" style="float: right; width:175px"
+              (click)="returnEmptyMaterial()">
+        <mat-icon class="icon-style expandIcon">add</mat-icon>Dodaj pusty
+      </button>
+  </div>
   <div style="overflow-y: scroll; height: 470px">
-    <mat-card class="example-card data-mat-card" *ngFor="let material of filteredMaterials" (click)="emmitMaterial(material)">
+    <mat-card class="example-card data-mat-card" *ngFor="let material of filteredMaterials"
+              (click)="emmitMaterial(material)">
       <div class="card-container" *ngIf="material">
         <mat-form-field style="width: 100%">
           <input matInput readonly style="border: 0px">

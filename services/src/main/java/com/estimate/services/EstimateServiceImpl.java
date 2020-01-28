@@ -1,12 +1,10 @@
 package com.estimate.services;
 
 import com.estimate.dao.services.dao.AbstractMaterialEstimateDao;
+import com.estimate.dao.services.dao.ClientDao;
 import com.estimate.dao.services.dao.EstimateDao;
 import com.estimate.dao.services.dao.JobTemplateEstimateDao;
-import com.estimate.model.entities.AbstractMaterialEstimate;
-import com.estimate.model.entities.Estimate;
-import com.estimate.model.entities.JobTemplateEstimate;
-import com.estimate.model.entities.User;
+import com.estimate.model.entities.*;
 import com.estimate.model.entities.dto.EstimateDTO;
 
 import javax.ejb.EJB;
@@ -35,6 +33,9 @@ public class EstimateServiceImpl implements EstimateService {
     @EJB
     private JobTemplateEstimateDao jobTemplateEstimateDao;
 
+    @EJB
+    private ClientDao clientDao;
+
     @Override
     @Transactional
     public EstimateDTO saveEstimate(EstimateDTO estimateDTO) {
@@ -62,6 +63,13 @@ public class EstimateServiceImpl implements EstimateService {
         deleteMaterials(estimateDTO.getId());
         deleteJobTemplates(estimateDTO.getId());
         return updateEstimate(estimateDTO);
+    }
+
+    @Override
+    @Transactional
+    public List<EstimateDTO> getAllEstimateByClientId(Long id) {
+        Client client = clientDao.getClientById(id).get();
+        return estimateDao.getEstimateByClientId(client, user.get()).stream().map(Estimate::toDTO).collect(Collectors.toList());
     }
 
     @Transactional

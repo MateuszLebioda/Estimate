@@ -52,7 +52,7 @@ public class JobTemplateEstimate implements SimpleEntity<JobTemplate> {
                 .unit(this.unit.toDTO())
                 .value(this.value)
                 .sumPrice(this.sumPrice)
-                .materials(materials.stream().map(materials -> materials instanceof WorkEstimate? ((WorkEstimate)materials).toDTO():((MaterialEstimate)materials).toDTO()).collect(Collectors.toList()))
+                .materials(materials.stream().map(materials -> materials instanceof ServiceEstimate ? ((ServiceEstimate)materials).toDTO():((MaterialEstimate)materials).toDTO()).collect(Collectors.toList()))
                 .build();
     }
 

@@ -6,7 +6,7 @@ import {Estimate} from '../model/estimate';
 import {JobTemplate} from '../model/template/job-template';
 import {AbstractMaterialType} from '../model/abstract-material-type.enum';
 import {MaterialEstimate} from '../model/material-estimate';
-import {WorkEstimate} from '../model/work-estimate';
+import {ServiceEstimate} from '../model/service-estimate';
 import {AbstractEstimateMaterial} from '../model/abstract-estimate-material';
 
 @Injectable({
@@ -71,24 +71,24 @@ export class FormService {
     return materials;
   }
 
-  createWorkFromMaterialEstimateFormGroup(form: FormGroup): WorkEstimate {
-    const work = new WorkEstimate();
-    work.id = 0;
-    work.unit = form.get('unit').value;
-    work.name = form.get('name').value;
-    work.price = form.get('price').value;
-    work.value = form.get('value').value;
-    work.sumPrice = form.get('sumPrice').value;
-    work.sumValue = form.get('sumValue').value;
-    return work;
+  createServiceFromMaterialEstimateFormGroup(form: FormGroup): ServiceEstimate {
+    const serviceEstimate = new ServiceEstimate();
+    serviceEstimate.id = 0;
+    serviceEstimate.unit = form.get('unit').value;
+    serviceEstimate.name = form.get('name').value;
+    serviceEstimate.price = form.get('price').value;
+    serviceEstimate.value = form.get('value').value;
+    serviceEstimate.sumPrice = form.get('sumPrice').value;
+    serviceEstimate.sumValue = form.get('sumValue').value;
+    return serviceEstimate;
   }
 
-  createWorEstimateArrayFromEstimateFormGroup(form: FormGroup): Array<WorkEstimate> {
-    const works = new Array<WorkEstimate>();
-    for (const workForm of (form.get('works') as FormArray).controls) {
-      works.push(this.createWorkFromMaterialEstimateFormGroup(workForm as FormGroup));
+  createServiceEstimateArrayFromEstimateFormGroup(form: FormGroup): Array<ServiceEstimate> {
+    const services = new Array<ServiceEstimate>();
+    for (const serviceForm of (form.get('services') as FormArray).controls) {
+      services.push(this.createServiceFromMaterialEstimateFormGroup(serviceForm as FormGroup));
     }
-    return works;
+    return services;
   }
 
   createJobTemplateFormGroup(jobTemplate: JobTemplate): FormGroup {
@@ -98,7 +98,7 @@ export class FormService {
       unit: [jobTemplate.unit, [Validators.required]],
       value: [0, Validators.required],
       materials: this.formBuilder.array([]),
-      works: this.formBuilder.array([]),
+      services: this.formBuilder.array([]),
       sumPrice: [0]
     });
   }
@@ -110,7 +110,7 @@ export class FormService {
       unit: [jobTemplate.unit, [Validators.required]],
       value: [jobTemplate.value, Validators.required],
       materials: this.createMaterialEstimateFormArray(jobTemplate.materials.filter(jt => jt.type === AbstractMaterialType.MATERIAL)),
-      works: this.createMaterialEstimateFormArray(jobTemplate.materials.filter(jt => jt.type === AbstractMaterialType.WORK)),
+      services: this.createMaterialEstimateFormArray(jobTemplate.materials.filter(jt => jt.type === AbstractMaterialType.SERVICE)),
       sumPrice: [jobTemplate.sumPrice]
     });
   }
@@ -132,7 +132,7 @@ export class FormService {
     jobTemplateEstimate.sumPrice = form.get('sumPrice').value;
     jobTemplateEstimate.setMaterials(
       this.createMaterialEstimateArrayFromEstimateFormGroup(form),
-      this.createWorEstimateArrayFromEstimateFormGroup(form));
+      this.createServiceEstimateArrayFromEstimateFormGroup(form));
     return jobTemplateEstimate;
   }
 
@@ -152,8 +152,8 @@ export class FormService {
       (formControl.get('materials') as FormArray).push(this.createMaterialEstimateFormGroup(material.material, material.value));
     }
 
-    for (const material of jobTemplate.materials.filter(m => m.material.type === AbstractMaterialType.WORK)) {
-      (formControl.get('works') as FormArray).push(this.createMaterialEstimateFormGroup(material.material, material.value));
+    for (const material of jobTemplate.materials.filter(m => m.material.type === AbstractMaterialType.SERVICE)) {
+      (formControl.get('services') as FormArray).push(this.createMaterialEstimateFormGroup(material.material, material.value));
     }
     return formControl;
   }
@@ -166,9 +166,9 @@ export class FormService {
       materials:
         estimate.materials ?
           this.createMaterialEstimateFormArray(estimate.materials) : this.formBuilder.array([]),
-      works:
-        estimate.works ?
-          this.createMaterialEstimateFormArray(estimate.works) : this.formBuilder.array([]),
+      services:
+        estimate.servicesEstimate ?
+          this.createMaterialEstimateFormArray(estimate.servicesEstimate) : this.formBuilder.array([]),
       jobTemplates:
         estimate.jobTemplates ?
           this.createJobTemplateEstimateFormArray(estimate.jobTemplates) : this.formBuilder.array([]),
@@ -181,7 +181,7 @@ export class FormService {
     estimate.id = form.get('id').value;
     estimate.name = form.get('name').value;
     estimate.materials = this.createMaterialEstimateArrayFromEstimateFormGroup(form);
-    estimate.works = this.createWorEstimateArrayFromEstimateFormGroup(form);
+    estimate.servicesEstimate = this.createServiceEstimateArrayFromEstimateFormGroup(form);
     estimate.jobTemplates = this.createJobTemplateArrayEstimateFromJobTemplateEstimateFormGroup(form);
     estimate.client = form.get('client').value === null ? null : form.get('client').value;
     estimate.sumPrice = form.get('sumPrice').value;

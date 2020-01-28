@@ -9,11 +9,12 @@ import {
 import {FormArray, FormGroup} from '@angular/forms';
 import {Unit} from '../../../../model/unit';
 import {MaterialTemplate} from '../../../../model/template/material-template';
-import {WorkTemplate} from '../../../../model/template/work-template';
+import {ServiceTemplate} from '../../../../model/template/service-template';
 import {AddAbstractMaterialDialogComponent} from '../../../../utils/add-abstract-material-dialog/add-abstract-material-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {AbstractMaterial} from '../../../../model/template/abstract-material';
 import {FormService} from '../../../../services/form-service.service';
+import {AbstractMaterialType} from '../../../../model/abstract-material-type.enum';
 
 @Component({
   selector: 'app-job-template-estimate-form-view',
@@ -26,7 +27,7 @@ export class JobTemplateEstimateFormViewComponent implements OnInit {
   allMaterials = new Array<MaterialTemplate>();
 
   @Input()
-  allWorks = new Array<WorkTemplate>();
+  allServices = new Array<ServiceTemplate>();
 
   @Input()
   jobTemplateFormControl: FormGroup;
@@ -51,7 +52,7 @@ export class JobTemplateEstimateFormViewComponent implements OnInit {
       this.calcSumPrice();
     });
 
-    this.jobTemplateFormControl.get('works').valueChanges.subscribe(() => {
+    this.jobTemplateFormControl.get('services').valueChanges.subscribe(() => {
       this.calcSumPrice();
     });
   }
@@ -75,13 +76,13 @@ export class JobTemplateEstimateFormViewComponent implements OnInit {
     return (this.jobTemplateFormControl.get('materials') as FormArray);
   }
 
-  getWorkFormArray(): FormArray {
-    return (this.jobTemplateFormControl.get('works') as FormArray);
+  getServiceFormArray(): FormArray {
+    return (this.jobTemplateFormControl.get('services') as FormArray);
   }
 
   addMaterial() {
     const dialogRef = this.dialog.open(AddAbstractMaterialDialogComponent, {
-      data: this.getAvailableMaterials(),
+      data: {materials: this.getAvailableMaterials(), returnEmptyService: true,  returnType: AbstractMaterialType.MATERIAL},
       width: '80%',
       height: '600px',
       disableClose: true
@@ -98,15 +99,15 @@ export class JobTemplateEstimateFormViewComponent implements OnInit {
     return this.formService.createMaterialEstimateFormGroup(material, value);
   }
 
-  addWork() {
+  addService() {
     const dialogRef = this.dialog.open(AddAbstractMaterialDialogComponent, {
-      data: this.getAvailableWorks(),
+      data: {materials: this.getAvailableServices(), returnEmptyService: true,  returnType: AbstractMaterialType.SERVICE},
       width: '80%',
       height: '600px',
       disableClose: true
     });
     dialogRef.componentInstance.emmmiter.subscribe(material => {
-      (this.jobTemplateFormControl.get('works') as FormArray).push(this.createMaterialFormGroup(material, 1));
+      (this.jobTemplateFormControl.get('services') as FormArray).push(this.createMaterialFormGroup(material, 1));
       this.cd.markForCheck();
     });
     dialogRef.afterClosed().subscribe();
@@ -118,8 +119,8 @@ export class JobTemplateEstimateFormViewComponent implements OnInit {
     for (const material of this.getMaterialFormArray().controls) {
       sum = sum + Number(material.get('sumPrice').value);
     }
-    for (const work of this.getWorkFormArray().controls) {
-      sum = sum + Number(work.get('sumPrice').value);
+    for (const control of this.getServiceFormArray().controls) {
+      sum = sum + Number(control.get('sumPrice').value);
     }
 
     this.jobTemplateFormControl.get('sumPrice').setValue(sum.toFixed(2));
@@ -127,14 +128,14 @@ export class JobTemplateEstimateFormViewComponent implements OnInit {
 
   getAvailableAbstractMaterials(abstractMaterials, formArray: FormArray): Array<AbstractMaterial> {
     const availableMaterials = new Array<AbstractMaterial>()
-    for(let material of abstractMaterials){
+    for (const material of abstractMaterials) {
       let isChosen = false;
-      for(let materialChosen of formArray.controls){
-        if(material.name === materialChosen.get('name').value){
+      for (const materialChosen of formArray.controls) {
+        if (material.name === materialChosen.get('name').value) {
           isChosen = true;
         }
       }
-      if(!isChosen){
+      if (!isChosen) {
         availableMaterials.push(material)
       }
     }
@@ -146,8 +147,8 @@ export class JobTemplateEstimateFormViewComponent implements OnInit {
     return this.getAvailableAbstractMaterials(this.allMaterials, this.getMaterialFormArray())
   }
 
-  getAvailableWorks(): Array<AbstractMaterial> {
-    return this.getAvailableAbstractMaterials(this.allWorks, this.getWorkFormArray())
+  getAvailableServices(): Array<AbstractMaterial> {
+    return this.getAvailableAbstractMaterials(this.allServices, this.getServiceFormArray())
   }
 
 }

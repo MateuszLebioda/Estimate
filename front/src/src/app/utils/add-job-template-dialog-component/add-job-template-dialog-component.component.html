@@ -6,9 +6,15 @@
         <mat-icon class="example-icon" aria-hidden="false">close</mat-icon>
       </button>
     </mat-card-header>
-    <mat-form-field class="white-placeholder" style="width: 95%; margin-left: 20px; margin-right:20px;">
-      <input matInput placeholder="Filtruj" [(ngModel)]="filter" (ngModelChange)="filterMethod()">
-    </mat-form-field>
+    <div>
+      <mat-form-field  style="width: calc(100% - 225px); margin-left: 20px; margin-right:20px;">
+        <input matInput placeholder="Filtruj" [(ngModel)]="filter" (ngModelChange)="filterMethod()">
+      </mat-form-field>
+      <button mat-button style="float: right; width:175px"
+              (click)="returnJobTemplate()">
+        <mat-icon class="icon-style expandIcon">add</mat-icon>Dodaj pusty
+      </button>
+    </div>
   </div>
   <div style="overflow-y: scroll; height: 470px">
     <div *ngFor="let jobTemplate of filteredJobTemplates">

@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {JobTemplateEstimate} from "../../../../../model/job-template-estimate";
-import {materialTitle, workTitle} from "../../../../../utils/static";
-import {WorkEstimate} from "../../../../../model/work-estimate";
-import {AbstractMaterialType} from "../../../../../model/abstract-material-type.enum";
-import {MaterialEstimate} from "../../../../../model/material-estimate";
+import {JobTemplateEstimate} from '../../../../../model/job-template-estimate';
+import {materialTitle, serviceTitle} from '../../../../../utils/static';
+import {ServiceEstimate} from '../../../../../model/service-estimate';
+import {AbstractMaterialType} from '../../../../../model/abstract-material-type.enum';
+import {MaterialEstimate} from '../../../../../model/material-estimate';
 
 @Component({
   selector: 'app-job-template-estimate-raw',
@@ -16,7 +16,7 @@ export class JobTemplateEstimateRawComponent implements OnInit {
   jobTemplateEstimate: JobTemplateEstimate;
 
   expanded = true;
-  workTitle = workTitle;
+  serviceTitle = serviceTitle;
   materialsTitle = materialTitle;
 
   constructor() { }
@@ -28,8 +28,8 @@ export class JobTemplateEstimateRawComponent implements OnInit {
     this.expanded = !this.expanded;
   }
 
-  getWorks(): Array<WorkEstimate> {
-    return (this.jobTemplateEstimate.materials.filter(w => w.type === AbstractMaterialType.WORK) as Array<WorkEstimate>);
+  getServices(): Array<ServiceEstimate> {
+    return (this.jobTemplateEstimate.materials.filter(w => w.type === AbstractMaterialType.SERVICE) as Array<ServiceEstimate>);
   }
 
   getMaterials(): Array<MaterialEstimate> {

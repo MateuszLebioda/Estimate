@@ -11,4 +11,5 @@ public interface EstimateService {
     List<EstimateDTO> getAllEstimates();
     Boolean deleteEstimate(Long id);
     EstimateDTO update(EstimateDTO estimateDTO);
+    List<EstimateDTO> getAllEstimateByClientId(Long id);
 }

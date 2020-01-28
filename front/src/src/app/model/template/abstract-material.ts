@@ -7,4 +7,11 @@ export class AbstractMaterial {
   unit: Unit;
   price: number;
   type: AbstractMaterialType;
+
+  constructor() {
+    this.id = 0;
+    this.name = '';
+    this.unit = new Unit();
+    this.price = 0;
+  }
 }

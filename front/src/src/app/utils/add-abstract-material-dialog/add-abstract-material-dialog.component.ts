@@ -1,6 +1,9 @@
 import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {AbstractMaterial} from '../../model/template/abstract-material';
+import {AbstractMaterialType} from '../../model/abstract-material-type.enum';
+import {ServiceTemplate} from '../../model/template/service-template';
+import {MaterialTemplate} from '../../model/template/material-template';
 
 
 @Component({
@@ -12,14 +15,25 @@ export class AddAbstractMaterialDialogComponent implements OnInit {
 
   materials = new Array<AbstractMaterial>();
   filteredMaterials = new Array<AbstractMaterial>();
+  emptyService = false;
+  emptyClass = null;
 
   emmmiter = new EventEmitter<AbstractMaterial>();
 
   filter = '';
 
   constructor(public dialogRef: MatDialogRef<AddAbstractMaterialDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Array<AbstractMaterial>) {
-    this.materials = data;
+              @Inject(MAT_DIALOG_DATA) public data:
+                {
+                  materials: Array<AbstractMaterial>,
+                  returnEmptyService: boolean;
+                  returnType: AbstractMaterialType
+                }) {
+    this.materials = data.materials;
+    if (data.returnEmptyService === true) {
+      this.emptyService = data.returnEmptyService;
+      this.emptyClass = data.returnType;
+    }
     for (const material of this.materials) {
       this.filteredMaterials.push(material);
     }
@@ -40,5 +54,15 @@ export class AddAbstractMaterialDialogComponent implements OnInit {
 
   close() {
     this.dialogRef.close();
+  }
+
+  generateStyle() {
+    return {
+      width: !this.emptyService ? 'calc(100% - 50px)' : 'calc(100% - 225px)',
+    };
+  }
+
+  returnEmptyMaterial() {
+    this.emmmiter.emit(this.emptyClass === AbstractMaterialType.SERVICE ? new ServiceTemplate() : new MaterialTemplate());
   }
 }

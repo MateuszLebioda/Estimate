@@ -39,6 +39,16 @@ public class EstimateControllers {
         }
     }
 
+    @GET
+    @Path("/getByClientId/{id}")
+    public  Response getAllEstimatesByClient(@PathParam(value = "id")Long id){
+        if(user.isPresent()){
+            return Response.ok(estimateService.getAllEstimateByClientId(id)).build();
+        }else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+
     @DELETE
     @Path("/delete/{id}")
     public Response delete(@PathParam(value = "id")Long id){

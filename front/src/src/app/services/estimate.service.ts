@@ -28,4 +28,9 @@ export class EstimateService {
   public update(estimate: Estimate): Observable<HttpResponse<Estimate>> {
     return this.http.put<Estimate>(backEndUrl + '/estimate/edit', estimate, {observe: 'response'});
   }
+
+  public getAllByClient(id: number): Observable<HttpResponse<Array<Estimate>>> {
+    return this.http.get<Array<Estimate>>(backEndUrl + '/getByClientId/' + id, {observe: 'response'});
+  }
+
 }

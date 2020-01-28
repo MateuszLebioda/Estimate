@@ -4,7 +4,7 @@ import com.estimate.dao.services.dao.AbstractMaterialDao;
 import com.estimate.model.entities.*;
 import com.estimate.model.entities.dto.AbstractMaterialTemplateDTO;
 import com.estimate.model.entities.dto.MaterialTemplateDTO;
-import com.estimate.model.entities.dto.WorkTemplateDTO;
+import com.estimate.model.entities.dto.ServiceTempleDTO;
 import com.estimate.model.entities.utils.Role;
 
 import javax.ejb.EJB;
@@ -28,13 +28,8 @@ public class MaterialServiceImpl implements MaterialService {
     private MaterialService materialService;
 
     @Override
-    public Long addAbstractMaterial(AbstractMaterialTemplate material) {
-        return abstractMaterialDao.save(material).getId();
-    }
-
-    @Override
-    public boolean deleteAbstractMaterial(AbstractMaterialTemplate abstractMaterialTemplate) {
-        Optional<AbstractMaterialTemplate> optionalAbstractMaterial = abstractMaterialDao.getAbstractMaterialById(abstractMaterialTemplate.getId());
+    public boolean deleteAbstractMaterial(Long id) {
+        Optional<AbstractMaterialTemplate> optionalAbstractMaterial = abstractMaterialDao.getAbstractMaterialById(id);
         if (optionalAbstractMaterial.isPresent()) {
             abstractMaterialDao.delete(optionalAbstractMaterial.get());
             return true;
@@ -46,8 +41,8 @@ public class MaterialServiceImpl implements MaterialService {
     @Transactional
     public Long updateAbstractMaterial(AbstractMaterialTemplateDTO abstractMaterialTemplateDTO) {
         AbstractMaterialTemplate abstractMaterial;
-        if(abstractMaterialTemplateDTO.getType()==Role.WORK){
-            abstractMaterial = materialService.getWorkById(abstractMaterialTemplateDTO.getId()).get();
+        if(abstractMaterialTemplateDTO.getType()==Role.SERVICE){
+            abstractMaterial = materialService.getServiceById(abstractMaterialTemplateDTO.getId()).get();
         }else{
             abstractMaterial = materialService.getMaterialById(abstractMaterialTemplateDTO.getId()).get();
         }
@@ -59,9 +54,9 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     public Long addAbstractMaterialFromDTO(AbstractMaterialTemplateDTO abstractMaterialTemplateDTO) {
-        if (abstractMaterialTemplateDTO instanceof WorkTemplateDTO) {
-            WorkTemplate workTemplate = getWorkFromDTO((WorkTemplateDTO) abstractMaterialTemplateDTO);
-            return abstractMaterialDao.save(workTemplate).getId();
+        if (abstractMaterialTemplateDTO instanceof ServiceTempleDTO) {
+            ServiceTemplate serviceTemplate = getServiceFromDTO((ServiceTempleDTO) abstractMaterialTemplateDTO);
+            return abstractMaterialDao.save(serviceTemplate).getId();
         } else {
             MaterialTemplate material = getMaterialFromDTO((MaterialTemplateDTO) abstractMaterialTemplateDTO);
             return abstractMaterialDao.save(material).getId();
@@ -73,8 +68,8 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    public List<WorkTemplate> getAllWorks(User user) {
-        return abstractMaterialDao.getAllWorks(user);
+    public List<ServiceTemplate> getAllServices(User user) {
+        return abstractMaterialDao.getAllServices(user);
     }
 
     @Override
@@ -96,10 +91,10 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    public WorkTemplate getWorkFromDTO(WorkTemplateDTO workDTO) {
-        WorkTemplate workTemplate = new WorkTemplate();
-        mergeMaterialWithMaterialDTO(workTemplate, workDTO);
-        return workTemplate;
+    public ServiceTemplate getServiceFromDTO(ServiceTempleDTO serviceTempleDTO) {
+        ServiceTemplate serviceTemplate = new ServiceTemplate();
+        mergeMaterialWithMaterialDTO(serviceTemplate, serviceTempleDTO);
+        return serviceTemplate;
     }
 
     @Override
@@ -112,8 +107,8 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    public Optional<WorkTemplate> getWorkById(Long id) {
-        return abstractMaterialDao.getWorkById(id);
+    public Optional<ServiceTemplate> getServiceById(Long id) {
+        return abstractMaterialDao.getServiceById(id);
     }
 
 }

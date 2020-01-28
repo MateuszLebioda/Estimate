@@ -44,5 +44,7 @@ export class AddJobTemplateDialogComponentComponent implements OnInit {
   }
 
 
-
+  returnJobTemplate() {
+    this.emitter.emit(new JobTemplate());
+  }
 }

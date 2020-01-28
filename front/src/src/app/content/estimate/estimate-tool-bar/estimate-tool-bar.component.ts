@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {AddNewEstimateSheetComponent} from '../add-new-estimate-sheet/add-new-estimate-sheet.component';
 import {JobTemplate} from '../../../model/template/job-template';
-import {WorkTemplate} from '../../../model/template/work-template';
+import {ServiceTemplate} from '../../../model/template/service-template';
 import {Unit} from '../../../model/unit';
 import {Client} from '../../../model/client';
 import {Estimate} from '../../../model/estimate';
@@ -24,10 +24,10 @@ export class EstimateToolBarComponent implements OnInit {
   jobTemplates: Array<JobTemplate>;
 
   @Input()
-  workTemplates: Array<WorkTemplate>;
+  serviceTemplates: Array<ServiceTemplate>;
 
   @Input()
-  materialTemplates: Array<WorkTemplate>;
+  materialTemplates: Array<ServiceTemplate>;
 
   @Input()
   units: Array<Unit>;
@@ -46,7 +46,7 @@ export class EstimateToolBarComponent implements OnInit {
       {
         data: {
           jobTemplates: this.jobTemplates,
-          workTemplates: this.workTemplates,
+          serviceTemplates: this.serviceTemplates,
           materialTemplates: this.materialTemplates,
           units: this.units,
           clients: this.clients,

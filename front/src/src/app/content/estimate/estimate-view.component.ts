@@ -1,22 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {EstimateService} from '../../services/estimate.service';
-import {WorkTemplate} from '../../model/template/work-template';
+import {ServiceTemplate} from '../../model/template/service-template';
 import {MaterialTemplate} from '../../model/template/material-template';
 import {JobTemplate} from '../../model/template/job-template';
 import {Unit} from '../../model/unit';
 import {MaterialService} from '../../services/material.service';
-import {WorkService} from '../../services/work.service';
+import {ServiceService} from '../../services/service.service';
 import {UnitService} from '../../services/unit.service';
 import {JobTemplateService} from '../../services/job-template.service';
 import {ClientService} from '../../services/client.service';
 import {Client} from '../../model/client';
 import {Estimate} from '../../model/estimate';
 import {SnackBarServiceService} from '../../services/snack-bar-service.service';
-import {DialogService} from '../../services/dialog.service';
-import {SimpleComponentDialogComponent} from '../../utils/simple-component-dialog/simple-component-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {AddNewEstimateSheetComponent} from './add-new-estimate-sheet/add-new-estimate-sheet.component';
+import {ActivatedRoute} from '@angular/router';
+import {EstimateDialogComponentComponent} from '../../utils/estimate-dialog-component/estimate-dialog-component.component';
 
 @Component({
   selector: 'app-estimate-view',
@@ -25,7 +25,7 @@ import {AddNewEstimateSheetComponent} from './add-new-estimate-sheet/add-new-est
 })
 export class EstimateViewComponent implements OnInit {
 
-  workTemplates: Array<WorkTemplate>;
+  serviceTemplates: Array<ServiceTemplate>;
   estimates: Array<Estimate>;
   materialTemplates: Array<MaterialTemplate>;
   jobTemplates: Array<JobTemplate>;
@@ -36,21 +36,19 @@ export class EstimateViewComponent implements OnInit {
 
   constructor(private estimateService: EstimateService,
               private materialService: MaterialService,
-              private workService: WorkService,
+              private serviceService: ServiceService,
               private unitService: UnitService,
               private clientService: ClientService,
               private jobTemplateService: JobTemplateService,
               private snackBar: SnackBarServiceService,
               public dialog: MatDialog,
               private addSheet: MatBottomSheet,
-              private dialogService: DialogService) {
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.initData();
-    this.estimateService.getAll().subscribe(r => {
-      console.log(r.body);
-    });
+
   }
 
   initData() {
@@ -58,8 +56,8 @@ export class EstimateViewComponent implements OnInit {
       this.jobTemplates = response.body;
     });
 
-    this.workService.getAllWorks().subscribe(response => {
-      this.workTemplates = response.body;
+    this.serviceService.getAllServices().subscribe(response => {
+      this.serviceTemplates = response.body;
     });
 
     this.materialService.getAllMaterials().subscribe(response => {
@@ -74,9 +72,20 @@ export class EstimateViewComponent implements OnInit {
       this.clients = response.body;
     });
 
-    this.estimateService.getAll().subscribe(response => {
-      this.estimates = response.body;
+
+
+    this.route.params.subscribe(p => {
+      if (p && p.id) {
+        this.estimateService.getAllByClient(p.id).subscribe(response => {
+          this.estimates = response.body;
+        });
+      } else {
+        this.estimateService.getAll().subscribe(response => {
+          this.estimates = response.body;
+        });
+      }
     });
+
   }
 
   saveNewEstimate(estimate: Estimate) {
@@ -87,40 +96,42 @@ export class EstimateViewComponent implements OnInit {
   }
 
   estimateClick(event: MouseEvent, estimate: Estimate) {
-    console.log(estimate);
     if (!((event.target) as Element).className.includes('expandIcon')) {
-        this.dialog.open((SimpleComponentDialogComponent), {
-          data: estimate.name
-        }).afterClosed().subscribe(reload => {
-          if (reload !== undefined && reload === 'deleted') {
-            this.estimateService.delete(estimate).subscribe(o => {
-              this.snackBar.openSnackBar(estimate.name, 'Usunięto');
-              this.estimates = this.estimates.filter(jT => jT.id !== estimate.id);
-            });
-          }
-          if (reload !== undefined && reload === 'edit') {
-            this.addSheet.open(AddNewEstimateSheetComponent, {
-              data: {
-                jobTemplates: this.jobTemplates,
-                workTemplates: this.workTemplates,
-                materialTemplates: this.materialTemplates,
-                units: this.units,
-                clients: this.clients,
-                estimate
-              },
-              panelClass: 'jobTemplateAddSheet'
-            }).afterDismissed().subscribe((estimateToUpdate: Estimate) => {
-                if (estimateToUpdate !== undefined) {
-                  this.estimateService.update(estimateToUpdate).subscribe(http => {
-                    const index = this.estimates.indexOf(estimate);
-                    this.estimates[index] = http.body;
-                    this.snackBar.openSnackBar(estimateToUpdate.name, 'Zaktualizowano');
-                  });
-                }
+      this.dialog.open((EstimateDialogComponentComponent), {
+        data: estimate.name
+      }).afterClosed().subscribe(reload => {
+        if (reload !== undefined && reload === 'deleted') {
+          this.estimateService.delete(estimate).subscribe(o => {
+            this.snackBar.openSnackBar(estimate.name, 'Usunięto');
+            this.estimates = this.estimates.filter(jT => jT.id !== estimate.id);
+          });
+        }
+        if (reload !== undefined && reload === 'generate') {
+          console.log('xaxa');
+        }
+        if (reload !== undefined && reload === 'edit') {
+          this.addSheet.open(AddNewEstimateSheetComponent, {
+            data: {
+              jobTemplates: this.jobTemplates,
+              serviceTemplates: this.serviceTemplates,
+              materialTemplates: this.materialTemplates,
+              units: this.units,
+              clients: this.clients,
+              estimate
+            },
+            panelClass: 'jobTemplateAddSheet'
+          }).afterDismissed().subscribe((estimateToUpdate: Estimate) => {
+              if (estimateToUpdate !== undefined) {
+                this.estimateService.update(estimateToUpdate).subscribe(http => {
+                  const index = this.estimates.indexOf(estimate);
+                  this.estimates[index] = http.body;
+                  this.snackBar.openSnackBar(estimateToUpdate.name, 'Zaktualizowano');
+                });
               }
-            );
-          }
-        });
+            }
+          );
+        }
+      });
     }
   }
 

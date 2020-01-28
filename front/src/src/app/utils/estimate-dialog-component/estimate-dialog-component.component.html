@@ -1,0 +1,12 @@
+<div class="card-container dialog-button-max-size" id="container">
+  <mat-form-field>
+    <input matInput value="{{value}}" readonly class="dialog-value">
+  </mat-form-field>
+  <div class="content">
+    <div class="content2">
+      <button mat-raised-button color="primary" (click)="edit()">Edytuj</button>
+      <button mat-raised-button color="primary" (click)="generatePDF()">Pobierz</button>
+      <button mat-raised-button color="warn" (click)="delete()">Usuń</button>
+    </div>
+  </div>
+</div>

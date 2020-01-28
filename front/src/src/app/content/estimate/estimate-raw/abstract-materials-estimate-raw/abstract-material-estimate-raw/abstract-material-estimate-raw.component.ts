@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AbstractEstimateMaterial} from "../../../../../model/abstract-estimate-material";
+import {AbstractEstimateMaterial} from '../../../../../model/abstract-estimate-material';
 
 @Component({
   selector: 'app-abstract-material-estimate-raw',

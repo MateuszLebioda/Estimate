@@ -1,0 +1,6 @@
+<app-service-toolbar (serviceToAdd)="addService($event)" (filter)="filter($event)"></app-service-toolbar>
+<div class="contentDiv">
+  <div *ngFor="let work of filterServices(); let i = index" class="card-container">
+    <app-raw-service [serviceTemplate]="work" class="example-card" (click)="onMatCardClickEvent(work)"></app-raw-service>
+  </div>
+</div>

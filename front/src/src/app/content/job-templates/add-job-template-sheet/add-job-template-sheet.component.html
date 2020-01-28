@@ -21,9 +21,9 @@
           <mat-icon class="example-icon" aria-hidden="false" style="padding-bottom: 3px">add</mat-icon>
           Dodaj materiał
         </button>
-        <button mat-button class="tool-bar-spans" style="float: right" (click)="addWork()">
+        <button mat-button class="tool-bar-spans" style="float: right" (click)="addServices()">
           <mat-icon class="example-icon" aria-hidden="false" style="padding-bottom: 3px">add</mat-icon>
-          Dodaj prace
+          Dodaj usługę
         </button>
       </div>
 
@@ -65,12 +65,12 @@
         </div>
       </ng-container>
 
-      <ng-container *ngIf="getMarkedWorks().controls.length > 0">
+      <ng-container *ngIf="getMarkedServices().controls.length > 0">
         <div>
           <div style="width: 100%; float: right;">
-            <mat-card-title style="">Prace</mat-card-title>
+            <mat-card-title style="">Usługi</mat-card-title>
           </div>
-          <ng-container  formArrayName="materials" *ngFor="let element of getMarkedWorks().controls; let i = index">
+          <ng-container  formArrayName="materials" *ngFor="let element of getMarkedServices().controls; let i = index">
             <div style="width: 95%; float: right; margin-bottom: 12px" >
               <div style="width: calc(100% - 230px); float: left; border-bottom: 1px solid black; padding-top: 21px">
                 <h4 style="margin: 0px; float: left">{{element.get('material').value.name}}</h4>
@@ -84,7 +84,7 @@
 
               <div style="float: right; padding-top: 10px">
                 <div style="float: right">
-                  <button style="float: right" mat-button (click)="deleteWork(element)" class="tool-bar-spans">
+                  <button style="float: right" mat-button (click)="deleteService(element)" class="tool-bar-spans">
                     <mat-icon class="example-icon" aria-hidden="false">close</mat-icon>
                   </button>
                 </div>

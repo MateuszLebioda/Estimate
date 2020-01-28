@@ -1,17 +1,17 @@
 package com.estimate.model.entities;
 
-import com.estimate.model.entities.dto.WorkEstimateDTO;
+import com.estimate.model.entities.dto.ServiceEstimateDTO;
 import com.estimate.model.entities.utils.Role;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity()
-@DiscriminatorValue(value = Role.WORKS_TITLE)
-public class WorkEstimate extends AbstractMaterialEstimate {
+@DiscriminatorValue(value = Role.SERVICE_TITLE)
+public class ServiceEstimate extends AbstractMaterialEstimate {
 
-    public WorkEstimateDTO toDTO() {
-        return WorkEstimateDTO.builder()
+    public ServiceEstimateDTO toDTO() {
+        return ServiceEstimateDTO.builder()
                 .id(this.id)
                 .name(this.name)
                 .price(this.price)
