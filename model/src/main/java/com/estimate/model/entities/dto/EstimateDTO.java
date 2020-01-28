@@ -14,7 +14,7 @@ import java.util.List;
 public class EstimateDTO {
     private Long id;
     private String name;
-    private List<WorkEstimateDTO> works;
+    private List<ServiceEstimateDTO> services;
     private List<MaterialEstimateDTO> materials;
     private List<JobTemplateEstimateDTO> jobTemplates;
     private ClientDTO client;

@@ -31,7 +31,7 @@ public class JobTemplateAbstractMaterial implements SimpleEntity<JobTemplateAbst
     public JobTemplateAbstractMaterialDTO toDTO() {
         JobTemplateAbstractMaterialDTO jobTemplateAbstractMaterialDTO = new JobTemplateAbstractMaterialDTO();
 
-        jobTemplateAbstractMaterialDTO.setMaterial(this.abstractMaterialTemplate instanceof WorkTemplate ? ((WorkTemplate) this.abstractMaterialTemplate).toDTO() : ((MaterialTemplate) this.abstractMaterialTemplate).toDTO());
+        jobTemplateAbstractMaterialDTO.setMaterial(this.abstractMaterialTemplate instanceof ServiceTemplate ? ((ServiceTemplate) this.abstractMaterialTemplate).toDTO() : ((MaterialTemplate) this.abstractMaterialTemplate).toDTO());
         jobTemplateAbstractMaterialDTO.setValue(this.value);
 
         return jobTemplateAbstractMaterialDTO;

@@ -1,0 +1,13 @@
+<mat-card class="example-card data-mat-card">
+  <div class="card-container" *ngIf="serviceTemplate">
+    <mat-form-field style="width: 100%">
+      <input matInput readonly style="border: 0px">
+      <h4 style="margin: 0px; float: left">{{serviceTemplate.name}}</h4>
+      <span style="float: right">
+        <h4 style="margin: 0px">{{serviceTemplate.price}}zł / {{serviceTemplate.unit.bottom}}
+          <sup>{{serviceTemplate.unit.top}}</sup>
+        </h4>
+      </span>
+    </mat-form-field>
+  </div>
+</mat-card>

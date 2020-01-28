@@ -49,14 +49,14 @@ public class DTOConverterImpl implements DTOConverter {
         jobTemplateAbstractMaterial.setAbstractMaterialTemplate(
                 jobTemplateAbstractMaterialDTO.getMaterial().getType() == Role.MATERIAL ?
                         materialService.getMaterialById(jobTemplateAbstractMaterialDTO.getMaterial().getId()).get() :
-                        materialService.getWorkById(jobTemplateAbstractMaterialDTO.getMaterial().getId()).get());
+                        materialService.getServiceById(jobTemplateAbstractMaterialDTO.getMaterial().getId()).get());
 
         return jobTemplateAbstractMaterial;
     }
 
     @Override
     public AbstractMaterialTemplate makeAbstractMaterialTemplate(AbstractMaterialTemplateDTO abstractMaterialTemplateDTO) {
-        AbstractMaterialTemplate abstractMaterialTemplate = abstractMaterialTemplateDTO.getType() == Role.MATERIAL ? new MaterialTemplate() : new WorkTemplate();
+        AbstractMaterialTemplate abstractMaterialTemplate = abstractMaterialTemplateDTO.getType() == Role.MATERIAL ? new MaterialTemplate() : new ServiceTemplate();
         abstractMaterialTemplate.setName(abstractMaterialTemplateDTO.getName());
         abstractMaterialTemplate.setPrice(abstractMaterialTemplateDTO.getPrice());
         abstractMaterialTemplate.setUser(abstractMaterialTemplateDTO.getUser());
@@ -68,7 +68,7 @@ public class DTOConverterImpl implements DTOConverter {
 
     @Override
     public AbstractMaterialEstimate makeAbstractMaterialEstimate(AbstractMaterialEstimateDTO abstractMaterialEstimateDTO) {
-        AbstractMaterialEstimate abstractMaterialEstimate = abstractMaterialEstimateDTO.getType() == Role.MATERIAL ? new MaterialEstimate() : new WorkEstimate();
+        AbstractMaterialEstimate abstractMaterialEstimate = abstractMaterialEstimateDTO.getType() == Role.MATERIAL ? new MaterialEstimate() : new ServiceEstimate();
         abstractMaterialEstimate.setName(abstractMaterialEstimateDTO.getName());
         abstractMaterialEstimate.setId(abstractMaterialEstimateDTO.getId() != null && abstractMaterialEstimateDTO.getId() == 0 ? null : abstractMaterialEstimateDTO.getId());
         abstractMaterialEstimate.setPrice(abstractMaterialEstimateDTO.getPrice());
@@ -102,7 +102,7 @@ public class DTOConverterImpl implements DTOConverter {
         estimate.setJobTemplates(estimateDTO.getJobTemplates().stream().map(this::makeJobTemplateEstimate).collect(Collectors.toList()));
         estimate.getJobTemplates().forEach(j -> j.setEstimate(estimate));
         estimate.setMaterials(estimateDTO.getMaterials().stream().map(this::makeAbstractMaterialEstimate).collect(Collectors.toList()));
-        estimate.addAbstractMaterials(estimateDTO.getWorks().stream().map(this::makeAbstractMaterialEstimate).collect(Collectors.toList()));
+        estimate.addAbstractMaterials(estimateDTO.getServices().stream().map(this::makeAbstractMaterialEstimate).collect(Collectors.toList()));
         estimate.getMaterials().forEach(m -> m.setEstimate(estimate));
         if(estimateDTO.getClient() != null){
             estimate.setClient(estimateDTO.getClient().getId() == null?null:clientService.getClientById(estimateDTO.getClient().getId()));

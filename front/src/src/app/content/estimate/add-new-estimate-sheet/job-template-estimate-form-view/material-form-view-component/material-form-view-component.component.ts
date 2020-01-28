@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from 
 import {FormArray, FormGroup} from '@angular/forms';
 import {Unit} from '../../../../../model/unit';
 import {MaterialTemplate} from '../../../../../model/template/material-template';
-import {WorkTemplate} from '../../../../../model/template/work-template';
+import {ServiceTemplate} from '../../../../../model/template/service-template';
 
 @Component({
   selector: 'app-material-form-view-component',
@@ -12,13 +12,13 @@ import {WorkTemplate} from '../../../../../model/template/work-template';
 export class MaterialFormViewComponentComponent implements OnInit {
 
   @Output()
-  deletedWork = new EventEmitter<number>();
+  deletedServiceId = new EventEmitter<number>();
 
   @Input()
   allMaterials = new Array<MaterialTemplate>();
 
   @Input()
-  allWorks = new Array<WorkTemplate>();
+  addService = new Array<ServiceTemplate>();
 
   @Input()
   opened: boolean;
@@ -40,8 +40,8 @@ export class MaterialFormViewComponentComponent implements OnInit {
     return (this.jobTemplateFormGroup.get('materials') as FormArray);
   }
 
-  getWorkFormArray(): FormArray {
-    return (this.jobTemplateFormGroup.get('works') as FormArray);
+  getServiceFormArray(): FormArray {
+    return (this.jobTemplateFormGroup.get('services') as FormArray);
   }
 
   compareObjects(o1: any, o2: any): boolean {
@@ -51,9 +51,9 @@ export class MaterialFormViewComponentComponent implements OnInit {
     return o1.id === o2.id;
   }
 
-  deleteWork(formGroup: FormGroup) {
-    this.getWorkFormArray()
-      .removeAt(this.getWorkFormArray().controls.findIndex(jt => jt.get('id').value === formGroup.get('id').value));
+  deleteService(formGroup: FormGroup) {
+    this.getServiceFormArray()
+      .removeAt(this.getServiceFormArray().controls.findIndex(jt => jt.get('id').value === formGroup.get('id').value));
   }
 
   deleteMaterial(formGroup: FormGroup) {

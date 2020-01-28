@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {EstimateService} from '../../services/estimate.service';
-import {WorkTemplate} from '../../model/template/work-template';
+import {ServiceTemplate} from '../../model/template/service-template';
 import {MaterialTemplate} from '../../model/template/material-template';
 import {JobTemplate} from '../../model/template/job-template';
 import {Unit} from '../../model/unit';
 import {MaterialService} from '../../services/material.service';
-import {WorkService} from '../../services/work.service';
+import {ServiceService} from '../../services/service.service';
 import {UnitService} from '../../services/unit.service';
 import {JobTemplateService} from '../../services/job-template.service';
 import {ClientService} from '../../services/client.service';
@@ -25,7 +25,7 @@ import {AddNewEstimateSheetComponent} from './add-new-estimate-sheet/add-new-est
 })
 export class EstimateViewComponent implements OnInit {
 
-  workTemplates: Array<WorkTemplate>;
+  serviceTemplates: Array<ServiceTemplate>;
   estimates: Array<Estimate>;
   materialTemplates: Array<MaterialTemplate>;
   jobTemplates: Array<JobTemplate>;
@@ -36,14 +36,13 @@ export class EstimateViewComponent implements OnInit {
 
   constructor(private estimateService: EstimateService,
               private materialService: MaterialService,
-              private workService: WorkService,
+              private serviceService: ServiceService,
               private unitService: UnitService,
               private clientService: ClientService,
               private jobTemplateService: JobTemplateService,
               private snackBar: SnackBarServiceService,
               public dialog: MatDialog,
-              private addSheet: MatBottomSheet,
-              private dialogService: DialogService) {
+              private addSheet: MatBottomSheet) {
   }
 
   ngOnInit() {
@@ -58,8 +57,8 @@ export class EstimateViewComponent implements OnInit {
       this.jobTemplates = response.body;
     });
 
-    this.workService.getAllWorks().subscribe(response => {
-      this.workTemplates = response.body;
+    this.serviceService.getAllServices().subscribe(response => {
+      this.serviceTemplates = response.body;
     });
 
     this.materialService.getAllMaterials().subscribe(response => {
@@ -102,7 +101,7 @@ export class EstimateViewComponent implements OnInit {
             this.addSheet.open(AddNewEstimateSheetComponent, {
               data: {
                 jobTemplates: this.jobTemplates,
-                workTemplates: this.workTemplates,
+                serviceTemplates: this.serviceTemplates,
                 materialTemplates: this.materialTemplates,
                 units: this.units,
                 clients: this.clients,

@@ -27,7 +27,7 @@ public class UnitController {
 
     @GET
     @Path("/getAllUnits")
-    public Response getWorkUnits(){
+    public Response get(){
         if(user.isPresent()){
             return Response.ok(getUnitList()).build();
         }else {

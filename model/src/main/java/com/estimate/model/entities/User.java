@@ -29,7 +29,7 @@ public class User implements SimpleEntity {
     private List<MaterialTemplate> materials;
 
     @OneToMany(mappedBy="user")
-    private List<WorkTemplate> workTemplates;
+    private List<ServiceTemplate> serviceTemplates;
 
     @OneToMany(mappedBy="user", cascade = {CascadeType.PERSIST})
     private List<Unit> unit;

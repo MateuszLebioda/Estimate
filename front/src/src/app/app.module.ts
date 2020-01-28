@@ -23,10 +23,10 @@ import {AddMaterialSheetComponent} from './content/material/add-material-sheet/a
 import {RawMaterialComponent} from './content/material/raw-material/raw-material.component';
 import {SimpleComponentDialogComponent} from './utils/simple-component-dialog/simple-component-dialog.component';
 import {ConfirmDialogComponent} from './utils/confirm-dialog/confirm-dialog.component';
-import {WorkViewComponent} from './content/work/work-view.component';
-import {WorkToolbarComponent} from './content/work/work-toolbar/work-toolbar.component';
-import {AddWorkSheetComponent} from './content/work/add-work-sheet/add-work-sheet.component';
-import {RawWorkComponent} from './content/work/raw-work/raw-work.component';
+import {ServiceViewComponent} from './content/service/service-view.component';
+import {ServiceToolbarComponent} from './content/service/service-toolbar/service-toolbar.component';
+import {AddServiceSheetComponent} from './content/service/add-service-sheet/add-service-sheet.component';
+import {RawServiceComponent} from './content/service/raw-service/raw-service.component';
 import {JobTemplatesViewComponent} from './content/job-templates/job-templates-view.component';
 import {JobTemplateToolbarComponent} from './content/job-templates/job-template-toolbar/job-template-toolbar.component';
 import {AddJobTemplateSheetComponent} from './content/job-templates/add-job-template-sheet/add-job-template-sheet.component';
@@ -37,14 +37,22 @@ import {JobTemplateRawComponent} from './content/job-templates/job-template-raw/
 import {JobTemplateAbstractMaterialRawComponent} from './content/job-templates/job-template-abstract-material-raw/job-template-abstract-material-raw.component';
 import {EstimateToolBarComponent} from './content/estimate/estimate-tool-bar/estimate-tool-bar.component';
 import {AddNewEstimateSheetComponent} from './content/estimate/add-new-estimate-sheet/add-new-estimate-sheet.component';
+// tslint:disable-next-line:max-line-length
 import {AddJobTemplateDialogComponentComponent} from './utils/add-job-template-dialog-component/add-job-template-dialog-component.component';
+// tslint:disable-next-line:max-line-length
 import {JobTemplateEstimateFormViewComponent} from './content/estimate/add-new-estimate-sheet/job-template-estimate-form-view/job-template-estimate-form-view.component';
+// tslint:disable-next-line:max-line-length
 import {MaterialFormViewComponentComponent} from './content/estimate/add-new-estimate-sheet/job-template-estimate-form-view/material-form-view-component/material-form-view-component.component';
+// tslint:disable-next-line:max-line-length
 import {MaterialFormEditableComponentComponent} from './content/estimate/add-new-estimate-sheet/job-template-estimate-form-view/material-form-editable-component/material-form-editable-component.component';
 import {EstimateRawComponent} from './content/estimate/estimate-raw/estimate-raw.component';
+// tslint:disable-next-line:max-line-length
 import {JobTemplatesEstimateRawComponent} from './content/estimate/estimate-raw/job-templates-estimate-raw/job-templates-estimate-raw.component';
+// tslint:disable-next-line:max-line-length
 import {AbstractMaterialsEstimateRawComponent} from './content/estimate/estimate-raw/abstract-materials-estimate-raw/abstract-materials-estimate-raw.component';
-import {AbstractMaterialEstimateRawComponent} from "./content/estimate/estimate-raw/abstract-materials-estimate-raw/abstract-material-estimate-raw/abstract-material-estimate-raw.component";
+// tslint:disable-next-line:max-line-length
+import {AbstractMaterialEstimateRawComponent} from './content/estimate/estimate-raw/abstract-materials-estimate-raw/abstract-material-estimate-raw/abstract-material-estimate-raw.component';
+// tslint:disable-next-line:max-line-length
 import {JobTemplateEstimateRawComponent} from './content/estimate/estimate-raw/job-templates-estimate-raw/job-template-estimate-raw/job-template-estimate-raw.component';
 import {Router} from '@angular/router';
 
@@ -75,7 +83,7 @@ const keycloakService = new KeycloakService();
     AddMaterialSheetComponent,
     ConfirmDialogComponent,
     SimpleComponentDialogComponent,
-    AddWorkSheetComponent,
+    AddServiceSheetComponent,
     AddJobTemplateSheetComponent,
     AddAbstractMaterialDialogComponent,
     AddNewEstimateSheetComponent,
@@ -97,10 +105,10 @@ const keycloakService = new KeycloakService();
     RawMaterialComponent,
     SimpleComponentDialogComponent,
     ConfirmDialogComponent,
-    WorkViewComponent,
-    WorkToolbarComponent,
-    AddWorkSheetComponent,
-    RawWorkComponent,
+    ServiceViewComponent,
+    ServiceToolbarComponent,
+    AddServiceSheetComponent,
+    RawServiceComponent,
     JobTemplatesViewComponent,
     JobTemplateToolbarComponent,
     AddJobTemplateSheetComponent,

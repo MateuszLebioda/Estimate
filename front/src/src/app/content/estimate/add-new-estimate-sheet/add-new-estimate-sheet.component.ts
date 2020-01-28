@@ -3,9 +3,9 @@ import {FormArray, FormGroup} from '@angular/forms';
 import {Estimate} from '../../../model/estimate';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {MaterialService} from '../../../services/material.service';
-import {WorkService} from '../../../services/work.service';
+import {ServiceService} from '../../../services/service.service';
 import {JobTemplateService} from '../../../services/job-template.service';
-import {WorkTemplate} from '../../../model/template/work-template';
+import {ServiceTemplate} from '../../../model/template/service-template';
 import {JobTemplate} from '../../../model/template/job-template';
 import {MaterialTemplate} from '../../../model/template/material-template';
 import {MatDialog} from '@angular/material/dialog';
@@ -30,9 +30,10 @@ export class AddNewEstimateSheetComponent implements OnInit {
   clients: Array<Client>;
 
   estimateFormGroup: FormGroup;
+
   estimate = new Estimate();
 
-  works: Array<WorkTemplate>;
+  services: Array<ServiceTemplate>;
 
   materials: Array<MaterialTemplate>;
 
@@ -43,7 +44,7 @@ export class AddNewEstimateSheetComponent implements OnInit {
   constructor(
     private bottomSheetRef: MatBottomSheetRef<AddNewEstimateSheetComponent>,
     private materialService: MaterialService,
-    private workService: WorkService,
+    private serviceService: ServiceService,
     private unitService: UnitService,
     private jobTemplateService: JobTemplateService,
     private dialog: MatDialog,
@@ -70,7 +71,7 @@ export class AddNewEstimateSheetComponent implements OnInit {
   initData() {
     if (this.data !== null) {
       this.jobTemplates = this.data.jobTemplates;
-      this.works = this.data.workTemplates;
+      this.services = this.data.serviceTemplates;
       this.materials = this.data.materialTemplates;
       this.units = this.data.units;
       this.clients = this.data.clients;
@@ -86,7 +87,7 @@ export class AddNewEstimateSheetComponent implements OnInit {
     this.estimateFormGroup.get('materials').valueChanges.subscribe(() => {
       this.calcSumPrice();
     });
-    this.estimateFormGroup.get('works').valueChanges.subscribe(() => {
+    this.estimateFormGroup.get('services').valueChanges.subscribe(() => {
       this.calcSumPrice();
     });
     this.estimateFormGroup.get('jobTemplates').valueChanges.subscribe(() => {
@@ -131,8 +132,8 @@ export class AddNewEstimateSheetComponent implements OnInit {
     return this.getAvailableAbstractMaterials(this.materials, this.getMaterialFormArray());
   }
 
-  getAvailableWorks(): Array<AbstractMaterial> {
-    return this.getAvailableAbstractMaterials(this.works, this.getWorkFormArray());
+  getAvailableServices(): Array<AbstractMaterial> {
+    return this.getAvailableAbstractMaterials(this.services, this.getServicesFormArray());
   }
 
 
@@ -150,15 +151,15 @@ export class AddNewEstimateSheetComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
   }
 
-  addWork() {
+  addService() {
     const dialogRef = this.dialog.open(AddAbstractMaterialDialogComponent, {
-      data: this.getAvailableWorks(),
+      data: this.getAvailableServices(),
       width: '80%',
       height: '600px',
       disableClose: true
     });
     dialogRef.componentInstance.emmmiter.subscribe(material => {
-      (this.estimateFormGroup.get('works') as FormArray).push(this.createMaterialFormGroup(material, 1));
+      (this.estimateFormGroup.get('services') as FormArray).push(this.createMaterialFormGroup(material, 1));
       this.cd.markForCheck();
     });
     dialogRef.afterClosed().subscribe();
@@ -194,8 +195,8 @@ export class AddNewEstimateSheetComponent implements OnInit {
     return (this.estimateFormGroup.get('materials') as FormArray);
   }
 
-  getWorkFormArray() {
-    return (this.estimateFormGroup.get('works') as FormArray);
+  getServicesFormArray() {
+    return (this.estimateFormGroup.get('services') as FormArray);
   }
 
   deleteMaterial(formGroup: FormGroup) {
@@ -203,13 +204,13 @@ export class AddNewEstimateSheetComponent implements OnInit {
       .removeAt(this.getMaterialFormArray().controls.findIndex(m => m.get('id').value === formGroup.get('id').value));
   }
 
-  deleteWork(formGroup: FormGroup) {
-    this.getWorkFormArray()
-      .removeAt(this.getWorkFormArray().controls.findIndex(w => w.get('id').value === formGroup.get('id').value));
+  deleteService(formGroup: FormGroup) {
+    this.getServicesFormArray()
+      .removeAt(this.getServicesFormArray().controls.findIndex(w => w.get('id').value === formGroup.get('id').value));
   }
 
-  getAllWorks(): Array<WorkTemplate> {
-    return this.works;
+  getAllServices(): Array<ServiceTemplate> {
+    return this.services;
   }
 
   getAllMaterials(): Array<MaterialTemplate> {
@@ -225,20 +226,20 @@ export class AddNewEstimateSheetComponent implements OnInit {
     return Number(sum.toFixed(2));
   }
 
-  calcSumPriceWorks(): number {
+  calcSumPriceService(): number {
     let sum = 0;
-    for (const work of this.getWorkFormArray().controls) {
-      sum = sum + Number(work.get('sumPrice').value);
+    for (const service of this.getServicesFormArray().controls) {
+      sum = sum + Number(service.get('sumPrice').value);
     }
     return Number(sum.toFixed(2));
   }
 
   private calcSumPrice() {
     let sum = 0;
-    sum = sum + this.calcSumPriceWorks();
+    sum = sum + this.calcSumPriceService();
     sum = sum + this.calcSumPriceMaterials();
-    for (const work of this.getJobTemplateFormArray().controls) {
-      sum = sum + Number(work.get('sumPrice').value);
+    for (const control of this.getJobTemplateFormArray().controls) {
+      sum = sum + Number(control.get('sumPrice').value);
     }
     this.estimateFormGroup.get('sumPrice').setValue(sum.toFixed(2));
   }

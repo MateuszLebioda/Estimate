@@ -17,10 +17,10 @@ import java.util.Optional;
 @Stateless(name = "abstractMaterialDao")
 public class AbstractDaoImpl extends AbstractDao<AbstractMaterialTemplate> implements AbstractMaterialDao {
     @Override
-    public List<WorkTemplate> getAllWorks(User user) {
+    public List<ServiceTemplate> getAllServices(User user) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<WorkTemplate> criteriaQuery = criteriaBuilder.createQuery(WorkTemplate.class);
-        Root<WorkTemplate> root = criteriaQuery.from(WorkTemplate.class);
+        CriteriaQuery<ServiceTemplate> criteriaQuery = criteriaBuilder.createQuery(ServiceTemplate.class);
+        Root<ServiceTemplate> root = criteriaQuery.from(ServiceTemplate.class);
         criteriaQuery.where(
                 criteriaBuilder.and(
                         criteriaBuilder.equal(root.get("user"), user)
@@ -54,8 +54,8 @@ public class AbstractDaoImpl extends AbstractDao<AbstractMaterialTemplate> imple
     }
 
     @Override
-    public Optional<WorkTemplate> getWorkById(Long id) {
-        return Optional.of((WorkTemplate) getAbstractMaterialById(id).get());
+    public Optional<ServiceTemplate> getServiceById(Long id) {
+        return Optional.of((ServiceTemplate) getAbstractMaterialById(id).get());
     }
 
     @Override

@@ -20,7 +20,7 @@ export class JobTemplateRawComponent implements OnInit, OnChanges {
   jobTempleEmitter = new EventEmitter<JobTemplate>();
 
   materialTitle = 'Materiały';
-  workTitle = 'Prace';
+  serviceTitle = 'Usługi';
 
   constructor() {
   }
@@ -32,8 +32,8 @@ export class JobTemplateRawComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
 
-  getMarkedWorks(): Array<JobTemplateMaterial> {
-    return this.jobTemplate.materials.filter(m => m.material.type === AbstractMaterialType.WORK);
+  getMarkedServices(): Array<JobTemplateMaterial> {
+    return this.jobTemplate.materials.filter(m => m.material.type === AbstractMaterialType.SERVICE);
   }
 
   getMarkedMaterial(): Array<JobTemplateMaterial> {

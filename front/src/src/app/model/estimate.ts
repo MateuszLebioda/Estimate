@@ -1,5 +1,5 @@
 import {MaterialEstimate} from './material-estimate';
-import {WorkEstimate} from './work-estimate';
+import {ServiceEstimate} from './service-estimate';
 import {JobTemplateEstimate} from './job-template-estimate';
 import {Client} from './client';
 
@@ -7,7 +7,7 @@ export class Estimate {
   id: number;
   name: string;
   materials: Array<MaterialEstimate>;
-  works: Array<WorkEstimate>;
+  servicesEstimate: Array<ServiceEstimate>;
   jobTemplates: Array<JobTemplateEstimate>;
   client: Client;
   sumPrice: number;

@@ -49,7 +49,7 @@ public class Estimate  implements SimpleEntity<Estimate> {
                 .id(id)
                 .jobTemplates(jobTemplates.stream().map(JobTemplateEstimate::toDTO).collect(Collectors.toList()))
                 .materials(materials.stream().filter(material -> material instanceof MaterialEstimate).map(m -> ((MaterialEstimate)m).toDTO()).collect(Collectors.toList()))
-                .works(materials.stream().filter(material -> material instanceof WorkEstimate).map(w -> ((WorkEstimate)w).toDTO()).collect(Collectors.toList()))
+                .services(materials.stream().filter(material -> material instanceof ServiceEstimate).map(w -> ((ServiceEstimate)w).toDTO()).collect(Collectors.toList()))
                 .name(this.name)
                 .client(this.client==null?null:this.client.toDTO())
                 .sumPrice(this.sumPrice)

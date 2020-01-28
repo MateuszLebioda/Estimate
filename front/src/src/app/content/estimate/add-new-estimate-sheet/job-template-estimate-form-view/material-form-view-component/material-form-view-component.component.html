@@ -11,13 +11,13 @@
       </div>
     </ng-container>
 
-    <ng-container *ngIf="opened && getWorkFormArray().length > 0">
+    <ng-container *ngIf="opened && getServiceFormArray().length > 0">
       <div style="padding-bottom: 20px">
         <div style="width: calc(100% - 85px); float: right;">
-          <mat-card-title style="font-size: 16px;font-weight: bold">Prace</mat-card-title>
+          <mat-card-title style="font-size: 16px;font-weight: bold">Usługi</mat-card-title>
         </div>
-        <ng-container *ngFor="let element of getWorkFormArray().controls">
-          <app-material-form-editable-component style="width: calc(100% - 85px); float: right" [calcValue]="getCalcValue()" [units]="units" [materialFormControl]="element" (deleteEmitter)="deleteWork($event)"></app-material-form-editable-component>
+        <ng-container *ngFor="let element of getServiceFormArray().controls">
+          <app-material-form-editable-component style="width: calc(100% - 85px); float: right" [calcValue]="getCalcValue()" [units]="units" [materialFormControl]="element" (deleteEmitter)="deleteService($event)"></app-material-form-editable-component>
         </ng-container>
       </div>
     </ng-container>

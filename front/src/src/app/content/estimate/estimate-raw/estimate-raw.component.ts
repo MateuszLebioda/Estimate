@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Estimate} from '../../../model/estimate';
-import {materialTitle, workTitle} from "../../../utils/static";
+import {materialTitle, serviceTitle} from "../../../utils/static";
 import {Client} from '../../../model/client';
 
 @Component({
@@ -14,7 +14,7 @@ export class EstimateRawComponent implements OnInit {
   estimate: Estimate;
 
   opened = false;
-  workTitle = workTitle;
+  serviceTitle = serviceTitle;
   materialsTitle = materialTitle;
 
   constructor() {

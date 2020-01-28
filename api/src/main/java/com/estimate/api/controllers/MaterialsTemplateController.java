@@ -2,9 +2,9 @@ package com.estimate.api.controllers;
 
 import com.estimate.model.entities.MaterialTemplate;
 import com.estimate.model.entities.User;
-import com.estimate.model.entities.WorkTemplate;
+import com.estimate.model.entities.ServiceTemplate;
 import com.estimate.model.entities.dto.MaterialTemplateDTO;
-import com.estimate.model.entities.dto.WorkTemplateDTO;
+import com.estimate.model.entities.dto.ServiceTempleDTO;
 import com.estimate.services.MaterialService;
 
 
@@ -37,11 +37,11 @@ public class MaterialsTemplateController {
     }
 
     @POST
-    @Path("/addWorks")
-    public Response addMaterial(WorkTemplateDTO workDTO){
+    @Path("/addService")
+    public Response addService(ServiceTempleDTO serviceTemplateDTO){
         if(user.isPresent()){
-            workDTO.setUser(user.get());
-            return Response.ok(materialService.addAbstractMaterialFromDTO(workDTO)).build();
+            serviceTemplateDTO.setUser(user.get());
+            return Response.ok(materialService.addAbstractMaterialFromDTO(serviceTemplateDTO)).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
@@ -64,13 +64,13 @@ public class MaterialsTemplateController {
     }
 
     @GET
-    @Path("/getAllWorks")
-    public Response getWorks(){
+    @Path("/getAllServices")
+    public Response getServices(){
         if(user.isPresent()){
             return Response.ok(
-                    materialService.getAllWorks(user.get())
-                            .stream().map(WorkTemplate::toDTO)
-                            .sorted(Comparator.comparing(WorkTemplateDTO::getName))
+                    materialService.getAllServices(user.get())
+                            .stream().map(ServiceTemplate::toDTO)
+                            .sorted(Comparator.comparing(ServiceTempleDTO::getName))
                             .collect(Collectors.toList())).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
@@ -84,7 +84,7 @@ public class MaterialsTemplateController {
             Optional<MaterialTemplate> optionalMaterial = materialService.getMaterialById(id);
             if(optionalMaterial.isPresent()) {
                 if (materialService.isMyMaterial(user.get(),optionalMaterial.get())) {
-                    materialService.deleteAbstractMaterial(optionalMaterial.get());
+                    materialService.deleteAbstractMaterial(id);
                     return Response.ok().build();
                 }else {
                     return Response.accepted("Client doest not exist").build();
@@ -96,13 +96,13 @@ public class MaterialsTemplateController {
     }
 
     @DELETE
-    @Path("/deleteWork/{id}")
-    public Response deleteWork(@PathParam("id") long id){
+    @Path("/deleteService/{id}")
+    public Response deleteService(@PathParam("id") long id){
         if(user.isPresent()){
-            Optional<WorkTemplate> optionalWork = materialService.getWorkById(id);
-            if(optionalWork.isPresent()) {
-                if (materialService.isMyMaterial(user.get(),optionalWork.get())) {
-                    materialService.deleteAbstractMaterial(optionalWork.get());
+            Optional<ServiceTemplate> optionalService = materialService.getServiceById(id);
+            if(optionalService.isPresent()) {
+                if (materialService.isMyMaterial(user.get(),optionalService.get())) {
+                    materialService.deleteAbstractMaterial(id);
                     return Response.ok().build();
                 }else {
                     return Response.accepted("Client doest not exist").build();
@@ -132,13 +132,13 @@ public class MaterialsTemplateController {
     }
 
     @PUT
-    @Path("/updateWorkTemplate")
-    public Response updateWork(WorkTemplateDTO workDTO) {
+    @Path("/updateServiceTemplate")
+    public Response updateService(ServiceTempleDTO serviceTempleDTO) {
         if(user.isPresent()){
-            WorkTemplate workTemplate = materialService.getWorkById(workDTO.getId()).get();
-            if (materialService.isMyMaterial(user.get(), workTemplate)) {
-                workDTO.setUser(user.get());
-                materialService.updateAbstractMaterial(workDTO);
+            ServiceTemplate serviceTemplate = materialService.getServiceById(serviceTempleDTO.getId()).get();
+            if (materialService.isMyMaterial(user.get(), serviceTemplate)) {
+                serviceTempleDTO.setUser(user.get());
+                materialService.updateAbstractMaterial(serviceTempleDTO);
                 return Response.ok().build();
             }else {
                 return Response.accepted("Client doest not exist").build();

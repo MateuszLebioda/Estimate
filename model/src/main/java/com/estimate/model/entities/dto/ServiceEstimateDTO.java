@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class WorkEstimateDTO extends AbstractMaterialEstimateDTO {
+public class ServiceEstimateDTO extends AbstractMaterialEstimateDTO {
 
     @Builder
-    public WorkEstimateDTO(Long id, String name, Unit unit, Double price, Double sumPrice, Double sumValue, Double value) {
+    public ServiceEstimateDTO(Long id, String name, Unit unit, Double price, Double sumPrice, Double sumValue, Double value) {
         super(id, name, unit, price, sumPrice, sumValue,value);
-        type = Role.WORK;
+        type = Role.SERVICE;
     }
 }

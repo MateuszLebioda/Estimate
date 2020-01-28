@@ -3,8 +3,8 @@ import {MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef} from '@angular
 import {JobTemplate} from '../../../model/template/job-template';
 import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MaterialService} from '../../../services/material.service';
-import {WorkService} from '../../../services/work.service';
-import {WorkTemplate} from '../../../model/template/work-template';
+import {ServiceService} from '../../../services/service.service';
+import {ServiceTemplate} from '../../../model/template/service-template';
 import {MaterialTemplate} from '../../../model/template/material-template';
 import {MatDialog} from '@angular/material/dialog';
 import {AddAbstractMaterialDialogComponent} from '../../../utils/add-abstract-material-dialog/add-abstract-material-dialog.component';
@@ -28,7 +28,7 @@ export class AddJobTemplateSheetComponent implements OnInit {
 
 
 
-  works = new Array<WorkTemplate>();
+  services = new Array<ServiceTemplate>();
   materials = new Array<MaterialTemplate>();
   units: Array<Unit>;
 
@@ -36,7 +36,7 @@ export class AddJobTemplateSheetComponent implements OnInit {
   jobTemplateForm: FormGroup;
 
   constructor(private materialService: MaterialService,
-              private workService: WorkService,
+              private serviceService: ServiceService,
               private bottomSheetRef: MatBottomSheetRef<AddJobTemplateSheetComponent>,
               private dialog: MatDialog,
               private unitService: UnitService,
@@ -52,7 +52,7 @@ export class AddJobTemplateSheetComponent implements OnInit {
       name: new FormControl(this.jobTemplate.name, [Validators.required]),
       unit: new FormControl(this.units, [Validators.required]),
       materials: new FormArray([]),
-      works: new FormArray([])
+      services: new FormArray([])
     });
 
     if (data !== null) {
@@ -65,10 +65,10 @@ export class AddJobTemplateSheetComponent implements OnInit {
         this.materials = this.materials.filter(m => m.id !== material.material.id);
       }
 
-      for (const material of data.materials.filter(m => m.material.type === AbstractMaterialType.WORK)) {
-        const items = this.jobTemplateForm.get('works') as FormArray;
+      for (const material of data.materials.filter(m => m.material.type === AbstractMaterialType.SERVICE)) {
+        const items = this.jobTemplateForm.get('services') as FormArray;
         items.push(this.creatFormMaterialArray(material));
-        this.works = this.works.filter(m => m.id !== material.material.id);
+        this.services = this.services.filter(m => m.id !== material.material.id);
       }
       this.jobTemplateForm.get('unit').setValue(data.unit);
     } else {
@@ -79,11 +79,11 @@ export class AddJobTemplateSheetComponent implements OnInit {
       this.units = units.body;
     });
 
-    workService.getAllWorks().subscribe(works => {
-      this.works = works.body;
+    serviceService.getAllServices().subscribe(services => {
+      this.services = services.body;
       if (data !== null) {
-        for (const work of data.materials.filter(m => m.material.type === AbstractMaterialType.WORK)) {
-          this.works = this.works.filter(m => m.id !== work.material.id);
+        for (const jobTemplateMaterial of data.materials.filter(m => m.material.type === AbstractMaterialType.SERVICE)) {
+          this.services = this.services.filter(m => m.id !== jobTemplateMaterial.material.id);
         }
       }
     });
@@ -112,7 +112,7 @@ export class AddJobTemplateSheetComponent implements OnInit {
   saveJobTemplate() {
     this.jobTemplate.name = this.jobTemplateForm.get('name').value;
     this.jobTemplate.materials = this.jobTemplateForm.get('materials').value;
-    for (const element of this.jobTemplateForm.get('works').value) {
+    for (const element of this.jobTemplateForm.get('services').value) {
       this.jobTemplate.materials.push(element);
     }
     this.jobTemplate.unit = this.jobTemplateForm.get('unit').value;
@@ -134,15 +134,15 @@ export class AddJobTemplateSheetComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
   }
 
-  addWork() {
+  addServices() {
     const dialogRef = this.dialog.open(AddAbstractMaterialDialogComponent, {
-      data: this.works,
+      data: this.services,
       width: '80%',
       height: '600px',
       disableClose: true
     });
-    dialogRef.componentInstance.emmmiter.subscribe(work => {
-      this.addJobAbstractMaterials(work, AbstractMaterialType.WORK);
+    dialogRef.componentInstance.emmmiter.subscribe(service => {
+      this.addJobAbstractMaterials(service, AbstractMaterialType.SERVICE);
       this.cd.markForCheck();
     });
     dialogRef.afterClosed().subscribe();
@@ -153,10 +153,10 @@ export class AddJobTemplateSheetComponent implements OnInit {
     const jobTemplate = new JobTemplateMaterial();
     jobTemplate.material = material;
     jobTemplate.value = 1;
-    if (material.type === AbstractMaterialType.WORK) {
-      const items = this.jobTemplateForm.get('works') as FormArray;
+    if (material.type === AbstractMaterialType.SERVICE) {
+      const items = this.jobTemplateForm.get('services') as FormArray;
       items.push(this.creatFormMaterialArray(jobTemplate));
-      this.works = this.works.filter(m => m.id !== material.id);
+      this.services = this.services.filter(m => m.id !== material.id);
     } else {
       const items = this.jobTemplateForm.get('materials') as FormArray;
       items.push(this.creatFormMaterialArray(jobTemplate));
@@ -164,8 +164,8 @@ export class AddJobTemplateSheetComponent implements OnInit {
     }
   }
 
-  getMarkedWorks(): FormArray {
-    return this.jobTemplateForm.get('works') as FormArray;
+  getMarkedServices(): FormArray {
+    return this.jobTemplateForm.get('services') as FormArray;
   }
 
   getMarkedMaterial(): FormArray {
@@ -185,9 +185,9 @@ export class AddJobTemplateSheetComponent implements OnInit {
     this.materials.push(element.value.material);
   }
 
-  deleteWork(element: AbstractControl) {
-    (this.jobTemplateForm.get('works') as FormArray)
-      .removeAt((this.jobTemplateForm.get('works') as FormArray).value.findIndex(m => m.material.id = element.value.material.id));
-    this.works.push(element.value.material);
+  deleteService(element: AbstractControl) {
+    (this.jobTemplateForm.get('services') as FormArray)
+      .removeAt((this.jobTemplateForm.get('services') as FormArray).value.findIndex(m => m.material.id = element.value.material.id));
+    this.services.push(element.value.material);
   }
 }

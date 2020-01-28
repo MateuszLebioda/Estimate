@@ -1,7 +1,6 @@
 import {Unit} from './unit';
 import {AbstractEstimateMaterial} from './abstract-estimate-material';
-import {WorkEstimate} from './work-estimate';
-import {AbstractMaterialType} from './abstract-material-type.enum';
+import {ServiceEstimate} from './service-estimate';
 import {MaterialEstimate} from './material-estimate';
 
 export class JobTemplateEstimate {
@@ -12,18 +11,11 @@ export class JobTemplateEstimate {
   value: number;
   sumPrice: number;
 
-  getWorks(): Array<WorkEstimate> {
-    return (this.materials.filter(w => w.type === AbstractMaterialType.WORK) as Array<WorkEstimate>);
-  }
 
-  getMaterials(): Array<MaterialEstimate> {
-    return (this.materials.filter(w => w.type === AbstractMaterialType.MATERIAL) as Array<MaterialEstimate>);
-  }
-
-  setMaterials(materials: Array<MaterialEstimate>, works: Array<WorkEstimate>) {
+  setMaterials(materials: Array<MaterialEstimate>, serviceEstimates: Array<ServiceEstimate>) {
     this.materials = materials;
-    for (const work of works) {
-      this.materials.push(work);
+    for (const serviceEstimate of serviceEstimates) {
+      this.materials.push(serviceEstimate);
     }
   }
 
