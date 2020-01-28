@@ -6,7 +6,6 @@ import {MaterialViewComponent} from './content/material/material-view.component'
 import {UnitViewsComponent} from './content/units/units-view.component';
 import {WorkViewComponent} from './content/work/work-view.component';
 import {JobTemplatesViewComponent} from './content/job-templates/job-templates-view.component';
-import {AddNewEstimateSheetComponent} from './content/estimate/add-new-estimate-sheet/add-new-estimate-sheet.component';
 
 const routes: Routes = [
   {path: 'clients', component: ClientsViewComponent},

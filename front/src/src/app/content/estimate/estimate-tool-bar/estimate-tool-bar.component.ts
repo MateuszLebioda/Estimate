@@ -15,6 +15,9 @@ import {Estimate} from '../../../model/estimate';
 export class EstimateToolBarComponent implements OnInit {
 
   @Output()
+  filter = new EventEmitter<string>();
+
+  @Output()
   estimateEmitter = new EventEmitter<Estimate>();
 
   @Input()
@@ -58,4 +61,8 @@ export class EstimateToolBarComponent implements OnInit {
     });
   }
 
+
+  filterMaterials(changed: string) {
+    this.filter.emit(changed);
+  }
 }

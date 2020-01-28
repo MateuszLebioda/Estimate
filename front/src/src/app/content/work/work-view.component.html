@@ -1,6 +1,6 @@
-<app-work-toolbar (workToAdd)="addWork($event)"></app-work-toolbar>
+<app-work-toolbar (workToAdd)="addWork($event)" (filter)="filter($event)"></app-work-toolbar>
 <div class="contentDiv">
-  <div *ngFor="let work of works; let i = index" class="card-container">
+  <div *ngFor="let work of filterWorks(); let i = index" class="card-container">
     <app-raw-work [work]="work" class="example-card" (click)="onMatCardClickEvent(work)"></app-raw-work>
   </div>
 </div>

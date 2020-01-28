@@ -6,6 +6,7 @@ import {Client} from '../../model/client';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogClientComponent} from './dialog-client/dialog-client.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MaterialTemplate} from '../../model/template/material-template';
 
 @Component({
   selector: 'app-clients-view',
@@ -14,12 +15,15 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class ClientsViewComponent implements OnInit {
 
+
   constructor(private addSheet: MatBottomSheet,
               private clientService: ClientService,
               public dialog: MatDialog,
               private snackBar: MatSnackBar) {
   }
 
+
+  filterMaterial = '';
   clients: Array<Client>;
 
   ngOnInit() {
@@ -78,4 +82,18 @@ export class ClientsViewComponent implements OnInit {
     });
   }
 
+  filterClient(filter: string) {
+    this.filterMaterial = filter;
+  }
+
+  filterClients(): Array<Client> {
+    if (this.clients !== undefined) {
+      if (this.filterMaterial === '') {
+        return this.clients.sort((a, b) => a.firstName.concat(a.lastName).localeCompare(b.firstName.concat(b.lastName)));
+      }
+      return this.clients.filter
+      (m => m.firstName.concat(' ', m.lastName).toLocaleLowerCase().includes(this.filterMaterial.toLocaleLowerCase()))
+        .sort((a, b) => a.firstName.concat(a.lastName).localeCompare(b.firstName.concat(b.lastName)));
+    }
+  }
 }

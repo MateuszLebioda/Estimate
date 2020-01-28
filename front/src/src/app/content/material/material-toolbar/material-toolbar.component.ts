@@ -10,11 +10,14 @@ import {AddMaterialSheetComponent} from '../add-material-sheet/add-material-shee
 })
 export class MaterialToolbarComponent implements OnInit {
 
-  constructor(private addSheet: MatBottomSheet) {
-  }
-
   @Output()
   materialToAdd = new EventEmitter<MaterialTemplate>();
+
+  @Output()
+  filter = new EventEmitter<string>();
+
+  constructor(private addSheet: MatBottomSheet) {
+  }
 
   ngOnInit() {
   }
@@ -26,5 +29,9 @@ export class MaterialToolbarComponent implements OnInit {
         }
       }
     );
+  }
+
+  filterMaterials(changed: string) {
+    this.filter.emit(changed);
   }
 }

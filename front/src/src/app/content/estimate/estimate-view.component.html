@@ -4,10 +4,11 @@
   [materialTemplates]="materialTemplates"
   [clients]="clients"
   [units]="units"
+  (filter)="filter($event)"
   (estimateEmitter)="saveNewEstimate($event)"
 ></app-estimate-tool-bar>
 <div class="contentDiv">
-  <ng-container *ngFor="let estimate of estimates">
+  <ng-container *ngFor="let estimate of filterEstimates()">
     <app-estimate-raw [estimate]="estimate" style="margin: 10px; cursor: pointer"
                       (click)="estimateClick($event,estimate)">
     </app-estimate-raw>

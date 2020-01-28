@@ -11,16 +11,17 @@ body {
 }
 
 .custom-dialog-container {
- padding: 0;
+  padding: 0;
 }
 
 .data-mat-card {
   background: $content-div-raw;
   margin: 20px 20px 0px;
   cursor: pointer !important;
-  padding-top: 0px!important;
-  padding-bottom: 0px!important;
-  input{
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+
+  input {
     cursor: pointer !important;
   }
 }
@@ -50,8 +51,9 @@ body {
   margin-left: 50px;
   margin-top: 25px;
   float: left;
-  input{
-    cursor: pointer!important;
+
+  input {
+    cursor: pointer !important;
     text-align: center;
   }
 }
@@ -62,7 +64,7 @@ body {
   width: auto;
 }
 
-.mat-error{
+.mat-error {
   font-size: 10px;
 }
 
@@ -71,7 +73,7 @@ body {
   color: white;
 }
 
-.tool-bar-dialog-filter{
+.tool-bar-dialog-filter {
   background: $toolbar-soft;
   color: white;
   border-radius: 7px 7px 0 0;
@@ -100,22 +102,26 @@ body {
 
 .dialog-button-max-size {
   min-width: 300px;
+
   mat-form-field {
     width: 100% !important;
   }
-    .content {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 200px;
-      max-width: 350px;
-      .content2 {
-        display: flex;
-        flex-direction: column;
-        .mat-raised-button {
-          max-width: 250px;
-          margin-bottom: 20px!important;
-          width: 100%;
+
+  .content {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    max-width: 350px;
+
+    .content2 {
+      display: flex;
+      flex-direction: column;
+
+      .mat-raised-button {
+        max-width: 250px;
+        margin-bottom: 20px !important;
+        width: 100%;
       }
     }
   }
@@ -129,23 +135,24 @@ body {
   padding: 0;
 }
 
-.jobTemplateAddSheet{
+.jobTemplateAddSheet {
   min-width: calc(100vw - 258px) !important;
   max-width: calc(100vw - 258px) !important;
 }
 
 
-.estimateAddSheet{
+.estimateAddSheet {
   min-width: calc(100vw - 124px) !important;
   max-width: calc(100vw - 124px) !important;
   max-height: calc(100vw - 200px) !important;
 }
 
-.contentDiv{
+.contentDiv {
   background: $content-div-background;
   height: calc(100% - 139px);
   overflow-y: scroll;
-  mat-card{
+
+  mat-card {
     background: $content-div-raw;
   }
 }
@@ -161,11 +168,12 @@ body {
   overflow: hidden;
 
 }
+
 .show-more.show {
 
 }
 
 
-.expandIcon{
+.expandIcon {
 
 }

@@ -1,11 +1,17 @@
 <div>
-  <mat-toolbar class="tool-bar-color tool-bar-spans">
-    <button mat-button class="tool-bar-spans" (click)="addNewClient()">Dodaj kilenta</button>
+  <mat-toolbar class="tool-bar-spans tool-bar-color">
+    <div style="width: 100%; padding-top: 15px">
+      <button mat-button class="tool-bar-spans" (click)="addNewClient()">Dodaj klienta</button>
+      <mat-icon style="float: right; padding-top: 5px; margin-right: 15px" class="icon-style expandIcon">search</mat-icon>
+      <mat-form-field class="mat-filed-style" style="float: right; padding-right: 5px; width: 25%">
+        <input ngModel="" (ngModelChange)="filterClient($event)" matInput placeholder="Szukaj">
+      </mat-form-field>
+    </div>
   </mat-toolbar>
 </div>
 <div class="contentDiv">
   <div class="user-card-container">
-    <div *ngFor="let client of clients; let i = index">
+    <div *ngFor="let client of filterClients(); let i = index">
       <app-raw-client [client]="client" class="client-example-card"
                       (click)="onMatCardClickEvent(client)"></app-raw-client>
     </div>
