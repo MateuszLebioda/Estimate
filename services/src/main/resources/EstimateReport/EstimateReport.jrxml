@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Simple_Blue" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="60a56d10-7791-4f8b-b5b3-3a664d7d7761">
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="subMaterialsSet" uuid="e74d0620-717a-403f-8f6b-edfe8a98efbc">
+		<field name="name" class="java.lang.String"/>
+		<field name="unit.bottom" class="java.lang.String"/>
+		<field name="unit.top" class="java.lang.String"/>
+		<field name="price" class="java.lang.Double"/>
+		<field name="value" class="java.lang.Double"/>
+		<field name="sumPrice" class="java.lang.Double"/>
+		<field name="sumValue" class="java.lang.Double"/>
+		<variable name="totalPrice" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{sumPrice}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="JobTemplateSource" uuid="de236c49-dce6-401c-99a9-2fb37f45856a">
+		<field name="name" class="java.lang.String"/>
+		<field name="unit.bottom" class="java.lang.String"/>
+		<field name="unit.top" class="java.lang.String"/>
+		<field name="value" class="java.lang.Double"/>
+		<field name="sumPrice" class="java.lang.Double"/>
+		<field name="materials" class="java.util.List"/>
+		<variable name="totalPrice" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{sumPrice}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="MaterialsParameters" uuid="9716e336-2d22-458e-8c70-2ed9d951338a">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="name" class="java.lang.String"/>
+		<field name="price" class="java.lang.Double"/>
+		<field name="unit.bottom" class="java.lang.String"/>
+		<field name="unit.top" class="java.lang.String"/>
+		<field name="value" class="java.lang.Double"/>
+		<field name="sumPrice" class="java.lang.Double"/>
+		<field name="sumValue" class="java.lang.Double"/>
+		<variable name="totalPrice" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{sumPrice}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="ServicesSource" uuid="3687ff4b-71b8-4b62-94ea-7409724029fe">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="name" class="java.lang.String"/>
+		<field name="price" class="java.lang.Double"/>
+		<field name="unit.bottom" class="java.lang.String"/>
+		<field name="unit.top" class="java.lang.String"/>
+		<field name="value" class="java.lang.Double"/>
+		<field name="sumPrice" class="java.lang.Double"/>
+		<field name="sumValue" class="java.lang.Double"/>
+		<variable name="totalPrice" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{sumPrice}]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="Dataset1" uuid="eab481c1-fb01-46ec-864b-550877ce9222">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="MaterialsParameters" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="Title" class="java.lang.String"/>
+	<parameter name="ServicesSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="JobTemplateSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="price" class="java.lang.Double"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="60">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="80" backcolor="#3F51B5" uuid="956d4712-b73b-4308-8e68-317330960042"/>
+				<staticText>
+					<reportElement x="10" y="10" width="160" height="50" forecolor="#FFFFFF" uuid="5f3a425d-0383-4925-943d-ecd4c45992dc"/>
+					<textElement>
+						<font fontName="Estimate" size="30"/>
+					</textElement>
+					<text><![CDATA[Kosztorys]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="30" y="50" width="520" height="30" forecolor="#FFFFFF" uuid="7526fdcf-ef59-4380-9cb4-1f08238ff5b6"/>
+					<textElement>
+						<font fontName="Estimate" size="17"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{Title}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="12"/>
+	</pageHeader>
+	<detail>
+		<band height="197">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="197" backcolor="#FFFFFF" uuid="5f7e1260-2528-49fb-8a93-badcfb970f8a">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="JobTemplateSource" uuid="52e97bb5-9d20-42d5-a20e-59ed90216bf6">
+						<dataSourceExpression><![CDATA[$P{JobTemplateSource}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="556" uuid="24020168-e9de-41ab-af48-50ddcdd88b39">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<frame>
+								<reportElement style="Table_TH" x="0" y="0" width="556" height="30" forecolor="#FFFFFF" backcolor="#3F51B5" uuid="f391a304-08e2-451c-b8da-e2b1772b0003"/>
+								<staticText>
+									<reportElement x="0" y="0" width="555" height="30" forecolor="#FFFFFF" uuid="a0dfcb51-1fe5-425b-862c-0cd0667cda07"/>
+									<box leftPadding="10"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Estimate" size="17"/>
+									</textElement>
+									<text><![CDATA[Prace]]></text>
+								</staticText>
+							</frame>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<frame>
+								<reportElement x="0" y="0" width="556" height="30" uuid="e2d77d90-acb0-4bc1-9f7f-43d05029272d"/>
+								<staticText>
+									<reportElement x="0" y="0" width="280" height="30" uuid="4a8478bb-9996-4a82-9e69-058f386bf8a6"/>
+									<box leftPadding="5"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[Suma kosztów prac:]]></text>
+								</staticText>
+								<textField>
+									<reportElement x="440" y="0" width="100" height="30" uuid="7c367fac-95d4-4602-b0be-30c813289eee"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{totalPrice}]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement x="540" y="0" width="16" height="30" uuid="02faf9cf-ebc9-4d13-bcab-9b1f0be347b8"/>
+									<box leftPadding="2"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[zł]]></text>
+								</staticText>
+							</frame>
+						</jr:tableFooter>
+						<jr:columnHeader height="30" rowSpan="1">
+							<frame>
+								<reportElement mode="Opaque" x="0" y="0" width="556" height="30" backcolor="#283593" uuid="77988ad8-5240-4926-9966-3cf5d9c56477"/>
+								<textField>
+									<reportElement x="0" y="0" width="254" height="30" forecolor="#FFFFFF" backcolor="#283593" uuid="6f89eace-49ea-4243-9517-849557ca24df"/>
+									<box leftPadding="20" rightPadding="0"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Nazwa"]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement x="390" y="0" width="90" height="30" forecolor="#FFFFFF" uuid="efc2e8a3-9431-426f-aa20-0d9ad4957849"/>
+									<box leftPadding="5"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[Nakład]]></text>
+								</staticText>
+								<staticText>
+									<reportElement x="480" y="0" width="60" height="30" forecolor="#FFFFFF" uuid="a57c7e55-e836-4c0d-8f19-254b0f8cecd5">
+										<property name="com.jaspersoft.studio.unit.x" value="px"/>
+									</reportElement>
+									<box leftPadding="5"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[Suma kosztów]]></text>
+								</staticText>
+							</frame>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="90">
+							<frame>
+								<reportElement x="0" y="0" width="556" height="90" uuid="d09dfc08-cc28-40d1-ae50-e131d58730a9"/>
+								<textField>
+									<reportElement x="0" y="0" width="390" height="30" uuid="08cfcc0b-316d-44d6-9115-efc6c870521c"/>
+									<box leftPadding="20"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="390" y="0" width="50" height="30" uuid="79b50486-a63d-4089-8fed-8f6c0fff0b0c"/>
+									<box leftPadding="0" rightPadding="5"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="480" y="0" width="60" height="30" uuid="3560c02e-e0ce-4717-ae88-f9b8a4228715">
+										<property name="com.jaspersoft.studio.unit.x" value="px"/>
+									</reportElement>
+									<box leftPadding="0" rightPadding="5"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{sumPrice}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="440" y="0" width="40" height="30" uuid="8d4008ce-345e-49ef-bf6c-ecfae1111223"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle" markup="styled">
+										<font fontName="Estimate" isBold="false"/>
+									</textElement>
+									<textFieldExpression><![CDATA["/".concat($F{unit.bottom}).concat("<sup>").concat($F{unit.top}!=null?$F{unit.top}:"").concat("</sup> ").concat("    ")]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement x="540" y="0" width="15" height="30" uuid="0790e16f-38f8-4834-be0e-ea0905781f1d"/>
+									<box leftPadding="2"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[zł]]></text>
+								</staticText>
+								<componentElement>
+									<reportElement x="21" y="30" width="535" height="60" uuid="1989dbe4-4029-46da-94ee-4d0f9b849af7">
+										<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+										<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
+										<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
+										<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+									</reportElement>
+									<jr:table>
+										<datasetRun subDataset="subMaterialsSet" uuid="8921cb00-5a84-4c7a-a3ef-c671f210c4b2">
+											<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{materials})]]></dataSourceExpression>
+										</datasetRun>
+										<jr:column width="535" uuid="898b5dc0-c357-4fb9-9dd0-c9062173dd77">
+											<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+											<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+												<frame>
+													<reportElement mode="Opaque" x="0" y="0" width="535" height="30" backcolor="rgba(40, 53, 147, 0.6627451)" uuid="665d48f4-f7c2-4ddb-b86a-6928ca23eb1c"/>
+													<textField>
+														<reportElement x="0" y="0" width="230" height="30" forecolor="#FFFFFF" uuid="d064f30b-efa9-4c3b-9e8e-571c7ee36991"/>
+														<box leftPadding="5"/>
+														<textElement verticalAlignment="Middle">
+															<font fontName="Estimate"/>
+														</textElement>
+														<textFieldExpression><![CDATA["Nazwa"]]></textFieldExpression>
+													</textField>
+													<staticText>
+														<reportElement x="230" y="0" width="70" height="30" forecolor="#FFFFFF" uuid="31740f95-747c-4d21-9565-1978f56411ef"/>
+														<box leftPadding="5"/>
+														<textElement verticalAlignment="Middle">
+															<font fontName="Estimate"/>
+														</textElement>
+														<text><![CDATA[Koszt]]></text>
+													</staticText>
+													<staticText>
+														<reportElement x="300" y="0" width="70" height="30" forecolor="#FFFFFF" uuid="43bcd070-8593-4e11-b475-82fad8796631"/>
+														<box leftPadding="5"/>
+														<textElement verticalAlignment="Middle">
+															<font fontName="Estimate"/>
+														</textElement>
+														<text><![CDATA[Nakład]]></text>
+													</staticText>
+													<staticText>
+														<reportElement x="370" y="0" width="70" height="30" forecolor="#FFFFFF" uuid="b3c8c2cd-5d3c-46c1-8169-94a66e6a8de4"/>
+														<box leftPadding="5"/>
+														<textElement verticalAlignment="Middle">
+															<font fontName="Estimate"/>
+														</textElement>
+														<text><![CDATA[Suma nakładów]]></text>
+													</staticText>
+													<staticText>
+														<reportElement x="460" y="0" width="70" height="30" forecolor="#FFFFFF" uuid="8e9361fa-7527-4952-96ca-018a33d2987c"/>
+														<box leftPadding="5"/>
+														<textElement verticalAlignment="Middle">
+															<font fontName="Estimate"/>
+														</textElement>
+														<text><![CDATA[Suma kosztów]]></text>
+													</staticText>
+												</frame>
+											</jr:columnHeader>
+											<jr:detailCell style="Table 1_TD" height="30">
+												<frame>
+													<reportElement x="0" y="0" width="535" height="30" uuid="ec86ce09-b624-49d6-9b40-69351f70aac4"/>
+													<textField>
+														<reportElement x="0" y="0" width="230" height="30" uuid="e36a1fb0-7e8e-4fae-8938-91ecb77af534"/>
+														<box leftPadding="5"/>
+														<textElement verticalAlignment="Middle">
+															<font fontName="Estimate"/>
+														</textElement>
+														<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+													</textField>
+													<staticText>
+														<reportElement x="282" y="0" width="15" height="30" uuid="8e053711-c365-48aa-8f60-ecf2164b4c06"/>
+														<box leftPadding="2"/>
+														<textElement textAlignment="Left" verticalAlignment="Middle">
+															<font fontName="Estimate"/>
+														</textElement>
+														<text><![CDATA[zł]]></text>
+													</staticText>
+													<textField>
+														<reportElement x="230" y="0" width="52" height="30" uuid="206b17db-b98f-48c7-b497-adeb90bd9f27"/>
+														<box leftPadding="0" rightPadding="5"/>
+														<textElement textAlignment="Right" verticalAlignment="Middle">
+															<font fontName="Estimate"/>
+														</textElement>
+														<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+													</textField>
+													<textField>
+														<reportElement x="297" y="0" width="43" height="30" uuid="cc7cb26c-86f2-4a45-b5af-6d8b87e7db6c"/>
+														<box leftPadding="0" rightPadding="5"/>
+														<textElement textAlignment="Right" verticalAlignment="Middle">
+															<font fontName="Estimate"/>
+														</textElement>
+														<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+													</textField>
+													<textField>
+														<reportElement x="340" y="0" width="34" height="30" uuid="8110f342-ac89-4753-aa1d-3e02dfc8b412"/>
+														<textElement textAlignment="Left" verticalAlignment="Middle" markup="styled">
+															<font fontName="Estimate" isBold="false"/>
+														</textElement>
+														<textFieldExpression><![CDATA["/".concat($F{unit.bottom}).concat("<sup>").concat($F{unit.top}!=null?$F{unit.top}:"").concat("</sup> ").concat("    ")]]></textFieldExpression>
+													</textField>
+													<staticText>
+														<reportElement x="520" y="0" width="15" height="30" uuid="8fe37f9a-2e28-4666-837c-bce15902ff72"/>
+														<box leftPadding="2"/>
+														<textElement textAlignment="Left" verticalAlignment="Middle">
+															<font fontName="Estimate"/>
+														</textElement>
+														<text><![CDATA[zł]]></text>
+													</staticText>
+													<textField>
+														<reportElement x="465" y="0" width="55" height="30" uuid="9ad7b487-eeba-460b-bf5f-3020846f30f5">
+															<property name="com.jaspersoft.studio.unit.x" value="px"/>
+														</reportElement>
+														<box leftPadding="0" rightPadding="5"/>
+														<textElement textAlignment="Right" verticalAlignment="Middle">
+															<font fontName="Estimate"/>
+														</textElement>
+														<textFieldExpression><![CDATA[$F{sumPrice}]]></textFieldExpression>
+													</textField>
+													<textField>
+														<reportElement x="425" y="0" width="40" height="30" uuid="73c48a47-3b69-4d12-9122-a5b61ca2950b"/>
+														<textElement textAlignment="Left" verticalAlignment="Middle" markup="styled">
+															<font fontName="Estimate" isBold="false"/>
+														</textElement>
+														<textFieldExpression><![CDATA["/".concat($F{unit.bottom}).concat("<sup>").concat($F{unit.top}!=null?$F{unit.top}:"").concat("</sup> ").concat("    ")]]></textFieldExpression>
+													</textField>
+													<textField>
+														<reportElement x="375" y="0" width="50" height="30" uuid="b72c3c8c-87ce-4799-b6a7-4c5ced24067e"/>
+														<box leftPadding="0" rightPadding="5"/>
+														<textElement textAlignment="Right" verticalAlignment="Middle">
+															<font fontName="Estimate"/>
+														</textElement>
+														<textFieldExpression><![CDATA[$F{sumValue}]]></textFieldExpression>
+													</textField>
+												</frame>
+											</jr:detailCell>
+										</jr:column>
+									</jr:table>
+								</componentElement>
+							</frame>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="135">
+			<componentElement>
+				<reportElement x="0" y="13" width="555" height="122" backcolor="#FFFFFF" uuid="93d224d6-3df7-4d79-9e97-4cca71283309">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="MaterialsParameters" uuid="52921027-ac13-40d3-a91e-d77cd98c253c">
+						<dataSourceExpression><![CDATA[$P{MaterialsParameters}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="555" uuid="febba1d4-b0ce-4c5d-9c5e-86612a245df9">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<frame>
+								<reportElement style="Table_TH" x="0" y="0" width="555" height="30" forecolor="#FFFFFF" backcolor="#3F51B5" uuid="7224d0ba-1f6b-4f12-9735-701007430393"/>
+								<staticText>
+									<reportElement x="0" y="0" width="555" height="30" forecolor="#FFFFFF" uuid="4274097c-c68f-4795-ae76-aa1bd3d0907f"/>
+									<box leftPadding="10"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Estimate" size="17"/>
+									</textElement>
+									<text><![CDATA[Dodatkowe materiały]]></text>
+								</staticText>
+							</frame>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<frame>
+								<reportElement x="0" y="0" width="555" height="30" uuid="000668a7-8e19-478d-9576-ada25b0207f7"/>
+								<textField>
+									<reportElement x="0" y="0" width="320" height="30" forecolor="#080404" backcolor="#303DCF" uuid="7e5f5a28-df2f-44da-b889-d868895e1b2c"/>
+									<box leftPadding="20" rightPadding="0"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Suma kosztów dodatkowych materiałów:"]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="440" y="0" width="100" height="30" uuid="7338aec3-b080-4813-b350-c3d2ba841b00"/>
+									<box rightPadding="5"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{totalPrice}]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement x="540" y="0" width="15" height="30" uuid="dd2f2cf0-c501-4b7a-9d20-581960d7ef75">
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									</reportElement>
+									<box leftPadding="2"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[zł]]></text>
+								</staticText>
+							</frame>
+						</jr:tableFooter>
+						<jr:columnHeader height="30" rowSpan="1">
+							<frame>
+								<reportElement mode="Opaque" x="0" y="0" width="555" height="30" backcolor="#283593" uuid="0dc9c4fc-1fd5-4945-886f-54c7612da0c6"/>
+								<textField>
+									<reportElement x="0" y="0" width="254" height="30" forecolor="#FFFFFF" backcolor="#283593" uuid="fc525da9-5c6d-44b1-be14-88dbef9a7276"/>
+									<box leftPadding="20" rightPadding="0"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Nazwa"]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement x="290" y="0" width="60" height="30" forecolor="#FFFFFF" uuid="92d281f9-9c21-44c5-adeb-61a2c3064ac0">
+										<property name="com.jaspersoft.studio.unit.x" value="px"/>
+									</reportElement>
+									<box leftPadding="5"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[Koszt]]></text>
+								</staticText>
+								<staticText>
+									<reportElement x="390" y="0" width="90" height="30" forecolor="#FFFFFF" uuid="a15ac8a7-c0bc-41b3-91d1-a3cfa061cd12"/>
+									<box leftPadding="5"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[Nakład]]></text>
+								</staticText>
+								<staticText>
+									<reportElement x="495" y="0" width="60" height="30" forecolor="#FFFFFF" uuid="7a1777c8-b2e5-46cb-a790-cb51f4831fd1"/>
+									<box leftPadding="5"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[Suma kosztów]]></text>
+								</staticText>
+							</frame>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<frame>
+								<reportElement x="0" y="0" width="555" height="30" uuid="76cbbf30-ca43-4fa7-b79f-8d3f4859d8eb"/>
+								<textField>
+									<reportElement x="0" y="0" width="300" height="30" uuid="6903c507-6a6c-4f20-90d6-449dc8a7d3f3"/>
+									<box leftPadding="20"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="300" y="0" width="45" height="30" uuid="338dd23f-d7bf-4ab3-a4be-98b104fdf360"/>
+									<box leftPadding="0" rightPadding="5"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="390" y="0" width="50" height="30" uuid="c7537d3e-5003-4591-bbcc-ada58dedae87"/>
+									<box leftPadding="0" rightPadding="5"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="480" y="0" width="60" height="30" uuid="51f34f17-95a7-443c-8f20-c20de88de80a"/>
+									<box leftPadding="0" rightPadding="5"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{sumPrice}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="440" y="0" width="40" height="30" uuid="c826acdd-a0c4-40f9-8f9a-4003157b6255"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle" markup="styled">
+										<font fontName="Estimate" isBold="false"/>
+									</textElement>
+									<textFieldExpression><![CDATA["/".concat($F{unit.bottom}).concat("<sup>").concat($F{unit.top}!=null?$F{unit.top}:"").concat("</sup> ").concat("    ")]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement x="540" y="0" width="15" height="30" uuid="6ccd49b2-59f0-4b84-830a-bccd3ee19863"/>
+									<box leftPadding="2"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[zł]]></text>
+								</staticText>
+								<staticText>
+									<reportElement x="345" y="0" width="15" height="30" uuid="fac81a53-8d4e-4d25-8eea-3e6c482ccf3d"/>
+									<box leftPadding="2"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[zł]]></text>
+								</staticText>
+							</frame>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="150">
+			<componentElement>
+				<reportElement x="0" y="14" width="555" height="121" backcolor="#FFFFFF" uuid="56ba051a-f293-4b84-b425-d825df543bca">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="ServicesSource" uuid="65b11b47-7ef6-48a3-a828-f1167fc89944">
+						<dataSourceExpression><![CDATA[$P{ServicesSource}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="555" uuid="83d43d37-a58a-45eb-9422-5963d5eeb68d">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table_TH" height="31" rowSpan="1">
+							<frame>
+								<reportElement style="Table_TH" x="0" y="0" width="555" height="31" forecolor="#FFFFFF" backcolor="#3F51B5" uuid="a55eb397-8b82-4c47-93c9-97cc64da35d8"/>
+								<staticText>
+									<reportElement x="1" y="1" width="554" height="30" forecolor="#FFFFFF" uuid="2787146a-1a6e-4cc8-85b5-37e3a5bbfaab"/>
+									<box leftPadding="10"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Estimate" size="17"/>
+									</textElement>
+									<text><![CDATA[Dodatkowe usługi]]></text>
+								</staticText>
+							</frame>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<frame>
+								<reportElement x="0" y="0" width="555" height="30" uuid="58eca7ee-aea1-470e-bb46-28188f9cbc91"/>
+								<textField>
+									<reportElement x="0" y="0" width="254" height="30" forecolor="#080404" backcolor="#303DCF" uuid="eb598bde-8ec8-46dd-8bbd-688e710842db"/>
+									<box leftPadding="20" rightPadding="0"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Suma kosztów dodatkowych usług:"]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="440" y="0" width="100" height="30" uuid="45b5e98e-c996-4f2a-a055-0799a24f6dda"/>
+									<box rightPadding="5"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{totalPrice}]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement x="540" y="0" width="15" height="30" uuid="ee0f13c4-e2cb-4043-a635-7ddf06e9aecf">
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									</reportElement>
+									<box leftPadding="2"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[zł]]></text>
+								</staticText>
+							</frame>
+						</jr:tableFooter>
+						<jr:columnHeader height="30" rowSpan="1">
+							<frame>
+								<reportElement mode="Opaque" x="0" y="0" width="555" height="30" backcolor="#283593" uuid="a1c45f61-77d4-4e72-bd0f-1eff568b5816"/>
+								<textField>
+									<reportElement x="0" y="0" width="254" height="30" forecolor="#FFFFFF" backcolor="#283593" uuid="6d1bd690-518b-4a22-acc5-7730a08723dc"/>
+									<box leftPadding="20" rightPadding="0"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Nazwa"]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement x="290" y="0" width="60" height="30" forecolor="#FFFFFF" uuid="095b4d44-6f7e-4e09-b788-b67d30310843">
+										<property name="com.jaspersoft.studio.unit.x" value="px"/>
+									</reportElement>
+									<box leftPadding="5"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[Koszt]]></text>
+								</staticText>
+								<staticText>
+									<reportElement x="390" y="0" width="90" height="30" forecolor="#FFFFFF" uuid="5199b83e-6a50-40b5-8776-db30cd304828"/>
+									<box leftPadding="5"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[Nakład]]></text>
+								</staticText>
+								<staticText>
+									<reportElement x="495" y="0" width="60" height="30" forecolor="#FFFFFF" uuid="5b4a8688-c2cf-4172-9412-3462233b27ff"/>
+									<box leftPadding="5"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[Suma kosztów]]></text>
+								</staticText>
+							</frame>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<frame>
+								<reportElement x="0" y="0" width="555" height="30" uuid="61aa8d2a-b6fd-4026-ab7c-d2a3c110a984"/>
+								<textField>
+									<reportElement x="0" y="0" width="300" height="30" uuid="d5e93202-29d1-49cf-8f7e-efe187919347"/>
+									<box leftPadding="20"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="300" y="0" width="45" height="30" uuid="0cf62cf5-a53f-46c5-976e-400948168d2d"/>
+									<box leftPadding="0" rightPadding="5"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="390" y="0" width="50" height="30" uuid="996db4c7-931a-49f9-98c0-77ff74ea9d0f"/>
+									<box leftPadding="0" rightPadding="5"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{value}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="480" y="0" width="60" height="30" uuid="036b8147-043e-467d-8f0a-5a0a3c57d660">
+										<property name="com.jaspersoft.studio.unit.x" value="px"/>
+									</reportElement>
+									<box leftPadding="0" rightPadding="5"/>
+									<textElement textAlignment="Right" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{sumPrice}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement x="440" y="0" width="40" height="30" uuid="5b583aae-cdd5-4404-acbf-957050498065"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle" markup="styled">
+										<font fontName="Estimate" isBold="false"/>
+									</textElement>
+									<textFieldExpression><![CDATA["/".concat($F{unit.bottom}).concat("<sup>").concat($F{unit.top}!=null?$F{unit.top}:"").concat("</sup> ").concat("    ")]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement x="540" y="0" width="15" height="30" uuid="ecbfd88e-1859-4c3b-9514-b48c31339399"/>
+									<box leftPadding="2"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[zł]]></text>
+								</staticText>
+								<staticText>
+									<reportElement x="345" y="0" width="15" height="30" uuid="636815f2-866c-48e3-bc2e-aaff080f07aa"/>
+									<box leftPadding="2"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Estimate"/>
+									</textElement>
+									<text><![CDATA[zł]]></text>
+								</staticText>
+							</frame>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="30">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="30" backcolor="#F0F8FF" uuid="5cd8e4c2-83d9-4190-ac20-d3dda035fe92"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<staticText>
+					<reportElement x="0" y="0" width="162" height="30" uuid="a8696d98-eba1-4497-8797-313bd0003386"/>
+					<box leftPadding="5"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Estimate" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Całkowita cena zlecenia]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="440" y="0" width="100" height="30" uuid="35a9b58d-4bed-4cec-bcec-a31497b1766e"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Estimate" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{price}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="540" y="0" width="15" height="30" uuid="eadbf210-0f7c-49e4-8949-d1972e037e90"/>
+					<box leftPadding="2"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Estimate" isBold="true"/>
+					</textElement>
+					<text><![CDATA[zł]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" forecolor="#FFFFFF" backcolor="#283593" uuid="a093122b-144f-4717-85b2-250d93332807"/>
+				<textElement textAlignment="Right">
+					<font fontName="Estimate"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Strona "+$V{PAGE_NUMBER}+" z"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" forecolor="#FFFFFF" backcolor="#283593" uuid="57ce83e0-c4ad-4045-af52-a49aff59d0dd"/>
+				<textElement>
+					<font fontName="Estimate"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="230" height="13" forecolor="#FFFFFF" uuid="9c4ebe9f-fb35-43d0-b9d1-4d740901fec8"/>
+				<box leftPadding="15"/>
+				<textElement>
+					<font fontName="Estimate"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd MMMM YYYY").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

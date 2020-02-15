@@ -9,5 +9,6 @@ import java.util.Optional;
 public interface UserDao extends AbstractDaoFunction<User>{
 
     Optional<User> getUserByKeyCloakId(String keyCloakId);
+    User getUserById(Long id);
 
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontFamilies>
+	<fontFamily name="Estimate">
+		<normal><![CDATA[fonts/Estimate/Audiowide-Regular.ttf]]></normal>
+		<pdfEncoding><![CDATA[CP1250]]></pdfEncoding>
+		<pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+		<exportFonts/>
+	</fontFamily>
+</fontFamilies>

@@ -3,6 +3,7 @@ package com.estimate.dao.services.impl;
 import com.estimate.dao.services.dao.AbstractDao;
 import com.estimate.dao.services.dao.AbstractMaterialDao;
 import com.estimate.model.entities.*;
+import org.hibernate.criterion.Order;
 
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
@@ -23,8 +24,8 @@ public class AbstractDaoImpl extends AbstractDao<AbstractMaterialTemplate> imple
         Root<ServiceTemplate> root = criteriaQuery.from(ServiceTemplate.class);
         criteriaQuery.where(
                 criteriaBuilder.and(
-                        criteriaBuilder.equal(root.get("user"), user)
-                ));
+                        criteriaBuilder.equal(root.get("user"), user)))
+                .orderBy(criteriaBuilder.asc(root.get("name")));
         try {
             return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
         } catch (NoResultException e) {
@@ -39,8 +40,8 @@ public class AbstractDaoImpl extends AbstractDao<AbstractMaterialTemplate> imple
         Root<MaterialTemplate> root = criteriaQuery.from(MaterialTemplate.class);
         criteriaQuery.where(
                 criteriaBuilder.and(
-                        criteriaBuilder.equal(root.get("user"), user)
-                        ));
+                        criteriaBuilder.equal(root.get("user"), user)))
+                .orderBy(criteriaBuilder.asc(root.get("name")));
         try {
             return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
         } catch (NoResultException e) {

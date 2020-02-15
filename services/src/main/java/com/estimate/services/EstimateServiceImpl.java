@@ -48,10 +48,19 @@ public class EstimateServiceImpl implements EstimateService {
     }
 
     @Override
+    public EstimateDTO getEstimatesByUserAndEstimateId(User user, Long estimateId) {
+        Estimate estimate = estimateDao.getEstimatesById(estimateId);
+        if(estimate.getUser().equals(user)){
+            return estimate.toDTO();
+        }
+        return null;
+    }
+
+    @Override
     @Transactional
     public Boolean deleteEstimate(Long id) {
-        Estimate estimate = estimateDao.getEstimatesByUId(id);
-        if(estimate.getUser().getId().equals(user.get().getId())){
+        Estimate estimate = estimateDao.getEstimatesById(id);
+        if (estimate.getUser().getId().equals(user.get().getId())) {
             estimateDao.delete(estimate);
             return true;
         }
@@ -59,10 +68,12 @@ public class EstimateServiceImpl implements EstimateService {
     }
 
     @Override
+    @Transactional
     public EstimateDTO update(EstimateDTO estimateDTO) {
-        deleteMaterials(estimateDTO.getId());
-        deleteJobTemplates(estimateDTO.getId());
-        return updateEstimate(estimateDTO);
+        Estimate estimate = estimateDao.getEstimatesById(estimateDTO.getId());
+        estimateDao.delete(estimate);
+        estimateDTO.setId(null);
+        return estimateDao.save(dtoConverter.makeEstimate(estimateDTO)).toDTO();
     }
 
     @Override
@@ -73,25 +84,25 @@ public class EstimateServiceImpl implements EstimateService {
     }
 
     @Transactional
-    private void deleteMaterials(Long estimateId){
-        Estimate estimate = estimateDao.getEstimatesByUId(estimateId);
-        for(AbstractMaterialEstimate abstractMaterialEstimate: estimate.getMaterials()){
+    private void deleteMaterials(Long estimateId) {
+        Estimate estimate = estimateDao.getEstimatesById(estimateId);
+        for (AbstractMaterialEstimate abstractMaterialEstimate : estimate.getMaterials()) {
             abstractMaterialEstimateDao.delete(abstractMaterialEstimate);
         }
     }
 
     @Transactional
-    private void deleteJobTemplates(Long estimateId){
-        Estimate estimate = estimateDao.getEstimatesByUId(estimateId);
-        for(JobTemplateEstimate jobTemplateEstimate: estimate.getJobTemplates()){
+    private void deleteJobTemplates(Long estimateId) {
+        Estimate estimate = estimateDao.getEstimatesById(estimateId);
+        for (JobTemplateEstimate jobTemplateEstimate : estimate.getJobTemplates()) {
             jobTemplateEstimateDao.delete(jobTemplateEstimate);
         }
     }
 
     @Transactional
-    private EstimateDTO updateEstimate(EstimateDTO estimateDTO){
+    private EstimateDTO updateEstimate(EstimateDTO estimateDTO) {
         Estimate estimate = dtoConverter.makeEstimate(estimateDTO);
-        if(estimate.getUser().getId().equals(user.get().getId())){
+        if (estimate.getUser().getId().equals(user.get().getId())) {
             estimateDao.merge(estimate);
             return estimate.toDTO();
         }

@@ -17,6 +17,7 @@ import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {AddNewEstimateSheetComponent} from './add-new-estimate-sheet/add-new-estimate-sheet.component';
 import {ActivatedRoute} from '@angular/router';
 import {EstimateDialogComponentComponent} from '../../utils/estimate-dialog-component/estimate-dialog-component.component';
+import {ReportsService} from '../../services/reports.service';
 
 @Component({
   selector: 'app-estimate-view',
@@ -43,7 +44,8 @@ export class EstimateViewComponent implements OnInit {
               private snackBar: SnackBarServiceService,
               public dialog: MatDialog,
               private addSheet: MatBottomSheet,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private reportsService: ReportsService) {
   }
 
   ngOnInit() {
@@ -107,7 +109,7 @@ export class EstimateViewComponent implements OnInit {
           });
         }
         if (reload !== undefined && reload === 'generate') {
-          console.log('xaxa');
+          this.reportsService.generateEstimateReport(estimate.id);
         }
         if (reload !== undefined && reload === 'edit') {
           this.addSheet.open(AddNewEstimateSheetComponent, {

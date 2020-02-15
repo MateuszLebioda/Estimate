@@ -61,7 +61,7 @@ public class EstimateControllers {
 
     @PUT
     @Path("/edit")
-    public Response delete(EstimateDTO estimateDTO){
+    public Response edit(EstimateDTO estimateDTO){
         if(user.isPresent()){
             return Response.ok(estimateService.update(estimateDTO)).build();
         }else {

@@ -14,6 +14,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Stateless(name = "materialService")
 public class MaterialServiceImpl implements MaterialService {
@@ -67,9 +68,17 @@ public class MaterialServiceImpl implements MaterialService {
         return abstractMaterialDao.getAllMaterials(user);
     }
 
+    public List<MaterialTemplateDTO> getAllMaterialsDTO(User user) {
+        return getAllMaterials(user).stream().map(MaterialTemplate::toDTO).collect(Collectors.toList());
+    }
+
     @Override
     public List<ServiceTemplate> getAllServices(User user) {
         return abstractMaterialDao.getAllServices(user);
+    }
+
+    public List<ServiceTempleDTO> getAllServicesDTO(User user){
+        return getAllServices(user).stream().map(ServiceTemplate::toDTO).collect(Collectors.toList());
     }
 
     @Override

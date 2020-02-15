@@ -19,7 +19,9 @@ public interface MaterialService {
     boolean deleteAbstractMaterial(Long id);
     Long updateAbstractMaterial(AbstractMaterialTemplateDTO abstractMaterialTemplateDTO);
     List<MaterialTemplate> getAllMaterials(User user);
+    List<MaterialTemplateDTO> getAllMaterialsDTO(User user);
     List<ServiceTemplate> getAllServices(User user);
+    List<ServiceTempleDTO> getAllServicesDTO(User user);
     Optional<MaterialTemplate> getMaterialById(Long id);
     Optional<ServiceTemplate> getServiceById(Long id);
     boolean isMyMaterial(User user, AbstractMaterialTemplate material);
