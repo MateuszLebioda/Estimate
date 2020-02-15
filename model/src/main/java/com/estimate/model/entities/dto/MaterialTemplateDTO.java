@@ -11,8 +11,8 @@ public class MaterialTemplateDTO extends AbstractMaterialTemplateDTO {
     public MaterialTemplateDTO() {
     }
 
-    public MaterialTemplateDTO(Long id, String name, Double price, Unit unit, User user) {
-        super(id,name,price,unit,user);
+    public MaterialTemplateDTO(Long id, String name, Double price, Unit unit){
+        super(id,name,price,unit);
         setType(Role.MATERIAL);
     }
 }

@@ -56,6 +56,7 @@ import {AbstractMaterialEstimateRawComponent} from './content/estimate/estimate-
 import {JobTemplateEstimateRawComponent} from './content/estimate/estimate-raw/job-templates-estimate-raw/job-template-estimate-raw/job-template-estimate-raw.component';
 import {Router} from '@angular/router';
 import { EstimateDialogComponentComponent } from './utils/estimate-dialog-component/estimate-dialog-component.component';
+import { DatePipe } from '@angular/common';
 
 const keycloakService = new KeycloakService();
 
@@ -75,7 +76,7 @@ const keycloakService = new KeycloakService();
     {
       provide: KeycloakService,
       useValue: keycloakService
-    }, CookieService
+    }, CookieService, DatePipe
   ],
   entryComponents: [AppComponent,
     ClientSheetComponent,

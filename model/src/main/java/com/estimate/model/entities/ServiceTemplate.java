@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 public class ServiceTemplate extends AbstractMaterialTemplate {
 
     public ServiceTempleDTO toDTO() {
-        return new ServiceTempleDTO(getId(),getName(),getPrice(),getUnit(),getUser());
+        return new ServiceTempleDTO(getId(),getName(),getPrice(),getUnit());
     }
 }
 

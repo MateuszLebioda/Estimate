@@ -7,6 +7,7 @@ front/src/temp
 front/src/out-tsc
 front/src/out
 front/out
+.settings/*
 
 front/src/node_modules
 

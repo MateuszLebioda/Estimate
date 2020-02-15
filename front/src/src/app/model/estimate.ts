@@ -7,7 +7,7 @@ export class Estimate {
   id: number;
   name: string;
   materials: Array<MaterialEstimate>;
-  servicesEstimate: Array<ServiceEstimate>;
+  services: Array<ServiceEstimate>;
   jobTemplates: Array<JobTemplateEstimate>;
   client: Client;
   sumPrice: number;

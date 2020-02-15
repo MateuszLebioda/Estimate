@@ -33,7 +33,7 @@ public class EstimateDaoImpl extends AbstractDao<Estimate> implements EstimateDa
     }
 
     @Override
-    public Estimate getEstimatesByUId(Long id) {
+    public Estimate getEstimatesById(Long id) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Estimate> criteriaQuery = criteriaBuilder.createQuery(Estimate.class);
         Root<Estimate> root = criteriaQuery.from(Estimate.class);

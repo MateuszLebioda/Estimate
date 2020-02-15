@@ -2,6 +2,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {ServiceTemplate} from '../../../model/template/service-template';
 import {AddServiceSheetComponent} from '../add-service-sheet/add-service-sheet.component';
+import {ReportsService} from '../../../services/reports.service';
+
+
 
 @Component({
   selector: 'app-service-toolbar',
@@ -17,7 +20,7 @@ export class ServiceToolbarComponent implements OnInit {
   @Output()
   filter = new EventEmitter<string>();
 
-  constructor(private addSheet: MatBottomSheet) {
+  constructor(private addSheet: MatBottomSheet, private reportsService: ReportsService) {
   }
 
   ngOnInit() {
@@ -34,5 +37,9 @@ export class ServiceToolbarComponent implements OnInit {
 
   filterMaterials(changed: string) {
     this.filter.emit(changed);
+  }
+
+  generatePrice() {
+    this.reportsService.generateServicePriceListReport();
   }
 }

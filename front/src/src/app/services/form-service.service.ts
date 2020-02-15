@@ -167,8 +167,8 @@ export class FormService {
         estimate.materials ?
           this.createMaterialEstimateFormArray(estimate.materials) : this.formBuilder.array([]),
       services:
-        estimate.servicesEstimate ?
-          this.createMaterialEstimateFormArray(estimate.servicesEstimate) : this.formBuilder.array([]),
+        estimate.services ?
+          this.createMaterialEstimateFormArray(estimate.services) : this.formBuilder.array([]),
       jobTemplates:
         estimate.jobTemplates ?
           this.createJobTemplateEstimateFormArray(estimate.jobTemplates) : this.formBuilder.array([]),
@@ -181,7 +181,7 @@ export class FormService {
     estimate.id = form.get('id').value;
     estimate.name = form.get('name').value;
     estimate.materials = this.createMaterialEstimateArrayFromEstimateFormGroup(form);
-    estimate.servicesEstimate = this.createServiceEstimateArrayFromEstimateFormGroup(form);
+    estimate.services = this.createServiceEstimateArrayFromEstimateFormGroup(form);
     estimate.jobTemplates = this.createJobTemplateArrayEstimateFromJobTemplateEstimateFormGroup(form);
     estimate.client = form.get('client').value === null ? null : form.get('client').value;
     estimate.sumPrice = form.get('sumPrice').value;

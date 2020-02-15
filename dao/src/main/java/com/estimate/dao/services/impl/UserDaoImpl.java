@@ -26,4 +26,17 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao  {
             return Optional.empty();
         }
     }
+
+    @Override
+    public User getUserById(Long id) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root<User> root = criteriaQuery.from(User.class);
+        criteriaQuery.where(criteriaBuilder.equal(root.get("id"),id));
+        try {
+            return entityManager.createQuery(criteriaQuery).getSingleResult();
+        }catch (NoResultException e){
+            return null;
+        }
+    }
 }

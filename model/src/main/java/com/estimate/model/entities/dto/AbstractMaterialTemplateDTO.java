@@ -18,7 +18,7 @@ public class AbstractMaterialTemplateDTO {
     public AbstractMaterialTemplateDTO() {
     }
 
-    public AbstractMaterialTemplateDTO(Long id, String name, Double price, Unit unit, User user) {
+    public AbstractMaterialTemplateDTO(Long id, String name, Double price, Unit unit) {
         this.id = id;
         this.name = name;
         this.price = price;

@@ -22,6 +22,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserById(Long id) {
+        return userDao.getUserById(id);
+    }
+
+    @Override
     public User createUser(String token) {
         User user = new User();
         user.setKeyCloakId(token);

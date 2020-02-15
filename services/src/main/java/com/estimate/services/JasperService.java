@@ -1,8 +1,11 @@
 package com.estimate.services;
 
-import com.estimate.model.entities.dto.EstimateDTO;
 
+import javax.ejb.Local;
+
+@Local
 public interface JasperService {
-   void generateEstimateReports(EstimateDTO estimateDTO);
-   void generatePriceList(Long userId);
+   byte[] generateMaterialPriceList(Long userId);
+   byte[] generateServicesPriceList(Long userId);
+   byte[] generateEstimateReport(Long userId, Long estimateId);
 }

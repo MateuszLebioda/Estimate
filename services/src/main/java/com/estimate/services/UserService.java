@@ -8,5 +8,6 @@ import java.util.Optional;
 @Local
 public interface UserService {
     Optional<User> getOptionalUserByToken(String token);
+    User getUserById(Long id);
     User createUser(String token);
 }
