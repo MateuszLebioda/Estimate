@@ -1,5 +1,16 @@
-<app-job-template-toolbar (jobTemplateToAdd)="addJobTemplate($event)" (filter)="filter($event)"></app-job-template-toolbar>
+<app-job-template-toolbar (jobTemplateToAdd)="addJobTemplate($event)"
+                          (filter)="filter($event)"></app-job-template-toolbar>
 <div class="contentDiv">
-<div *ngFor="let job of filterJobTemplates(); let i = index" class="card-container">
-  <app-job-template-raw [jobTemplate]="job" class="example-card" (jobTempleEmitter)="handleEmitter($event)"></app-job-template-raw></div>
+  <ng-container *ngIf="filterJobTemplates() && filterJobTemplates().length > 0">
+    <div *ngFor="let job of filterJobTemplates(); let i = index" class="card-container">
+
+      <app-job-template-raw [jobTemplate]="job" class="example-card"
+                            (jobTempleEmitter)="handleEmitter($event)"></app-job-template-raw>
+
+    </div>
+  </ng-container>
+  <mat-card style=" width: 50%; margin-top: 15px; margin-right: auto; margin-left: auto"
+            *ngIf="filterJobTemplates() && filterJobTemplates().length == 0">
+    <h3 style="text-align: center">Nie znaleziono żadnych szablonów prac</h3>
+  </mat-card>
 </div>

@@ -1,7 +1,12 @@
 <app-material-toolbar (navigateToHide)="navigateToHide()" (materialToAdd)="addMaterial($event)" (filter)="filter($event)"></app-material-toolbar>
 <div class="contentDiv">
+  <ng-container *ngIf="filterMaterials() && filterMaterials().length > 0">
   <div *ngFor="let material of filterMaterials(); let i = index" class="card-container">
     <app-raw-material [material]="material" class="example-card"
                       (click)="onMatCardClickEvent(material)"></app-raw-material>
   </div>
+  </ng-container>
+  <mat-card  style=" width: 50%; margin-top: 15px; margin-right: auto; margin-left: auto" *ngIf="filterMaterials() && filterMaterials().length == 0">
+    <h3 style="text-align: center">Nie znaleziono żadnych materiałów</h3>
+  </mat-card>
 </div>
