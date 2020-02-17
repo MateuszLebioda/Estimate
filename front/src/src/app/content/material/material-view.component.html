@@ -1,4 +1,4 @@
-<app-material-toolbar (materialToAdd)="addMaterial($event)" (filter)="filter($event)"></app-material-toolbar>
+<app-material-toolbar (navigateToHide)="navigateToHide()" (materialToAdd)="addMaterial($event)" (filter)="filter($event)"></app-material-toolbar>
 <div class="contentDiv">
   <div *ngFor="let material of filterMaterials(); let i = index" class="card-container">
     <app-raw-material [material]="material" class="example-card"

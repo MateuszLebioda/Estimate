@@ -1,0 +1,14 @@
+<app-hide-materials-toolbar></app-hide-materials-toolbar>
+<div class="contentDiv">
+  <ng-container *ngIf="materials && materials.length > 0">
+    <div *ngFor="let material of materials; let i = index">
+      <app-raw-service [serviceTemplate]="material" [isHidden]="true" style="float: left; width: calc(100% - 100px)"></app-raw-service>
+      <button mat-button (click)="displayMaterial(material)" style="float: left; width: 75px; height: 75px; padding:0; margin-top: 20px;">
+        <mat-icon>replay</mat-icon>
+      </button>
+    </div>
+  </ng-container>
+  <mat-card class="data-dont-find-hidden" style=" width: 50%; margin-top: 15px; margin-right: auto; margin-left: auto;" *ngIf="materials && materials.length == 0">
+    <h3 style="text-align: center">Nie znaleziono żadnych usług</h3>
+  </mat-card>
+</div>

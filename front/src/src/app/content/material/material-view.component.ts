@@ -6,6 +6,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {SimpleComponentDialogComponent} from '../../utils/simple-component-dialog/simple-component-dialog.component';
 import {AddMaterialSheetComponent} from './add-material-sheet/add-material-sheet.component';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {HideDialogComponent} from '../../utils/hide-dialog/hide-dialog.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-material-view',
@@ -21,7 +23,8 @@ export class MaterialViewComponent implements OnInit {
   constructor(private addSheet: MatBottomSheet,
               public dialog: MatDialog,
               private snackBar: MatSnackBar,
-              private materialService: MaterialService) {
+              private materialService: MaterialService,
+              private rote: Router) {
   }
 
   private openSnackBar(material: MaterialTemplate, action: string) {
@@ -31,7 +34,7 @@ export class MaterialViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.materialService.getAllMaterials().subscribe(materials => {
+    this.materialService.getDisplayedMaterials().subscribe(materials => {
       this.materials = materials.body;
     });
   }
@@ -49,8 +52,18 @@ export class MaterialViewComponent implements OnInit {
     }).afterClosed().subscribe(reload => {
       if (reload !== undefined && reload === 'deleted') {
         this.materialService.delete(material).subscribe(o => {
-          this.openSnackBar(material, 'Usunięto');
-          this.materials = this.materials.filter(m => m.id !== material.id);
+          if (o.body) {
+            this.openSnackBar(material, 'Usunięto');
+            this.materials = this.materials.filter(m => m.id !== material.id);
+          } else {
+            this.dialog.open(HideDialogComponent, {data: {value: material.name}})
+              .afterClosed().subscribe((result: boolean) => {
+              if (result) {
+                this.materialService.hideMaterial(material).subscribe();
+                this.materials = this.materials.filter(w => w !== material);
+              }
+            });
+          }
         });
       }
       if (reload !== undefined && reload === 'edit') {
@@ -80,5 +93,9 @@ export class MaterialViewComponent implements OnInit {
       return this.materials.filter
       (m => m.name.toLocaleLowerCase().includes(this.filterMaterial.toLocaleLowerCase())).sort((a, b) => a.name.localeCompare(b.name));
     }
+  }
+
+  navigateToHide() {
+    this.rote.navigate(['/materialsHidden']);
   }
 }

@@ -8,6 +8,7 @@ import {ServiceViewComponent} from './content/service/service-view.component';
 import {JobTemplatesViewComponent} from './content/job-templates/job-templates-view.component';
 import {HiddenUnitsComponent} from './content/units/hidden-units/hidden-units.component';
 import {HiddenServiceComponent} from './content/service/hidden-service/hidden-service.component';
+import {HideMaterialsComponent} from './content/material/hide-materials/hide-materials.component';
 
 const routes: Routes = [
   {path: 'clients', component: ClientsViewComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'unitsHidden', component: HiddenUnitsComponent},
   {path: 'services', component: ServiceViewComponent},
   {path: 'servicesHidden', component: HiddenServiceComponent},
+  {path: 'materialsHidden', component: HideMaterialsComponent},
   {path: 'job-templates', component: JobTemplatesViewComponent}
 ];
 
