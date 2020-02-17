@@ -75,7 +75,7 @@ export class AddJobTemplateSheetComponent implements OnInit {
       this.jobTemplate = new JobTemplate();
     }
 
-    unitService.getAllUnits().subscribe(units => {
+    unitService.getDisplayedUnits().subscribe(units => {
       this.units = units.body;
     });
 

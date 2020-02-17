@@ -19,7 +19,7 @@ export class ReportsService {
   }
 
   public getServicesPriceListResponse() {
-    return this.http.get<any>(backEndUrl + '/reports/getServicesPriceListResponse', {responseType: 'arraybuffer' as 'json'});
+    return this.http.get<any>(backEndUrl + '/reports/getServicesPriceList', {responseType: 'arraybuffer' as 'json'});
   }
 
   public generateEstimateReportResponse(id: number) {

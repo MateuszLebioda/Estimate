@@ -25,7 +25,7 @@ export class AddServiceSheetComponent implements OnInit {
       this.serviceTemplate = new ServiceTemplate();
     }
 
-    unitService.getAllUnits().subscribe(units => {
+    unitService.getDisplayedUnits().subscribe(units => {
       this.units = units.body;
     });
 

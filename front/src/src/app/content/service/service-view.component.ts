@@ -74,6 +74,7 @@ export class ServiceViewComponent implements OnInit {
     this.filterMaterial = filter;
   }
 
+
   filterServices(): Array<ServiceTemplate> {
     if (this.services !== undefined) {
       if (this.filterMaterial === '') {

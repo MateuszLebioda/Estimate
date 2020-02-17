@@ -1,0 +1,10 @@
+<app-hidden-unit-toolbar></app-hidden-unit-toolbar>
+<div class="contentDiv">
+  <app-unit-content *ngIf="units && units.length > 0" (unitDelete)="displayUnit($event)"
+                    [units]="units"
+                    [iconName]="'replay'">
+  </app-unit-content>
+  <mat-card  style=" width: 50%; margin-top: 15px; margin-right: auto; margin-left: auto" *ngIf="units && units.length == 0">
+    <h3 style="text-align: center">Nie znaleziono żadnych jednostek</h3>
+  </mat-card>
+</div>

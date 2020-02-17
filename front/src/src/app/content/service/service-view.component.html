@@ -1,6 +1,11 @@
 <app-service-toolbar (serviceToAdd)="addService($event)" (filter)="filter($event)"></app-service-toolbar>
 <div class="contentDiv">
+  <ng-container *ngIf="filterServices() && filterServices().length > 0">
   <div *ngFor="let work of filterServices(); let i = index" class="card-container">
     <app-raw-service [serviceTemplate]="work" class="example-card" (click)="onMatCardClickEvent(work)"></app-raw-service>
   </div>
+  </ng-container>
+  <mat-card  style=" width: 50%; margin-top: 15px; margin-right: auto; margin-left: auto" *ngIf="filterServices() && filterServices().length == 0">
+    <h3 style="text-align: center">Nie znaleziono żadnych usług</h3>
+  </mat-card>
 </div>

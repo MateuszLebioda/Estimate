@@ -6,11 +6,13 @@ import com.estimate.dao.services.dao.EstimateDao;
 import com.estimate.dao.services.dao.JobTemplateEstimateDao;
 import com.estimate.model.entities.*;
 import com.estimate.model.entities.dto.EstimateDTO;
+import com.estimate.model.entities.dto.UnitDTO;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -43,8 +45,8 @@ public class EstimateServiceImpl implements EstimateService {
     }
 
     @Override
-    public List<EstimateDTO> getAllEstimates() {
-        return estimateDao.getEstimatesByUser(user.get()).stream().map(Estimate::toDTO).collect(Collectors.toList());
+    public List<EstimateDTO> getAllEstimates(User user) {
+        return prepareEstimateList(estimateDao.getEstimatesByUser(user));
     }
 
     @Override
@@ -108,4 +110,11 @@ public class EstimateServiceImpl implements EstimateService {
         }
         return null;
     }
+
+    private List<EstimateDTO> prepareEstimateList(List<Estimate> estimates){
+        return estimates.stream()
+                .sorted(Comparator.comparing(Estimate::getName))
+                .map(Estimate::toDTO).collect(Collectors.toList());
+    }
+
 }

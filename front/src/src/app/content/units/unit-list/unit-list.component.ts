@@ -12,6 +12,7 @@ export class UnitListComponent implements OnInit {
 
   @Input() units: Array<Unit>;
   @Input() title: string;
+  @Input() iconName: string;
   @Output() unitToDelete = new EventEmitter<Unit>();
 
   ngOnInit() {

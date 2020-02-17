@@ -4,7 +4,7 @@
     <mat-list-item *ngFor="let unit of units">
       <h4 mat-line>{{unit.bottom}} <sup>{{unit.top}}</sup></h4>
       <button aria-label="Example icon-button with a heart icon" (click)="deleteUnit(unit)">
-        <mat-icon>delete</mat-icon>
+        <mat-icon>{{iconName}}</mat-icon>
       </button>
       <mat-divider></mat-divider>
     </mat-list-item>

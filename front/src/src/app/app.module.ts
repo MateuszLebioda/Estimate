@@ -57,6 +57,9 @@ import {JobTemplateEstimateRawComponent} from './content/estimate/estimate-raw/j
 import {Router} from '@angular/router';
 import { EstimateDialogComponentComponent } from './utils/estimate-dialog-component/estimate-dialog-component.component';
 import { DatePipe } from '@angular/common';
+import { HideDialogComponent } from './utils/hide-dialog/hide-dialog.component';
+import { HiddenUnitsComponent } from './content/units/hidden-units/hidden-units.component';
+import { HiddenUnitToolbarComponent } from './content/units/hidden-units/hidden-unit-toolbar/hidden-unit-toolbar.component';
 
 const keycloakService = new KeycloakService();
 
@@ -90,7 +93,8 @@ const keycloakService = new KeycloakService();
     AddJobTemplateSheetComponent,
     AddAbstractMaterialDialogComponent,
     AddNewEstimateSheetComponent,
-    AddJobTemplateDialogComponentComponent],
+    AddJobTemplateDialogComponentComponent,
+  HideDialogComponent],
   declarations: [AppComponent,
     ContentComponent,
     MenuComponent,
@@ -129,7 +133,10 @@ const keycloakService = new KeycloakService();
     AbstractMaterialEstimateRawComponent,
     AbstractMaterialsEstimateRawComponent,
     JobTemplateEstimateRawComponent,
-    EstimateDialogComponentComponent]
+    EstimateDialogComponentComponent,
+    HideDialogComponent,
+    HiddenUnitsComponent,
+    HiddenUnitToolbarComponent]
 })
 
 export class AppModule {
@@ -152,7 +159,6 @@ export class AppModule {
         }
       })
       .then(() => {
-        console.log('[ngDoBootstrap] bootstrap app');
         this.rote.navigate(['/estimates']);
         app.bootstrap(AppComponent);
       })
