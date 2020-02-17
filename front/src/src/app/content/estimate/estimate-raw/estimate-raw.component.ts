@@ -25,7 +25,7 @@ export class EstimateRawComponent implements OnInit {
 
   nameStyle() {
     return {
-      width: this.estimate.client === null ? 'calc(100% - 55px)' : 'calc(70% - 85px)',
+      width: this.estimate.client === null ? 'calc(100% - 65px)' : 'calc(70% - 85px)',
     };
   }
 

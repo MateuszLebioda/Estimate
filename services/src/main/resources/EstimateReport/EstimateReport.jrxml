@@ -108,11 +108,6 @@
 			<variableExpression><![CDATA[$F{sumPrice}]]></variableExpression>
 		</variable>
 	</subDataset>
-	<subDataset name="Dataset1" uuid="eab481c1-fb01-46ec-864b-550877ce9222">
-		<queryString>
-			<![CDATA[]]>
-		</queryString>
-	</subDataset>
 	<parameter name="MaterialsParameters" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="Title" class="java.lang.String"/>
 	<parameter name="ServicesSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
@@ -149,10 +144,11 @@
 		<band height="12"/>
 	</pageHeader>
 	<detail>
-		<band height="197">
+		<band height="200">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+			<printWhenExpression><![CDATA[!($P{JobTemplateSource}.getData().isEmpty())]]></printWhenExpression>
 			<componentElement>
-				<reportElement x="0" y="0" width="555" height="197" backcolor="#FFFFFF" uuid="5f7e1260-2528-49fb-8a93-badcfb970f8a">
+				<reportElement x="0" y="0" width="555" height="180" backcolor="#FFFFFF" uuid="5f7e1260-2528-49fb-8a93-badcfb970f8a">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -426,8 +422,9 @@
 			</componentElement>
 		</band>
 		<band height="135">
+			<printWhenExpression><![CDATA[!($P{MaterialsParameters}.getData().isEmpty())]]></printWhenExpression>
 			<componentElement>
-				<reportElement x="0" y="13" width="555" height="122" backcolor="#FFFFFF" uuid="93d224d6-3df7-4d79-9e97-4cca71283309">
+				<reportElement x="0" y="0" width="555" height="122" backcolor="#FFFFFF" uuid="93d224d6-3df7-4d79-9e97-4cca71283309">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -586,9 +583,10 @@
 				</jr:table>
 			</componentElement>
 		</band>
-		<band height="150">
+		<band height="135">
+			<printWhenExpression><![CDATA[!($P{ServicesSource}.getData().isEmpty())]]></printWhenExpression>
 			<componentElement>
-				<reportElement x="0" y="14" width="555" height="121" backcolor="#FFFFFF" uuid="56ba051a-f293-4b84-b425-d825df543bca">
+				<reportElement x="0" y="0" width="555" height="121" backcolor="#FFFFFF" uuid="56ba051a-f293-4b84-b425-d825df543bca">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
