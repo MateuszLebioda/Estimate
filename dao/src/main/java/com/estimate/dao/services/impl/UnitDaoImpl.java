@@ -20,7 +20,7 @@ import java.util.Optional;
 public class UnitDaoImpl extends AbstractDao<Unit> implements UnitDao {
 
     @Override
-    public List<Unit> getUnitsByUser(User user) {
+    public List<Unit> getAllUnitsByUser(User user) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Unit> criteriaQuery = criteriaBuilder.createQuery(Unit.class);
         Root<Unit> root = criteriaQuery.from(Unit.class);
@@ -30,6 +30,16 @@ public class UnitDaoImpl extends AbstractDao<Unit> implements UnitDao {
         }catch (NoResultException e){
             return Collections.emptyList();
         }
+    }
+
+    @Override
+    public List<Unit> getHiddenUnitsByUser(User user) {
+        return getUnitsByHiddenAttribute(true, user);
+    }
+
+    @Override
+    public List<Unit> getDisplayUnitsByUser(User user) {
+        return getUnitsByHiddenAttribute(false, user);
     }
 
     @Override
@@ -45,16 +55,15 @@ public class UnitDaoImpl extends AbstractDao<Unit> implements UnitDao {
         }
     }
 
-    @Override
-    public List<Unit> getUnitsByUserAndRole(User user, Role role) {
+    private List<Unit> getUnitsByHiddenAttribute(boolean hidden, User user){
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Unit> criteriaQuery = criteriaBuilder.createQuery(Unit.class);
         Root<Unit> root = criteriaQuery.from(Unit.class);
         criteriaQuery.where(
                 criteriaBuilder.and(
-                        criteriaBuilder.equal(root.get("user"),user),
-                        criteriaBuilder.equal(root.get("role"),role),
-                        criteriaBuilder.equal(root.get("actual"),true)));
+                    criteriaBuilder.equal(root.get("hidden"),hidden)),
+                    criteriaBuilder.equal(root.get("user"),user)
+                );
         try {
             return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
         }catch (NoResultException e){

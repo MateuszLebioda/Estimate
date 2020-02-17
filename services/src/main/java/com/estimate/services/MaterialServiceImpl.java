@@ -1,10 +1,12 @@
 package com.estimate.services;
 
 import com.estimate.dao.services.dao.AbstractMaterialDao;
+import com.estimate.dao.services.dao.JobTemplateDao;
 import com.estimate.model.entities.*;
 import com.estimate.model.entities.dto.AbstractMaterialTemplateDTO;
 import com.estimate.model.entities.dto.MaterialTemplateDTO;
 import com.estimate.model.entities.dto.ServiceTempleDTO;
+import com.estimate.model.entities.dto.UnitDTO;
 import com.estimate.model.entities.utils.Role;
 
 import javax.ejb.EJB;
@@ -12,6 +14,7 @@ import javax.ejb.Stateless;
 import javax.transaction.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,7 +23,10 @@ import java.util.stream.Collectors;
 public class MaterialServiceImpl implements MaterialService {
 
     @EJB
-    AbstractMaterialDao abstractMaterialDao;
+    private AbstractMaterialDao abstractMaterialDao;
+
+    @EJB
+    private JobTemplateDao jobTemplateDao;
 
     @EJB
     private UnitService unitService;
@@ -28,12 +34,18 @@ public class MaterialServiceImpl implements MaterialService {
     @EJB
     private MaterialService materialService;
 
+
+
     @Override
+    @Transactional
     public boolean deleteAbstractMaterial(Long id) {
         Optional<AbstractMaterialTemplate> optionalAbstractMaterial = abstractMaterialDao.getAbstractMaterialById(id);
         if (optionalAbstractMaterial.isPresent()) {
-            abstractMaterialDao.delete(optionalAbstractMaterial.get());
-            return true;
+            AbstractMaterialTemplate materialTemplate = optionalAbstractMaterial.get();
+            if(materialTemplate.getJobTemplateAbstractMaterial().isEmpty()){
+                abstractMaterialDao.delete(optionalAbstractMaterial.get());
+                return true;
+            }
         }
         return false;
     }
@@ -64,21 +76,33 @@ public class MaterialServiceImpl implements MaterialService {
         }
     }
 
-    public List<MaterialTemplate> getAllMaterials(User user) {
-        return abstractMaterialDao.getAllMaterials(user);
-    }
-
-    public List<MaterialTemplateDTO> getAllMaterialsDTO(User user) {
-        return getAllMaterials(user).stream().map(MaterialTemplate::toDTO).collect(Collectors.toList());
+    @Override
+    public List<AbstractMaterialTemplateDTO> getAllMaterialsDTO(User user) {
+        return prepareAbstractMaterialList(abstractMaterialDao.getAllMaterials(user));
     }
 
     @Override
-    public List<ServiceTemplate> getAllServices(User user) {
-        return abstractMaterialDao.getAllServices(user);
+    public List<AbstractMaterialTemplateDTO> getHideMaterials(User user) {
+        return prepareAbstractMaterialList(abstractMaterialDao.getHideMaterials(user));
     }
 
-    public List<ServiceTempleDTO> getAllServicesDTO(User user){
-        return getAllServices(user).stream().map(ServiceTemplate::toDTO).collect(Collectors.toList());
+    @Override
+    public List<AbstractMaterialTemplateDTO> getDisplayedMaterials(User user) {
+        return prepareAbstractMaterialList(abstractMaterialDao.getDisplayMaterials(user));
+    }
+
+    public List<AbstractMaterialTemplateDTO> getAllServicesDTO(User user){
+        return prepareAbstractMaterialList(abstractMaterialDao.getAllServices(user));
+    }
+
+    @Override
+    public List<AbstractMaterialTemplateDTO> getHideServices(User user) {
+        return prepareAbstractMaterialList(abstractMaterialDao.getHideServices(user));
+    }
+
+    @Override
+    public List<AbstractMaterialTemplateDTO> getDisplayedServices(User user) {
+        return prepareAbstractMaterialList(abstractMaterialDao.getDisplayServices(user));
     }
 
     @Override
@@ -110,14 +134,40 @@ public class MaterialServiceImpl implements MaterialService {
     public void mergeMaterialWithMaterialDTO(AbstractMaterialTemplate material, AbstractMaterialTemplateDTO materialDTO) {
         material.setName(materialDTO.getName());
         material.setPrice(materialDTO.getPrice());
+        material.setHidden(false);
         material.setUser(materialDTO.getUser());
         material.setCreateTime(LocalDateTime.now());
         material.setUnit(unitService.getUnitById(materialDTO.getUnit().getId()));
     }
 
+
+
     @Override
     public Optional<ServiceTemplate> getServiceById(Long id) {
         return abstractMaterialDao.getServiceById(id);
+    }
+
+    private List<AbstractMaterialTemplateDTO> prepareAbstractMaterialList(List<? extends AbstractMaterialTemplate> templates){
+        return templates.stream()
+                .sorted()
+                .map(AbstractMaterialTemplate::toDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public void displayAbstractMaterial(Long id) {
+        editHide(id, false);
+    }
+
+    @Override
+    public void hideAbstractMaterial(Long id) {
+        editHide(id, true);
+    }
+
+    @Transactional
+    private void editHide(Long id, boolean hide){
+        AbstractMaterialTemplate material = abstractMaterialDao.getAbstractMaterialById(id).get();
+        material.setHidden(hide);
+        abstractMaterialDao.merge(material);
     }
 
 }

@@ -26,11 +26,27 @@ export class ServiceService {
     return this.http.get<ServiceTemplate[]>(backEndUrl + '/materials/getAllServices', {observe: 'response'});
   }
 
-  public delete(serviceTemplate: ServiceTemplate): Observable<HttpResponse<object>> {
-    return this.http.delete(backEndUrl + '/materials/deleteService/' + serviceTemplate.id, {observe: 'response'});
+  public getHideServices(): Observable<HttpResponse<ServiceTemplate[]>> {
+    return this.http.get<ServiceTemplate[]>(backEndUrl + '/materials/getHideServices', {observe: 'response'});
+  }
+
+  public getDisplayServices(): Observable<HttpResponse<ServiceTemplate[]>> {
+    return this.http.get<ServiceTemplate[]>(backEndUrl + '/materials/getDisplayedServices', {observe: 'response'});
+  }
+
+  public delete(serviceTemplate: ServiceTemplate): Observable<HttpResponse<boolean>> {
+    return this.http.delete<boolean>(backEndUrl + '/materials/deleteService/' + serviceTemplate.id, {observe: 'response'});
   }
 
   public put(serviceTemplate: ServiceTemplate): Observable<HttpResponse<number>> {
     return this.http.put<number>(backEndUrl + '/materials/updateService', serviceTemplate, {observe: 'response'});
+  }
+
+  public hideService(serviceTemplate: ServiceTemplate): Observable<HttpResponse<void>> {
+    return this.http.put<void>(backEndUrl + '/materials/hide/' + serviceTemplate.id, {}, {observe: 'response'});
+  }
+
+  public displayService(serviceTemplate: ServiceTemplate): Observable<HttpResponse<void>> {
+    return this.http.put<void>(backEndUrl + '/materials/display/' + serviceTemplate.id, {}, {observe: 'response'});
   }
 }

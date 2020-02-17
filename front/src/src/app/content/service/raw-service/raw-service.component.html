@@ -1,4 +1,4 @@
-<mat-card class="example-card data-mat-card">
+<mat-card [ngClass]="{'data-mat-card':!isHidden,'data-mat-card-hidden':isHidden}">
   <div class="card-container" *ngIf="serviceTemplate">
     <mat-form-field style="width: 100%">
       <input matInput readonly style="border: 0px">

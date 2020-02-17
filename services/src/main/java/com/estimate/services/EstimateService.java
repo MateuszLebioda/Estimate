@@ -9,7 +9,7 @@ import java.util.List;
 @Local
 public interface EstimateService {
     EstimateDTO saveEstimate(EstimateDTO estimateDTO);
-    List<EstimateDTO> getAllEstimates();
+    List<EstimateDTO> getAllEstimates(User user);
     EstimateDTO getEstimatesByUserAndEstimateId(User user, Long estimateId);
     Boolean deleteEstimate(Long id);
     EstimateDTO update(EstimateDTO estimateDTO);

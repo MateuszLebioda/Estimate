@@ -5,7 +5,6 @@ import {AddServiceSheetComponent} from '../add-service-sheet/add-service-sheet.c
 import {ReportsService} from '../../../services/reports.service';
 
 
-
 @Component({
   selector: 'app-service-toolbar',
   templateUrl: './service-toolbar.component.html',
@@ -19,6 +18,9 @@ export class ServiceToolbarComponent implements OnInit {
 
   @Output()
   filter = new EventEmitter<string>();
+
+  @Output()
+  navigateToHidden = new EventEmitter<boolean>();
 
   constructor(private addSheet: MatBottomSheet, private reportsService: ReportsService) {
   }
@@ -41,5 +43,9 @@ export class ServiceToolbarComponent implements OnInit {
 
   generatePrice() {
     this.reportsService.generateServicePriceListReport();
+  }
+
+  goToHidden() {
+    this.navigateToHidden.emit(true);
   }
 }

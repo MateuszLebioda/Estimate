@@ -33,7 +33,7 @@ public class EstimateControllers {
     @Path("/getAll")
     public  Response getAllEstimates(){
         if(user.isPresent()){
-            return Response.ok(estimateService.getAllEstimates()).build();
+            return Response.ok(estimateService.getAllEstimates(user.get())).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }

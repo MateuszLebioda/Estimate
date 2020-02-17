@@ -2,15 +2,14 @@ package com.estimate.dao.services.impl;
 
 import com.estimate.dao.services.dao.AbstractDao;
 import com.estimate.dao.services.dao.JobTemplateDao;
+import com.estimate.model.entities.AbstractMaterialTemplate;
 import com.estimate.model.entities.JobTemplate;
+import com.estimate.model.entities.JobTemplateAbstractMaterial;
 import com.estimate.model.entities.User;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.ejb.Stateless;
 import javax.persistence.NoResultException;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

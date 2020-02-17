@@ -2,6 +2,7 @@ package com.estimate.services;
 
 import com.estimate.model.entities.Estimate;
 import com.estimate.model.entities.User;
+import com.estimate.model.entities.dto.AbstractMaterialTemplateDTO;
 import com.estimate.model.entities.dto.EstimateDTO;
 import com.estimate.model.entities.dto.MaterialTemplateDTO;
 import com.estimate.model.entities.dto.ServiceTempleDTO;
@@ -45,7 +46,7 @@ public class JasperServiceImpl implements JasperService {
     @Override
     public byte[] generateMaterialPriceList(Long userId) {
         User user = userService.getUserById(userId);
-        List<MaterialTemplateDTO> abstractMaterialTemplates = materialService.getAllMaterialsDTO(user);
+        List<AbstractMaterialTemplateDTO> abstractMaterialTemplates = materialService.getAllMaterialsDTO(user);
         JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(abstractMaterialTemplates);
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("MaterialsParameters",source);
@@ -55,7 +56,7 @@ public class JasperServiceImpl implements JasperService {
     @Override
     public byte[] generateServicesPriceList(Long userId) {
         User user = userService.getUserById(userId);
-        List<ServiceTempleDTO> abstractMaterialTemplates = materialService.getAllServicesDTO(user);
+        List<AbstractMaterialTemplateDTO> abstractMaterialTemplates = materialService.getAllServicesDTO(user);
         JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(abstractMaterialTemplates);
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("MaterialsParameters",source);

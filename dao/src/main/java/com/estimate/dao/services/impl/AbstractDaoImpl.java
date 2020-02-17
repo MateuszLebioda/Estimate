@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @Stateless(name = "abstractMaterialDao")
 public class AbstractDaoImpl extends AbstractDao<AbstractMaterialTemplate> implements AbstractMaterialDao {
+
     @Override
     public List<ServiceTemplate> getAllServices(User user) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -50,6 +51,26 @@ public class AbstractDaoImpl extends AbstractDao<AbstractMaterialTemplate> imple
     }
 
     @Override
+    public List<MaterialTemplate> getHideMaterials(User user) {
+        return getMaterialTemplateByHidden(user,true);
+    }
+
+    @Override
+    public List<ServiceTemplate> getHideServices(User user) {
+        return getServiceTemplateByHidden(user,true);
+    }
+
+    @Override
+    public List<MaterialTemplate> getDisplayMaterials(User user) {
+        return getMaterialTemplateByHidden(user,false);
+    }
+
+    @Override
+    public List<ServiceTemplate> getDisplayServices(User user) {
+        return getServiceTemplateByHidden(user,false);
+    }
+
+    @Override
     public Optional<MaterialTemplate> getMaterialById(Long id) {
         return Optional.of((MaterialTemplate) getAbstractMaterialById(id).get());
     }
@@ -69,6 +90,41 @@ public class AbstractDaoImpl extends AbstractDao<AbstractMaterialTemplate> imple
             return Optional.of(entityManager.createQuery(criteriaQuery).getSingleResult());
         }catch (NoResultException e){
             return Optional.empty();
+        }
+    }
+
+
+    private List<ServiceTemplate> getServiceTemplateByHidden(User user, boolean hidden){
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<ServiceTemplate> criteriaQuery = criteriaBuilder.createQuery(ServiceTemplate.class);
+        Root<ServiceTemplate> root = criteriaQuery.from(ServiceTemplate.class);
+        criteriaQuery.where(
+                criteriaBuilder.and(
+                        criteriaBuilder.equal(root.get("user"), user),
+                        criteriaBuilder.equal(root.get("hidden"), hidden))
+                        )
+                .orderBy(criteriaBuilder.asc(root.get("name")));
+        try {
+            return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
+        } catch (NoResultException e) {
+            return Collections.emptyList();
+        }
+    }
+
+    private List<MaterialTemplate> getMaterialTemplateByHidden(User user, boolean hidden){
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<MaterialTemplate> criteriaQuery = criteriaBuilder.createQuery(MaterialTemplate.class);
+        Root<MaterialTemplate> root = criteriaQuery.from(MaterialTemplate.class);
+        criteriaQuery.where(
+                criteriaBuilder.and(
+                        criteriaBuilder.equal(root.get("user"), user),
+                        criteriaBuilder.equal(root.get("hidden"), hidden))
+        )
+                .orderBy(criteriaBuilder.asc(root.get("name")));
+        try {
+            return new ArrayList<>(entityManager.createQuery(criteriaQuery).getResultList());
+        } catch (NoResultException e) {
+            return Collections.emptyList();
         }
     }
 

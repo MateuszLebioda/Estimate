@@ -1,6 +1,11 @@
-<app-unit-toolbar-view (unitToAdd)="addUnit($event)"></app-unit-toolbar-view>
+<app-unit-toolbar-view (unitToAdd)="addUnit($event)" (navigateToHidden)="navigateToHidden($event)"></app-unit-toolbar-view>
 <div class="contentDiv">
-  <app-unit-content (unitDelete)="deleteUnit($event)"
-                    [units]="units">
+  <app-unit-content *ngIf="units && units.length > 0" (unitDelete)="deleteUnit($event)"
+                    [units]="units"
+                    [iconName]="'delete'"
+                    [hidden]="false">
   </app-unit-content>
+  <mat-card  style=" width: 50%; margin-top: 15px; margin-right: auto; margin-left: auto" *ngIf="units.length == 0">
+    <h3 style="text-align: center">Nie znaleziono żadnych jednostek</h3>
+  </mat-card>
 </div>

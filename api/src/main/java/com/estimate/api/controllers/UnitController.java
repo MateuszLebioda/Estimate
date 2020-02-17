@@ -2,8 +2,6 @@ package com.estimate.api.controllers;
 
 import com.estimate.model.entities.Unit;
 import com.estimate.model.entities.User;
-import com.estimate.model.entities.dto.UnitDTO;
-import com.estimate.model.entities.utils.Role;
 import com.estimate.services.UnitService;
 
 import javax.ejb.EJB;
@@ -11,10 +9,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Path("/unit")
 public class UnitController {
@@ -29,7 +24,49 @@ public class UnitController {
     @Path("/getAllUnits")
     public Response get(){
         if(user.isPresent()){
-            return Response.ok(getUnitList()).build();
+            return Response.ok(unitService.getAllUnits(user.get())).build();
+        }else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+
+    @GET
+    @Path("/getHiddenUnits")
+    public Response getHiddenUtils(){
+        if(user.isPresent()){
+            return Response.ok(unitService.getHiddenUnits(user.get())).build();
+        }else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+
+    @GET
+    @Path("/getDisplayedUnits")
+    public Response getDisplayedUnits(){
+        if(user.isPresent()){
+            return Response.ok(unitService.getDisplayedUnits(user.get())).build();
+        }else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+
+    @PUT
+    @Path("/hide/{id}")
+    public Response hideUnit(@PathParam("id") Long id){
+        if(user.isPresent()){
+            unitService.hideUnit(id);
+            return Response.ok().build();
+        }else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+
+    @PUT
+    @Path("/display/{id}")
+    public Response displayUnit(@PathParam("id") Long id){
+        if(user.isPresent()){
+            unitService.displayUnit(id);
+            return Response.ok().build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
@@ -53,19 +90,12 @@ public class UnitController {
         if(user.isPresent()){
             unit.setUser(user.get());
             unit.setCreated(LocalDateTime.now());
-            unit.setActual(Boolean.TRUE);
+            unit.setHidden(Boolean.FALSE);
             return Response.ok(unitService.addUnit(unit)).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
     }
 
-    private List<UnitDTO> getUnitList(){
-        return unitService.getAllUnits(user.get())
-                .stream()
-                .sorted(Comparator.comparing(Unit::getBottom)
-                        .thenComparing(Unit::getTop))
-                .map(Unit::toDTO).collect(Collectors.toList());
-    }
 
 }

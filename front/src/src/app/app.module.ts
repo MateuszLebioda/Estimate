@@ -57,6 +57,13 @@ import {JobTemplateEstimateRawComponent} from './content/estimate/estimate-raw/j
 import {Router} from '@angular/router';
 import { EstimateDialogComponentComponent } from './utils/estimate-dialog-component/estimate-dialog-component.component';
 import { DatePipe } from '@angular/common';
+import { HideDialogComponent } from './utils/hide-dialog/hide-dialog.component';
+import { HiddenUnitsComponent } from './content/units/hidden-units/hidden-units.component';
+import { HiddenUnitToolbarComponent } from './content/units/hidden-units/hidden-unit-toolbar/hidden-unit-toolbar.component';
+import { HiddenServiceComponent } from './content/service/hidden-service/hidden-service.component';
+import { HiddenServiceToolbarComponent } from './content/service/hidden-service/hidden-service-toolbar/hidden-service-toolbar.component';
+import { HideMaterialsComponent } from './content/material/hide-materials/hide-materials.component';
+import { HideMaterialsToolbarComponent } from './content/material/hide-materials/hide-materials-toolbar/hide-materials-toolbar.component';
 
 const keycloakService = new KeycloakService();
 
@@ -90,8 +97,10 @@ const keycloakService = new KeycloakService();
     AddJobTemplateSheetComponent,
     AddAbstractMaterialDialogComponent,
     AddNewEstimateSheetComponent,
-    AddJobTemplateDialogComponentComponent],
+    AddJobTemplateDialogComponentComponent,
+  HideDialogComponent],
   declarations: [AppComponent,
+    HiddenServiceComponent,
     ContentComponent,
     MenuComponent,
     routingComponents,
@@ -129,7 +138,14 @@ const keycloakService = new KeycloakService();
     AbstractMaterialEstimateRawComponent,
     AbstractMaterialsEstimateRawComponent,
     JobTemplateEstimateRawComponent,
-    EstimateDialogComponentComponent]
+    EstimateDialogComponentComponent,
+    HideDialogComponent,
+    HiddenUnitsComponent,
+    HiddenUnitToolbarComponent,
+    HiddenServiceComponent,
+    HiddenServiceToolbarComponent,
+    HideMaterialsComponent,
+    HideMaterialsToolbarComponent]
 })
 
 export class AppModule {
@@ -152,7 +168,6 @@ export class AppModule {
         }
       })
       .then(() => {
-        console.log('[ngDoBootstrap] bootstrap app');
         this.rote.navigate(['/estimates']);
         app.bootstrap(AppComponent);
       })

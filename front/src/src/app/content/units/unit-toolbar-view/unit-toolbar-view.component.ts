@@ -16,16 +16,22 @@ export class UnitToolbarViewComponent implements OnInit {
   @Output()
   unitToAdd = new EventEmitter<Unit>();
 
+  @Output()
+  navigateToHidden = new EventEmitter<boolean>()
+
   ngOnInit() {
   }
 
   addNewUnit() {
     this.addSheet.open(UnitSheetComponentComponent).afterDismissed().subscribe((unit: Unit) => {
-      if (unit !== undefined) {
-        this.unitToAdd.emit(unit);
-      }
+        if (unit !== undefined) {
+          this.unitToAdd.emit(unit);
+        }
       }
     );
   }
 
+  goToHidden() {
+    this.navigateToHidden.emit(true);
+  }
 }

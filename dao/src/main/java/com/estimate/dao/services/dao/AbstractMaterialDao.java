@@ -12,6 +12,10 @@ import java.util.Optional;
 public interface AbstractMaterialDao extends AbstractDaoFunction <AbstractMaterialTemplate>{
     List<ServiceTemplate> getAllServices(User user);
     List<MaterialTemplate> getAllMaterials(User user);
+    List<MaterialTemplate> getHideMaterials(User user);
+    List<ServiceTemplate> getHideServices(User user);
+    List<MaterialTemplate> getDisplayMaterials(User user);
+    List<ServiceTemplate> getDisplayServices(User user);
     Optional<MaterialTemplate> getMaterialById(Long id);
     Optional<ServiceTemplate> getServiceById(Long id);
     Optional<AbstractMaterialTemplate> getAbstractMaterialById(Long id);

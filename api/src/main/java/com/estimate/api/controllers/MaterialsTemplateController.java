@@ -53,11 +53,7 @@ public class MaterialsTemplateController {
     public Response getMaterials(){
         if(user.isPresent()){
             return Response.ok(
-                    materialService.getAllMaterials(user.get())
-                            .stream()
-                            .map(MaterialTemplate::toDTO)
-                            .sorted(Comparator.comparing(MaterialTemplateDTO::getName))
-                            .collect(Collectors.toList())).build();
+                    materialService.getAllMaterialsDTO(user.get())).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
@@ -65,13 +61,54 @@ public class MaterialsTemplateController {
 
     @GET
     @Path("/getAllServices")
-    public Response getServices(){
+    public Response getAllServices(){
         if(user.isPresent()){
             return Response.ok(
-                    materialService.getAllServices(user.get())
-                            .stream().map(ServiceTemplate::toDTO)
-                            .sorted(Comparator.comparing(ServiceTempleDTO::getName))
-                            .collect(Collectors.toList())).build();
+                    materialService.getAllServicesDTO(user.get())).build();
+        }else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+
+    @GET
+    @Path("/getDisplayedMaterials")
+    public Response getDisplayedMaterials(){
+        if(user.isPresent()){
+            return Response.ok(
+                    materialService.getDisplayedMaterials(user.get())).build();
+        }else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+
+    @GET
+    @Path("/getHideMaterials")
+    public Response getHideMaterials(){
+        if(user.isPresent()){
+            return Response.ok(
+                    materialService.getHideMaterials(user.get())).build();
+        }else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+
+    @GET
+    @Path("/getDisplayedServices")
+    public Response getDisplayedServices(){
+        if(user.isPresent()){
+            return Response.ok(
+                    materialService.getDisplayedServices(user.get())).build();
+        }else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+
+    @GET
+    @Path("/getHideServices")
+    public Response getHideServices(){
+        if(user.isPresent()){
+            return Response.ok(
+                    materialService.getHideServices(user.get())).build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
@@ -84,8 +121,7 @@ public class MaterialsTemplateController {
             Optional<MaterialTemplate> optionalMaterial = materialService.getMaterialById(id);
             if(optionalMaterial.isPresent()) {
                 if (materialService.isMyMaterial(user.get(),optionalMaterial.get())) {
-                    materialService.deleteAbstractMaterial(id);
-                    return Response.ok().build();
+                    return Response.ok(materialService.deleteAbstractMaterial(id)).build();
                 }else {
                     return Response.accepted("Client doest not exist").build();
                 }
@@ -102,8 +138,7 @@ public class MaterialsTemplateController {
             Optional<ServiceTemplate> optionalService = materialService.getServiceById(id);
             if(optionalService.isPresent()) {
                 if (materialService.isMyMaterial(user.get(),optionalService.get())) {
-                    materialService.deleteAbstractMaterial(id);
-                    return Response.ok().build();
+                    return Response.ok(materialService.deleteAbstractMaterial(id)).build();
                 }else {
                     return Response.accepted("Client doest not exist").build();
                 }
@@ -143,6 +178,28 @@ public class MaterialsTemplateController {
             }else {
                 return Response.accepted("Client doest not exist").build();
             }
+        }else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+
+    @PUT
+    @Path("/hide/{id}")
+    public Response hideUnit(@PathParam("id") Long id){
+        if(user.isPresent()){
+            materialService.hideAbstractMaterial(id);
+            return Response.ok().build();
+        }else {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+
+    @PUT
+    @Path("/display/{id}")
+    public Response displayUnit(@PathParam("id") Long id){
+        if(user.isPresent()){
+            materialService.displayAbstractMaterial(id);
+            return Response.ok().build();
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }

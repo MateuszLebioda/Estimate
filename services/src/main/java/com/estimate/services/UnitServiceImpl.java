@@ -4,12 +4,12 @@ import com.estimate.dao.services.dao.UnitDao;
 import com.estimate.model.entities.Unit;
 import com.estimate.model.entities.User;
 import com.estimate.model.entities.dto.UnitDTO;
-import com.estimate.model.entities.utils.Role;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,13 +26,28 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
-    public List<Unit> getAllUnits(User user) {
-        return unitDao.getUnitsByUser(user);
+    public List<UnitDTO> getAllUnits(User user) {
+        return prepareUnitList(unitDao.getAllUnitsByUser(user));
     }
 
     @Override
-    public List<Unit> getAllUnitsByRole(User user, Role role) {
-        return unitDao.getUnitsByUserAndRole(user,role);
+    public List<UnitDTO> getHiddenUnits(User user) {
+        return prepareUnitList(unitDao.getHiddenUnitsByUser(user));
+    }
+
+    @Override
+    public List<UnitDTO> getDisplayedUnits(User user) {
+        return prepareUnitList(unitDao.getDisplayUnitsByUser(user));
+    }
+
+    @Override
+    public void hideUnit(Long id) {
+        editHide(id,true);
+    }
+
+    @Override
+    public void displayUnit(Long id) {
+        editHide(id,false);
     }
 
     @Override
@@ -53,11 +68,6 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
-    public List<UnitDTO> getAllDTOUnits(User user) {
-        return getAllUnits(user).stream().map(Unit::toDTO).collect(Collectors.toList());
-    }
-
-    @Override
     public Optional<Unit> getOptionalUnitById(Long id) {
         return unitDao.getUnitById(id);
     }
@@ -72,13 +82,11 @@ public class UnitServiceImpl implements UnitService {
     public boolean deleteUnit(Unit unit) {
         Optional<Unit> optionalUnit = unitDao.getUnitById(unit.getId());
         if(optionalUnit.isPresent()){
-            if(optionalUnit.get().getMaterials().isEmpty()) {
+            if(optionalUnit.get().getMaterials().isEmpty() &&
+                    optionalUnit.get().getJobTemplates().isEmpty()) {
                 unitDao.delete(unit);
-            }else {
-                unit.setActual(false);
-                unitDao.merge(unit);
+                return true;
             }
-            return true;
         }return false;
     }
 
@@ -94,6 +102,20 @@ public class UnitServiceImpl implements UnitService {
 
     @Override
     public void merge(Unit unit) {
+        unitDao.merge(unit);
+    }
+
+    private List<UnitDTO> prepareUnitList(List<Unit> units){
+        return units.stream()
+                .sorted(Comparator.comparing(Unit::getBottom)
+                        .thenComparing(Unit::getTop))
+                .map(Unit::toDTO).collect(Collectors.toList());
+    }
+
+    @Transactional
+    private void editHide(Long id, boolean hide){
+        Unit unit = unitDao.getUnitById(id).get();
+        unit.setHidden(hide);
         unitDao.merge(unit);
     }
 }

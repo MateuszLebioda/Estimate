@@ -18,14 +18,18 @@ public interface MaterialService {
     Long addAbstractMaterialFromDTO(AbstractMaterialTemplateDTO abstractMaterialTemplateDTO);
     boolean deleteAbstractMaterial(Long id);
     Long updateAbstractMaterial(AbstractMaterialTemplateDTO abstractMaterialTemplateDTO);
-    List<MaterialTemplate> getAllMaterials(User user);
-    List<MaterialTemplateDTO> getAllMaterialsDTO(User user);
-    List<ServiceTemplate> getAllServices(User user);
-    List<ServiceTempleDTO> getAllServicesDTO(User user);
+    List<AbstractMaterialTemplateDTO> getAllMaterialsDTO(User user);
+    List<AbstractMaterialTemplateDTO> getHideMaterials(User user);
+    List<AbstractMaterialTemplateDTO> getDisplayedMaterials(User user);
+    List<AbstractMaterialTemplateDTO> getAllServicesDTO(User user);
+    List<AbstractMaterialTemplateDTO> getHideServices(User user);
+    List<AbstractMaterialTemplateDTO> getDisplayedServices(User user);
     Optional<MaterialTemplate> getMaterialById(Long id);
     Optional<ServiceTemplate> getServiceById(Long id);
     boolean isMyMaterial(User user, AbstractMaterialTemplate material);
     MaterialTemplate getMaterialFromDTO(MaterialTemplateDTO materialDTO);
     ServiceTemplate getServiceFromDTO(ServiceTempleDTO serviceTempleDTO);
     void mergeMaterialWithMaterialDTO(AbstractMaterialTemplate material, AbstractMaterialTemplateDTO materialDTO);
+    void displayAbstractMaterial(Long id);
+    void hideAbstractMaterial(Long id);
 }

@@ -30,8 +30,8 @@ public class Unit implements SimpleEntity<Unit> {
     @OneToMany(mappedBy="unit")
     private List<AbstractMaterialTemplate> materials;
 
-    @Column(name = "isActual")
-    private Boolean actual;
+    @Column(name = "hidden")
+    private Boolean hidden;
 
     @Column(name = "created")
     private LocalDateTime created;
@@ -54,10 +54,10 @@ public class Unit implements SimpleEntity<Unit> {
 
     }
 
-    public Unit(String bottom, String top, Boolean actual) {
+    public Unit(String bottom, String top, Boolean hidden) {
         this.bottom = bottom;
         this.top = top;
-        this.actual = actual;
+        this.hidden = hidden;
         this.created = LocalDateTime.now();
     }
 

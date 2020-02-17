@@ -12,11 +12,13 @@ import java.util.Optional;
 @Local
 public interface UnitService {
     Long addUnit(Unit unit);
-    List<Unit> getAllUnits(User user);
-    List<Unit> getAllUnitsByRole(User user, Role role);
+    List<UnitDTO> getAllUnits(User user);
+    List<UnitDTO> getHiddenUnits(User user);
+    List<UnitDTO> getDisplayedUnits(User user);
+    void hideUnit(Long id);
+    void displayUnit(Long id);
     List<Unit> generateDefaultUnits();
     List<Unit> generateDefaultUnitsToUser(User user);
-    List<UnitDTO> getAllDTOUnits(User user);
     Optional<Unit> getOptionalUnitById(Long id);
     Unit getUnitById(Long id);
     boolean deleteUnit(Unit unit);

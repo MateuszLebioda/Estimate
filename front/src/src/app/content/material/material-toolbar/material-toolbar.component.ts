@@ -3,7 +3,6 @@ import {MaterialTemplate} from '../../../model/template/material-template';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {AddMaterialSheetComponent} from '../add-material-sheet/add-material-sheet.component';
 import {ReportsService} from '../../../services/reports.service';
-import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-material-toolbar',
@@ -11,6 +10,9 @@ import { saveAs } from 'file-saver';
   styleUrls: ['./material-toolbar.component.scss']
 })
 export class MaterialToolbarComponent implements OnInit {
+
+  @Output()
+  navigateToHide = new EventEmitter<boolean>();
 
   @Output()
   materialToAdd = new EventEmitter<MaterialTemplate>();
@@ -39,5 +41,9 @@ export class MaterialToolbarComponent implements OnInit {
 
   generatePrice() {
     this.reportsService.generateMaterialsPriceListReport();
+  }
+
+  goToHidden() {
+    this.navigateToHide.emit(true);
   }
 }
