@@ -1,26 +1,37 @@
-<div class="card-container dialog-button-max-size" id="container">
-  <mat-form-field style="text-align: center">
-    <mat-icon style="font-size: 14px; float: right" class="example-icon" aria-hidden="false"
-              matTooltip="Element przestanie być wyświetlany w głównym katalogu,
-                ale nie zostanie usunięty. Będzie go można przywrócić do widoku z sekcji, ukryte. Jeśli chcesz usunąć element definitywnie,
-                usuń lub edytuj wszystkie wystąpienia elementu w innych. ">help_outline
-    </mat-icon>
-    <ng-container *ngIf="data.unit">
+<div class="card-container dialog-button-max-size" id="container" style="text-align: center">
+  <div>
+    <div style="width: 24px; height: 24px;float: left"></div>
+    <div style="width:calc(100% - 48px); float: left">
+      <ng-container *ngIf="data.unit">
       <span>
         <h4 style="margin: 0px">{{data.unit.bottom}}
           <sup>{{data.unit.top}}</sup>
         </h4>
       </span>
-    </ng-container>
-    <input style="padding-top: 15px" matInput value="Nie można usunąć elementu" readonly class="dialog-value">
-    <input matInput value="Ponieważ jest używany w innym miejscu" readonly class="dialog-value">
-    <input style="padding-top: 15px" matInput value="Chcesz ukryć ten element?" readonly class="dialog-value">
+      </ng-container>
+      <ng-container *ngIf="data.value">
+      <span>
+        <h4 style="margin: 0px">{{data.value}}
+        </h4>
+      </span>
+      </ng-container>
+    </div>
+    <div style="width: 24px; float: right">
+      <mat-icon style="font-size: 14px; float: right" class="example-icon" aria-hidden="false"
+                matTooltip="Element przestanie być wyświetlany w głównym katalogu,
+                ale nie zostanie usunięty. Będzie go można przywrócić do widoku z sekcji, ukryte. Jeśli chcesz usunąć element definitywnie,
+                usuń lub edytuj wszystkie wystąpienia elementu. ">help_outline
+      </mat-icon>
+    </div>
+  </div>
+  <input style="padding-top: 15px" matInput value="Nie można usunąć elementu" readonly class="dialog-value">
+  <input matInput value="Ponieważ jest używany w innym miejscu" readonly class="dialog-value">
+  <input style="padding-top: 15px" matInput value="Chcesz ukryć ten element?" readonly class="dialog-value">
 
-  </mat-form-field>
   <div>
-    <div>
-      <button mat-raised-button color="primary" (click)="hide()">Tak</button>
-      <button mat-raised-button color="warn" (click)="dontHide()()">Nie</button>
+    <div style="margin-left: auto; margin-right: auto; margin-top: 15px; width: 160px">
+      <button mat-raised-button color="primary" style="float: left; width: 75px" (click)="hide()">Tak</button>
+      <button mat-raised-button color="warn"  style="float: left; margin-left: 10px; width: 75px" (click)="dontHide()">Nie</button>
     </div>
   </div>
 </div>

@@ -10,6 +10,8 @@ export class RawServiceComponent implements OnInit {
 
   @Input() serviceTemplate: ServiceTemplate;
 
+  @Input() isHidden: false;
+
   constructor() { }
 
   ngOnInit() {

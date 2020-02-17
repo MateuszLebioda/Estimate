@@ -82,7 +82,8 @@ public class UnitServiceImpl implements UnitService {
     public boolean deleteUnit(Unit unit) {
         Optional<Unit> optionalUnit = unitDao.getUnitById(unit.getId());
         if(optionalUnit.isPresent()){
-            if(optionalUnit.get().getMaterials().isEmpty()) {
+            if(optionalUnit.get().getMaterials().isEmpty() &&
+                    optionalUnit.get().getJobTemplates().isEmpty()) {
                 unitDao.delete(unit);
                 return true;
             }

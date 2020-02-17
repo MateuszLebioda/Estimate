@@ -6,6 +6,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {ServiceService} from '../../services/service.service';
 import {SimpleComponentDialogComponent} from '../../utils/simple-component-dialog/simple-component-dialog.component';
 import {AddServiceSheetComponent} from './add-service-sheet/add-service-sheet.component';
+import {HideDialogComponent} from '../../utils/hide-dialog/hide-dialog.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-service-view',
@@ -21,11 +23,12 @@ export class ServiceViewComponent implements OnInit {
   constructor(private addSheet: MatBottomSheet,
               public dialog: MatDialog,
               private snackBar: MatSnackBar,
-              private serviceService: ServiceService) {
+              private serviceService: ServiceService,
+              private rote: Router) {
   }
 
   ngOnInit() {
-    this.serviceService.getAllServices().subscribe(services => {
+    this.serviceService.getDisplayServices().subscribe(services => {
       this.services = services.body;
     });
   }
@@ -49,8 +52,18 @@ export class ServiceViewComponent implements OnInit {
     }).afterClosed().subscribe(reload => {
       if (reload !== undefined && reload === 'deleted') {
         this.serviceService.delete(serviceTemplate).subscribe(o => {
-          this.openSnackBar(serviceTemplate, 'Usunięto');
-          this.services = this.services.filter(m => m.id !== serviceTemplate.id);
+          if (o.body) {
+            this.openSnackBar(serviceTemplate, 'Usunięto');
+            this.services = this.services.filter(m => m.id !== serviceTemplate.id);
+          } else {
+            this.dialog.open(HideDialogComponent, {data: {value: serviceTemplate.name}})
+              .afterClosed().subscribe((result: boolean) => {
+              if (result) {
+                this.serviceService.hideService(serviceTemplate).subscribe();
+                this.services = this.services.filter(w => w !== serviceTemplate);
+              }
+            });
+          }
         });
       }
       if (reload !== undefined && reload === 'edit') {
@@ -58,7 +71,6 @@ export class ServiceViewComponent implements OnInit {
           data: serviceTemplate
         }).afterDismissed().subscribe((m: ServiceTemplate) => {
             if (m !== undefined) {
-              console.log(m);
               this.serviceService.put(m).subscribe(http => {
                 console.log(http.body);
                 this.openSnackBar(serviceTemplate, 'Zaktualizowano');
@@ -83,5 +95,9 @@ export class ServiceViewComponent implements OnInit {
       return this.services.filter
       (m => m.name.toLocaleLowerCase().includes(this.filterMaterial.toLocaleLowerCase())).sort((a, b) => a.name.localeCompare(b.name));
     }
+  }
+
+  navigateToHidden() {
+    this.rote.navigate(['/servicesHidden']);
   }
 }

@@ -1,4 +1,4 @@
-<app-service-toolbar (serviceToAdd)="addService($event)" (filter)="filter($event)"></app-service-toolbar>
+<app-service-toolbar (serviceToAdd)="addService($event)" (filter)="filter($event)" (navigateToHidden)="navigateToHidden()"></app-service-toolbar>
 <div class="contentDiv">
   <ng-container *ngIf="filterServices() && filterServices().length > 0">
   <div *ngFor="let work of filterServices(); let i = index" class="card-container">

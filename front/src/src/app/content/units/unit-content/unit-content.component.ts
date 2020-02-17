@@ -12,7 +12,8 @@ export class UnitContentComponent implements OnInit {
   units: Array<Unit>;
   @Input()
   iconName: string;
-
+  @Input()
+  hidden: boolean;
   @Output()
   unitDelete = new EventEmitter<Unit>();
 

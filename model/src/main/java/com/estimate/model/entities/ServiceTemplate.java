@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value = Role.SERVICE_TITLE)
 public class ServiceTemplate extends AbstractMaterialTemplate {
 
+    @Override
     public ServiceTempleDTO toDTO() {
         return new ServiceTempleDTO(getId(),getName(),getPrice(),getUnit());
     }

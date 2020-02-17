@@ -19,7 +19,11 @@ export class HideDialogComponent implements OnInit {
 
   ngOnInit() {
     if (this.data.value) {
-      this.resizable(document.getElementById('container'), this.data.value);
+      if (this.data.value.length < 'Ponieważ jest używany w innym miejscu'.length) {
+        this.resizable(document.getElementById('container'), 'Ponieważ jest używany w innym miejscu');
+      } else {
+        this.resizable(document.getElementById('container'), this.data.value);
+      }
     } else if (this.data.unit) {
       this.resizable(document.getElementById('container'), 'Ponieważ jest używany w innym miejscu');
     }

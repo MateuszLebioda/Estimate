@@ -14,6 +14,22 @@ body {
   padding: 0;
 }
 
+.data-dont-find-hidden{
+  background: $content-div-raw-hidden!important;;
+}
+
+.data-mat-card-hidden {
+  background: $content-div-raw-hidden!important;;
+  margin: 20px 20px 0px;
+  cursor: default !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+
+  input {
+    cursor: default !important;
+  }
+}
+
 .data-mat-card {
   background: $content-div-raw;
   margin: 20px 20px 0px;

@@ -60,6 +60,8 @@ import { DatePipe } from '@angular/common';
 import { HideDialogComponent } from './utils/hide-dialog/hide-dialog.component';
 import { HiddenUnitsComponent } from './content/units/hidden-units/hidden-units.component';
 import { HiddenUnitToolbarComponent } from './content/units/hidden-units/hidden-unit-toolbar/hidden-unit-toolbar.component';
+import { HiddenServiceComponent } from './content/service/hidden-service/hidden-service.component';
+import { HiddenServiceToolbarComponent } from './content/service/hidden-service/hidden-service-toolbar/hidden-service-toolbar.component';
 
 const keycloakService = new KeycloakService();
 
@@ -96,6 +98,7 @@ const keycloakService = new KeycloakService();
     AddJobTemplateDialogComponentComponent,
   HideDialogComponent],
   declarations: [AppComponent,
+    HiddenServiceComponent,
     ContentComponent,
     MenuComponent,
     routingComponents,
@@ -136,7 +139,9 @@ const keycloakService = new KeycloakService();
     EstimateDialogComponentComponent,
     HideDialogComponent,
     HiddenUnitsComponent,
-    HiddenUnitToolbarComponent]
+    HiddenUnitToolbarComponent,
+    HiddenServiceComponent,
+    HiddenServiceToolbarComponent]
 })
 
 export class AppModule {

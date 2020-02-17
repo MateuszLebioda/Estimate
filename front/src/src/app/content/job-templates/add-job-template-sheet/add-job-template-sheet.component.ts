@@ -79,7 +79,7 @@ export class AddJobTemplateSheetComponent implements OnInit {
       this.units = units.body;
     });
 
-    serviceService.getAllServices().subscribe(services => {
+    serviceService.getDisplayServices().subscribe(services => {
       this.services = services.body;
       if (data !== null) {
         for (const jobTemplateMaterial of data.materials.filter(m => m.material.type === AbstractMaterialType.SERVICE)) {

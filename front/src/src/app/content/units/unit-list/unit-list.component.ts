@@ -11,6 +11,7 @@ export class UnitListComponent implements OnInit {
   constructor() { }
 
   @Input() units: Array<Unit>;
+  @Input() hidden: boolean;
   @Input() title: string;
   @Input() iconName: string;
   @Output() unitToDelete = new EventEmitter<Unit>();

@@ -58,7 +58,7 @@ export class EstimateViewComponent implements OnInit {
       this.jobTemplates = response.body;
     });
 
-    this.serviceService.getAllServices().subscribe(response => {
+    this.serviceService.getDisplayServices().subscribe(response => {
       this.serviceTemplates = response.body;
     });
 
