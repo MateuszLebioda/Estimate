@@ -107,8 +107,7 @@ public class UnitServiceImpl implements UnitService {
 
     private List<UnitDTO> prepareUnitList(List<Unit> units){
         return units.stream()
-                .sorted(Comparator.comparing(Unit::getBottom)
-                        .thenComparing(Unit::getTop))
+                .sorted()
                 .map(Unit::toDTO).collect(Collectors.toList());
     }
 

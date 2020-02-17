@@ -15,9 +15,9 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name = "unit")
 @Entity
 @Data
-public class Unit implements SimpleEntity<Unit> {
+public class Unit implements SimpleEntity<Unit>, Comparable<Unit> {
     @Id
-    @GeneratedValue(strategy=SEQUENCE, generator="unit_id")
+    @GeneratedValue(strategy = SEQUENCE, generator = "unit_id")
     @Column(name = "id")
     private Long id;
 
@@ -27,7 +27,7 @@ public class Unit implements SimpleEntity<Unit> {
     @Column(name = "top")
     private String top;
 
-    @OneToMany(mappedBy="unit")
+    @OneToMany(mappedBy = "unit")
     private List<AbstractMaterialTemplate> materials;
 
     @Column(name = "hidden")
@@ -36,18 +36,18 @@ public class Unit implements SimpleEntity<Unit> {
     @Column(name = "created")
     private LocalDateTime created;
 
-    @ManyToOne(cascade={CascadeType.ALL})
-    @JoinColumn(name="parent")
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "parent")
     private Unit parent;
 
-    @OneToMany(mappedBy="parent")
+    @OneToMany(mappedBy = "parent")
     private Set<Unit> children = new HashSet<>();
 
     @OneToMany(mappedBy = "unit", cascade = CascadeType.ALL)
     Set<JobTemplate> jobTemplates;
 
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public Unit() {
@@ -61,7 +61,18 @@ public class Unit implements SimpleEntity<Unit> {
         this.created = LocalDateTime.now();
     }
 
-    public UnitDTO toDTO(){
-        return new UnitDTO(id,bottom,top);
+    public UnitDTO toDTO() {
+        return new UnitDTO(id, bottom, top);
+    }
+
+    @Override
+    public int compareTo(Unit o) {
+        int compare = getBottom().compareToIgnoreCase(o.getBottom());
+        if (compare == 0) {
+            if (getTop() != null && o.getTop() != null) {
+                return getTop().compareToIgnoreCase(o.getTop());
+            }
+        }
+        return compare;
     }
 }

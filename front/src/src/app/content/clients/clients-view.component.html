@@ -11,10 +11,16 @@
 </div>
 <div class="contentDiv">
   <div class="user-card-container">
+    <ng-container *ngIf="filterClients() && filterClients().length > 0">
     <div *ngFor="let client of filterClients(); let i = index">
       <app-raw-client [client]="client" class="client-example-card"
                       (click)="onMatCardClickEvent(client)"></app-raw-client>
     </div>
+    </ng-container>
+    <mat-card style=" width: 50%; margin-top: 15px; margin-right: auto; margin-left: auto"
+              *ngIf="filterClients() && filterClients().length == 0">
+      <h3 style="text-align: center">Nie znaleziono żadnych kientów</h3>
+    </mat-card>
   </div>
 </div>
 

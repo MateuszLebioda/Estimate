@@ -8,10 +8,16 @@
   (estimateEmitter)="saveNewEstimate($event)"
 ></app-estimate-tool-bar>
 <div class="contentDiv">
+  <ng-container *ngIf="filterEstimates() && filterEstimates().length > 0">
   <ng-container *ngFor="let estimate of filterEstimates()">
     <app-estimate-raw [estimate]="estimate" style="margin: 10px; cursor: pointer"
                       (click)="estimateClick($event,estimate)">
     </app-estimate-raw>
   </ng-container>
+  </ng-container>
+  <mat-card style=" width: 50%; margin-top: 15px; margin-right: auto; margin-left: auto"
+            *ngIf="filterEstimates() && filterEstimates().length == 0">
+    <h3 style="text-align: center">Nie znaleziono żadnych kosztorysów</h3>
+  </mat-card>
 </div>
 

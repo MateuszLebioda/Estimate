@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {AbstractMaterial} from '../model/template/abstract-material';
 import {JobTemplateEstimate} from '../model/job-template-estimate';
 import {Estimate} from '../model/estimate';
@@ -22,7 +22,7 @@ export class FormService {
         id: [material.id],
         name: [material.name, [Validators.required]],
         price: [material.price, [Validators.required, Validators.pattern('\\d+(\\.\\d{1,2})*')]],
-        unit: [material.unit, [Validators.required]],
+        unit: [material.unit, [Validators.required, this.validateUnit]],
         value: [value, [Validators.required]],
         sumPrice: [0],
         sumValue: [0]
@@ -35,7 +35,7 @@ export class FormService {
         id: [material.id],
         name: [material.name, [Validators.required]],
         price: [material.price, [Validators.required, Validators.pattern('\\d+(\\.\\d{1,2})*')]],
-        unit: [material.unit, [Validators.required]],
+        unit: [material.unit, [Validators.required, this.validateUnit]],
         value: [material.value, [Validators.required]],
         sumPrice: [material.sumPrice],
         sumValue: [material.sumValue]
@@ -95,7 +95,7 @@ export class FormService {
     return this.formBuilder.group({
       id: [jobTemplate.id],
       name: [jobTemplate.name, Validators.required],
-      unit: [jobTemplate.unit, [Validators.required]],
+      unit: [jobTemplate.unit, [Validators.required, this.validateUnit]],
       value: [0, Validators.required],
       materials: this.formBuilder.array([]),
       services: this.formBuilder.array([]),
@@ -107,7 +107,7 @@ export class FormService {
     return this.formBuilder.group({
       id: [jobTemplate.id],
       name: [jobTemplate.name, Validators.required],
-      unit: [jobTemplate.unit, [Validators.required]],
+      unit: [jobTemplate.unit, [Validators.required, this.validateUnit]],
       value: [jobTemplate.value, Validators.required],
       materials: this.createMaterialEstimateFormArray(jobTemplate.materials.filter(jt => jt.type === AbstractMaterialType.MATERIAL)),
       services: this.createMaterialEstimateFormArray(jobTemplate.materials.filter(jt => jt.type === AbstractMaterialType.SERVICE)),
@@ -196,4 +196,11 @@ export class FormService {
     return o1.id === o2.id;
   }
 
+
+  validateUnit(control: FormControl): ValidationErrors {
+    if (control.value.bottom == null) {
+      return {validUnit: true};
+    }
+    return null;
+  }
 }
