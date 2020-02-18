@@ -8,8 +8,9 @@
 
       <mat-form-field>
         <mat-select formControlName="client" [compareWith]="formService.compareObjects" placeholder="Klient">
+          <mat-option [value]="null">Brak</mat-option>
           <mat-option *ngFor="let client of clients" [value]="client">
-            <div>
+            <div *ngIf="client.firstName!=null">
               {{client.firstName}} {{client.lastName}}
               {{client.city}}ul.{{client.street}} {{client.houseNumber}}
             </div>

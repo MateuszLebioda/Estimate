@@ -1,16 +1,20 @@
 <mat-card>
-<div *ngIf="client" class="card-style">
-        <mat-form-field>
-          <input matInput value="{{client.firstName}} {{client.lastName}}" readonly class="client-data">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput value="{{client.email}}"  readonly >
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput  value="{{client.code}} {{client.city}}" readonly class="client-data">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput  value="{{client.street}} {{client.houseNumber}}"  readonly class="client-data">
-        </mat-form-field>
-      </div>
+  <div *ngIf="client" class="card-style">
+    <mat-form-field>
+      <input matInput value="{{client.firstName}} {{client.lastName}}" readonly class="client-data">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput value="{{client.email}}" readonly>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput *ngIf="client.phoneNumber" value="tel: {{client.phoneNumber}}" readonly>
+      <input matInput *ngIf="!client.phoneNumber" value="" readonly>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput  value="{{client.code}} {{client.city}}" readonly class="client-data">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput  value="{{client.street}} {{client.houseNumber}}" readonly class="client-data">
+    </mat-form-field>
+  </div>
 </mat-card>

@@ -2,7 +2,10 @@ package com.estimate.model.entities;
 
 import com.estimate.model.entities.dto.JobTemplateDTO;
 import com.estimate.model.entities.utils.SimpleEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -15,6 +18,9 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Data
 @Entity
 @Table(name = "job_temple")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class JobTemplate implements SimpleEntity<JobTemplate> {
 
     @Id
@@ -40,18 +46,14 @@ public class JobTemplate implements SimpleEntity<JobTemplate> {
     private Boolean isTemplate;
 
     public JobTemplateDTO toDto() {
-        JobTemplateDTO jobTemplateDTO = new JobTemplateDTO();
-
-        jobTemplateDTO.setId(id);
-        jobTemplateDTO.setName(name);
-        jobTemplateDTO.setUnit(unit.toDTO());
-        jobTemplateDTO.setMaterials(jobTemplateAbstractMaterial.stream()
-                .map(JobTemplateAbstractMaterial::toDTO).collect(Collectors.toList()));
-
-        return jobTemplateDTO;
-    }
-
-    void mergeWithDTO(){
-
+        return JobTemplateDTO.builder()
+                .id(id)
+                .name(name)
+                .unit(unit.toDTO())
+                .materials(
+                        jobTemplateAbstractMaterial.stream()
+                        .map(JobTemplateAbstractMaterial::toDTO)
+                        .collect(Collectors.toList()))
+                .build();
     }
 }

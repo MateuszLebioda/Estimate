@@ -2,10 +2,14 @@ package com.estimate.model.entities;
 
 import com.estimate.model.entities.dto.UnitDTO;
 import com.estimate.model.entities.utils.SimpleEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +19,9 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Table(name = "unit")
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Unit implements SimpleEntity<Unit>, Comparable<Unit> {
     @Id
     @GeneratedValue(strategy = SEQUENCE, generator = "unit_id")
@@ -41,18 +48,15 @@ public class Unit implements SimpleEntity<Unit>, Comparable<Unit> {
     private Unit parent;
 
     @OneToMany(mappedBy = "parent")
-    private Set<Unit> children = new HashSet<>();
+    private List<Unit> children;
 
     @OneToMany(mappedBy = "unit", cascade = CascadeType.ALL)
-    Set<JobTemplate> jobTemplates;
+    private List<JobTemplate> jobTemplates;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public Unit() {
-
-    }
 
     public Unit(String bottom, String top, Boolean hidden) {
         this.bottom = bottom;
@@ -62,16 +66,18 @@ public class Unit implements SimpleEntity<Unit>, Comparable<Unit> {
     }
 
     public UnitDTO toDTO() {
-        return new UnitDTO(id, bottom, top);
+        return  UnitDTO.builder()
+                .id(id)
+                .bottom(bottom)
+                .top(top)
+                .build();
     }
 
     @Override
     public int compareTo(Unit o) {
         int compare = getBottom().compareToIgnoreCase(o.getBottom());
-        if (compare == 0) {
-            if (getTop() != null && o.getTop() != null) {
-                return getTop().compareToIgnoreCase(o.getTop());
-            }
+        if (compare == 0 && (getTop() != null && o.getTop() != null)) {
+            return getTop().compareToIgnoreCase(o.getTop());
         }
         return compare;
     }

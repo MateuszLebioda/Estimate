@@ -74,8 +74,6 @@ export class EstimateViewComponent implements OnInit {
       this.clients = response.body;
     });
 
-
-
     this.route.params.subscribe(p => {
       if (p && p.id) {
         this.estimateService.getAllByClient(p.id).subscribe(response => {

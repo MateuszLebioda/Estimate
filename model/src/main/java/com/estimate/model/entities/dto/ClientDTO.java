@@ -1,10 +1,15 @@
 package com.estimate.model.entities.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ClientDTO {
-
     private Long id;
     private String firstName;
     private String lastName;
@@ -12,23 +17,8 @@ public class ClientDTO {
     private String city;
     private String street;
     private String houseNumber;
+    private String phoneNumber;
     private String code;
     private Long user;
     private Boolean actual;
-
-    public ClientDTO() {
-    }
-
-    public ClientDTO(Long id, String firstName, String lastName, String email, String city, String street, String houseNumber, String code, Long user, Boolean actual) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.city = city;
-        this.street = street;
-        this.houseNumber = houseNumber;
-        this.code = code;
-        this.user = user;
-        this.actual = actual;
-    }
 }

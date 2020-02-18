@@ -64,6 +64,7 @@ import { HiddenServiceComponent } from './content/service/hidden-service/hidden-
 import { HiddenServiceToolbarComponent } from './content/service/hidden-service/hidden-service-toolbar/hidden-service-toolbar.component';
 import { HideMaterialsComponent } from './content/material/hide-materials/hide-materials.component';
 import { HideMaterialsToolbarComponent } from './content/material/hide-materials/hide-materials-toolbar/hide-materials-toolbar.component';
+import {PhonePipe} from './utils/phone-pipe';
 
 const keycloakService = new KeycloakService();
 
@@ -100,6 +101,7 @@ const keycloakService = new KeycloakService();
     AddJobTemplateDialogComponentComponent,
   HideDialogComponent],
   declarations: [AppComponent,
+    PhonePipe,
     HiddenServiceComponent,
     ContentComponent,
     MenuComponent,

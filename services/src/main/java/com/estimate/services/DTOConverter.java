@@ -14,4 +14,5 @@ public interface DTOConverter {
     AbstractMaterialEstimate makeAbstractMaterialEstimate(AbstractMaterialEstimateDTO abstractMaterialEstimateDTO);
     JobTemplateEstimate makeJobTemplateEstimate(JobTemplateEstimateDTO jobTemplateEstimateDTO);
     Estimate makeEstimate(EstimateDTO estimateDTO);
+    Client makeClient(ClientDTO clientDTO);
 }

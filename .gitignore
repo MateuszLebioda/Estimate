@@ -10,6 +10,7 @@ front/out
 .settings/*
 .classpath
 .project
+front/node_modules/*
 
 front/src/node_modules
 
