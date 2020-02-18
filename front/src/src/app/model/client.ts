@@ -9,6 +9,7 @@ export class Client {
   city: string;
   street: string;
   houseNumber: string;
+  phoneNumber: string;
   code: string;
   user: string;
 }

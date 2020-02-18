@@ -30,7 +30,7 @@ export class EstimateService {
   }
 
   public getAllByClient(id: number): Observable<HttpResponse<Array<Estimate>>> {
-    return this.http.get<Array<Estimate>>(backEndUrl + '/getByClientId/' + id, {observe: 'response'});
+    return this.http.get<Array<Estimate>>(backEndUrl + '/estimate/getByClientId/' + id, {observe: 'response'});
   }
 
 }

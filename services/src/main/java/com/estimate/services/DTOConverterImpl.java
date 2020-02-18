@@ -17,6 +17,9 @@ public class DTOConverterImpl implements DTOConverter {
     private Optional<User> user;
 
     @EJB
+    private UserService userService;
+
+    @EJB
     private UnitService unitService;
 
     @EJB
@@ -109,6 +112,20 @@ public class DTOConverterImpl implements DTOConverter {
         }
         estimate.setUser(user.get());
         return estimate;
+    }
+
+    public Client makeClient(ClientDTO clientDTO){
+        return Client.builder()
+                .id(clientDTO.getId())
+                .user(userService.getUserById(clientDTO.getUser()))
+                .firstName(clientDTO.getFirstName())
+                .lastName(clientDTO.getLastName())
+                .city(clientDTO.getCity())
+                .street(clientDTO.getStreet())
+                .email(clientDTO.getEmail())
+                .code(clientDTO.getCode())
+                .phoneNumber(clientDTO.getPhoneNumber())
+                .build();
     }
 
 }

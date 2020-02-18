@@ -24,6 +24,7 @@ export class ClientSheetComponent {
       firstName: new FormControl(this.client.firstName, [Validators.required]),
       lastName: new FormControl(this.client.lastName, [Validators.required]),
       email: new FormControl(this.client.email, [Validators.email]),
+      phoneNumber: new FormControl(this.client.phoneNumber),
       city: new FormControl(this.client.city, ),
       street: new FormControl(this.client.street, ),
       houseNumber: new FormControl(this.client.houseNumber),
@@ -42,6 +43,7 @@ export class ClientSheetComponent {
     this.client.city = this.clientForm.get('city').value;
     this.client.street = this.clientForm.get('street').value;
     this.client.houseNumber = this.clientForm.get('houseNumber').value;
+    this.client.phoneNumber = this.clientForm.get('phoneNumber').value;
     this.client.code = this.clientForm.get('code').value;
     this.bottomSheetRef.dismiss(this.client);
   }

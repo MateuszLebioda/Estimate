@@ -64,13 +64,10 @@ public class ClientController {
     @Path("/update")
     public Response updateClient(ClientDTO clientDTO) {
         if(user.isPresent()){
-            Client client = clientService.getClientById(clientDTO.getId());
-            if (clientService.isMyClient(user.get(), client)) {
-                client.mergeWithDto(clientDTO);
-                clientService.merge(client);
-                return Response.ok().build();
+            if(clientService.mergeClient(clientDTO,user.get())){
+                return Response.ok(true).build();
             }else {
-                return Response.accepted("Client doest not exist").build();
+                return Response.ok(false).build();
             }
         }else {
             return Response.status(Response.Status.UNAUTHORIZED).build();

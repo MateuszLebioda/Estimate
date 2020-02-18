@@ -76,6 +76,7 @@ export class AddNewEstimateSheetComponent implements OnInit {
       this.materials = this.data.materialTemplates;
       this.units = this.data.units;
       this.clients = this.data.clients;
+      // this.clients.push(new Client());
       if (this.data.estimate) {
         this.estimate = this.data.estimate;
       }

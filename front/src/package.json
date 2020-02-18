@@ -27,6 +27,7 @@
     "keycloak-angular": "^7.1.0",
     "keycloak-js": "^6.0.1",
     "keycloak-js-adapter": "^1.0.6",
+    "libphonenumber-js": "^1.7.43",
     "ngx-cookie-service": "^2.2.0",
     "rxjs": "^6.5.4",
     "tslib": "^1.9.0",

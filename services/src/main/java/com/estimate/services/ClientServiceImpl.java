@@ -7,6 +7,7 @@ import com.estimate.model.entities.dto.ClientDTO;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,6 +18,21 @@ public class ClientServiceImpl implements ClientService{
 
     @EJB
     private ClientDao clientDao;
+
+    @EJB
+    private DTOConverter dtoConverter;
+
+    @Override
+    public Boolean mergeClient(ClientDTO clientDTO, User user) {
+        Client client = clientDao.getClientById(clientDTO.getId()).get();
+        if (isMyClient(user, client)) {
+            client = dtoConverter.makeClient(clientDTO);
+            merge(client);
+            return Boolean.TRUE;
+        }else {
+            return Boolean.FALSE;
+        }
+    }
 
     @Override
     public Long addClient(Client client) {

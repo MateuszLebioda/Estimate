@@ -14,6 +14,9 @@
         <mat-error *ngIf="clientForm.get('email').hasError('email')">Niepoprawy format adresu email</mat-error>
       </mat-form-field>
       <mat-form-field>
+        <input formControlName="phoneNumber" matInput placeholder="Numer telefonu">
+      </mat-form-field>
+      <mat-form-field>
         <input formControlName="city" matInput placeholder="Miasto">
       </mat-form-field>
       <mat-form-field>
